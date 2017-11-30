@@ -1,0 +1,27 @@
+:global(.page__content) {
+  position: fixed;
+  height: 93%;
+  width: 100%;
+  top: 7%;
+  overflow: auto;
+  background-color: #fff;
+}
+
+:global(.error) {
+  color: red;
+  margin-left: 10px;
+  line-height: 2;
+}
+
+:global(.meta) {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: space-between;
+  height: 30px;
+  width: 95%;
+  color: #999;
+  font-size: 14px;
+  line-height: 1.2;
+  font-weight: normal;
+}

@@ -1,0 +1,6 @@
+.jokes__row {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  line-height: 1.5;
+}
