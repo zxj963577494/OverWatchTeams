@@ -8,10 +8,10 @@ import {
 } from '../constants/actionTypes'
 
 const initialLoginState = {
-  username: 'tougao',
-  password: '^KwunubASjG@*dV&q)8JZSgB',
-  isFetching: false,
-  isLogin: false
+  username: '',
+  password: '',
+  email: '',
+  isFetching: false
 }
 
 function loginReducer(state = initialLoginState, action) {
@@ -25,8 +25,7 @@ function loginReducer(state = initialLoginState, action) {
     case POST_LOGIN_SUCCESS:
       return {
         ...state,
-        isFetching: false,
-        isLogin: true
+        isFetching: false
       }
     case POST_LOGIN_FAILED:
       return { ...state, isFetching: false }
@@ -40,8 +39,7 @@ function loginReducer(state = initialLoginState, action) {
     case POST_LOGOUT_SUCCESS:
       return {
         ...state,
-        isFetching: false,
-        isLogin: false
+        isFetching: false
       }
     default:
       return state

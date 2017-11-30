@@ -6,7 +6,8 @@ import { watchDetail } from './detailSaga'
 import { watchComments } from './commentsSaga'
 import { watchLogin } from './loginSaga'
 import { watchLogout } from './logoutSaga'
-import { watchPageCount} from './commonSaga'
+import { watchPageCount } from './commonSaga'
+import { watchSignUp } from './userSaga'
 
 export default function* rootSaga() {
   yield all([
@@ -18,6 +19,7 @@ export default function* rootSaga() {
     fork(watchPictures),
     fork(watchLogin),
     fork(watchLogout),
-    fork(watchPageCount)
+    fork(watchPageCount),
+    fork(watchSignUp)
   ])
 }

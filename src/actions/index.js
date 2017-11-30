@@ -23,6 +23,9 @@ import {
   POST_LOGOUT_REQUEST,
   POST_LOGOUT_SUCCESS,
   POST_LOGOUT_FAILED,
+  POST_SIGNUP_REQUEST,
+  POST_SIGNUP_SUCCESS,
+  POST_SIGNUP_FAILED,
   POST_PAGECOUNT_REQUEST,
   CHANGE_TABBAR,
   SET_NAVBAR
@@ -113,19 +116,31 @@ export const postLoginFailed = function(payload) {
 }
 
 export const postLogoutRequest = function() {
-  return { type: POST_LOGOUT_REQUEST}
+  return { type: POST_LOGOUT_REQUEST }
 }
 
 export const postLogoutSuccess = function() {
-  return { type: POST_LOGOUT_SUCCESS}
+  return { type: POST_LOGOUT_SUCCESS }
 }
 
 export const postLogoutFailed = function() {
-  return { type: POST_LOGOUT_FAILED}
+  return { type: POST_LOGOUT_FAILED }
 }
 
 export const postPageCountRequest = function(payload) {
-  return { type: POST_PAGECOUNT_REQUEST, payload}
+  return { type: POST_PAGECOUNT_REQUEST, payload }
+}
+
+export const postSignUpRequest = function(payload) {
+  return { type: POST_SIGNUP_REQUEST, payload }
+}
+
+export const postSignUpSuccess = function(payload) {
+  return { type: POST_SIGNUP_SUCCESS, payload }
+}
+
+export const postSignUpFailed = function(payload) {
+  return { type: POST_SIGNUP_FAILED, payload }
 }
 
 export const changeTabBar = function(payload) {

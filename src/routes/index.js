@@ -11,7 +11,8 @@ import {
   Detail,
   Login,
   Account,
-  Welcome
+  Welcome,
+  SignUp
 } from '../containers'
 
 export default (history, navbar) => {
@@ -25,6 +26,7 @@ export default (history, navbar) => {
           <Route exec path="/joke/:id" component={Detail} />
           <Route exec path="/picture/:id" component={Detail} />
           <Route exec path="/login" component={Login} />
+          <Route exec path="/signup" component={SignUp} />
           <Route exec path="/account" component={Account} />
           <App history={history}>
             <Route exec path="/home" component={Home} />
