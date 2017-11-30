@@ -50,6 +50,7 @@ class SignUp extends Component {
 
   render() {
     const { getFieldProps, getFieldError } = this.props.form
+    const { app, user } = this.props
     const usernameErrors = getFieldError('username')
     const passwordErrors = getFieldError('password')
     const emailErrors = getFieldError('email')
@@ -57,13 +58,18 @@ class SignUp extends Component {
       <div className="page__content">
         <WhiteSpace />
         <form>
-          <MyActivityIndicator isFetching={false} />
+          <MyActivityIndicator isFetching={app.isFetching} />
           <InputItem
             {...getFieldProps('username', {
               onChange: this.onUserNameChange,
               validateFirst: true,
               rules: [
-                { type: 'string', required: true, message: '用户名不能为空' }
+                {
+                  type: 'string',
+                  required: true,
+                  pattern: /\w{5,25}$/,
+                  message: '6-25个字符'
+                }
               ]
             })}
             placeholder="请输入用户名"
@@ -80,7 +86,12 @@ class SignUp extends Component {
               onChange: this.onPasswordChange,
               validateFirst: true,
               rules: [
-                { type: 'string', required: true, message: '密码不能为空' }
+                {
+                  type: 'string',
+                  required: true,
+                  pattern: /\w{5,25}$/,
+                  message: '6-25个字符'
+                }
               ]
             })}
             placeholder="请输入密码"
@@ -115,6 +126,8 @@ class SignUp extends Component {
               注 册
             </Button>
           </WingBlank>
+          <WhiteSpace />
+          <Flex className="error">{user ? user.signupError : null}</Flex>
         </form>
       </div>
     )
@@ -122,7 +135,10 @@ class SignUp extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  return {}
+  return {
+    app: state.root.app,
+    user: state.root.user
+  }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
@@ -134,6 +150,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 }
 
 SignUp.propTypes = {
+  app: PropTypes.object.isRequired,
+  user: PropTypes.object.isRequired,
   postSignUp: PropTypes.func.isRequired,
   form: PropTypes.object
 }

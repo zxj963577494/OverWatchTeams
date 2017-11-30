@@ -26,6 +26,9 @@ import {
   POST_SIGNUP_REQUEST,
   POST_SIGNUP_SUCCESS,
   POST_SIGNUP_FAILED,
+  FETCH_REQUEST,
+  FETCH_SUCCESS,
+  FETCH_FAILED,
   POST_PAGECOUNT_REQUEST,
   CHANGE_TABBAR,
   SET_NAVBAR
@@ -141,6 +144,18 @@ export const postSignUpSuccess = function(payload) {
 
 export const postSignUpFailed = function(payload) {
   return { type: POST_SIGNUP_FAILED, payload }
+}
+
+export const fetchRequest = function() {
+  return { type: FETCH_REQUEST }
+}
+
+export const fetchSuccess = function() {
+  return { type: FETCH_SUCCESS }
+}
+
+export const fetchFailed = function() {
+  return { type: FETCH_FAILED }
 }
 
 export const changeTabBar = function(payload) {

@@ -4,10 +4,8 @@ import { watchJokes } from './jokesSaga'
 import { watchPictures } from './picturesSaga'
 import { watchDetail } from './detailSaga'
 import { watchComments } from './commentsSaga'
-import { watchLogin } from './loginSaga'
-import { watchLogout } from './logoutSaga'
 import { watchPageCount } from './commonSaga'
-import { watchSignUp } from './userSaga'
+import { watchSignUp, watchLogin, watchLogout } from './userSaga'
 
 export default function* rootSaga() {
   yield all([
