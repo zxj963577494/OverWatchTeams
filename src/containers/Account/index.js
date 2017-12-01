@@ -1,65 +1,59 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { Result, WhiteSpace, Flex, Button } from 'antd-mobile'
-import Cookies from 'universal-cookie'
-import { replace } from 'react-router-redux'
-import { postLogoutRequest } from '../../actions'
+import { Result, WhiteSpace, Flex, Button, List, WingBlank } from 'antd-mobile'
+import { push } from 'react-router-redux'
+import { postLogoutRequest, setNavBar } from '../../actions'
+import { user } from '../../services/leanclound'
 
-class Login extends Component {
-  constructor(props) {
-    super(props)
-    this.onBackHome = this.onBackHome.bind(this)
-    this.onLogout = this.onLogout.bind(this)
-  }
-
-  onBackHome() {
-    this.props.navigateTo('/home')
-  }
-
-  onLogout() {
-    this.props.postLogout()
-  }
-
-  componentDidMount() {
-    const cookies = new Cookies()
-    if (!(cookies.get('token') && this.props.login.isLogin)) {
-      this.props.navigateTo('/login')
-    }
-  }
+class Account extends Component {
+  componentDidMount() {}
 
   render() {
+    const logined = user.getCurrentUser()
+    const { postLogout, navigateTo } = this.props
     return (
-      <div className="page__content">
+      <div>
+        <WhiteSpace />
         <Result
           img={
             <img
               width="60px"
               height="60px"
               style={{ borderRadius: '50%' }}
-              src={require('../../assets/images/logo-80.png')}
+              src={
+                logined
+                  ? require('../../assets/images/logo-80.png')
+                  : require('../../assets/images/logo-80.png')
+              }
+              onClick={() => navigateTo('/login')}
               alt="登录成功"
             />
           }
-          title="登录成功"
-          message={this.props.username}
+          title={logined ? '登录/注册' : ''}
+          message={logined ? '' : ''}
         />
         <WhiteSpace />
+        <List>
+          <List.Item arrow="horizontal" onClick={() => navigateTo('/account/mime')}>
+            个人介绍
+          </List.Item>
+          <List.Item arrow="horizontal" onClick={() => {}}>
+            我的战队
+          </List.Item>
+        </List>
         <WhiteSpace />
-        <Flex>
-          <Flex.Item />
-          <Flex.Item>
-            <Button onClick={this.onBackHome} type="primary">
-              回到首页
-            </Button>
-          </Flex.Item>
-          <Flex.Item>
-            <Button onClick={this.onLogout} type="warning">
-              退出登录
-            </Button>
-          </Flex.Item>
-          <Flex.Item />
-        </Flex>
+        {logined ? (
+          <WingBlank>
+            <Flex>
+              <Flex.Item>
+                <Button onClick={() => postLogout()} type="warning">
+                  注 销
+                </Button>
+              </Flex.Item>
+            </Flex>
+          </WingBlank>
+        ) : null}
       </div>
     )
   }
@@ -67,7 +61,7 @@ class Login extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    login: state.root.login
+    user: state.root.user
   }
 }
 
@@ -77,13 +71,16 @@ const mapDispatchToProps = (dispatch, ownProps) => {
       dispatch(postLogoutRequest())
     },
     navigateTo: location => {
-      dispatch(replace(location))
+      dispatch(push(location))
+    },
+    setNavBar: () => {
+      dispatch(setNavBar({ title: '登录', isCanBack: true }))
     }
   }
 }
 
-Login.propTypes = {
-  login: PropTypes.object.isRequired
+Account.propTypes = {
+  user: PropTypes.object.isRequired
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login)
+export default connect(mapStateToProps, mapDispatchToProps)(Account)

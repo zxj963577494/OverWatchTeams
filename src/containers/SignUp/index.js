@@ -2,7 +2,16 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { createForm } from 'rc-form'
-import { Button, InputItem, WhiteSpace, Flex, WingBlank } from 'antd-mobile'
+import {
+  Button,
+  InputItem,
+  WhiteSpace,
+  Flex,
+  WingBlank,
+  NavBar,
+  Icon
+} from 'antd-mobile'
+import { goBack } from 'react-router-redux'
 import { postSignUpRequest } from '../../actions'
 import { MyActivityIndicator } from '../../components'
 
@@ -50,12 +59,19 @@ class SignUp extends Component {
 
   render() {
     const { getFieldProps, getFieldError } = this.props.form
-    const { app, user } = this.props
+    const { app, user, goBack } = this.props
     const usernameErrors = getFieldError('username')
     const passwordErrors = getFieldError('password')
     const emailErrors = getFieldError('email')
     return (
-      <div className="page__content">
+      <div>
+        <NavBar
+          icon={<Icon type="left" />}
+          onLeftClick={() => goBack()}
+          mode="light"
+        >
+          登录
+        </NavBar>
         <WhiteSpace />
         <form>
           <MyActivityIndicator isFetching={app.isFetching} />
@@ -145,6 +161,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     postSignUp: payload => {
       dispatch(postSignUpRequest(payload))
+    },
+    goBack: () => {
+      dispatch(goBack())
     }
   }
 }

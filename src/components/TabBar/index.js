@@ -1,34 +1,50 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { TabBar } from 'antd-mobile'
+import MyNavBar from '../NavBar'
+import { Home, Account, Mime } from '../../containers'
 
 export default class MyTabBar extends Component {
   render() {
     const pathname = this.props.history.location.pathname
-    const children = this.props.children
+    const { children, navbar, history } = this.props
     return (
-      <div style={{ position: 'fixed', height: '93%', width: '100%', top: '7%' }}>
-        <TabBar
-          unselectedTintColor="#949494"
-          tintColor="#33A3F4"
-          barTintColor="white"
+      <div>
+        <MyNavBar navbar={navbar} history={history} />
+        <div
+          style={{ position: 'fixed', height: '93%', width: '100%', top: '7%' }}
         >
-          {this.props.tabbars.map(item => (
+          <TabBar
+            unselectedTintColor="#949494"
+            tintColor="#33A3F4"
+            barTintColor="white"
+          >
             <TabBar.Item
-              title={item.title}
-              key={item.key}
-              icon={this.renderIcon(item.icon)}
-              selectedIcon={this.renderIcon(item.selectedIcon)}
-              selected={pathname === '/' + item.key}
+              title="首页"
+              key="home"
+              icon={require('../../assets/images/tar-home.png')}
+              selectedIcon={require('../../assets/images/tar-home-on.png')}
+              selected={pathname.startsWith('/home')}
               onPress={() => {
-                this.props.changeTabBar(item.key)
-                this.props.navigateTo(item.key)
+                this.props.navigateTo('/home')
               }}
             >
-              {pathname === '/' + item.key ? children : null}
+              {pathname === '/home' ? children : null}
             </TabBar.Item>
-          ))}
-        </TabBar>
+            <TabBar.Item
+              title="我的"
+              key="account"
+              icon={require('../../assets/images/tar-topic.png')}
+              selectedIcon={require('../../assets/images/tar-topic-on.png')}
+              selected={pathname.startsWith('/account')}
+              onPress={() => {
+                this.props.navigateTo('/account')
+              }}
+            >
+              {pathname.startsWith('/account') ? children : null}
+            </TabBar.Item>
+          </TabBar>
+        </div>
       </div>
     )
   }
@@ -47,9 +63,7 @@ export default class MyTabBar extends Component {
 }
 
 MyTabBar.propTypes = {
-  tabbars: PropTypes.array.isRequired,
-  changeTabBar: PropTypes.func.isRequired,
   navigateTo: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
-  children: PropTypes.array.isRequired,
+  children: PropTypes.object
 }

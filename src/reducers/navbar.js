@@ -3,7 +3,7 @@ import {
 } from '../constants/actionTypes'
 
 const initialNavBarState = {
-  title: '奇葩林',
+  title: 'OverWatch Teams',
   isCanBack: false,
 }
 

@@ -2,8 +2,16 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { createForm } from 'rc-form'
-import { Button, InputItem, WhiteSpace, Flex, WingBlank } from 'antd-mobile'
-import { replace } from 'react-router-redux'
+import {
+  Button,
+  InputItem,
+  WhiteSpace,
+  Flex,
+  WingBlank,
+  NavBar,
+  Icon
+} from 'antd-mobile'
+import { push, goBack } from 'react-router-redux'
 import { postLoginRequest } from '../../actions'
 import { MyActivityIndicator } from '../../components'
 
@@ -47,11 +55,18 @@ class Login extends Component {
 
   render() {
     const { getFieldProps, getFieldError } = this.props.form
-    const { app, user } = this.props
+    const { app, user, goBack } = this.props
     const usernameErrors = getFieldError('username')
     const passwordErrors = getFieldError('password')
     return (
-      <div className="page__content">
+      <div>
+        <NavBar
+          icon={<Icon type="left" />}
+          onLeftClick={() => goBack()}
+          mode="light"
+        >
+          登录
+        </NavBar>
         <WhiteSpace />
         <form>
           <MyActivityIndicator isFetching={app.isFetching} />
@@ -135,7 +150,10 @@ const mapDispatchToProps = (dispatch, ownProps) => {
       dispatch(postLoginRequest(payload))
     },
     navigateTo: location => {
-      dispatch(replace(location))
+      dispatch(push(location))
+    },
+    goBack: () => {
+      dispatch(goBack())
     }
   }
 }

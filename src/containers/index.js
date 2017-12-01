@@ -9,6 +9,7 @@ import Login from './Login'
 import Account from './Account'
 import Welcome from './Welcome'
 import SignUp from './SignUp'
+import Mime from './Account/Mime'
 
 export {
   Root,
@@ -21,5 +22,6 @@ export {
   Login,
   Account,
   Welcome,
-  SignUp
+  SignUp,
+  Mime
 }

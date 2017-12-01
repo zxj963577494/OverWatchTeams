@@ -11,6 +11,7 @@ class App extends Component {
     return (
       <div>
         <MyTabBar
+          navbar = {this.props.navbar}
           history={this.props.history}
           children={this.props.children}
           tabbars={this.props.tabbars}
@@ -25,7 +26,8 @@ class App extends Component {
 const mapStateToProps = (state, ownProps) => {
   return {
     tabbars: state.root.tabbars,
-    location: state.location
+    location: state.location,
+    navbar: state.root.navbar
   }
 }
 
