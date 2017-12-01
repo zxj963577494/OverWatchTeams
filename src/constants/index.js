@@ -20,6 +20,48 @@ export const TEAMPOSITIONS = [
     desc: ''
   }
 ]
+export const RANKS = [
+  {
+    value: 'bronze',
+    label: '青铜',
+    score: '1-1499'
+  },
+  {
+    value: 'silver',
+    label: '白银',
+    score: '1500-1999'
+  },
+  {
+    value: 'gold',
+    label: '黄金',
+    score: '2000-2499'
+  },
+  {
+    value: 'platinum',
+    label: '白金',
+    score: '2500-2999'
+  },
+  {
+    value: 'diamond',
+    label: '钻石',
+    score: '3000-3499'
+  },
+  {
+    value: 'master',
+    label: '大师',
+    score: '3500-3999'
+  },
+  {
+    value: 'grandmaster',
+    label: '宗师',
+    score: '4000-5000'
+  },
+  {
+    value: 'top500',
+    label: '500强',
+    score: '4000-5000'
+  }
+]
 
 export const HEROS = [
   {

@@ -18,7 +18,8 @@ import {
 import { goBack } from 'react-router-redux'
 import { postSignUpRequest } from '../../../actions'
 import { MyActivityIndicator } from '../../../components'
-import { TEAMPOSITIONS, HEROS } from '../../../constants'
+import { TEAMPOSITIONS, HEROS, RANKS } from '../../../constants'
+import styles from './style.css'
 
 class Mime extends Component {
   constructor(props) {
@@ -30,15 +31,22 @@ class Mime extends Component {
       introduction: '',
       email: '',
       files: [],
-      heros: HEROS
+      avatar: '',
+      heros: HEROS,
+      rank: 'top500',
+      mouse: '',
+      keyboard: '',
+      headphones: ''
     }
     this.onNickNameChange = this.onNickNameChange.bind(this)
     this.onContactChange = this.onContactChange.bind(this)
     this.onIntroductionChange = this.onIntroductionChange.bind(this)
     this.onMatchChange = this.onMatchChange.bind(this)
     this.onEmailChange = this.onEmailChange.bind(this)
+    this.onMouseChange = this.onMouseChange.bind(this)
+    this.onKeyboardChange = this.onKeyboardChange.bind(this)
+    this.onHeadPhonesChange = this.onHeadPhonesChange.bind(this)
     this.onImagePickerChange = this.onImagePickerChange.bind(this)
-    
     this.onSubmit = this.onSubmit.bind(this)
   }
 
@@ -78,13 +86,41 @@ class Mime extends Component {
     })
   }
 
+  onRankChange(value) {
+    this.setState({
+      rank: value
+    })
+  }
+
+  onMouseChange(value) {
+    this.setState({
+      mouse: value
+    })
+  }
+
+  onKeyboardChange(value) {
+    this.setState({
+      keyboard: value
+    })
+  }
+
+  onHeadPhonesChange(value) {
+    this.setState({
+      headphones: value
+    })
+  }
+
   onHeroChange(value) {
-    if (this.state.heros.filter(item => item.checked === true).length >= 3) {
-      Toast.info('最多选择3位擅长英雄', 1)
-      return
-    }
     this.state.heros.forEach(item => {
       if (item.value === value) {
+        if (!item.checked) {
+          if (
+            this.state.heros.filter(item => item.checked === true).length >= 3
+          ) {
+            Toast.info('最多选择3位擅长英雄', 1)
+            return
+          }
+        }
         item.checked = !item.checked
       }
     })
@@ -93,6 +129,9 @@ class Mime extends Component {
 
   onImagePickerChange(files, type, index) {
     console.log(files, type, index)
+    // const name = files[0].file.name
+    // const base64 = files[0].url
+    // const avatar = '';
     this.setState({
       files
     })
@@ -100,9 +139,19 @@ class Mime extends Component {
 
   onSubmit = () => {
     this.props.postSignUp({
-      username: this.state.username,
-      password: this.state.password,
-      email: this.state.email
+      nickname: this.state.nickname,
+      position: this.state.position,
+      email: this.state.email,
+      contact: this.state.contact,
+      introduction: this.state.introduction,
+      avatar: this.state.files,
+      heros: this.state.heros.filter(item => {
+        return item.checked === true
+      }),
+      rank: this.state.rank,
+      mouse: this.state.mouse,
+      keyboard: this.state.keyboard,
+      headphones: this.state.headphones
     })
   }
 
@@ -111,12 +160,15 @@ class Mime extends Component {
   render() {
     const { getFieldProps, getFieldError } = this.props.form
     const { app, user, goBack } = this.props
-    const { position, files, heros } = this.state
+    const { position, files, heros, rank } = this.state
     const nicknameErrors = getFieldError('nickname')
     const contactErrors = getFieldError('contact')
     const introductionErrors = getFieldError('introduction')
     const emailErrors = getFieldError('email')
     const matchErrors = getFieldError('match')
+    const mouseErrors = getFieldError('mouse')
+    const keyboardErrors = getFieldError('keyboard')
+    const headphonesErrors = getFieldError('headphones')
     return (
       <div>
         <MyActivityIndicator isFetching={app.isFetching} />
@@ -238,6 +290,17 @@ class Mime extends Component {
               {matchErrors ? matchErrors.join(',') : null}
             </Flex>
           </List>
+          <List renderHeader={() => '天梯段位'}>
+            {RANKS.map(i => (
+              <Radio.RadioItem
+                key={i.value}
+                onChange={() => this.onRankChange(i.value)}
+                checked={rank === i.value}
+              >
+                {`${i.label} (${i.score})`}
+              </Radio.RadioItem>
+            ))}
+          </List>
           <List renderHeader={() => '团队定位'}>
             {TEAMPOSITIONS.map(i => (
               <Radio.RadioItem
@@ -249,10 +312,10 @@ class Mime extends Component {
               </Radio.RadioItem>
             ))}
           </List>
-          <List renderHeader={() => '擅长英雄'}>
+          <List className="am-list-hero" renderHeader={() => '擅长英雄'}>
             {heros.map(i => (
               <Checkbox.CheckboxItem
-                thumb="https://zos.alipayobjects.com/rmsportal/dNuvNrtqUztHCwM.png"
+                style={{ backgroundImage: `url(${i.image})` }}
                 key={i.value}
                 onChange={() => this.onHeroChange(i.value)}
                 checked={i.checked}
@@ -261,7 +324,71 @@ class Mime extends Component {
               </Checkbox.CheckboxItem>
             ))}
           </List>
-          <WhiteSpace />
+          <List renderHeader={() => '其它'}>
+            <InputItem
+              {...getFieldProps('mouse', {
+                onChange: this.onMouseChange,
+                validateFirst: true,
+                rules: [
+                  {
+                    type: 'string',
+                    required: true,
+                    pattern: /\w{4,25}$/,
+                    message: '4-25个字符'
+                  }
+                ]
+              })}
+              placeholder="请输入鼠标品牌、型号"
+              value={this.state.mouse}
+            >
+              鼠标
+            </InputItem>
+            <Flex className="error">
+              {mouseErrors ? mouseErrors.join(',') : null}
+            </Flex>
+            <InputItem
+              {...getFieldProps('keyboard', {
+                onChange: this.onKeyboardChange,
+                validateFirst: true,
+                rules: [
+                  {
+                    type: 'string',
+                    required: true,
+                    pattern: /\w{4,25}$/,
+                    message: '4-25个字符'
+                  }
+                ]
+              })}
+              placeholder="请输入键盘品牌、型号"
+              value={this.state.keyboard}
+            >
+              键盘
+            </InputItem>
+            <Flex className="error">
+              {keyboardErrors ? keyboardErrors.join(',') : null}
+            </Flex>
+            <InputItem
+              {...getFieldProps('headphones', {
+                onChange: this.onHeadPhonesChange,
+                validateFirst: true,
+                rules: [
+                  {
+                    type: 'string',
+                    required: true,
+                    pattern: /\w{4,25}$/,
+                    message: '4-25个字符'
+                  }
+                ]
+              })}
+              placeholder="请输入耳机品牌、型号"
+              value={this.state.headphones}
+            >
+              耳机
+            </InputItem>
+            <Flex className="error">
+              {headphonesErrors ? headphonesErrors.join(',') : null}
+            </Flex>
+          </List>
           <WhiteSpace />
           <WingBlank>
             <Button onClick={this.onSubmit} type="primary">
