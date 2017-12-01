@@ -9,7 +9,6 @@ import {
 
 const initialArticlesState = {
   list: [],
-  isFetching: false,
   isLoadMore: false,
   isRefreshing: false,
   page: 1,
@@ -31,7 +30,6 @@ function articlesReducer(state = initialArticlesState, action) {
     case GET_ARTICLES_REQUEST:
       return {
         ...state,
-        isFetching: true,
         isRefreshing: action.payload.isRefreshing,
         page: action.payload.page ? action.payload.page : 1
       }
@@ -39,12 +37,11 @@ function articlesReducer(state = initialArticlesState, action) {
       return {
         ...state,
         list: state.list.concat(action.payload),
-        isFetching: false,
         isRefreshing: false,
         isLoadMore: action.payload.length < 10 ? true : false
       }
     case GET_ARTICLES_FAILED:
-      return { ...state, isFetching: false, isRefreshing: false }
+      return { ...state, isRefreshing: false }
     default:
       return state
   }
@@ -53,20 +50,19 @@ function articlesReducer(state = initialArticlesState, action) {
 function stickyArticlesReducer(state = initialStickyArticlesState, action) {
   switch (action.type) {
     case GET_STICKY_ARTICLES_REQUEST:
-      return { ...state, isFetching: true }
+      return state
     case GET_STICKY_ARTICLES_SUCCESS:
       if (action.payload.length > 0) {
         return {
           ...state,
           list: state.list.slice(0, 1).concat(action.payload),
-          isFetching: false,
           isShowLogo: false
         }
       } else {
-        return { ...state, isFetching: false }
+        return state
       }
     case GET_STICKY_ARTICLES_FAILED:
-      return { ...state, isFetching: false }
+      return state
     default:
       return state
   }

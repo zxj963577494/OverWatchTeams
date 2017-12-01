@@ -9,19 +9,25 @@ import { getArticles, getStickyArticles } from '../services/api'
 function* getArticlesWorker(payload) {
   try {
     yield put(action.setNavBar({ title: '奇葩林', isCanBack: false }))
+    yield put(action.fetchRequest({text: '加载中'}))
     const response = yield call(getArticles, payload)
     yield put(action.getArticlesSuccess(response.data))
+    yield put(action.fetchSuccess())
   } catch (error) {
     yield put(action.getArticlesSuccess(error))
+    yield put(action.fetchFailed())
   }
 }
 
 function* getStickyArticlesWorker() {
   try {
+    yield put(action.fetchRequest({text: '加载中'}))
     const response = yield call(getStickyArticles)
     yield put(action.getStickyArticlesSuccess(response.data))
+    yield put(action.fetchSuccess())
   } catch (error) {
     yield put(action.getStickyArticlesFailed(error))
+    yield put(action.fetchFailed())
   }
 }
 

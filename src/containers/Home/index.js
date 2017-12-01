@@ -39,10 +39,10 @@ class Home extends Component {
   }
 
   render() {
-    const { sticky, articles, navigateTo } = this.props
+    const { sticky, articles, navigateTo, app } = this.props
     return (
       <div>
-        <MyActivityIndicator isFetching={articles.isFetching} />
+        <MyActivityIndicator isFetching={app.isFetching} text={app.text} />
         <div className={styles['header__sticky']}>
           {sticky.isShowLogo ? this.renderLogo(sticky) : this.renderCarousel()}
         </div>
@@ -57,6 +57,7 @@ class Home extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
+    app: state.root.app,
     sticky: state.root.sticky,
     articles: state.root.articles
   }

@@ -1,39 +1,41 @@
-:global(.am-list-hero) {
+:global(.am-image-picker-list) {
+    padding: 9px 7px;
+    margin-bottom: 0;
 }
 
+:global(.am-image-picker-list .am-flexbox) {
+    margin-bottom: 0;
+}
+
+:global(.am-list-hero) {}
+
 :global(.am-list-hero > .am-list-body) {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  align-items: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
 }
 
 :global(.am-list-hero .am-list-item) {
-  margin: 3px;
-  height: 100px;
-  width: 112px;
+    margin: 3px;
+    height: 100px;
+    width: 112px;
 }
 
 :global(.am-list-hero .am-list-line) {
-  display: none;
+    display: none;
 }
 
-:global(.am-list-hero
-    .am-list-item.am-checkbox-item
-    .am-list-thumb
-    .am-checkbox) {
-  width: 100%;
-  height: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: contain;
+:global(.am-list-hero .am-list-item.am-checkbox-item .am-list-thumb .am-checkbox) {
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
 }
 
-:global(.am-list
-    .am-list-item.am-checkbox-item
-    .am-list-thumb
-    .am-checkbox-inner) {
-  top: 0;
-  left: 91px;
+:global(.am-list .am-list-item.am-checkbox-item .am-list-thumb .am-checkbox-inner) {
+    top: 0;
+    left: 91px;
 }

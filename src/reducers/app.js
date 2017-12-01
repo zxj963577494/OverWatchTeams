@@ -5,7 +5,8 @@ import {
 } from '../constants/actionTypes'
 
 const initialAppState = {
-  isFetching: false
+  isFetching: false,
+  text: ''
 }
 
 function appReducer(state = initialAppState, action) {
@@ -13,7 +14,8 @@ function appReducer(state = initialAppState, action) {
     case FETCH_REQUEST:
       return {
         ...state,
-        isFetching: true
+        isFetching: true,
+        text: action.payload.text
       }
     case FETCH_SUCCESS:
       return {

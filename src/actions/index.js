@@ -95,8 +95,8 @@ export const postUploadFailed = function(payload) {
   return { type: POST_UPLOAD_FAILED, payload }
 }
 
-export const fetchRequest = function() {
-  return { type: FETCH_REQUEST }
+export const fetchRequest = function(payload) {
+  return { type: FETCH_REQUEST, payload }
 }
 
 export const fetchSuccess = function() {

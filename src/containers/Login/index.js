@@ -69,7 +69,7 @@ class Login extends Component {
         </NavBar>
         <WhiteSpace />
         <form>
-          <MyActivityIndicator isFetching={app.isFetching} />
+          <MyActivityIndicator isFetching={app.isFetching} text={app.text} />
           <InputItem
             {...getFieldProps('username', {
               onChange: this.onUserNameChange,

@@ -16,7 +16,7 @@ export default class MyActivityIndicator extends Component {
       <div>
         <ActivityIndicator
           toast
-          text="加载中..."
+          text={this.props.text}
           animating={this.props.isFetching}
         />
       </div>,
@@ -30,5 +30,6 @@ export default class MyActivityIndicator extends Component {
 }
 
 MyActivityIndicator.propTypes = {
-  isFetching: PropTypes.bool.isRequired
+  isFetching: PropTypes.bool,
+  isFettextching: PropTypes.string
 }

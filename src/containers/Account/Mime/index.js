@@ -16,9 +16,10 @@ import {
   Toast
 } from 'antd-mobile'
 import { goBack } from 'react-router-redux'
-import { postSignUpRequest } from '../../../actions'
+import { postUploadRequest } from '../../../actions'
 import { MyActivityIndicator } from '../../../components'
 import { TEAMPOSITIONS, HEROS, RANKS } from '../../../constants'
+// eslint-disable-next-line
 import styles from './style.css'
 
 class Mime extends Component {
@@ -129,22 +130,24 @@ class Mime extends Component {
 
   onImagePickerChange(files, type, index) {
     console.log(files, type, index)
-    // const name = files[0].file.name
-    // const base64 = files[0].url
-    // const avatar = '';
+    const { postUpload } = this.props
+    const name = files[0].file.name
+    const base64 = files[0].url
+    postUpload({ name, base64 })
     this.setState({
-      files
+      files,
     })
   }
 
   onSubmit = () => {
+    const { common } = this.props
     this.props.postSignUp({
       nickname: this.state.nickname,
       position: this.state.position,
       email: this.state.email,
       contact: this.state.contact,
       introduction: this.state.introduction,
-      avatar: this.state.files,
+      avatar: common.file,
       heros: this.state.heros.filter(item => {
         return item.checked === true
       }),
@@ -171,7 +174,7 @@ class Mime extends Component {
     const headphonesErrors = getFieldError('headphones')
     return (
       <div>
-        <MyActivityIndicator isFetching={app.isFetching} />
+        <MyActivityIndicator isFetching={app.isFetching} text={app.text}/>
         <WhiteSpace />
         <form>
           <List renderHeader={() => '上传头像'}>
@@ -406,14 +409,15 @@ class Mime extends Component {
 const mapStateToProps = (state, ownProps) => {
   return {
     app: state.root.app,
-    user: state.root.user
+    user: state.root.user,
+    common: state.root.common
   }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    postSignUp: payload => {
-      dispatch(postSignUpRequest(payload))
+    postUpload: payload => {
+      dispatch(postUploadRequest(payload))
     },
     goBack: () => {
       dispatch(goBack())
@@ -424,7 +428,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 Mime.propTypes = {
   app: PropTypes.object.isRequired,
   user: PropTypes.object.isRequired,
-  postSignUp: PropTypes.func.isRequired,
+  postUpload: PropTypes.func.isRequired,
   form: PropTypes.object
 }
 
