@@ -2,18 +2,6 @@ import {
   GET_ARTICLES_REQUEST,
   GET_ARTICLES_SUCCESS,
   GET_ARTICLES_FAILED,
-  GET_DETAIL_REQUEST,
-  GET_DETAIL_SUCCESS,
-  GET_DETAIL_FAILED,
-  GET_JOKES_REQUEST,
-  GET_JOKES_SUCCESS,
-  GET_JOKES_FAILED,
-  GET_PICTURES_REQUEST,
-  GET_PICTURES_SUCCESS,
-  GET_PICTURES_FAILED,
-  GET_COMMENTS_REQUEST,
-  GET_COMMENTS_SUCCESS,
-  GET_COMMENTS_FAILED,
   GET_STICKY_ARTICLES_REQUEST,
   GET_STICKY_ARTICLES_SUCCESS,
   GET_STICKY_ARTICLES_FAILED,
@@ -26,11 +14,12 @@ import {
   POST_SIGNUP_REQUEST,
   POST_SIGNUP_SUCCESS,
   POST_SIGNUP_FAILED,
+  POST_UPLOAD_REQUEST,
+  POST_UPLOAD_SUCCESS,
+  POST_UPLOAD_FAILED,
   FETCH_REQUEST,
   FETCH_SUCCESS,
   FETCH_FAILED,
-  POST_PAGECOUNT_REQUEST,
-  CHANGE_TABBAR,
   SET_NAVBAR
 } from '../constants/actionTypes'
 
@@ -46,42 +35,6 @@ export const getArticlesFailed = function(payload) {
   return { type: GET_ARTICLES_FAILED, payload }
 }
 
-export const getJokesRequest = function(payload) {
-  return { type: GET_JOKES_REQUEST, payload }
-}
-
-export const getJokesSuccess = function(payload) {
-  return { type: GET_JOKES_SUCCESS, payload }
-}
-
-export const getJokesFailed = function(payload) {
-  return { type: GET_JOKES_FAILED, payload }
-}
-
-export const getPicturesRequest = function(payload) {
-  return { type: GET_PICTURES_REQUEST, payload }
-}
-
-export const getPicturesSuccess = function(payload) {
-  return { type: GET_PICTURES_SUCCESS, payload }
-}
-
-export const getPicturesFailed = function(payload) {
-  return { type: GET_PICTURES_FAILED, payload }
-}
-
-export const getDetailRequest = function(payload) {
-  return { type: GET_DETAIL_REQUEST, payload }
-}
-
-export const getDetailSuccess = function(payload) {
-  return { type: GET_DETAIL_SUCCESS, payload }
-}
-
-export const getDetailFailed = function(payload) {
-  return { type: GET_DETAIL_FAILED, payload }
-}
-
 export const getStickyArticlesRequest = function() {
   return { type: GET_STICKY_ARTICLES_REQUEST }
 }
@@ -92,18 +45,6 @@ export const getStickyArticlesSuccess = function(payload) {
 
 export const getStickyArticlesFailed = function(payload) {
   return { type: GET_STICKY_ARTICLES_FAILED, payload }
-}
-
-export const getCommentsRequest = function(payload) {
-  return { type: GET_COMMENTS_REQUEST, payload }
-}
-
-export const getCommentsSuccess = function(payload) {
-  return { type: GET_COMMENTS_SUCCESS, payload }
-}
-
-export const getCommentsFailed = function(payload) {
-  return { type: GET_COMMENTS_FAILED, payload }
 }
 
 export const postLoginRequest = function(payload) {
@@ -130,10 +71,6 @@ export const postLogoutFailed = function() {
   return { type: POST_LOGOUT_FAILED }
 }
 
-export const postPageCountRequest = function(payload) {
-  return { type: POST_PAGECOUNT_REQUEST, payload }
-}
-
 export const postSignUpRequest = function(payload) {
   return { type: POST_SIGNUP_REQUEST, payload }
 }
@@ -146,6 +83,18 @@ export const postSignUpFailed = function(payload) {
   return { type: POST_SIGNUP_FAILED, payload }
 }
 
+export const postUploadRequest = function(payload) {
+  return { type: POST_UPLOAD_REQUEST, payload }
+}
+
+export const postUploadSuccess = function(payload) {
+  return { type: POST_UPLOAD_SUCCESS, payload }
+}
+
+export const postUploadFailed = function(payload) {
+  return { type: POST_UPLOAD_FAILED, payload }
+}
+
 export const fetchRequest = function() {
   return { type: FETCH_REQUEST }
 }
@@ -156,10 +105,6 @@ export const fetchSuccess = function() {
 
 export const fetchFailed = function() {
   return { type: FETCH_FAILED }
-}
-
-export const changeTabBar = function(payload) {
-  return { type: CHANGE_TABBAR, payload }
 }
 
 export const setNavBar = function(payload) {

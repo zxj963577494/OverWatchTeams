@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import { MyTabBar } from '../../components'
-import { changeTabBar } from '../../actions'
 // eslint-disable-next-line
 import globalcss from '../../assets/css/style.css'
 
@@ -14,8 +13,6 @@ class App extends Component {
           navbar = {this.props.navbar}
           history={this.props.history}
           children={this.props.children}
-          tabbars={this.props.tabbars}
-          changeTabBar={this.props.changeTabBar}
           navigateTo={this.props.navigateTo}
         />
       </div>
@@ -25,7 +22,6 @@ class App extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    tabbars: state.root.tabbars,
     location: state.location,
     navbar: state.root.navbar
   }
@@ -33,9 +29,6 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    changeTabBar: payload => {
-      dispatch(changeTabBar(payload))
-    },
     navigateTo: location => {
       dispatch(push(location))
     }
