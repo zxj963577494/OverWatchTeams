@@ -10,7 +10,9 @@ export default class MyNavBar extends Component {
         <NavBar
           mode="light"
           leftContent={<Icon type="left" />}
-          onLeftClick={() => history.goBack()}
+          onLeftClick={() => {
+            history.goBack()
+          }}
           style={{ position: 'fixed', width: '100%', height: '7%' }}
         >
           {navbar.title}

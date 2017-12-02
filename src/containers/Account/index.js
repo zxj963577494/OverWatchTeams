@@ -5,7 +5,6 @@ import { Result, WhiteSpace, Flex, Button, List, WingBlank } from 'antd-mobile'
 import { push } from 'react-router-redux'
 import { postLogoutRequest, setNavBar, getUserInfoRequest } from '../../actions'
 import { user } from '../../services/leanclound'
-import { getAvatar } from '../../utils/utils'
 
 class Account extends Component {
   constructor(props) {
@@ -17,6 +16,7 @@ class Account extends Component {
 
   componentDidMount() {
     const users = user.getCurrentUser()
+    this.props.setNavBar({ title: '个人中心', isCanBack: false })
     if (users) {
       this.props.getUserInfo()
       this.setState({
@@ -55,7 +55,7 @@ class Account extends Component {
           }
           message={
             logined
-              ? userinfo.introduction ? userinfo.introduction : '个人简介'
+              ? userinfo.introduction ? userinfo.introduction : '个人介绍'
               : ''
           }
         />
@@ -63,7 +63,9 @@ class Account extends Component {
         <List>
           <List.Item
             arrow="horizontal"
-            onClick={() => navigateTo('/account/mime')}
+            onClick={() => {
+              navigateTo('/account/mime')
+            }}
           >
             个人简介
           </List.Item>
@@ -106,8 +108,10 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     navigateTo: location => {
       dispatch(push(location))
     },
-    setNavBar: () => {
-      dispatch(setNavBar({ title: '登录', isCanBack: true }))
+    setNavBar: payload => {
+      dispatch(
+        setNavBar({ title: payload.title, isCanBack: payload.isCanBack })
+      )
     }
   }
 }

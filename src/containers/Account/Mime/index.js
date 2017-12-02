@@ -15,8 +15,11 @@ import {
   ImagePicker,
   Toast
 } from 'antd-mobile'
-import { goBack } from 'react-router-redux'
-import { postUploadRequest, putUserInfoRequest } from '../../../actions'
+import {
+  postUploadRequest,
+  putUserInfoRequest,
+  setNavBar
+} from '../../../actions'
 import { MyActivityIndicator } from '../../../components'
 import { TEAMPOSITIONS, RANKS } from '../../../constants'
 // eslint-disable-next-line
@@ -162,11 +165,13 @@ class Mime extends Component {
     })
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    this.props.setNavBar({ title: '个人简介', isCanBack: true })
+  }
 
   render() {
     const { getFieldProps, getFieldError } = this.props.form
-    const { app, user, goBack } = this.props
+    const { app } = this.props
     const { position, files, heros, rank, pending } = this.state
     const nicknameErrors = getFieldError('nickname')
     const contactErrors = getFieldError('contact')
@@ -392,7 +397,6 @@ class Mime extends Component {
 const mapStateToProps = (state, ownProps) => {
   return {
     app: state.root.app,
-    user: state.root.user,
     common: state.root.common,
     userinfo: state.root.userinfo
   }
@@ -406,15 +410,16 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     putUserInfo: payload => {
       dispatch(putUserInfoRequest(payload))
     },
-    goBack: () => {
-      dispatch(goBack())
+    setNavBar: payload => {
+      dispatch(
+        setNavBar({ title: payload.title, isCanBack: payload.isCanBack })
+      )
     }
   }
 }
 
 Mime.propTypes = {
   app: PropTypes.object.isRequired,
-  user: PropTypes.object.isRequired,
   userinfo: PropTypes.object,
   postUpload: PropTypes.func.isRequired,
   putUserInfo: PropTypes.func.isRequired,
