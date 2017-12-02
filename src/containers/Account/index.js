@@ -3,15 +3,31 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Result, WhiteSpace, Flex, Button, List, WingBlank } from 'antd-mobile'
 import { push } from 'react-router-redux'
-import { postLogoutRequest, setNavBar } from '../../actions'
+import { postLogoutRequest, setNavBar, getUserInfoRequest } from '../../actions'
 import { user } from '../../services/leanclound'
+import { getAvatar } from '../../utils/utils'
 
 class Account extends Component {
-  componentDidMount() {}
+  constructor(props) {
+    super(props)
+    this.state = {
+      logined: null
+    }
+  }
+
+  componentDidMount() {
+    const users = user.getCurrentUser()
+    if (users) {
+      this.props.getUserInfo()
+      this.setState({
+        logined: users
+      })
+    }
+  }
 
   render() {
-    const logined = user.getCurrentUser()
-    const { postLogout, navigateTo } = this.props
+    const { logined } = this.state
+    const { postLogout, navigateTo, userinfo } = this.props
     return (
       <div>
         <WhiteSpace />
@@ -23,20 +39,33 @@ class Account extends Component {
               style={{ borderRadius: '50%' }}
               src={
                 logined
-                  ? require('../../assets/images/logo-80.png')
+                  ? userinfo.avatar
+                    ? userinfo.avatar
+                    : require('../../assets/images/logo-80.png')
                   : require('../../assets/images/logo-80.png')
               }
               onClick={() => navigateTo('/login')}
               alt="登录成功"
             />
           }
-          title={logined ? '登录/注册' : ''}
-          message={logined ? '' : ''}
+          title={
+            logined
+              ? userinfo.nickname ? userinfo.nickname : '昵称'
+              : '登录/注册'
+          }
+          message={
+            logined
+              ? userinfo.introduction ? userinfo.introduction : '个人简介'
+              : ''
+          }
         />
         <WhiteSpace />
         <List>
-          <List.Item arrow="horizontal" onClick={() => navigateTo('/account/mime')}>
-            个人介绍
+          <List.Item
+            arrow="horizontal"
+            onClick={() => navigateTo('/account/mime')}
+          >
+            个人简介
           </List.Item>
           <List.Item arrow="horizontal" onClick={() => {}}>
             我的战队
@@ -61,12 +90,16 @@ class Account extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    user: state.root.user
+    user: state.root.user,
+    userinfo: state.root.userinfo
   }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
+    getUserInfo: () => {
+      dispatch(getUserInfoRequest())
+    },
     postLogout: () => {
       dispatch(postLogoutRequest())
     },

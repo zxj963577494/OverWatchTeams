@@ -20,7 +20,13 @@ import {
   FETCH_REQUEST,
   FETCH_SUCCESS,
   FETCH_FAILED,
-  SET_NAVBAR
+  SET_NAVBAR,
+  GET_USERINFO_REQUEST,
+  GET_USERINFO_SUCCESS,
+  GET_USERINFO_FAILED,
+  PUT_USERINFO_REQUEST,
+  PUT_USERINFO_SUCCESS,
+  PUT_USERINFO_FAILED
 } from '../constants/actionTypes'
 
 export const getArticlesRequest = function(payload) {
@@ -109,4 +115,28 @@ export const fetchFailed = function() {
 
 export const setNavBar = function(payload) {
   return { type: SET_NAVBAR, payload }
+}
+
+export const getUserInfoRequest = function() {
+  return { type: GET_USERINFO_REQUEST }
+}
+
+export const getUserInfoSuccess = function(payload) {
+  return { type: GET_USERINFO_SUCCESS, payload }
+}
+
+export const getUserInfoFailed = function(payload) {
+  return { type: GET_USERINFO_FAILED, payload }
+}
+
+export const putUserInfoRequest = function(payload) {
+  return { type: PUT_USERINFO_REQUEST, payload }
+}
+
+export const putUserInfoSuccess = function(payload) {
+  return { type: PUT_USERINFO_SUCCESS, payload }
+}
+
+export const putUserInfoFailed = function(payload) {
+  return { type: PUT_USERINFO_FAILED, payload }
 }

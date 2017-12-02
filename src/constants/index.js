@@ -133,125 +133,143 @@ export const HEROS = [
     label: '堡垒',
     image:
       'http://overwatch.nos.netease.com/1/assets/images/hero/bastion/icon-portrait.png',
-    position: 'defense'
+    position: 'defense',
+    checked: false
   },
   {
     value: 'hanzo',
     label: '半藏',
     image:
       'http://overwatch.nos.netease.com/1/assets/images/hero/hanzo/icon-portrait.png',
-    position: 'defense'
+    position: 'defense',
+    checked: false
   },
   {
     value: 'junkrat',
     label: '狂鼠',
     image:
       'http://overwatch.nos.netease.com/1/assets/images/hero/junkrat/icon-portrait.png',
-    position: 'offense'
+    position: 'offense',
+    checked: false
   },
   {
     value: 'mei',
     label: '美',
     image:
       'http://overwatch.nos.netease.com/1/assets/images/hero/mei/icon-portrait.png',
-    position: 'offense'
+    position: 'offense',
+    checked: false
   },
   {
     value: 'torbjorn',
     label: '托比昂',
     image:
       'http://overwatch.nos.netease.com/1/assets/images/hero/torbjorn/icon-portrait.png',
-    position: 'offense'
+    position: 'offense',
+    checked: false
   },
   {
     value: 'widowmaker',
     label: '黑百合',
     image:
       'http://overwatch.nos.netease.com/1/assets/images/hero/widowmaker/icon-portrait.png',
-    position: 'offense'
+    position: 'offense',
+    checked: false
   },
   {
     value: 'dva',
     label: 'D.Va',
     image:
       'http://overwatch.nos.netease.com/1/assets/images/hero/dva/icon-portrait.png',
-    position: 'tank'
+    position: 'tank',
+    checked: false
   },
   {
     value: 'orisa',
     label: '奥丽莎',
     image:
       'http://overwatch.nos.netease.com/1/assets/images/hero/orisa/icon-portrait.png',
-    position: 'tank'
+    position: 'tank',
+    checked: false
   },
   {
     value: 'reinhardt',
     label: '莱因哈特',
     image:
       'http://overwatch.nos.netease.com/1/assets/images/hero/reinhardt/icon-portrait.png',
-    position: 'tank'
+    position: 'tank',
+    checked: false
   },
   {
     value: 'roadhog',
     label: '路霸',
     image:
       'http://overwatch.nos.netease.com/1/assets/images/hero/roadhog/icon-portrait.png',
-    position: 'tank'
+    position: 'tank',
+    checked: false
   },
   {
     value: 'winston',
     label: '温斯顿',
     image:
       'http://overwatch.nos.netease.com/1/assets/images/hero/winston/icon-portrait.png',
-    position: 'tank'
+    position: 'tank',
+    checked: false
   },
   {
     value: 'zarya',
     label: '查莉娅',
     image:
       'http://overwatch.nos.netease.com/1/assets/images/hero/zarya/icon-portrait.png',
-    position: 'tank'
+    position: 'tank',
+    checked: false
   },
   {
     value: 'ana',
     label: '安娜',
     image:
       'http://overwatch.nos.netease.com/1/assets/images/hero/ana/icon-portrait.png',
-    position: 'support'
+    position: 'support',
+    checked: false
   },
   {
     value: 'lucio',
     label: '卢西奥',
     image:
       'http://overwatch.nos.netease.com/1/assets/images/hero/lucio/icon-portrait.png',
-    position: 'support'
+    position: 'support',
+    checked: false
   },
   {
     value: 'mercy',
     label: '天使',
     image:
       'http://overwatch.nos.netease.com/1/assets/images/hero/mercy/icon-portrait.png',
-    position: 'support'
+    position: 'support',
+    checked: false
   },
   {
     value: 'moira',
     label: '莫伊拉',
     image:
       'http://overwatch.nos.netease.com/1/assets/images/hero/moira/icon-portrait.png',
-    position: 'support'
+    position: 'support',
+    checked: false
   },
   {
     value: 'symmetra',
     label: '秩序之光',
     image:
       'http://overwatch.nos.netease.com/1/assets/images/hero/symmetra/icon-portrait.png',
-    position: 'support'
+    position: 'support',
+    checked: false
   },
   {
     value: 'zenyatta',
     label: '禅雅塔',
     image:
       'http://overwatch.nos.netease.com/1/assets/images/hero/zenyatta/icon-portrait.png',
-    position: 'support'
+    position: 'support',
+    checked: false
   }
 ]

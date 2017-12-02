@@ -1,6 +1,12 @@
 import { fork, all } from 'redux-saga/effects'
 import { watchArticles, watchStickyArticles } from './articlesSaga'
-import { watchSignUp, watchLogin, watchLogout } from './userSaga'
+import {
+  watchSignUp,
+  watchLogin,
+  watchLogout,
+  watchPutUserInfo,
+  watchGetUserInfo
+} from './userSaga'
 import { watchUpload } from './commonSaga'
 
 export default function* rootSaga() {
@@ -10,6 +16,8 @@ export default function* rootSaga() {
     fork(watchLogin),
     fork(watchLogout),
     fork(watchSignUp),
-    fork(watchUpload)
+    fork(watchUpload),
+    fork(watchPutUserInfo),
+    fork(watchGetUserInfo)
   ])
 }

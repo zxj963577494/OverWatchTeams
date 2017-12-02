@@ -16,9 +16,9 @@ import {
   Toast
 } from 'antd-mobile'
 import { goBack } from 'react-router-redux'
-import { postUploadRequest } from '../../../actions'
+import { postUploadRequest, putUserInfoRequest } from '../../../actions'
 import { MyActivityIndicator } from '../../../components'
-import { TEAMPOSITIONS, HEROS, RANKS } from '../../../constants'
+import { TEAMPOSITIONS, RANKS } from '../../../constants'
 // eslint-disable-next-line
 import styles from './style.css'
 
@@ -26,24 +26,25 @@ class Mime extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      nickname: '',
-      position: 'DPS',
-      contact: '',
-      introduction: '',
-      email: '',
-      files: [],
-      avatar: '',
-      heros: HEROS,
-      rank: 'top500',
-      mouse: '',
-      keyboard: '',
-      headphones: ''
+      objectId: props.userinfo.objectId,
+      nickname: props.userinfo.nickname,
+      position: props.userinfo.position,
+      contact: props.userinfo.contact,
+      introduction: props.userinfo.introduction,
+      match: props.userinfo.match,
+      files: props.userinfo.files,
+      avatar: props.userinfo.avatar,
+      heros: props.userinfo.heros,
+      rank: props.userinfo.rank,
+      mouse: props.userinfo.mouse,
+      keyboard: props.userinfo.keyboard,
+      headphones: props.userinfo.headphones,
+      pending: props.userinfo.pending
     }
     this.onNickNameChange = this.onNickNameChange.bind(this)
     this.onContactChange = this.onContactChange.bind(this)
     this.onIntroductionChange = this.onIntroductionChange.bind(this)
     this.onMatchChange = this.onMatchChange.bind(this)
-    this.onEmailChange = this.onEmailChange.bind(this)
     this.onMouseChange = this.onMouseChange.bind(this)
     this.onKeyboardChange = this.onKeyboardChange.bind(this)
     this.onHeadPhonesChange = this.onHeadPhonesChange.bind(this)
@@ -72,12 +73,6 @@ class Mime extends Component {
   onIntroductionChange(value) {
     this.setState({
       introduction: value
-    })
-  }
-
-  onEmailChange(value) {
-    this.setState({
-      email: value
     })
   }
 
@@ -130,31 +125,40 @@ class Mime extends Component {
 
   onImagePickerChange(files, type, index) {
     console.log(files, type, index)
-    const { postUpload } = this.props
-    const name = files[0].file.name
-    const base64 = files[0].url
-    postUpload({ name, base64 })
+    if (type === 'add') {
+      const { postUpload } = this.props
+      const name = files[0].file.name
+      const base64 = files[0].url
+      postUpload({ name, base64 })
+    }
     this.setState({
-      files,
+      files
     })
   }
 
   onSubmit = () => {
-    const { common } = this.props
-    this.props.postSignUp({
-      nickname: this.state.nickname,
-      position: this.state.position,
-      email: this.state.email,
-      contact: this.state.contact,
-      introduction: this.state.introduction,
-      avatar: common.file,
-      heros: this.state.heros.filter(item => {
-        return item.checked === true
-      }),
-      rank: this.state.rank,
-      mouse: this.state.mouse,
-      keyboard: this.state.keyboard,
-      headphones: this.state.headphones
+    const { common, putUserInfo, form } = this.props
+    form.validateFields((error, value) => {
+      if (!error) {
+        putUserInfo({
+          objectId: this.state.objectId,
+          nickname: this.state.nickname,
+          position: this.state.position,
+          contact: this.state.contact,
+          introduction: this.state.introduction,
+          avatar: common.file || this.state.avatar,
+          heros: this.state.heros.filter(item => {
+            return item.checked === true
+          }),
+          match: this.state.match,
+          rank: this.state.rank,
+          mouse: this.state.mouse,
+          keyboard: this.state.keyboard,
+          headphones: this.state.headphones
+        })
+      } else {
+        Toast.fail('格式错误，请检查后提交', 2)
+      }
     })
   }
 
@@ -163,18 +167,17 @@ class Mime extends Component {
   render() {
     const { getFieldProps, getFieldError } = this.props.form
     const { app, user, goBack } = this.props
-    const { position, files, heros, rank } = this.state
+    const { position, files, heros, rank, pending } = this.state
     const nicknameErrors = getFieldError('nickname')
     const contactErrors = getFieldError('contact')
     const introductionErrors = getFieldError('introduction')
-    const emailErrors = getFieldError('email')
     const matchErrors = getFieldError('match')
     const mouseErrors = getFieldError('mouse')
     const keyboardErrors = getFieldError('keyboard')
     const headphonesErrors = getFieldError('headphones')
     return (
       <div>
-        <MyActivityIndicator isFetching={app.isFetching} text={app.text}/>
+        <MyActivityIndicator isFetching={app.isFetching} text={app.text} />
         <WhiteSpace />
         <form>
           <List renderHeader={() => '上传头像'}>
@@ -189,35 +192,33 @@ class Mime extends Component {
             <InputItem
               {...getFieldProps('nickname', {
                 onChange: this.onNickNameChange,
-                validateFirst: true,
                 rules: [
                   {
                     type: 'string',
                     required: true,
-                    pattern: /\w{4,25}$/,
-                    message: '4-25个字符'
+                    min: 2,
+                    max: 10,
+                    message: '昵称:2-10个字符'
                   }
                 ]
               })}
-              placeholder="请输入战网昵称"
-              value={this.state.username}
+              placeholder="请输入昵称"
+              value={this.state.nickname}
             >
-              战网昵称
+              昵称
             </InputItem>
             <Flex className="error">
               {nicknameErrors ? nicknameErrors.join(',') : null}
             </Flex>
             <InputItem
-              type="password"
               {...getFieldProps('contact', {
                 onChange: this.onContactChange,
-                validateFirst: true,
                 rules: [
                   {
                     type: 'string',
-                    required: true,
-                    pattern: /\w{5,25}$/,
-                    message: '6-25个字符'
+                    min: 6,
+                    max: 25,
+                    message: '联系方式:6-25个字符'
                   }
                 ]
               })}
@@ -229,23 +230,6 @@ class Mime extends Component {
             <Flex className="error">
               {contactErrors ? contactErrors.join(',') : null}
             </Flex>
-            <InputItem
-              type="email"
-              {...getFieldProps('email', {
-                onChange: this.onEmailChange,
-                validateFirst: true,
-                rules: [
-                  { type: 'email', required: true, message: '邮箱格式不正确' }
-                ]
-              })}
-              placeholder="请输入邮箱地址"
-              value={this.state.email}
-            >
-              邮箱
-            </InputItem>
-            <Flex className="error">
-              {emailErrors ? emailErrors.join(',') : null}
-            </Flex>
           </List>
           <List renderHeader={() => '个人介绍'}>
             <TextareaItem
@@ -256,14 +240,15 @@ class Mime extends Component {
                   {
                     type: 'string',
                     required: false,
-                    pattern: /\w{5,25}$/,
-                    message: '6-25个字符'
+                    min: 4,
+                    max: 25,
+                    message: '个人介绍:4-25个字符'
                   }
                 ]
               })}
               rows={3}
               labelNumber={5}
-              placeholder="请输入个人介绍"
+              placeholder="一句话个人介绍"
               value={this.state.introduction}
             />
             <Flex className="error">
@@ -274,19 +259,19 @@ class Mime extends Component {
             <TextareaItem
               {...getFieldProps('match', {
                 onChange: this.onMatchChange,
-                validateFirst: true,
                 rules: [
                   {
                     type: 'string',
                     required: false,
-                    pattern: /\w{5,25}$/,
-                    message: '6-25个字符'
+                    min: 4,
+                    max: 100,
+                    message: '个人比赛经历:4-100个字符'
                   }
                 ]
               })}
               rows={3}
               labelNumber={5}
-              placeholder="请输入个人比赛经历，包括OWOD、战队训练赛等其它任何比赛经历"
+              placeholder="个人比赛经历，包括OWOD、战队训练赛等其它任何比赛经历"
               value={this.state.match}
             />
             <Flex className="error">
@@ -331,13 +316,13 @@ class Mime extends Component {
             <InputItem
               {...getFieldProps('mouse', {
                 onChange: this.onMouseChange,
-                validateFirst: true,
                 rules: [
                   {
                     type: 'string',
-                    required: true,
-                    pattern: /\w{4,25}$/,
-                    message: '4-25个字符'
+                    required: false,
+                    min: 3,
+                    max: 20,
+                    message: '鼠标:3-20个字符'
                   }
                 ]
               })}
@@ -352,13 +337,13 @@ class Mime extends Component {
             <InputItem
               {...getFieldProps('keyboard', {
                 onChange: this.onKeyboardChange,
-                validateFirst: true,
                 rules: [
                   {
                     type: 'string',
-                    required: true,
-                    pattern: /\w{4,25}$/,
-                    message: '4-25个字符'
+                    required: false,
+                    min: 3,
+                    max: 20,
+                    message: '键盘:3-20个字符'
                   }
                 ]
               })}
@@ -373,13 +358,13 @@ class Mime extends Component {
             <InputItem
               {...getFieldProps('headphones', {
                 onChange: this.onHeadPhonesChange,
-                validateFirst: true,
                 rules: [
                   {
                     type: 'string',
-                    required: true,
-                    pattern: /\w{4,25}$/,
-                    message: '4-25个字符'
+                    required: false,
+                    min: 3,
+                    max: 20,
+                    message: '耳机:3-20个字符'
                   }
                 ]
               })}
@@ -394,12 +379,10 @@ class Mime extends Component {
           </List>
           <WhiteSpace />
           <WingBlank>
-            <Button onClick={this.onSubmit} type="primary">
+            <Button disabled={pending} onClick={this.onSubmit} type="primary">
               保 存
             </Button>
           </WingBlank>
-          <WhiteSpace />
-          <Flex className="error">{user ? user.signupError : null}</Flex>
         </form>
       </div>
     )
@@ -410,7 +393,8 @@ const mapStateToProps = (state, ownProps) => {
   return {
     app: state.root.app,
     user: state.root.user,
-    common: state.root.common
+    common: state.root.common,
+    userinfo: state.root.userinfo
   }
 }
 
@@ -418,6 +402,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     postUpload: payload => {
       dispatch(postUploadRequest(payload))
+    },
+    putUserInfo: payload => {
+      dispatch(putUserInfoRequest(payload))
     },
     goBack: () => {
       dispatch(goBack())
@@ -428,7 +415,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 Mime.propTypes = {
   app: PropTypes.object.isRequired,
   user: PropTypes.object.isRequired,
+  userinfo: PropTypes.object,
   postUpload: PropTypes.func.isRequired,
+  putUserInfo: PropTypes.func.isRequired,
   form: PropTypes.object
 }
 
