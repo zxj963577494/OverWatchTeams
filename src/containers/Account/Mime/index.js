@@ -25,7 +25,7 @@ import { TEAMPOSITIONS, RANKS } from '../../../constants'
 // eslint-disable-next-line
 import styles from './style.css'
 
-class Mime extends Component {
+class AccountMime extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -418,7 +418,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   }
 }
 
-Mime.propTypes = {
+AccountMime.propTypes = {
   app: PropTypes.object.isRequired,
   userinfo: PropTypes.object,
   postUpload: PropTypes.func.isRequired,
@@ -426,4 +426,4 @@ Mime.propTypes = {
   form: PropTypes.object
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(createForm()(Mime))
+export default connect(mapStateToProps, mapDispatchToProps)(createForm()(AccountMime))

@@ -5,7 +5,8 @@ import Login from './Login'
 import Account from './Account'
 import Welcome from './Welcome'
 import SignUp from './SignUp'
-import Mime from './Account/Mime'
+import AccountMime from './Account/Mime'
+import AccountTeams from './Account/Teams'
 
 export {
   Root,
@@ -15,5 +16,6 @@ export {
   Account,
   Welcome,
   SignUp,
-  Mime
+  AccountMime,
+  AccountTeams
 }

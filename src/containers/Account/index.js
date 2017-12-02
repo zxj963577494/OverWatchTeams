@@ -63,13 +63,14 @@ class Account extends Component {
         <List>
           <List.Item
             arrow="horizontal"
-            onClick={() => {
-              navigateTo('/account/mime')
-            }}
+            onClick={() => navigateTo('/account/mime')}
           >
             个人简介
           </List.Item>
-          <List.Item arrow="horizontal" onClick={() => {}}>
+          <List.Item
+            arrow="horizontal"
+            onClick={() => navigateTo('/account/teams')}
+          >
             我的战队
           </List.Item>
         </List>
