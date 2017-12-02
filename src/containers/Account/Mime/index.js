@@ -127,7 +127,6 @@ class AccountMime extends Component {
   }
 
   onImagePickerChange(files, type, index) {
-    console.log(files, type, index)
     if (type === 'add') {
       const { postUpload } = this.props
       const name = files[0].file.name
@@ -183,7 +182,6 @@ class AccountMime extends Component {
     return (
       <div>
         <MyActivityIndicator isFetching={app.isFetching} text={app.text} />
-        <WhiteSpace />
         <form>
           <List renderHeader={() => '上传头像'}>
             <ImagePicker

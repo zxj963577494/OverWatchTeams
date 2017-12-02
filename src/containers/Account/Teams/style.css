@@ -1,0 +1,10 @@
+:global(.am-card-header-content img) {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+:global(.am-flexbox-item) {
+  text-align: center
+}
