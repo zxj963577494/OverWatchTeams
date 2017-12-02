@@ -1,10 +1,11 @@
 import AV from 'leancloud-storage'
-import { getAvatar } from '../../utils/utils'
+import { getAvatar, getNickName } from '../../utils/utils'
 
 // 用户名和密码注册
 export function signUp(payload) {
   const { username, password, email } = payload
   const avatar = getAvatar()
+  const nickname = getNickName()
   const user = new AV.User()
   user.setUsername(username)
   user.setPassword(password)
@@ -13,7 +14,7 @@ export function signUp(payload) {
     if (!loginedUser.get('userinfo')) {
       const Userinfo = AV.Object.extend('UserInfo')
       const userinfo = new Userinfo()
-      userinfo.set('nickname', '')
+      userinfo.set('nickname', nickname)
       userinfo.set('contact', email)
       userinfo.set('avatar', avatar)
       userinfo.set('introduction', '这个世界需要更多的英雄')

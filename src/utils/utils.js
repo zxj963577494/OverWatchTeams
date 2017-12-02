@@ -23,6 +23,38 @@ export function cutstr(str, len, flag) {
   }
 }
 
+export function getNickName() {
+  const nicks = [
+    '末日铁拳',
+    '源氏',
+    '麦克雷',
+    '法老之鹰',
+    '死神',
+    '士兵：76',
+    '黑影',
+    '堡垒',
+    '半藏',
+    '狂鼠',
+    '美',
+    '托比昂',
+    '黑百合',
+    'D.Va',
+    '奥丽莎',
+    '莱因哈特',
+    '路霸',
+    '温斯顿',
+    '查莉娅',
+    '安娜',
+    '卢西奥',
+    '天使',
+    '莫伊拉',
+    '秩序之光',
+    '禅雅塔'
+  ]
+  const i = nicks[Math.floor(Math.random() * nicks.length)]
+  return i
+}
+
 export function getAvatar() {
   const avatars = [
     'avatar/00007642.png',
