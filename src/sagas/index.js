@@ -7,6 +7,7 @@ import {
   watchPutUserInfo,
   watchGetUserInfo
 } from './userSaga'
+import { watchGetTeamsByUser, watchPostTeams } from './teamsSaga'
 import { watchUpload } from './commonSaga'
 
 export default function* rootSaga() {
@@ -18,6 +19,8 @@ export default function* rootSaga() {
     fork(watchSignUp),
     fork(watchUpload),
     fork(watchPutUserInfo),
-    fork(watchGetUserInfo)
+    fork(watchGetUserInfo),
+    fork(watchPostTeams),
+    fork(watchGetTeamsByUser)
   ])
 }

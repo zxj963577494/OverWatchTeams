@@ -13,9 +13,10 @@ import {
   List,
   TextareaItem,
   ImagePicker,
+  Toast
 } from 'antd-mobile'
 import { RANKS } from '../../../../constants'
-import { setNavBar } from '../../../../actions'
+import { setNavBar, postTeamsRequest } from '../../../../actions'
 import { MyActivityIndicator } from '../../../../components'
 import styles from './style.css'
 
@@ -112,11 +113,13 @@ class AccountTeamsCreate extends Component {
       createCity: value
     })
   }
+
   onRankChange(value) {
     this.setState({
       rank: value
     })
   }
+
   onSloganChange(value) {
     this.setState({
       slogan: value
@@ -135,7 +138,31 @@ class AccountTeamsCreate extends Component {
     })
   }
 
-  onSubmit() {}
+  onSubmit() {
+    const { common, postTeam, form } = this.props
+    form.validateFields((error, value) => {
+      if (!error) {
+        postTeam({
+          chineseFullName: this.state.chineseFullName,
+          englishFullName: this.state.englishFullName,
+          chineseName: this.state.chineseName,
+          englishName: this.state.englishName,
+          slogan: this.state.slogan,
+          introduction: this.state.introduction,
+          rank: this.state.rank,
+          avatar: common.file || this.state.avatar,
+          createDate: this.state.createDate,
+          createCity: this.state.createCity,
+          contact: this.state.contact,
+          honor: this.state.honor,
+          match: this.state.match,
+          isRecruit: this.state.isRecruit
+        })
+      } else {
+        Toast.fail('格式错误，请检查后提交', 2)
+      }
+    })
+  }
 
   componentDidMount() {
     this.props.setNavBar({ title: '新建战队', isCanBack: true })
@@ -436,6 +463,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
       dispatch(
         setNavBar({ title: payload.title, isCanBack: payload.isCanBack })
       )
+    },
+    postTeam: payload => {
+      dispatch(postTeamsRequest(payload))
     }
   }
 }

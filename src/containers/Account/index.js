@@ -1,7 +1,15 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { Result, WhiteSpace, Flex, Button, List, WingBlank } from 'antd-mobile'
+import {
+  Result,
+  WhiteSpace,
+  Flex,
+  Button,
+  List,
+  WingBlank,
+  Toast
+} from 'antd-mobile'
 import { push } from 'react-router-redux'
 import { postLogoutRequest, setNavBar, getUserInfoRequest } from '../../actions'
 import { user } from '../../services/leanclound'
@@ -63,13 +71,25 @@ class Account extends Component {
         <List>
           <List.Item
             arrow="horizontal"
-            onClick={() => navigateTo('/account/mime')}
+            onClick={() => {
+              if (logined) {
+                navigateTo('/account/mime')
+              } else {
+                Toast.info('请先登录', 1)
+              }
+            }}
           >
             个人简介
           </List.Item>
           <List.Item
             arrow="horizontal"
-            onClick={() => navigateTo('/account/teams')}
+            onClick={() => {
+              if (logined) {
+                navigateTo('/account/teams')
+              } else {
+                Toast.info('请先登录', 1)
+              }
+            }}
           >
             我的战队
           </List.Item>

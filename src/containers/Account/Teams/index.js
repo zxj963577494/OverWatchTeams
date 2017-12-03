@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import { Button, WhiteSpace, Flex, WingBlank, Card } from 'antd-mobile'
-import { setNavBar } from '../../../actions'
+import { setNavBar, getTeamsByUserRequest } from '../../../actions'
 import styles from './style.css'
 
 class AccountTeams extends Component {
@@ -18,9 +18,11 @@ class AccountTeams extends Component {
 
   componentDidMount() {
     this.props.setNavBar({ title: '我的战队', isCanBack: true })
+    this.props.getTeamsByUser()
   }
 
   render() {
+    console.log(this.props.userteams)
     return (
       <div>
         <WingBlank>
@@ -83,11 +85,16 @@ class AccountTeams extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  return {}
+  return {
+    userteams: state.root.userteams
+  }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
+    getTeamsByUser: () => {
+      dispatch(getTeamsByUserRequest())
+    },
     setNavBar: payload => {
       dispatch(
         setNavBar({ title: payload.title, isCanBack: payload.isCanBack })

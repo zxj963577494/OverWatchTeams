@@ -26,7 +26,13 @@ import {
   GET_USERINFO_FAILED,
   PUT_USERINFO_REQUEST,
   PUT_USERINFO_SUCCESS,
-  PUT_USERINFO_FAILED
+  PUT_USERINFO_FAILED,
+  POST_TEAMS_REQUEST,
+  POST_TEAMS_SUCCESS,
+  POST_TEAMS_FAILED,
+  GET_USER_TEAMS_REQUEST,
+  GET_USER_TEAMS_SUCCESS,
+  GET_USER_TEAMS_FAILED
 } from '../constants/actionTypes'
 
 export const getArticlesRequest = function(payload) {
@@ -139,4 +145,28 @@ export const putUserInfoSuccess = function(payload) {
 
 export const putUserInfoFailed = function(payload) {
   return { type: PUT_USERINFO_FAILED, payload }
+}
+
+export const postTeamsRequest = function(payload) {
+  return { type: POST_TEAMS_REQUEST, payload }
+}
+
+export const postTeamsSuccess = function(payload) {
+  return { type: POST_TEAMS_SUCCESS, payload }
+}
+
+export const postTeamsFailed = function(payload) {
+  return { type: POST_TEAMS_FAILED, payload }
+}
+
+export const getTeamsByUserRequest = function() {
+  return { type: GET_USER_TEAMS_REQUEST }
+}
+
+export const getTeamsByUserSuccess = function(payload) {
+  return { type: GET_USER_TEAMS_SUCCESS, payload }
+}
+
+export const getTeamsByUserFailed = function(payload) {
+  return { type: GET_USER_TEAMS_FAILED, payload }
 }
