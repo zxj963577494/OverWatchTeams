@@ -21,7 +21,7 @@ export function cerateTeam(payload) {
 }
 
 // 根据个人获取战队
-export function getTeamsByUser(payload) {
+export function getTeamsByUser() {
   // 当前用户
   const user = getCurrentUser()
 
@@ -35,22 +35,22 @@ export function getTeamsByUser(payload) {
   query.include('team')
 
   // 执行查询
-  query.find().then(function(UserTeamMap) {
+  return query.find().then(function(UserTeamMap) {
+    let result = []
     UserTeamMap.forEach(function(scm, i, a) {
-      console.log(scm)
-      console.log(scm.get('team'))
       const team = scm.get('team')
-      var query2 = new AV.Query('UserTeamMap')
-      query2.equalTo('team', team)
-      query2.include('user')
-      query2.include('team')
-      query.find().then(function(UserTeamMap2) {
-        UserTeamMap2.forEach(function(scm, i, a) {
-          console.log(scm)
-        })
-      })
-      console.log(scm.get('user'))
-      console.log(scm.get('leader'))
+      let o = {
+        objectId: team.id,
+        avatar: team.get('avatar'),
+        chineseFullName: team.get('chineseFullName'),
+        chineseName: team.get('chineseName'),
+        englishFullName: team.get('englishFullName'),
+        englishName: team.get('englishName'),
+        isRecruit: team.get('isRecruit'),
+        createDate: team.get('createDate'),
+      }
+      result.push(o)
     })
+    return result
   })
 }

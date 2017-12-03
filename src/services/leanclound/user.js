@@ -107,5 +107,20 @@ export function putUserInfo(payload) {
 export function getUserInfo() {
   const user = new AV.Query('_User')
   user.include(['userinfo'])
-  return user.find()
+  return user.first().then(function(result) {
+    const userinfo = result.get('userinfo')
+    return {
+      objectId: userinfo.id,      
+      avatar:userinfo.get('avatar'),
+      contact:userinfo.get('contact'),
+      headphones:userinfo.get('files'),
+      heros:userinfo.get('heros'),
+      introduction:userinfo.get('introduction'),
+      keyboard:userinfo.get('keyboard'),
+      match:userinfo.get('match'),
+      nickname:userinfo.get('nickname'),
+      position:userinfo.get('position'),
+      rank:userinfo.get('rank'),
+    }
+  })
 }

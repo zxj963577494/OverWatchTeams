@@ -30,10 +30,7 @@ function* getTeamsByUserWorker() {
     const response = yield call(teams.getTeamsByUser)
     console.log(response[0])
     yield put(
-      action.getTeamsByUserSuccess({
-        ...response[0].attributes.userinfo.attributes,
-        objectId: response[0].attributes.userinfo.id
-      })
+      action.getTeamsByUserSuccess(response)
     )
   } catch (error) {
     yield put(action.getTeamsByUserFailed(error))

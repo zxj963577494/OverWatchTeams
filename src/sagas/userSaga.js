@@ -73,12 +73,8 @@ function* putUserInfoWorker(payload) {
 function* getUserInfoWorker() {
   try {
     const response = yield call(user.getUserInfo)
-    console.log(response[0])
     yield put(
-      action.getUserInfoSuccess({
-        ...response[0].attributes.userinfo.attributes,
-        objectId: response[0].attributes.userinfo.id
-      })
+      action.getUserInfoSuccess(response)
     )
   } catch (error) {
     yield put(action.getUserInfoFailed(error))
