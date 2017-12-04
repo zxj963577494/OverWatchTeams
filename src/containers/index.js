@@ -8,6 +8,7 @@ import SignUp from './SignUp'
 import AccountMime from './Account/Mime'
 import AccountTeams from './Account/Teams'
 import AccountTeamsCreate from './Account/Teams/Create'
+import AccountTeamsEdit from './Account/Teams/Edit'
 
 export {
   Root,
@@ -19,5 +20,6 @@ export {
   SignUp,
   AccountMime,
   AccountTeams,
-  AccountTeamsCreate
+  AccountTeamsCreate,
+  AccountTeamsEdit
 }

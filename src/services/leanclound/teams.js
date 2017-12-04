@@ -23,6 +23,20 @@ export function cerateTeam(payload) {
   return userTeamMap.save()
 }
 
+// 更新战队
+export function updateTeams(payload) {
+  const team = AV.Object.createWithoutData('Teams', payload.objectId)
+  for (let key of Object.keys(payload)) {
+    if (key !== 'objectId') {
+      team.set(key, payload[key])
+    }
+  }
+  if (!payload['avatar']) {
+    team.set('avatar', config.BASE_PIC_URL + '/logo.png')
+  }
+  return team.save()
+}
+
 // 根据个人获取战队
 export function getTeamsByUser() {
   // 当前用户
@@ -45,62 +59,62 @@ export function getTeamsByUser() {
         {
           avatar: config.TEAM_DEFAULT_AVATAR,
           nickname: '暂无',
-          leader: false,
+          leader: false
         },
         {
           avatar: config.TEAM_DEFAULT_AVATAR,
           nickname: '暂无',
-          leader: false,
+          leader: false
         },
         {
           avatar: config.TEAM_DEFAULT_AVATAR,
           nickname: '暂无',
-          leader: false,
+          leader: false
         },
         {
           avatar: config.TEAM_DEFAULT_AVATAR,
           nickname: '暂无',
-          leader: false,
+          leader: false
         },
         {
           avatar: config.TEAM_DEFAULT_AVATAR,
           nickname: '暂无',
-          leader: false,
+          leader: false
         },
         {
           avatar: config.TEAM_DEFAULT_AVATAR,
           nickname: '暂无',
-          leader: false,
+          leader: false
         },
         {
           avatar: config.TEAM_DEFAULT_AVATAR,
           nickname: '暂无',
-          leader: false,
+          leader: false
         },
         {
           avatar: config.TEAM_DEFAULT_AVATAR,
           nickname: '暂无',
-          leader: false,
+          leader: false
         },
         {
           avatar: config.TEAM_DEFAULT_AVATAR,
           nickname: '暂无',
-          leader: false,
+          leader: false
         },
         {
           avatar: config.TEAM_DEFAULT_AVATAR,
           nickname: '暂无',
-          leader: false,
+          leader: false
         },
         {
           avatar: config.TEAM_DEFAULT_AVATAR,
           nickname: '暂无',
-          leader: false,
+          leader: false
         },
         {
           avatar: config.TEAM_DEFAULT_AVATAR,
           nickname: '暂无',
-          leader: false,
+          leader: false
         }
       ]
       const team = item.get('team')
@@ -113,6 +127,13 @@ export function getTeamsByUser() {
         englishName: team.get('englishName'),
         isRecruit: team.get('isRecruit'),
         createDate: team.get('createDate'),
+        slogan: team.get('slogan'),
+        introduction: team.get('introduction'),
+        rank: team.get('rank'),
+        createCity: team.get('createCity'),
+        contact: team.get('contact'),
+        honor: team.get('honor'),
+        match: team.get('match'),
         members: members
       }
       result.push(o)

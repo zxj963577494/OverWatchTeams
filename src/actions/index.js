@@ -30,6 +30,9 @@ import {
   POST_TEAMS_REQUEST,
   POST_TEAMS_SUCCESS,
   POST_TEAMS_FAILED,
+  PUT_TEAMS_REQUEST,
+  PUT_TEAMS_SUCCESS,
+  PUT_TEAMS_FAILED,
   GET_USER_TEAMS_REQUEST,
   GET_USER_TEAMS_SUCCESS,
   GET_USER_TEAMS_FAILED
@@ -157,6 +160,18 @@ export const postTeamsSuccess = function(payload) {
 
 export const postTeamsFailed = function(payload) {
   return { type: POST_TEAMS_FAILED, payload }
+}
+
+export const putTeamsRequest = function(payload) {
+  return { type: PUT_TEAMS_REQUEST, payload }
+}
+
+export const putTeamsSuccess = function(payload) {
+  return { type: PUT_TEAMS_SUCCESS, payload }
+}
+
+export const putTeamsFailed = function(payload) {
+  return { type: PUT_TEAMS_FAILED, payload }
 }
 
 export const getTeamsByUserRequest = function() {

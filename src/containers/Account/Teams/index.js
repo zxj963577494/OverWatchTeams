@@ -25,7 +25,7 @@ class AccountTeams extends Component {
   }
 
   render() {
-    const { userteams, app } = this.props
+    const { userteams, app, navigateTo } = this.props
     return (
       <div>
         <MyActivityIndicator isFetching={app.isFetching} text={app.text} />
@@ -46,7 +46,7 @@ class AccountTeams extends Component {
                     extra={
                       <Button
                         onClick={() => {
-                          console.log(item.objectId)
+                          navigateTo('/account/teams/edit/' + item.objectId)
                         }}
                         type="ghost"
                         size="small"
@@ -95,7 +95,7 @@ class AccountTeams extends Component {
                             {dataItem.leader ? (
                               <img
                                 src={config.BASE_PIC_URL + '/leader.png'}
-                                alt={dataItem.leader}
+                                alt="队长"
                                 className="teams--leader"
                               />
                             ) : null}
@@ -149,7 +149,7 @@ class AccountTeams extends Component {
 const mapStateToProps = (state, ownProps) => {
   return {
     app: state.root.app,
-    userteams: state.root.userteams
+    userteams: state.root.userteams.list
   }
 }
 
