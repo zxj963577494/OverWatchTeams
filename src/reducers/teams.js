@@ -18,7 +18,7 @@ function userTeamsReducer(state = [], action) {
     case GET_USER_TEAMS_REQUEST:
       return state
     case GET_USER_TEAMS_SUCCESS:
-      return [...state, action.payload]
+      return [].concat(...action.payload)
     case GET_USER_TEAMS_FAILED:
       return state
     default:

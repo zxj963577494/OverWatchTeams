@@ -105,8 +105,10 @@ export function putUserInfo(payload) {
 }
 
 export function getUserInfo() {
+  const current = AV.User.current()
   const user = new AV.Query('_User')
-  user.include(['userinfo'])
+  user.equalTo('objectId', current.id)
+  user.include('userinfo')
   return user.first().then(function(result) {
     const userinfo = result.get('userinfo')
     return {

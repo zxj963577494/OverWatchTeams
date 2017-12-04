@@ -1,3 +1,5 @@
+import config from '../config'
+
 export function cutstr(str, len, flag) {
   var str_length = 0
   var str_cut = ''
@@ -169,5 +171,19 @@ export function getAvatar() {
     'avatar/000071B3.png'
   ]
   const i = avatars[Math.floor(Math.random() * avatars.length)]
-  return 'http://p0bl3nkmx.bkt.clouddn.com/' + i
+  return config.BASE_PIC_URL + '/' + i
+}
+
+export function getPosition(type) {
+  if (type) {
+    const positions = {
+      DPS: config.BASE_PIC_URL + '/dps.png',
+      Flex: config.BASE_PIC_URL + '/flex.png',
+      Tank: config.BASE_PIC_URL + '/tank.png',
+      Support: config.BASE_PIC_URL + '/support.png'
+    }
+    return positions[type]
+  } else {
+    return config.BASE_PIC_URL + '/position.png'
+  }
 }

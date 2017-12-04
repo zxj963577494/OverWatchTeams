@@ -74,15 +74,17 @@ function userInfoReducer(state = initialUserInfoState, action) {
 }
 
 function merge(o1, o2) {
-  const result = o1.map(item1 => {
-    return Object.assign(
-      item1,
-      o2.find(item2 => {
-        return item2 && item1.value === item2.value
-      })
-    )
-  })
-  return result
+  if (o2) {
+    const result = o1.map(item1 => {
+      return Object.assign(
+        item1,
+        o2.find(item2 => {
+          return item2 && item1.value === item2.value
+        })
+      )
+    })
+    return result
+  }
 }
 
 export { userInfoReducer }

@@ -27,12 +27,13 @@ function* postTeamsWorker(payload) {
 
 function* getTeamsByUserWorker() {
   try {
-    const response = yield call(teams.getTeamsByUser)
-    console.log(response[0])
-    yield put(
-      action.getTeamsByUserSuccess(response)
-    )
+    yield put(action.fetchRequest({ text: '加载中' }))
+    const teams1 = yield call(teams.getTeamsByUser)
+    const teams2 = yield call(teams.getUsersByTeam, teams1)
+    yield put(action.getTeamsByUserSuccess(teams2))
+    yield put(action.fetchSuccess())
   } catch (error) {
+    yield put(action.fetchFailed())
     yield put(action.getTeamsByUserFailed(error))
   }
 }
