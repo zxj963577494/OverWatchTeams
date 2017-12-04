@@ -31,7 +31,6 @@ class AccountTeams extends Component {
         <MyActivityIndicator isFetching={app.isFetching} text={app.text} />
         <WingBlank>
           {userteams.map(function(item, index) {
-            console.log(item)
             return (
               <div key={index}>
                 <WhiteSpace />
@@ -62,8 +61,15 @@ class AccountTeams extends Component {
                       data={item.members}
                       columnNum={3}
                       hasLine={false}
-                      renderItem={(dataItem,index) => (
-                        <div key={index}>
+                      renderItem={(dataItem, index) => (
+                        <div
+                          key={index}
+                          onClick={() => {
+                            if (dataItem.objectId) {
+                              console.log(dataItem.objectId)
+                            }
+                          }}
+                        >
                           <img
                             src={dataItem.avatar}
                             style={{

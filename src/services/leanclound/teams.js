@@ -145,12 +145,14 @@ function getUserInfo(id, item) {
         include: ['userinfo']
       })
       .then(function(data) {
+        const objectId = id
         const userinfo = data.get('userinfo')
         const avatar = userinfo.get('avatar')
         const nickname = userinfo.get('nickname')
         const position = userinfo.get('position')
         const leader = item.get('leader')
         const obj = {
+          objectId,
           avatar,
           nickname,
           position,
