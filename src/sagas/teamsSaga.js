@@ -5,7 +5,9 @@ import { Toast } from 'antd-mobile'
 import {
   POST_TEAMS_REQUEST,
   PUT_TEAMS_REQUEST,
-  GET_USER_TEAMS_REQUEST
+  GET_USER_TEAMS_REQUEST,
+  DELETE_TEAM_MEMBER_REQUEST,
+  DELETE_TEAM_REQUEST
 } from '../constants/actionTypes'
 import * as action from '../actions'
 import { teams } from '../services/leanclound'
@@ -43,16 +45,48 @@ function* putTeamsWorker(payload) {
   }
 }
 
-function* getTeamsByUserWorker() {
+function* getTeamsByUserWorker(payload) {
   try {
     yield put(action.fetchRequest({ text: '加载中' }))
-    const teams1 = yield call(teams.getTeamsByUser)
+    const teams1 = yield call(teams.getTeamsByUser, payload)
     const teams2 = yield call(teams.getUsersByTeam, teams1)
     yield put(action.getTeamsByUserSuccess(teams2))
     yield put(action.fetchSuccess())
   } catch (error) {
     yield put(action.fetchFailed())
     yield put(action.getTeamsByUserFailed(error))
+  }
+}
+
+function* deleteTeamMemberWorker(payload) {
+  try {
+    yield put(action.fetchRequest({ text: '提交中' }))
+    const response = yield call(teams.removeMember, payload)
+    yield put(action.deleteTeamMemberSuccess(response))
+    yield put(action.fetchSuccess())
+    Toast.success('移除队员成功', 1.5)
+    yield delay(1500)
+    yield put(replace('/account/teams'))
+  } catch (error) {
+    yield put(action.fetchFailed())
+    yield put(action.deleteTeamMemberFailed(error))
+    Toast.fail(error.message, 1.5)
+  }
+}
+
+function* deleteTeamWorker(payload) {
+  try {
+    yield put(action.fetchRequest({ text: '提交中' }))
+    const response = yield call(teams.removeTeam, payload)
+    yield put(action.deleteTeamSuccess(response))
+    yield put(action.fetchSuccess())
+    Toast.success('移除队员成功', 1.5)
+    yield delay(1500)
+    yield put(replace('/account/teams'))
+  } catch (error) {
+    yield put(action.fetchFailed())
+    yield put(action.deleteTeamFailed(error))
+    Toast.fail(error.message, 1.5)
   }
 }
 
@@ -72,9 +106,29 @@ function* watchPutTeams() {
 
 function* watchGetTeamsByUser() {
   while (true) {
-    yield take(GET_USER_TEAMS_REQUEST)
-    yield fork(getTeamsByUserWorker)
+    const { payload } = yield take(GET_USER_TEAMS_REQUEST)
+    yield fork(getTeamsByUserWorker, payload)
   }
 }
 
-export { watchGetTeamsByUser, watchPostTeams, watchPutTeams }
+function* watchDeleteTeamMember() {
+  while (true) {
+    const { payload } = yield take(DELETE_TEAM_MEMBER_REQUEST)
+    yield fork(deleteTeamMemberWorker, payload)
+  }
+}
+
+function* watchDeleteTeam() {
+  while (true) {
+    const { payload } = yield take(DELETE_TEAM_REQUEST)
+    yield fork(deleteTeamWorker, payload)
+  }
+}
+
+export {
+  watchGetTeamsByUser,
+  watchPostTeams,
+  watchPutTeams,
+  watchDeleteTeamMember,
+  watchDeleteTeam
+}

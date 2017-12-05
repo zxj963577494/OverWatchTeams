@@ -68,7 +68,7 @@ class Account extends Component {
           }
         />
         <WhiteSpace />
-        <List>
+        <List renderHeader={() => '个人'}>
           <List.Item
             arrow="horizontal"
             onClick={() => {
@@ -81,6 +81,8 @@ class Account extends Component {
           >
             个人简介
           </List.Item>
+        </List>
+        <List renderHeader={() => '战队'}>
           <List.Item
             arrow="horizontal"
             onClick={() => {
@@ -92,6 +94,18 @@ class Account extends Component {
             }}
           >
             我的战队
+          </List.Item>
+          <List.Item
+            arrow="horizontal"
+            onClick={() => {
+              if (logined) {
+                navigateTo('/account/teamsin')
+              } else {
+                Toast.info('请先登录', 1)
+              }
+            }}
+          >
+            所在战队
           </List.Item>
         </List>
         <WhiteSpace />

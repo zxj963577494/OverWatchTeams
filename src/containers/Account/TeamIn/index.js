@@ -3,11 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import { Button, WhiteSpace, WingBlank, Card, Grid } from 'antd-mobile'
-import {
-  setNavBar,
-  getTeamsByUserRequest,
-  deleteTeamRequest
-} from '../../../actions'
+import { setNavBar, getTeamsByUserRequest } from '../../../actions'
 import { MyActivityIndicator } from '../../../components'
 import { getPosition } from '../../../utils/utils'
 import config from '../../../config'
@@ -15,22 +11,8 @@ import config from '../../../config'
 import styles from './style.css'
 
 class AccountTeams extends Component {
-  constructor(props) {
-    super(props)
-    this.onCreateTeam = this.onCreateTeam.bind(this)
-    this.onRemoveTeam = this.onRemoveTeam.bind(this)
-  }
-
-  onCreateTeam() {
-    this.props.navigateTo('/account/teams/create')
-  }
-
-  onRemoveTeam(id) {
-    this.props.deleteTeam({teamid: id})
-  }
-
   componentDidMount() {
-    this.props.setNavBar({ title: '我的战队', isCanBack: true })
+    this.props.setNavBar({ title: '所在战队', isCanBack: true })
     this.props.getTeamsByUser()
   }
 
@@ -53,18 +35,6 @@ class AccountTeams extends Component {
                       item.chineseName
                     }
                     thumb={item.avatar}
-                    extra={
-                      <Button
-                        onClick={() => {
-                          navigateTo('/account/teams/edit/' + item.objectId)
-                        }}
-                        type="ghost"
-                        size="small"
-                        inline
-                      >
-                        编辑
-                      </Button>
-                    }
                   />
                   <Card.Body>
                     <Grid
@@ -118,29 +88,12 @@ class AccountTeams extends Component {
                       )}
                     />
                   </Card.Body>
-                  <Card.Footer
-                    extra={
-                      <Button
-                        onClick={this.onRemoveTeam.bind(this, item.objectId)}
-                        type="warning"
-                        size="small"
-                        inline
-                      >
-                        战队解散
-                      </Button>
-                    }
-                  />
                 </Card>
               </div>
             )
-          }, this)}
+          })}
         </WingBlank>
         <WhiteSpace />
-        <WingBlank>
-          <Button onClick={this.onCreateTeam} type="primary">
-            新 建 战 队
-          </Button>
-        </WingBlank>
       </div>
     )
   }
@@ -156,10 +109,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     getTeamsByUser: () => {
-      dispatch(getTeamsByUserRequest({ t: 1 }))
-    },
-    deleteTeam: payload => {
-      dispatch(deleteTeamRequest(payload))
+      dispatch(getTeamsByUserRequest({ t: 0 }))
     },
     setNavBar: payload => {
       dispatch(

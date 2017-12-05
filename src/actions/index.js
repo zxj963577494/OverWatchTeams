@@ -35,7 +35,13 @@ import {
   PUT_TEAMS_FAILED,
   GET_USER_TEAMS_REQUEST,
   GET_USER_TEAMS_SUCCESS,
-  GET_USER_TEAMS_FAILED
+  GET_USER_TEAMS_FAILED,
+  DELETE_TEAM_MEMBER_REQUEST,
+  DELETE_TEAM_MEMBER_SUCCESS,
+  DELETE_TEAM_MEMBER_FAILED,
+  DELETE_TEAM_REQUEST,
+  DELETE_TEAM_SUCCESS,
+  DELETE_TEAM_FAILED,
 } from '../constants/actionTypes'
 
 export const getArticlesRequest = function(payload) {
@@ -174,8 +180,8 @@ export const putTeamsFailed = function(payload) {
   return { type: PUT_TEAMS_FAILED, payload }
 }
 
-export const getTeamsByUserRequest = function() {
-  return { type: GET_USER_TEAMS_REQUEST }
+export const getTeamsByUserRequest = function(payload) {
+  return { type: GET_USER_TEAMS_REQUEST, payload }
 }
 
 export const getTeamsByUserSuccess = function(payload) {
@@ -184,4 +190,28 @@ export const getTeamsByUserSuccess = function(payload) {
 
 export const getTeamsByUserFailed = function(payload) {
   return { type: GET_USER_TEAMS_FAILED, payload }
+}
+
+export const deleteTeamMemberRequest = function(payload) {
+  return { type: DELETE_TEAM_MEMBER_REQUEST, payload }
+}
+
+export const deleteTeamMemberSuccess = function(payload) {
+  return { type: DELETE_TEAM_MEMBER_SUCCESS, payload }
+}
+
+export const deleteTeamMemberFailed = function(payload) {
+  return { type: DELETE_TEAM_MEMBER_FAILED, payload }
+}
+
+export const deleteTeamRequest = function(payload) {
+  return { type: DELETE_TEAM_REQUEST, payload }
+}
+
+export const deleteTeamSuccess = function(payload) {
+  return { type: DELETE_TEAM_SUCCESS, payload }
+}
+
+export const deleteTeamFailed = function(payload) {
+  return { type: DELETE_TEAM_FAILED, payload }
 }

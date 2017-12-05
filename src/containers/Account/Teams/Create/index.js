@@ -18,6 +18,7 @@ import {
 import { RANKS } from '../../../../constants'
 import { setNavBar, postTeamsRequest } from '../../../../actions'
 import { MyActivityIndicator } from '../../../../components'
+// eslint-disable-next-line
 import styles from './style.css'
 
 class AccountTeamsCreate extends Component {
@@ -470,7 +471,13 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   }
 }
 
-AccountTeamsCreate.propTypes = {}
+AccountTeamsCreate.propTypes = {
+  app: PropTypes.object.isRequired,
+  common: PropTypes.object,
+  postUpload: PropTypes.func.isRequired,
+  postTeam: PropTypes.func.isRequired,
+  form: PropTypes.object
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(
   createForm()(AccountTeamsCreate)

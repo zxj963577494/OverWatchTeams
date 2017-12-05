@@ -9,6 +9,8 @@ import AccountMime from './Account/Mime'
 import AccountTeams from './Account/Teams'
 import AccountTeamsCreate from './Account/Teams/Create'
 import AccountTeamsEdit from './Account/Teams/Edit'
+import AccountMembersDetail from './Account/Members/Detail'
+import AccountTeamsIn from './Account/TeamIn'
 
 export {
   Root,
@@ -21,5 +23,7 @@ export {
   AccountMime,
   AccountTeams,
   AccountTeamsCreate,
-  AccountTeamsEdit
+  AccountTeamsEdit,
+  AccountMembersDetail,
+  AccountTeamsIn
 }

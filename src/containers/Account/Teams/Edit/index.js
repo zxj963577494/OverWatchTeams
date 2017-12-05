@@ -19,6 +19,7 @@ import { push } from 'react-router-redux'
 import { RANKS } from '../../../../constants'
 import { setNavBar, putTeamsRequest } from '../../../../actions'
 import { MyActivityIndicator } from '../../../../components'
+// eslint-disable-next-line
 import styles from './style.css'
 
 class AccountTeamsEdit extends Component {
@@ -173,7 +174,6 @@ class AccountTeamsEdit extends Component {
 
   componentDidMount() {
     this.props.setNavBar({ title: '战队编辑', isCanBack: true })
-    const id = this.props.match.params.id
   }
 
   render() {
@@ -484,7 +484,15 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   }
 }
 
-AccountTeamsEdit.propTypes = {}
+AccountTeamsEdit.propTypes = {
+  app: PropTypes.object.isRequired,
+  common: PropTypes.object,
+  currentTeam: PropTypes.object,
+  postUpload: PropTypes.func.isRequired,
+  putTeam: PropTypes.func.isRequired,
+  navigateTo: PropTypes.func.isRequired,
+  form: PropTypes.object
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(
   createForm()(AccountTeamsEdit)

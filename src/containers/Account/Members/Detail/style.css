@@ -1,0 +1,3 @@
+:global(.am-list-item .am-list-line .am-list-extra) {
+  flex: 2 1;
+}

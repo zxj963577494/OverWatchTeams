@@ -20,6 +20,12 @@ export function cerateTeam(payload) {
   userTeamMap.set('team', teams)
   userTeamMap.set('leader', true)
 
+  var acl = new AV.ACL()
+  acl.setPublicReadAccess(true)
+  acl.setWriteAccess(AV.User.current(), true)
+
+  userTeamMap.setACL(acl)
+
   return userTeamMap.save()
 }
 
@@ -38,7 +44,7 @@ export function updateTeams(payload) {
 }
 
 // 根据个人获取战队
-export function getTeamsByUser() {
+export function getTeamsByUser(payload) {
   // 当前用户
   const user = getCurrentUser()
 
@@ -48,6 +54,11 @@ export function getTeamsByUser() {
   // 查询所有选择了当前用户的战队
   query.equalTo('user', user)
 
+  // 是否是战队创建者
+  // if (payload.t === 1) {
+  //   query.equalTo('leader', true)
+  // }
+  query.descending('createdAt')
   query.include('team')
 
   let result = []
@@ -171,12 +182,22 @@ function getUserInfo(id, item) {
         const avatar = userinfo.get('avatar')
         const nickname = userinfo.get('nickname')
         const position = userinfo.get('position')
+        const contact = userinfo.get('contact')
+        const heros = userinfo.get('heros')
+        const introduction = userinfo.get('introduction')
+        const match = userinfo.get('match')
+        const rank = userinfo.get('rank')
         const leader = item.get('leader')
         const obj = {
           objectId,
           avatar,
           nickname,
           position,
+          contact,
+          heros,
+          introduction,
+          match,
+          rank,
           leader
         }
         resolve(obj)
@@ -211,137 +232,51 @@ function getTeams(payload) {
   })
 }
 
-// // 根据个人获取战队
-// export function getTeamsByUser() {
-//   // 当前用户
-//   const user = getCurrentUser()
+export function removeMember(payload) {
+  const { teamid, memberid } = payload
+  // 当前登录用户
+  const currentUser = AV.User.current()
+  const user = AV.Object.createWithoutData('_User', currentUser.id)
+  const team = AV.Object.createWithoutData('Teams', teamid)
+  const query = new AV.Query('UserTeamMap')
+  query.equalTo('user', user)
+  query.equalTo('team', team)
+  query.include('user')
+  return query.find().then(function(UserTeamMap) {
+    UserTeamMap.forEach(function(scm, i, a) {
+      if (scm.get('leader')) {
+        if (scm.get('user').id === memberid) {
+          return AV.Query.doCloudQuery(
+            `delete from UserTeamMap where user=${memberid} && team=${teamid}`
+          )
+        } else {
+          throw new Error('该队员不在该战队中，无法移除')
+        }
+      } else {
+        throw new Error('您不是战队管理者，无法执行该操作')
+      }
+    })
+  })
+}
 
-//   // 构建 UserTeamMap 的查询
-//   const query = new AV.Query('UserTeamMap')
-
-//   // 查询所有选择了当前用户的战队
-//   query.equalTo('user', user)
-
-//   query.include('team')
-
-//   let result = []
-
-//   // 获取当前用户所在的所有战队
-//   query.find().then(function(UserTeamMap) {
-//     UserTeamMap.forEach(function(scm, i, a) {
-//       let members = [
-//         {
-//           avator: config.TEAM_DEFAULT_AVATAR,
-//           nickname: '暂无',
-//           leader: false,
-//           position: ''
-//         },
-//         {
-//           avator: config.TEAM_DEFAULT_AVATAR,
-//           nickname: '暂无',
-//           leader: false,
-//           position: ''
-//         },
-//         {
-//           avator: config.TEAM_DEFAULT_AVATAR,
-//           nickname: '暂无',
-//           leader: false,
-//           position: ''
-//         },
-//         {
-//           avator: config.TEAM_DEFAULT_AVATAR,
-//           nickname: '暂无',
-//           leader: false,
-//           position: ''
-//         },
-//         {
-//           avator: config.TEAM_DEFAULT_AVATAR,
-//           nickname: '暂无',
-//           leader: false,
-//           position: ''
-//         },
-//         {
-//           avator: config.TEAM_DEFAULT_AVATAR,
-//           nickname: '暂无',
-//           leader: false,
-//           position: ''
-//         },
-//         {
-//           avator: config.TEAM_DEFAULT_AVATAR,
-//           nickname: '暂无',
-//           leader: false,
-//           position: ''
-//         },
-//         {
-//           avator: config.TEAM_DEFAULT_AVATAR,
-//           nickname: '暂无',
-//           leader: false,
-//           position: ''
-//         },
-//         {
-//           avator: config.TEAM_DEFAULT_AVATAR,
-//           nickname: '暂无',
-//           leader: false,
-//           position: ''
-//         },
-//         {
-//           avator: config.TEAM_DEFAULT_AVATAR,
-//           nickname: '暂无',
-//           leader: false,
-//           position: ''
-//         },
-//         {
-//           avator: config.TEAM_DEFAULT_AVATAR,
-//           nickname: '暂无',
-//           leader: false,
-//           position: ''
-//         },
-//         {
-//           avator: config.TEAM_DEFAULT_AVATAR,
-//           nickname: '暂无',
-//           leader: false,
-//           position: ''
-//         }
-//       ]
-//       const team = scm.get('team')
-//       let o = {
-//         objectId: team.id,
-//         avatar: team.get('avatar'),
-//         chineseFullName: team.get('chineseFullName'),
-//         chineseName: team.get('chineseName'),
-//         englishFullName: team.get('englishFullName'),
-//         englishName: team.get('englishName'),
-//         isRecruit: team.get('isRecruit'),
-//         createDate: team.get('createDate'),
-//         members: members
-//       }
-//       result.push(o)
-
-//       const query = new AV.Query('UserTeamMap')
-
-//       query.equalTo('team', team)
-
-//       query.include('user')
-//       query.include('team')
-
-//       // 获取战队的所有成员
-//       return query.find().then(function(UserTeamMap) {
-//         UserTeamMap.forEach(function(scmscm, ii, aa) {
-//           const user = scmscm.get('user')
-//           var user1 = AV.Object.createWithoutData('_User', user.id)
-//           user1
-//             .fetch({
-//               include: ['userinfo']
-//             })
-//             .then(function(user) {
-//               const userinfo = user.get('userinfo')
-//               result[i].members[ii].avatar = userinfo.get('avatar')
-//               result[i].members[ii].nickname = userinfo.get('nickname')
-//               result[i].members[ii].position = userinfo.get('position')
-//               result[i].members[ii].leader = scmscm.get('leader')
-//             })
-//         })
-//       })
-//     })
-//   })
-// }
+// 解散队伍
+export function removeTeam(payload) {
+  const { teamid } = payload
+  const currentUser = AV.User.current()
+  const user = AV.Object.createWithoutData('_User', currentUser.id)
+  const team = AV.Object.createWithoutData('Teams', teamid)
+  const query = new AV.Query('UserTeamMap')
+  query.equalTo('user', user)
+  query.equalTo('team', team)
+  return query.find().then(function(UserTeamMap) {
+    UserTeamMap.forEach(function(scm, i, a) {
+      if (scm.get('leader')) {
+        return AV.Query.doCloudQuery(
+          `delete from UserTeamMap where team=${teamid}`
+        )
+      } else {
+        throw new Error('您不是战队管理者，无法执行该操作')
+      }
+    })
+  })
+}

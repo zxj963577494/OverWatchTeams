@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { TabBar } from 'antd-mobile'
 import MyNavBar from '../NavBar'
-import { Home, Account, Mime } from '../../containers'
 
 export default class MyTabBar extends Component {
   render() {
