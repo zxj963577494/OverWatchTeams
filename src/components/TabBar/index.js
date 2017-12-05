@@ -28,7 +28,7 @@ export default class MyTabBar extends Component {
                 this.props.navigateTo('/home')
               }}
             >
-              {pathname === '/home' ? children : null}
+              {pathname.startsWith('/home') ? children : null}
             </TabBar.Item>
             <TabBar.Item
               title="我的"

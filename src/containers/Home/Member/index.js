@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { goBack } from 'react-router-redux'
-import { WhiteSpace, List, Result, NavBar, Icon } from 'antd-mobile'
-import { RANKS, TEAMPOSITIONS } from '../../constants'
-import { setNavBar, getMemberDetailRequest } from '../../actions'
-import config from '../../config'
+import { WhiteSpace, List, Result } from 'antd-mobile'
+import { RANKS, TEAMPOSITIONS } from '../../../constants'
+import { setNavBar, getMemberDetailRequest } from '../../../actions'
+import config from '../../../config'
 
-class Member extends Component {
+class HomeMember extends Component {
   componentDidMount() {
+    this.props.setNavBar({ title: '个人详情', isCanBack: true })
     const id = this.props.match.params.id
     this.props.getMemberById({ objectId: id })
   }
@@ -20,13 +20,6 @@ class Member extends Component {
     }
     return (
       <div>
-        <NavBar
-          icon={<Icon type="left" />}
-          onLeftClick={() => goBack()}
-          mode="light"
-        >
-          个人详情
-        </NavBar>
         <WhiteSpace />
         <Result
           img={
@@ -130,13 +123,10 @@ const mapDispatchToProps = (dispatch, ownProps) => {
       dispatch(
         setNavBar({ title: payload.title, isCanBack: payload.isCanBack })
       )
-    },
-    goBack: () => {
-      dispatch(goBack())
     }
   }
 }
 
-Member.propTypes = {}
+HomeMember.propTypes = {}
 
-export default connect(mapStateToProps, mapDispatchToProps)(Member)
+export default connect(mapStateToProps, mapDispatchToProps)(HomeMember)
