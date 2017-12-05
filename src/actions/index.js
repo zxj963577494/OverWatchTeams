@@ -42,9 +42,12 @@ import {
   DELETE_TEAM_REQUEST,
   DELETE_TEAM_SUCCESS,
   DELETE_TEAM_FAILED,
-  GET_MEMBER_DETAIL_REQUEST,
-  GET_MEMBER_DETAIL_SUCCESS,
-  GET_MEMBER_DETAIL_FAILED,
+  GET_HOME_MEMBER_DETAIL_REQUEST,
+  GET_HOME_MEMBER_DETAIL_SUCCESS,
+  GET_HOME_MEMBER_DETAIL_FAILED,
+  GET_HOME_MEMBER_LIST_REQUEST,
+  GET_HOME_MEMBER_LIST_SUCCESS,
+  GET_HOME_MEMBER_LIST_FAILED
 } from '../constants/actionTypes'
 
 export const getArticlesRequest = function(payload) {
@@ -219,14 +222,26 @@ export const deleteTeamFailed = function(payload) {
   return { type: DELETE_TEAM_FAILED, payload }
 }
 
-export const getMemberDetailRequest = function(payload) {
-  return { type: GET_MEMBER_DETAIL_REQUEST, payload }
+export const getHomeMemberDetailRequest = function(payload) {
+  return { type: GET_HOME_MEMBER_DETAIL_REQUEST, payload }
 }
 
-export const getMemberDetailSuccess = function(payload) {
-  return { type: GET_MEMBER_DETAIL_SUCCESS, payload }
+export const getHomeMemberDetailSuccess = function(payload) {
+  return { type: GET_HOME_MEMBER_DETAIL_SUCCESS, payload }
 }
 
-export const getMemberDetailFailed = function(payload) {
-  return { type: GET_MEMBER_DETAIL_FAILED, payload }
+export const getHomeMemberDetailFailed = function(payload) {
+  return { type: GET_HOME_MEMBER_DETAIL_FAILED, payload }
+}
+
+export const getHomeMemberListRequest = function(payload) {
+  return { type: GET_HOME_MEMBER_LIST_REQUEST, payload }
+}
+
+export const getHomeMemberListSuccess = function(payload) {
+  return { type: GET_HOME_MEMBER_LIST_SUCCESS, payload }
+}
+
+export const getHomeMemberListFailed = function(payload) {
+  return { type: GET_HOME_MEMBER_LIST_FAILED, payload }
 }

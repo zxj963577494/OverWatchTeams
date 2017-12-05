@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { WhiteSpace, List, Result } from 'antd-mobile'
 import { RANKS, TEAMPOSITIONS } from '../../../../constants'
-import { setNavBar, getMemberDetailRequest } from '../../../../actions'
+import { setNavBar, getHomeMemberDetailRequest } from '../../../../actions'
 import config from '../../../../config'
 
 class HomeMemberDetail extends Component {
@@ -117,7 +117,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     getMemberById: payload => {
-      dispatch(getMemberDetailRequest(payload))
+      dispatch(getHomeMemberDetailRequest(payload))
     },
     setNavBar: payload => {
       dispatch(
