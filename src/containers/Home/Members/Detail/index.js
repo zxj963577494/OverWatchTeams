@@ -2,11 +2,11 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { WhiteSpace, List, Result } from 'antd-mobile'
-import { RANKS, TEAMPOSITIONS } from '../../../constants'
-import { setNavBar, getMemberDetailRequest } from '../../../actions'
-import config from '../../../config'
+import { RANKS, TEAMPOSITIONS } from '../../../../constants'
+import { setNavBar, getMemberDetailRequest } from '../../../../actions'
+import config from '../../../../config'
 
-class HomeMember extends Component {
+class HomeMemberDetail extends Component {
   componentDidMount() {
     this.props.setNavBar({ title: '个人详情', isCanBack: true })
     const id = this.props.match.params.id
@@ -127,6 +127,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   }
 }
 
-HomeMember.propTypes = {}
+HomeMemberDetail.propTypes = {}
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomeMember)
+export default connect(mapStateToProps, mapDispatchToProps)(HomeMemberDetail)
