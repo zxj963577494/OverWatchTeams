@@ -2,10 +2,30 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
-import { Flex, WhiteSpace } from 'antd-mobile'
+import { Flex, WhiteSpace, Grid } from 'antd-mobile'
 import { getArticlesRequest, getStickyArticlesRequest } from '../../actions'
 import { MyCarousel, HomeListView, MyActivityIndicator } from '../../components'
+import config from '../../config'
 import styles from './style.css'
+
+const data = [
+  {
+    icon: config.BASE_PIC_URL + '/logo.png',
+    text: '战队'
+  },
+  {
+    icon: config.BASE_PIC_URL + '/logo.png',
+    text: '招募令'
+  },
+  {
+    icon: config.BASE_PIC_URL + '/logo.png',
+    text: '组队上分'
+  },
+  {
+    icon: config.BASE_PIC_URL + '/logo.png',
+    text: '个人库'
+  }
+]
 
 class Home extends Component {
   componentDidMount() {
@@ -46,6 +66,26 @@ class Home extends Component {
         <div className={styles['header__sticky']}>
           {sticky.isShowLogo ? this.renderLogo(sticky) : this.renderCarousel()}
         </div>
+        <WhiteSpace size="xs" />
+        <Grid
+          data={data}
+          columnNum={4}
+          hasLine={false}
+          renderItem={dataItem => (
+            <div>
+              <img
+                src={dataItem.icon}
+                style={{ width: '40px', height: '40px' }}
+                alt=""
+              />
+              <div
+                style={{ color: '#888', fontSize: '14px', marginTop: '6px' }}
+              >
+                <span>{dataItem.text}</span>
+              </div>
+            </div>
+          )}
+        />
         <WhiteSpace size="xs" />
         <div>
           <HomeListView articles={articles} navigateTo={navigateTo} />
