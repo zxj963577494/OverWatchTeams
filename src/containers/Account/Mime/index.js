@@ -22,7 +22,7 @@ import {
   setNavBar
 } from '../../../actions'
 import { MyActivityIndicator } from '../../../components'
-import { TEAMPOSITIONS, RANKS } from '../../../constants'
+import { TEAMPOSITIONS, RANKS, HEROS } from '../../../constants'
 // eslint-disable-next-line
 import styles from './style.css'
 
@@ -38,7 +38,7 @@ class AccountMime extends Component {
       match: props.userinfo.match,
       files: props.userinfo.files,
       avatar: props.userinfo.avatar,
-      heros: props.userinfo.heros,
+      heros: props.userinfo.heros ? props.userinfo.heros : HEROS,
       rank: props.userinfo.rank,
       mouse: props.userinfo.mouse,
       keyboard: props.userinfo.keyboard,
