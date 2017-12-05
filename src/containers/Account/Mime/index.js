@@ -13,7 +13,8 @@ import {
   List,
   TextareaItem,
   ImagePicker,
-  Toast
+  Toast,
+  Switch
 } from 'antd-mobile'
 import {
   postUploadRequest,
@@ -42,7 +43,8 @@ class AccountMime extends Component {
       mouse: props.userinfo.mouse,
       keyboard: props.userinfo.keyboard,
       headphones: props.userinfo.headphones,
-      pending: props.userinfo.pending
+      pending: props.userinfo.pending,
+      isPublic: props.userinfo.isPublic
     }
     this.onNickNameChange = this.onNickNameChange.bind(this)
     this.onContactChange = this.onContactChange.bind(this)
@@ -109,6 +111,12 @@ class AccountMime extends Component {
     })
   }
 
+  onPublicChange(value) {
+    this.setState({
+      isPublic: value
+    })
+  }
+
   onHeroChange(value) {
     this.state.heros.forEach(item => {
       if (item.value === value) {
@@ -156,7 +164,8 @@ class AccountMime extends Component {
           rank: this.state.rank,
           mouse: this.state.mouse,
           keyboard: this.state.keyboard,
-          headphones: this.state.headphones
+          headphones: this.state.headphones,
+          isPublic: this.state.isPublic
         })
       } else {
         Toast.fail('格式错误，请检查后提交', 2)
@@ -171,7 +180,7 @@ class AccountMime extends Component {
   render() {
     const { getFieldProps, getFieldError } = this.props.form
     const { app } = this.props
-    const { position, files, heros, rank, pending } = this.state
+    const { position, files, heros, rank, pending, isPublic } = this.state
     const nicknameErrors = getFieldError('nickname')
     const contactErrors = getFieldError('contact')
     const introductionErrors = getFieldError('introduction')
@@ -380,6 +389,23 @@ class AccountMime extends Component {
               {headphonesErrors ? headphonesErrors.join(',') : null}
             </Flex>
           </List>
+          <List renderHeader={() => '是否招募队员'}>
+            <List.Item
+              extra={
+                <Switch
+                  {...getFieldProps('isPublic', {
+                    initialValue: isPublic,
+                    valuePropName: 'checked'
+                  })}
+                  onClick={checked => {
+                    this.onPublicChange(checked)
+                  }}
+                />
+              }
+            >
+              是否招募队员
+            </List.Item>
+          </List>
           <WhiteSpace />
           <WingBlank>
             <Button disabled={pending} onClick={this.onSubmit} type="primary">
@@ -424,4 +450,6 @@ AccountMime.propTypes = {
   form: PropTypes.object
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(createForm()(AccountMime))
+export default connect(mapStateToProps, mapDispatchToProps)(
+  createForm()(AccountMime)
+)

@@ -10,7 +10,7 @@ const initialMembersState = {
   isLoadMore: false,
   isRefreshing: false,
   page: 1,
-  pre_page: 10
+  pagesize: 10
 }
 
 function membersReducer(state = initialMembersState, action) {
@@ -28,7 +28,7 @@ function membersReducer(state = initialMembersState, action) {
         list: state.list.concat(action.payload),
         isFetching: false,
         isRefreshing: false,
-        isLoadMore: action.payload.length < 10 ? true : false
+        isLoadMore: action.payload.length < 20 ? true : false
       }
     case GET_HOME_MEMBER_LIST_FAILED:
       return { ...state, isFetching: false, isRefreshing: false }

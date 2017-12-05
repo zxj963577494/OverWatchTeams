@@ -17,6 +17,8 @@ export function signUp(payload) {
       userinfo.set('nickname', nickname)
       userinfo.set('contact', email)
       userinfo.set('avatar', avatar)
+      userinfo.set('avatar', avatar)
+      userinfo.set('isPublic', true)
       userinfo.set('introduction', '这个世界需要更多的英雄')
       loginedUser.set('userinfo', userinfo)
       return loginedUser.save()
@@ -148,3 +150,31 @@ export function getMemberInfo(payload) {
     }
   })
 }
+
+export function getHomeMembers(payload) {
+  const { page, pagesize } = payload
+  const user = new AV.Query('_User')
+  user.equalTo('objectId', payload.objectId)
+  user.equalTo('isPublic', true)
+  user.limit(pagesize)
+  user.skip(pagesize * (page - 1))
+  user.include('userinfo')
+  return user.first().then(function(result) {
+    const userinfo = result.get('userinfo')
+    return {
+      objectId: userinfo.id,
+      avatar: userinfo.get('avatar'),
+      contact: userinfo.get('contact'),
+      headphones: userinfo.get('files'),
+      heros: userinfo.get('heros'),
+      introduction: userinfo.get('introduction'),
+      keyboard: userinfo.get('keyboard'),
+      match: userinfo.get('match'),
+      nickname: userinfo.get('nickname'),
+      position: userinfo.get('position'),
+      rank: userinfo.get('rank')
+    }
+  })
+}
+
+
