@@ -112,17 +112,39 @@ export function getUserInfo() {
   return user.first().then(function(result) {
     const userinfo = result.get('userinfo')
     return {
-      objectId: userinfo.id,      
-      avatar:userinfo.get('avatar'),
-      contact:userinfo.get('contact'),
-      headphones:userinfo.get('files'),
-      heros:userinfo.get('heros'),
-      introduction:userinfo.get('introduction'),
-      keyboard:userinfo.get('keyboard'),
-      match:userinfo.get('match'),
-      nickname:userinfo.get('nickname'),
-      position:userinfo.get('position'),
-      rank:userinfo.get('rank'),
+      objectId: userinfo.id,
+      avatar: userinfo.get('avatar'),
+      contact: userinfo.get('contact'),
+      headphones: userinfo.get('files'),
+      heros: userinfo.get('heros'),
+      introduction: userinfo.get('introduction'),
+      keyboard: userinfo.get('keyboard'),
+      match: userinfo.get('match'),
+      nickname: userinfo.get('nickname'),
+      position: userinfo.get('position'),
+      rank: userinfo.get('rank')
+    }
+  })
+}
+
+export function getMemberInfo(payload) {
+  const user = new AV.Query('_User')
+  user.equalTo('objectId', payload.objectId)
+  user.include('userinfo')
+  return user.first().then(function(result) {
+    const userinfo = result.get('userinfo')
+    return {
+      objectId: userinfo.id,
+      avatar: userinfo.get('avatar'),
+      contact: userinfo.get('contact'),
+      headphones: userinfo.get('files'),
+      heros: userinfo.get('heros'),
+      introduction: userinfo.get('introduction'),
+      keyboard: userinfo.get('keyboard'),
+      match: userinfo.get('match'),
+      nickname: userinfo.get('nickname'),
+      position: userinfo.get('position'),
+      rank: userinfo.get('rank')
     }
   })
 }

@@ -15,7 +15,7 @@ const rootReducer = combineReducers({
   articles: articlesReducer,
   sticky: stickyArticlesReducer,
   navbar: navbarReducer,
-  common: commonReducer
+  common: commonReducer,
 })
 
 export default rootReducer

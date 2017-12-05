@@ -42,6 +42,9 @@ import {
   DELETE_TEAM_REQUEST,
   DELETE_TEAM_SUCCESS,
   DELETE_TEAM_FAILED,
+  GET_MEMBER_DETAIL_REQUEST,
+  GET_MEMBER_DETAIL_SUCCESS,
+  GET_MEMBER_DETAIL_FAILED,
 } from '../constants/actionTypes'
 
 export const getArticlesRequest = function(payload) {
@@ -214,4 +217,16 @@ export const deleteTeamSuccess = function(payload) {
 
 export const deleteTeamFailed = function(payload) {
   return { type: DELETE_TEAM_FAILED, payload }
+}
+
+export const getMemberDetailRequest = function(payload) {
+  return { type: GET_MEMBER_DETAIL_REQUEST, payload }
+}
+
+export const getMemberDetailSuccess = function(payload) {
+  return { type: GET_MEMBER_DETAIL_SUCCESS, payload }
+}
+
+export const getMemberDetailFailed = function(payload) {
+  return { type: GET_MEMBER_DETAIL_FAILED, payload }
 }
