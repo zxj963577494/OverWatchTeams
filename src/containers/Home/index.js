@@ -10,18 +10,22 @@ import styles from './style.css'
 
 const data = [
   {
+    url: '/home/temas',
     icon: config.BASE_PIC_URL + '/logo.png',
     text: '战队'
   },
   {
+    url: '/home/temas',
     icon: config.BASE_PIC_URL + '/logo.png',
     text: '招募令'
   },
   {
+    url: '/home/temas',
     icon: config.BASE_PIC_URL + '/logo.png',
     text: '组队上分'
   },
   {
+    url: '/home/members',
     icon: config.BASE_PIC_URL + '/logo.png',
     text: '个人库'
   }
@@ -71,8 +75,8 @@ class Home extends Component {
           data={data}
           columnNum={4}
           hasLine={false}
-          renderItem={dataItem => (
-            <div>
+          renderItem={(dataItem, index) => (
+            <div key={index} onClick={() => navigateTo(dataItem.url)}>
               <img
                 src={dataItem.icon}
                 style={{ width: '40px', height: '40px' }}

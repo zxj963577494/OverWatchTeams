@@ -9,12 +9,12 @@ import config from '../../../../config'
 class HomeMemberDetail extends Component {
   componentDidMount() {
     this.props.setNavBar({ title: '个人详情', isCanBack: true })
-    const id = this.props.match.params.id
-    this.props.getMemberById({ objectId: id })
+    //const id = this.props.match.params.id
+    //this.props.getMemberById({ objectId: id })
   }
 
   render() {
-    const { navigateTo, member } = this.props
+    const { member } = this.props
     if (!member) {
       return null
     }
@@ -110,7 +110,9 @@ class HomeMemberDetail extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    member: state.root.app.member
+    member: state.root.members.list.length > 0
+      ? state.root.members.list.filter(x => x.objectId === ownProps.match.params.id)[0]
+      : null
   }
 }
 

@@ -5,6 +5,7 @@ import Login from './Login'
 import Account from './Account'
 import Welcome from './Welcome'
 import SignUp from './SignUp'
+import HomeMembers from './Home/Members'
 import HomeMemberDetail from './Home/Members/Detail'
 import AccountMime from './Account/Mime'
 import AccountTeams from './Account/Teams'
@@ -21,6 +22,7 @@ export {
   Account,
   Welcome,
   SignUp,
+  HomeMembers,
   HomeMemberDetail,
   AccountMime,
   AccountTeams,

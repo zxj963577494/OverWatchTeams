@@ -12,3 +12,55 @@
   padding: 9px 8px;
   margin-bottom: 0;
 }
+
+:global(.am-list-item .am-list-line .am-list-extra) {
+  flex: 2 1;
+}
+
+:global(.am-image-picker-list) {
+  padding: 9px 7px;
+  margin-bottom: 0;
+}
+
+:global(.am-image-picker-list .am-flexbox) {
+  margin-bottom: 0;
+}
+
+:global(.am-card-body) {
+  padding: 15px;
+}
+
+:global(.am-card-header-content) {
+  flex: 2 1;
+}
+
+:global(.am-card-header-content img) {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+:global(.am-flexbox-item) {
+  text-align: center;
+}
+
+:global(.am-button-small) {
+  font-size: 14px;
+}
+
+:global(.teams--position) {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 20px;
+}
+
+:global(.teams--leader) {
+  position: absolute;
+  top: 0;
+  right: 2px;
+  width: 20px;
+  height: 20px;
+}

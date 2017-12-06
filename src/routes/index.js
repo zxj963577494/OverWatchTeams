@@ -8,6 +8,7 @@ import {
   Account,
   SignUp,
   HomeMemberDetail,
+  HomeMembers,
   AccountMime,
   AccountTeams,
   AccountTeamsCreate,
@@ -26,6 +27,7 @@ export default (history, navbar) => {
           <App history={history}>
             <Switch>
               <Route exec path="/home/member/:id" component={HomeMemberDetail} />
+              <Route exec path="/home/members" component={HomeMembers} />
               <Route exec path="/home" component={Home} />
               <Route exec path="/account/mime" component={AccountMime} />
               <Route

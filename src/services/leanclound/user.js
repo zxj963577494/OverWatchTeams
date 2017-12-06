@@ -117,18 +117,23 @@ export function getUserInfo() {
   })
 }
 
+// 获取会员信息列表
 export function getHomeMembers(payload) {
-  const { page, pagesize } = payload
+  let list = []
+  let { page, pagesize } = payload
+  pagesize = pagesize || 20
+  const userinfo = new AV.Query('UserInfo')
+  userinfo.equalTo('isPublic', true)
   const user = new AV.Query('_User')
-  user.equalTo('objectId', payload.objectId)
-  user.equalTo('isPublic', true)
   user.limit(pagesize)
   user.skip(pagesize * (page - 1))
   user.include('userinfo')
-  return user.first().then(function(result) {
-    const userinfo = result.get('userinfo')
-    return userinfo.toJSON()
+  user.matchesQuery('userinfo', userinfo)
+  return user.find().then(function(result) {
+    result.forEach(item => {
+      const userinfo = item.get('userinfo').toJSON()
+      list.push(userinfo)
+    })
+    return list
   })
 }
-
-

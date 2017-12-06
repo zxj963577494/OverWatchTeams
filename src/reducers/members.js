@@ -6,11 +6,10 @@ import {
 
 const initialMembersState = {
   list: [],
-  isFetching: false,
   isLoadMore: false,
   isRefreshing: false,
   page: 1,
-  pagesize: 10
+  pagesize: 20
 }
 
 function membersReducer(state = initialMembersState, action) {
@@ -18,20 +17,18 @@ function membersReducer(state = initialMembersState, action) {
     case GET_HOME_MEMBER_LIST_REQUEST:
       return {
         ...state,
-        isFetching: true,
-        isRefreshing: action.payload.isRefreshing,
+        isRefreshing: action.payload.isRefreshing || false,
         page: action.payload.page ? action.payload.page : 1
       }
     case GET_HOME_MEMBER_LIST_SUCCESS:
       return {
         ...state,
         list: state.list.concat(action.payload),
-        isFetching: false,
         isRefreshing: false,
-        isLoadMore: action.payload.length < 20 ? true : false
+        isLoadMore: action.payload.length < 20 ? false : true
       }
     case GET_HOME_MEMBER_LIST_FAILED:
-      return { ...state, isFetching: false, isRefreshing: false }
+      return { ...state, isRefreshing: false }
     default:
       return state
   }
