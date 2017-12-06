@@ -2,6 +2,69 @@ import AV from 'leancloud-storage'
 import { getCurrentUser } from './user'
 import config from '../../config'
 
+let members = [
+  {
+    avatar: config.TEAM_DEFAULT_AVATAR,
+    nickname: '暂无',
+    leader: false
+  },
+  {
+    avatar: config.TEAM_DEFAULT_AVATAR,
+    nickname: '暂无',
+    leader: false
+  },
+  {
+    avatar: config.TEAM_DEFAULT_AVATAR,
+    nickname: '暂无',
+    leader: false
+  },
+  {
+    avatar: config.TEAM_DEFAULT_AVATAR,
+    nickname: '暂无',
+    leader: false
+  },
+  {
+    avatar: config.TEAM_DEFAULT_AVATAR,
+    nickname: '暂无',
+    leader: false
+  },
+  {
+    avatar: config.TEAM_DEFAULT_AVATAR,
+    nickname: '暂无',
+    leader: false
+  },
+  {
+    avatar: config.TEAM_DEFAULT_AVATAR,
+    nickname: '暂无',
+    leader: false
+  },
+  {
+    avatar: config.TEAM_DEFAULT_AVATAR,
+    nickname: '暂无',
+    leader: false
+  },
+  {
+    avatar: config.TEAM_DEFAULT_AVATAR,
+    nickname: '暂无',
+    leader: false
+  },
+  {
+    avatar: config.TEAM_DEFAULT_AVATAR,
+    nickname: '暂无',
+    leader: false
+  },
+  {
+    avatar: config.TEAM_DEFAULT_AVATAR,
+    nickname: '暂无',
+    leader: false
+  },
+  {
+    avatar: config.TEAM_DEFAULT_AVATAR,
+    nickname: '暂无',
+    leader: false
+  }
+]
+
 // 创建战队
 export function cerateTeam(payload) {
   const teams = new AV.Object('Teams')
@@ -66,68 +129,6 @@ export function getTeamsByUser(payload) {
   // 获取当前用户所在的所有战队
   return query.find().then(function(UserTeamMap) {
     UserTeamMap.forEach(function(item, i, a) {
-      let members = [
-        {
-          avatar: config.TEAM_DEFAULT_AVATAR,
-          nickname: '暂无',
-          leader: false
-        },
-        {
-          avatar: config.TEAM_DEFAULT_AVATAR,
-          nickname: '暂无',
-          leader: false
-        },
-        {
-          avatar: config.TEAM_DEFAULT_AVATAR,
-          nickname: '暂无',
-          leader: false
-        },
-        {
-          avatar: config.TEAM_DEFAULT_AVATAR,
-          nickname: '暂无',
-          leader: false
-        },
-        {
-          avatar: config.TEAM_DEFAULT_AVATAR,
-          nickname: '暂无',
-          leader: false
-        },
-        {
-          avatar: config.TEAM_DEFAULT_AVATAR,
-          nickname: '暂无',
-          leader: false
-        },
-        {
-          avatar: config.TEAM_DEFAULT_AVATAR,
-          nickname: '暂无',
-          leader: false
-        },
-        {
-          avatar: config.TEAM_DEFAULT_AVATAR,
-          nickname: '暂无',
-          leader: false
-        },
-        {
-          avatar: config.TEAM_DEFAULT_AVATAR,
-          nickname: '暂无',
-          leader: false
-        },
-        {
-          avatar: config.TEAM_DEFAULT_AVATAR,
-          nickname: '暂无',
-          leader: false
-        },
-        {
-          avatar: config.TEAM_DEFAULT_AVATAR,
-          nickname: '暂无',
-          leader: false
-        },
-        {
-          avatar: config.TEAM_DEFAULT_AVATAR,
-          nickname: '暂无',
-          leader: false
-        }
-      ]
       const team = item.get('team')
       let o = {
         objectId: team.id,
@@ -232,6 +233,7 @@ function getTeams(payload) {
   })
 }
 
+// 移除队员
 export function removeMember(payload) {
   const { teamid, memberid } = payload
   // 当前登录用户
@@ -259,7 +261,7 @@ export function removeMember(payload) {
   })
 }
 
-// 解散队伍
+// 解散战队
 export function removeTeam(payload) {
   const { teamid } = payload
   const currentUser = AV.User.current()
@@ -281,6 +283,7 @@ export function removeTeam(payload) {
   })
 }
 
+// 获取战队列表
 export function getHomeTeamsList(payload) {
   let list = []
   let { page, pagesize } = payload
@@ -296,11 +299,32 @@ export function getHomeTeamsList(payload) {
   })
 }
 
+// 获取战队信息
 export function getHomeTeamDetail(payload) {
   const { objectId } = payload
-  const teams = new AV.Query('Teams')
-  teams.equalTo('objectId', objectId)
-  return teams.first().then(function(result) {
-    return result.toJSON()
+  const team = AV.Object.createWithoutData('Teams', objectId)
+
+  // 构建 UserTeamMap 的查询
+  const query = new AV.Query('UserTeamMap')
+  query.equalTo('team', team)
+  query.descending('createdAt')
+  query.include('team')
+  query.include('user')
+  query.include('user.userinfo')
+  // 获取当前用户所在的所有战队
+  return query.find().then(function(UserTeamMap) {
+    // 获取战队
+    let teaminfo = UserTeamMap[0].get('team').toJSON()
+    teaminfo = { ...teaminfo, members: members }
+    UserTeamMap.forEach(function(item, i, a) {
+      const userid = item.get('user').id
+      const userinfo = item
+        .get('user')
+        .get('userinfo')
+        .toJSON()
+      const result = { ...userinfo, userid: userid, leader: item.get('leader') }
+      teaminfo.members.splice(i, 1, result)
+    })
+    return teaminfo
   })
 }
