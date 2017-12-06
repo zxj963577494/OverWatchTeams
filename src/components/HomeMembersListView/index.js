@@ -18,7 +18,7 @@ export default class HomeMemberListView extends Component {
   }
 
   onEndReached = event => {
-    if (this.props.members.isFetching && !this.props.members.isLoadMore) {
+    if (this.props.members.isFetching || !this.props.members.isLoadMore) {
       return
     }
     const page = this.props.members.page + 1
@@ -110,13 +110,9 @@ export default class HomeMemberListView extends Component {
         renderSeparator={separator}
         initialListSize={10}
         pageSize={20}
-        className="am-list"
         style={{
           height: '100%',
           overflow: 'auto'
-        }}
-        onScroll={() => {
-          console.log('scroll')
         }}
         scrollRenderAheadDistance={500}
         onEndReached={this.onEndReached}

@@ -296,7 +296,7 @@ export function getHomeTeamsList(payload) {
   })
 }
 
-export function getHomeTeamsDetail(payload) {
+export function getHomeTeamDetail(payload) {
   const { objectId } = payload
   const teams = new AV.Query('Teams')
   teams.equalTo('objectId', objectId)

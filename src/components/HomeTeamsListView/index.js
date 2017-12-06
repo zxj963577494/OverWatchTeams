@@ -11,7 +11,7 @@ export default class HomeTeamsListView extends Component {
   }
 
   onEndReached = event => {
-    if (this.props.teams.isFetching && !this.props.teams.isLoadMore) {
+    if (this.props.teams.isFetching || !this.props.teams.isLoadMore) {
       return
     }
     const page = this.props.teams.page + 1
@@ -50,7 +50,7 @@ export default class HomeTeamsListView extends Component {
             <Card.Body>
               <Flex>
                 <Flex.Item>
-                  {cutstr(rowData.introduction, 200, '...')}
+                  {cutstr(rowData.introduction, 200, 0)}
                 </Flex.Item>
               </Flex>
               <WhiteSpace />
@@ -74,7 +74,7 @@ export default class HomeTeamsListView extends Component {
                   <WhiteSpace />
                   <Flex>
                     <Flex.Item>
-                      战队地点：{rowData.city ? rowData.city : '暂无'}
+                      战队地点：{rowData.createCity ? rowData.createCity : '暂无'}
                     </Flex.Item>
                   </Flex>
                 </div>
@@ -87,7 +87,7 @@ export default class HomeTeamsListView extends Component {
     const fonter = () => {
       return (
         <div style={{ padding: 5, textAlign: 'center' }}>
-          {this.props.teams.isFetching ? '' : '到底了'}
+          {this.props.teams.isLoadMore ? '' : '到底了'}
         </div>
       )
     }
@@ -97,15 +97,11 @@ export default class HomeTeamsListView extends Component {
         renderFooter={fonter}
         renderRow={row}
         renderSeparator={separator}
-        initialListSize={10}
+        initialListSize={2}
         pageSize={20}
-        className="am-list"
         style={{
           height: '100%',
           overflow: 'auto'
-        }}
-        onScroll={() => {
-          console.log('scroll')
         }}
         scrollRenderAheadDistance={500}
         onEndReached={this.onEndReached}

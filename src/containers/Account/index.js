@@ -13,6 +13,7 @@ import {
 import { push } from 'react-router-redux'
 import { postLogoutRequest, setNavBar, getUserInfoRequest } from '../../actions'
 import { user } from '../../services/leanclound'
+import config from '../../config'
 
 class Account extends Component {
   constructor(props) {
@@ -47,10 +48,10 @@ class Account extends Component {
               style={{ borderRadius: '50%' }}
               src={
                 logined
-                  ? userinfo.avatar
+                  ? (userinfo.avatar
                     ? userinfo.avatar
-                    : require('../../assets/images/logo-80.png')
-                  : require('../../assets/images/logo-80.png')
+                    : config.BASE_DEFAULT_PIC_URL)
+                  : config.BASE_DEFAULT_PIC_URL
               }
               onClick={() => navigateTo('/login')}
               alt="登录成功"

@@ -14,7 +14,7 @@ import { user } from '../services/leanclound'
 
 function* postSignUpWorker(payload) {
   try {
-    yield put(action.fetchRequest({ text: '加载中' }))
+    yield put(action.fetchRequest({ text: '注册中' }))
     const response = yield call(user.signUp, payload)
     console.log(response)
     yield put(action.fetchSuccess())
@@ -29,7 +29,7 @@ function* postSignUpWorker(payload) {
 
 function* postLoginWorker(payload) {
   try {
-    yield put(action.fetchRequest({ text: '加载中' }))
+    yield put(action.fetchRequest({ text: '登录中' }))
     const response = yield call(user.logIn, payload)
     console.log(response)
     yield put(action.fetchSuccess())

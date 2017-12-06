@@ -6,10 +6,6 @@ import { getHomeTeamListRequest } from '../../../actions'
 import { HomeTeamsListView, MyActivityIndicator } from '../../../components'
 
 class HomeTeams extends Component {
-  constructor(props) {
-    super(props)
-    console.log(123)
-  }
   componentDidMount() {
     if (this.props.teams.list.length === 0) {
       this.props.getHomeTeams({ page: 1 })

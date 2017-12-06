@@ -50,7 +50,7 @@ class AccountMembersDetail extends Component {
               src={
                 pickerMember.avatar
                   ? pickerMember.avatar
-                  : require('../../../../assets/images/logo-80.png')
+                  : config.BASE_DEFAULT_PIC_URL
               }
               onClick={() => navigateTo('/login')}
               alt={pickerMember.nickname}

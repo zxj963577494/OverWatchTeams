@@ -104,11 +104,11 @@ function* getHomeTeamListWorker(payload) {
 function* getHomeTeamDetailWorker(payload) {
   try {
     yield put(action.fetchRequest({text: '加载中'}))
-    const response = yield call(teams.getHomeTeamsDetail, payload)
-    yield put(action.getHomeMemberDetailSuccess(response))
+    const response = yield call(teams.getHomeTeamDetail, payload)
+    yield put(action.getHomeTeamDetailSuccess(response))
     yield put(action.fetchSuccess())
   } catch (error) {
-    yield put(action.getHomeMemberDetailFailed(error))
+    yield put(action.getHomeTeamDetailFailed(error))
     yield put(action.fetchFailed())
   }
 }

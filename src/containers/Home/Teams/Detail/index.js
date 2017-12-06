@@ -9,14 +9,17 @@ import { MyActivityIndicator } from '../../../../components'
 class HomeTeamDetail extends Component {
   componentDidMount() {
     this.props.setNavBar({ title: '战队详情', isCanBack: true })
-    if (!this.props.teams) {
+    if (!this.props.team) {
       const id = this.props.match.params.id
       this.props.getTeamById({ objectId: id })
     }
   }
 
   render() {
-    const { team, app, navigateTo } = this.props
+    let { team, app, current } = this.props
+    if (team == null && current != null) {
+      team = current
+    }
     return (
       <div>
         <MyActivityIndicator
