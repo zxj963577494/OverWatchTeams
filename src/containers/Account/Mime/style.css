@@ -1,3 +1,8 @@
+:global(.am-image-picker-list) {
+  padding: 9px 8px;
+  margin-bottom: 0;
+}
+
 :global(.am-list-hero) {}
 
 :global(.am-list-hero > .am-list-body) {

@@ -118,7 +118,7 @@ export function getUserInfo() {
 }
 
 // 获取会员信息列表
-export function getHomeMembers(payload) {
+export function getHomeMemberList(payload) {
   let list = []
   let { page, pagesize } = payload
   pagesize = pagesize || 20
@@ -131,9 +131,21 @@ export function getHomeMembers(payload) {
   user.matchesQuery('userinfo', userinfo)
   return user.find().then(function(result) {
     result.forEach(item => {
-      const userinfo = item.get('userinfo').toJSON()
+      const userinfo = { ...item.get('userinfo').toJSON(), userid: item.id }
       list.push(userinfo)
     })
     return list
+  })
+}
+
+// 获取会员详细信息
+export function getHomeMemberDetail(payload) {
+  const { objectId } = payload
+  const user = new AV.Query('_User')
+  user.equalTo('objectId', objectId)
+  user.include('userinfo')
+  return user.first().then(function(result) {
+    const userinfo = result.get('userinfo')
+    return userinfo.toJSON()
   })
 }

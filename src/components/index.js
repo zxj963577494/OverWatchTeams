@@ -2,14 +2,16 @@ import MyTabBar from './TabBar'
 import MyCarousel from './Carousel'
 import MyNavBar from './NavBar'
 import HomeListView from './HomeListView'
-import HomeMemberListView from './HomeMembersListView'
+import HomeMembersListView from './HomeMembersListView'
+import HomeTeamsListView from './HomeTeamsListView'
 import MyActivityIndicator from './ActivityIndicator'
 
 export {
   MyTabBar,
   MyCarousel,
   MyNavBar,
-  HomeMemberListView,
+  HomeMembersListView,
+  HomeTeamsListView,
   HomeListView,
   MyActivityIndicator,
 }

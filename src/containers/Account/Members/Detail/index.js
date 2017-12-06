@@ -64,6 +64,7 @@ class AccountMembersDetail extends Component {
           <List.Item extra={pickerMember.contact}>联系方式</List.Item>
         </List>
         <List>
+          <List.Item extra={pickerMember.rankscore}>天梯分</List.Item>
           <List.Item
             extra={
               pickerMember.rank
@@ -113,7 +114,7 @@ class AccountMembersDetail extends Component {
                   height: '60px',
                   margin: '10px'
                 }}
-                src={config.BASE_PIC_URL + '/logo.png'}
+                src={config.BASE_DEFAULT_PIC_URL}
                 alt="未知"
               />
             )}
@@ -140,16 +141,20 @@ class AccountMembersDetail extends Component {
 const mapStateToProps = (state, ownProps) => {
   return {
     userteams: state.root.userteams.list,
-    pickerTeam: state.root.userteams.list.length > 0
-      ? state.root.userteams.list.filter(
-          x => x.objectId === ownProps.match.params.teamid
-        )[0]
-      : null,
-    pickerMember: state.root.userteams.list.length > 0
-      ? state.root.userteams.list
-          .filter(x => x.objectId === ownProps.match.params.teamid)[0]
-          .members.filter(x => x.objectId === ownProps.match.params.memberid)[0]
-      : null
+    pickerTeam:
+      state.root.userteams.list.length > 0
+        ? state.root.userteams.list.filter(
+            x => x.objectId === ownProps.match.params.teamid
+          )[0]
+        : null,
+    pickerMember:
+      state.root.userteams.list.length > 0
+        ? state.root.userteams.list
+            .filter(x => x.objectId === ownProps.match.params.teamid)[0]
+            .members.filter(
+              x => x.objectId === ownProps.match.params.memberid
+            )[0]
+        : null
   }
 }
 

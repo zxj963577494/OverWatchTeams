@@ -40,7 +40,7 @@ export default class HomeMemberListView extends Component {
       return (
         <div
           onClick={() => {
-            this.props.navigateTo('/home/member/' + rowData.objectId)
+            this.props.navigateTo('/home/member/' + rowData.userid)
           }}
           key={rowID}
         >
@@ -48,14 +48,18 @@ export default class HomeMemberListView extends Component {
             <Card.Header title={rowData.nickname} thumb={rowData.avatar} />
             <Card.Body>
               <Flex>
-                <Flex.Item>自由人</Flex.Item>
                 <Flex.Item>
-                  {rowData.rank
+                  天梯分：{rowData.rankscore
+                    ? rowData.rankscore + '分'
+                    : '未知'}
+                </Flex.Item>
+                <Flex.Item>
+                  段位：{rowData.rank
                     ? RANKS.filter(x => x.value === rowData.rank)[0].label
                     : '未知'}
                 </Flex.Item>
                 <Flex.Item>
-                  {rowData.position
+                  位置：{rowData.position
                     ? TEAMPOSITIONS.filter(x => x.value === rowData.position)[0]
                         .label
                     : '未知'}

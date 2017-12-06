@@ -1,6 +1,6 @@
 import { put, fork, take, call } from 'redux-saga/effects'
 import { delay } from 'redux-saga'
-import { replace } from 'react-router-redux'
+import { replace, goBack } from 'react-router-redux'
 import { Toast } from 'antd-mobile'
 import {
   POST_SIGNUP_REQUEST,
@@ -62,6 +62,8 @@ function* putUserInfoWorker(payload) {
     yield put(action.fetchSuccess())
     yield put(action.putUserInfoSuccess(response.attributes))
     Toast.success('提交成功', 1.5)
+    yield delay(1500)
+    yield put(goBack())
   } catch (error) {
     console.log(error)
     yield put(action.fetchFailed())

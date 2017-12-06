@@ -31,19 +31,7 @@ function userInfoReducer(state = initialUserInfoState, action) {
     case PUT_USERINFO_SUCCESS:
       return {
         ...state,
-        pending: false,
-        nickname: action.payload.nickname,
-        position: action.payload.position,
-        contact: action.payload.contact,
-        introduction: action.payload.introduction,
-        avatar: action.payload.avatar,
-        rank: action.payload.rank,
-        match: action.payload.match,
-        mouse: action.payload.mouse,
-        keyboard: action.payload.keyboard,
-        headphones: action.payload.headphones,
-        files: { url: action.payload.avatar },
-        heros: merge(HEROS, action.payload.heros)
+        pending: false
       }
     case PUT_USERINFO_FAILED:
       return { ...state, pending: false }
@@ -57,12 +45,14 @@ function userInfoReducer(state = initialUserInfoState, action) {
         position: action.payload.position,
         contact: action.payload.contact,
         introduction: action.payload.introduction,
-        match: action.payload.match,
         avatar: action.payload.avatar,
         rank: action.payload.rank,
+        rankscore: action.payload.rankscore,
+        match: action.payload.match,
         mouse: action.payload.mouse,
         keyboard: action.payload.keyboard,
         headphones: action.payload.headphones,
+        isPublic: action.payload.isPublic,
         files: [{ url: action.payload.avatar }],
         heros: merge(HEROS, action.payload.heros)
       }

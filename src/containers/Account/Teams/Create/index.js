@@ -16,7 +16,7 @@ import {
   Toast
 } from 'antd-mobile'
 import { RANKS } from '../../../../constants'
-import { setNavBar, postTeamsRequest } from '../../../../actions'
+import { setNavBar, postTeamsRequest, postUploadRequest } from '../../../../actions'
 import { MyActivityIndicator } from '../../../../components'
 // eslint-disable-next-line
 import styles from './style.css'
@@ -46,6 +46,7 @@ class AccountTeamsCreate extends Component {
     this.onChineseFullNameChange = this.onChineseFullNameChange.bind(this)
     this.onContactChange = this.onContactChange.bind(this)
     this.onIntroductionChange = this.onIntroductionChange.bind(this)
+    this.onImagePickerChange = this.onImagePickerChange.bind(this)
     this.onMatchChange = this.onMatchChange.bind(this)
     this.onEnglishNameChange = this.onEnglishNameChange.bind(this)
     this.onEnglishFullNameChange = this.onEnglishFullNameChange.bind(this)
@@ -160,7 +161,7 @@ class AccountTeamsCreate extends Component {
           isRecruit: this.state.isRecruit
         })
       } else {
-        Toast.fail('格式错误，请检查后提交', 2)
+        Toast.fail('格式错误，请检查后提交', 1.5)
       }
     })
   }
@@ -198,13 +199,13 @@ class AccountTeamsCreate extends Component {
             <InputItem
               {...getFieldProps('chineseName', {
                 onChange: this.onChineseNameChange,
+                initialValue: this.state.chineseName,
                 rules: [
                   {
-                    type: 'string',
                     required: true,
                     min: 2,
-                    max: 10,
-                    message: '战队中文简称:2-10个字符'
+                    max: 25,
+                    message: '战队中文简称:2-25个字符'
                   }
                 ]
               })}
@@ -222,9 +223,9 @@ class AccountTeamsCreate extends Component {
                 rules: [
                   {
                     type: 'string',
-                    min: 3,
+                    min: 2,
                     max: 25,
-                    message: '战队中文全称:3-25个字符'
+                    message: '战队中文全称:2-25个字符'
                   }
                 ]
               })}
@@ -242,9 +243,9 @@ class AccountTeamsCreate extends Component {
                 rules: [
                   {
                     type: 'string',
-                    min: 3,
+                    min: 2,
                     max: 25,
-                    message: '战队英文简称:3-25个字符'
+                    message: '战队英文简称:2-25个字符'
                   }
                 ]
               })}
@@ -264,7 +265,7 @@ class AccountTeamsCreate extends Component {
                     type: 'string',
                     min: 2,
                     max: 25,
-                    message: '战队英文全称:3-25个字符'
+                    message: '战队英文全称:2-25个字符'
                   }
                 ]
               })}
@@ -284,7 +285,7 @@ class AccountTeamsCreate extends Component {
                     type: 'string',
                     min: 2,
                     max: 25,
-                    message: '联系方式:3-25个字符'
+                    message: '联系方式:2-25个字符'
                   }
                 ]
               })}
@@ -304,7 +305,7 @@ class AccountTeamsCreate extends Component {
                     type: 'string',
                     min: 2,
                     max: 25,
-                    message: '战队地点:3-25个字符'
+                    message: '战队地点:2-25个字符'
                   }
                 ]
               })}
@@ -342,10 +343,9 @@ class AccountTeamsCreate extends Component {
                 rules: [
                   {
                     type: 'string',
-                    required: false,
-                    min: 4,
-                    max: 25,
-                    message: '战队口号:4-25个字符'
+                    min: 2,
+                    max: 100,
+                    message: '战队口号:2-100个字符'
                   }
                 ]
               })}
@@ -365,11 +365,9 @@ class AccountTeamsCreate extends Component {
                 validateFirst: true,
                 rules: [
                   {
-                    type: 'string',
-                    required: false,
-                    min: 4,
-                    max: 25,
-                    message: '战队介绍:4-25个字符'
+                    min: 2,
+                    max: 400,
+                    message: '战队介绍:4-400个字符'
                   }
                 ]
               })}
@@ -382,17 +380,15 @@ class AccountTeamsCreate extends Component {
               {introductionErrors ? introductionErrors.join(',') : null}
             </Flex>
           </List>
-          <List renderHeader={() => '战队比赛经历'}>
+          <List renderHeader={() => '比赛经历'}>
             <TextareaItem
               {...getFieldProps('match', {
                 onChange: this.onMatchChange,
                 rules: [
                   {
-                    type: 'string',
-                    required: false,
-                    min: 4,
-                    max: 100,
-                    message: '战队比赛经历:4-100个字符'
+                    min: 2,
+                    max: 200,
+                    message: '比赛经历:4-400个字符'
                   }
                 ]
               })}
@@ -411,11 +407,9 @@ class AccountTeamsCreate extends Component {
                 onChange: this.onHonorChange,
                 rules: [
                   {
-                    type: 'string',
-                    required: false,
-                    min: 4,
-                    max: 100,
-                    message: '主要荣耀:4-100个字符'
+                    min: 2,
+                    max: 400,
+                    message: '主要荣耀:4-400个字符'
                   }
                 ]
               })}
@@ -460,6 +454,9 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
+    postUpload: payload => {
+      dispatch(postUploadRequest(payload))
+    },
     setNavBar: payload => {
       dispatch(
         setNavBar({ title: payload.title, isCanBack: payload.isCanBack })

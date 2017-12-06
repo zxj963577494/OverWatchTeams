@@ -4,20 +4,22 @@ import { userReducer } from './user'
 import { userInfoReducer } from './userinfo'
 import { appReducer } from './app'
 import { commonReducer } from './common'
-import { userTeamsReducer } from './teams'
 import navbarReducer from './navbar'
-import { membersReducer } from './members'
+import { userTeamsReducer } from './userteams'
+import { membersReducer } from './home/members'
+import { teamsReducer } from './home/teams'
 
 const rootReducer = combineReducers({
   app: appReducer,
   user: userReducer,
   userinfo: userInfoReducer,
-  userteams: userTeamsReducer,
   articles: articlesReducer,
   sticky: stickyArticlesReducer,
   navbar: navbarReducer,
   common: commonReducer,
-  members: membersReducer
+  members: membersReducer,
+  userteams: userTeamsReducer,
+  teams: teamsReducer
 })
 
 export default rootReducer

@@ -17,7 +17,7 @@ import {
 } from 'antd-mobile'
 import { push } from 'react-router-redux'
 import { RANKS } from '../../../../constants'
-import { setNavBar, putTeamsRequest } from '../../../../actions'
+import { setNavBar, putTeamsRequest, postUploadRequest } from '../../../../actions'
 import { MyActivityIndicator } from '../../../../components'
 // eslint-disable-next-line
 import styles from './style.css'
@@ -49,6 +49,7 @@ class AccountTeamsEdit extends Component {
       pending: props.currentTeam.pending,
     }
     this.onChineseNameChange = this.onChineseNameChange.bind(this)
+    this.onImagePickerChange = this.onImagePickerChange.bind(this)
     this.onChineseFullNameChange = this.onChineseFullNameChange.bind(this)
     this.onContactChange = this.onContactChange.bind(this)
     this.onIntroductionChange = this.onIntroductionChange.bind(this)
@@ -167,7 +168,7 @@ class AccountTeamsEdit extends Component {
           isRecruit: this.state.isRecruit
         })
       } else {
-        Toast.fail('格式错误，请检查后提交', 2)
+        Toast.fail('格式错误，请检查后提交', 1.5)
       }
     })
   }
@@ -210,8 +211,8 @@ class AccountTeamsEdit extends Component {
                     type: 'string',
                     required: true,
                     min: 2,
-                    max: 10,
-                    message: '战队中文简称:2-10个字符'
+                    max: 25,
+                    message: '战队中文简称:2-25个字符'
                   }
                 ]
               })}
@@ -229,9 +230,9 @@ class AccountTeamsEdit extends Component {
                 rules: [
                   {
                     type: 'string',
-                    min: 3,
+                    min: 2,
                     max: 25,
-                    message: '战队中文全称:3-25个字符'
+                    message: '战队中文全称:2-25个字符'
                   }
                 ]
               })}
@@ -249,9 +250,9 @@ class AccountTeamsEdit extends Component {
                 rules: [
                   {
                     type: 'string',
-                    min: 3,
+                    min: 2,
                     max: 25,
-                    message: '战队英文简称:3-25个字符'
+                    message: '战队英文简称:2-25个字符'
                   }
                 ]
               })}
@@ -271,7 +272,7 @@ class AccountTeamsEdit extends Component {
                     type: 'string',
                     min: 2,
                     max: 25,
-                    message: '战队英文全称:3-25个字符'
+                    message: '战队英文全称:2-25个字符'
                   }
                 ]
               })}
@@ -291,7 +292,7 @@ class AccountTeamsEdit extends Component {
                     type: 'string',
                     min: 2,
                     max: 25,
-                    message: '联系方式:3-25个字符'
+                    message: '联系方式:2-25个字符'
                   }
                 ]
               })}
@@ -311,7 +312,7 @@ class AccountTeamsEdit extends Component {
                     type: 'string',
                     min: 2,
                     max: 25,
-                    message: '战队地点:3-25个字符'
+                    message: '战队地点:2-25个字符'
                   }
                 ]
               })}
@@ -350,9 +351,9 @@ class AccountTeamsEdit extends Component {
                   {
                     type: 'string',
                     required: false,
-                    min: 4,
-                    max: 25,
-                    message: '战队口号:4-25个字符'
+                    min: 2,
+                    max: 100,
+                    message: '战队口号:2-100个字符'
                   }
                 ]
               })}
@@ -374,9 +375,9 @@ class AccountTeamsEdit extends Component {
                   {
                     type: 'string',
                     required: false,
-                    min: 4,
-                    max: 25,
-                    message: '战队介绍:4-25个字符'
+                    min: 2,
+                    max: 400,
+                    message: '战队介绍:2-400个字符'
                   }
                 ]
               })}
@@ -397,9 +398,9 @@ class AccountTeamsEdit extends Component {
                   {
                     type: 'string',
                     required: false,
-                    min: 4,
-                    max: 100,
-                    message: '战队比赛经历:4-100个字符'
+                    min: 2,
+                    max: 400,
+                    message: '战队比赛经历:2-400个字符'
                   }
                 ]
               })}
@@ -420,9 +421,9 @@ class AccountTeamsEdit extends Component {
                   {
                     type: 'string',
                     required: false,
-                    min: 4,
-                    max: 100,
-                    message: '主要荣耀:4-100个字符'
+                    min: 2,
+                    max: 400,
+                    message: '主要荣耀:2-400个字符'
                   }
                 ]
               })}
@@ -470,6 +471,9 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
+    postUpload: payload => {
+      dispatch(postUploadRequest(payload))
+    },
     setNavBar: payload => {
       dispatch(
         setNavBar({ title: payload.title, isCanBack: payload.isCanBack })

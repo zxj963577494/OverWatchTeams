@@ -38,7 +38,7 @@ export function updateTeams(payload) {
     }
   }
   if (!payload['avatar']) {
-    team.set('avatar', config.BASE_PIC_URL + '/logo.png')
+    team.set('avatar', config.BASE_DEFAULT_PIC_URL)
   }
   return team.save()
 }
@@ -278,5 +278,29 @@ export function removeTeam(payload) {
         throw new Error('您不是战队管理者，无法执行该操作')
       }
     })
+  })
+}
+
+export function getHomeTeamsList(payload) {
+  let list = []
+  let { page, pagesize } = payload
+  pagesize = pagesize || 20
+  const teams = new AV.Query('Teams')
+  teams.limit(pagesize)
+  teams.skip(pagesize * (page - 1))
+  return teams.find().then(function(result) {
+    result.forEach(item => {
+      list.push(item.toJSON())
+    })
+    return list
+  })
+}
+
+export function getHomeTeamsDetail(payload) {
+  const { objectId } = payload
+  const teams = new AV.Query('Teams')
+  teams.equalTo('objectId', objectId)
+  return teams.first().then(function(result) {
+    return result.toJSON()
   })
 }

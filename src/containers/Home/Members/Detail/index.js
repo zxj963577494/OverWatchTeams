@@ -5,21 +5,28 @@ import { WhiteSpace, List, Result } from 'antd-mobile'
 import { RANKS, TEAMPOSITIONS } from '../../../../constants'
 import { setNavBar, getHomeMemberDetailRequest } from '../../../../actions'
 import config from '../../../../config'
+import { MyActivityIndicator } from '../../../../components'
 
 class HomeMemberDetail extends Component {
   componentDidMount() {
     this.props.setNavBar({ title: '个人详情', isCanBack: true })
-    //const id = this.props.match.params.id
-    //this.props.getMemberById({ objectId: id })
+    if (!this.props.member) {
+      const id = this.props.match.params.id
+      this.props.getMemberById({ objectId: id })
+    }
   }
 
   render() {
-    const { member } = this.props
-    if (!member) {
-      return null
+    let { member, current, app } = this.props
+    if (member == null && current != null) {
+      member = current
     }
     return (
       <div>
+        <MyActivityIndicator
+          isFetching={app.isFetching}
+          text={app.fetchingText}
+        />
         <WhiteSpace />
         <Result
           img={
@@ -27,11 +34,7 @@ class HomeMemberDetail extends Component {
               width="60px"
               height="60px"
               style={{ borderRadius: '50%' }}
-              src={
-                member.avatar
-                  ? member.avatar
-                  : config.BASE_PIC_URL + '/logo.png'
-              }
+              src={member.avatar ? member.avatar : config.BASE_DEFAULT_PIC_URL}
               alt={member.nickname}
             />
           }
@@ -40,6 +43,11 @@ class HomeMemberDetail extends Component {
         />
         <WhiteSpace />
         <List>
+          <List.Item
+            extra={member.rankscore ? member.rankscore + '分' : '未知'}
+          >
+            天梯分
+          </List.Item>
           <List.Item
             extra={
               member.rank
@@ -88,7 +96,7 @@ class HomeMemberDetail extends Component {
                   height: '60px',
                   margin: '10px'
                 }}
-                src={config.BASE_PIC_URL + '/logo.png'}
+                src={config.BASE_DEFAULT_PIC_URL}
                 alt="未知"
               />
             )}
@@ -110,9 +118,14 @@ class HomeMemberDetail extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    member: state.root.members.list.length > 0
-      ? state.root.members.list.filter(x => x.objectId === ownProps.match.params.id)[0]
-      : null
+    app: state.root.app,
+    current: state.root.members.current,
+    member:
+      state.root.members.list.length > 0
+        ? state.root.members.list.filter(
+            x => x.objectId === ownProps.match.params.id
+          )[0]
+        : null
   }
 }
 

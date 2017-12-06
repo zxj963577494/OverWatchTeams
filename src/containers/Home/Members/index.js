@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import { getHomeMemberListRequest } from '../../../actions'
-import { HomeMemberListView, MyActivityIndicator } from '../../../components'
+import { HomeMembersListView, MyActivityIndicator } from '../../../components'
 
 class HomeMembers extends Component {
   componentDidMount() {
@@ -13,11 +13,11 @@ class HomeMembers extends Component {
   }
 
   render() {
-    const { members, app, navigateTo, getHomeMembers } = this.props
+    const { members, navigateTo, getHomeMembers } = this.props
     return (
       <div style={{ height: '100%' }}>
-        <MyActivityIndicator isFetching={app.isFetching} text={app.text} />
-        <HomeMemberListView
+        <MyActivityIndicator isFetching={members.isFetching} text={members.fetchingText} />
+        <HomeMembersListView
           members={members}
           navigateTo={navigateTo}
           getHomeMembers={getHomeMembers}
@@ -29,7 +29,6 @@ class HomeMembers extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    app: state.root.app,
     members: state.root.members
   }
 }

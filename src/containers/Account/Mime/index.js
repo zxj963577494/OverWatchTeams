@@ -40,6 +40,7 @@ class AccountMime extends Component {
       avatar: props.userinfo.avatar,
       heros: props.userinfo.heros ? props.userinfo.heros : HEROS,
       rank: props.userinfo.rank,
+      rankscore: props.userinfo.rankscore,
       mouse: props.userinfo.mouse,
       keyboard: props.userinfo.keyboard,
       headphones: props.userinfo.headphones,
@@ -48,6 +49,7 @@ class AccountMime extends Component {
     }
     this.onNickNameChange = this.onNickNameChange.bind(this)
     this.onContactChange = this.onContactChange.bind(this)
+    this.onRankScoreChange = this.onRankScoreChange.bind(this)
     this.onIntroductionChange = this.onIntroductionChange.bind(this)
     this.onMatchChange = this.onMatchChange.bind(this)
     this.onMouseChange = this.onMouseChange.bind(this)
@@ -90,6 +92,12 @@ class AccountMime extends Component {
   onRankChange(value) {
     this.setState({
       rank: value
+    })
+  }
+
+  onRankScoreChange(value) {
+    this.setState({
+      rankscore: value
     })
   }
 
@@ -162,6 +170,7 @@ class AccountMime extends Component {
           }),
           match: this.state.match,
           rank: this.state.rank,
+          rankscore: this.state.rankscore,
           mouse: this.state.mouse,
           keyboard: this.state.keyboard,
           headphones: this.state.headphones,
@@ -183,6 +192,7 @@ class AccountMime extends Component {
     const { position, files, heros, rank, pending, isPublic } = this.state
     const nicknameErrors = getFieldError('nickname')
     const contactErrors = getFieldError('contact')
+    const rankscoreErrors = getFieldError('rankscore')
     const introductionErrors = getFieldError('introduction')
     const matchErrors = getFieldError('match')
     const mouseErrors = getFieldError('mouse')
@@ -204,9 +214,9 @@ class AccountMime extends Component {
             <InputItem
               {...getFieldProps('nickname', {
                 onChange: this.onNickNameChange,
+                initialValue: this.state.nickname,
                 rules: [
                   {
-                    type: 'string',
                     required: true,
                     min: 2,
                     max: 10,
@@ -221,6 +231,29 @@ class AccountMime extends Component {
             </InputItem>
             <Flex className="error">
               {nicknameErrors ? nicknameErrors.join(',') : null}
+            </Flex>
+            <InputItem
+              type="number"
+              {...getFieldProps('rankscore', {
+                onChange: this.onRankScoreChange,
+                initialValue: this.state.rankscore,
+                rules: [
+                  {
+                    type: 'number',
+                    min: 1,
+                    max: 5000,
+                    message: '天梯分数:1-5000数字',
+                    transform: value => +value
+                  }
+                ]
+              })}
+              placeholder="请输入天梯分数"
+              value={this.state.rankscore}
+            >
+              天梯分
+            </InputItem>
+            <Flex className="error">
+              {rankscoreErrors ? rankscoreErrors.join(',') : null}
             </Flex>
             <InputItem
               {...getFieldProps('contact', {
@@ -251,7 +284,6 @@ class AccountMime extends Component {
                 rules: [
                   {
                     type: 'string',
-                    required: false,
                     min: 4,
                     max: 25,
                     message: '个人介绍:4-25个字符'
@@ -274,7 +306,6 @@ class AccountMime extends Component {
                 rules: [
                   {
                     type: 'string',
-                    required: false,
                     min: 4,
                     max: 100,
                     message: '个人比赛经历:4-100个字符'
@@ -331,7 +362,6 @@ class AccountMime extends Component {
                 rules: [
                   {
                     type: 'string',
-                    required: false,
                     min: 3,
                     max: 20,
                     message: '鼠标:3-20个字符'
@@ -352,7 +382,6 @@ class AccountMime extends Component {
                 rules: [
                   {
                     type: 'string',
-                    required: false,
                     min: 3,
                     max: 20,
                     message: '键盘:3-20个字符'
@@ -373,7 +402,6 @@ class AccountMime extends Component {
                 rules: [
                   {
                     type: 'string',
-                    required: false,
                     min: 3,
                     max: 20,
                     message: '耳机:3-20个字符'
@@ -389,7 +417,7 @@ class AccountMime extends Component {
               {headphonesErrors ? headphonesErrors.join(',') : null}
             </Flex>
           </List>
-          <List renderHeader={() => '是否招募队员'}>
+          <List renderHeader={() => '是否公开信息(联系方式不公开)'}>
             <List.Item
               extra={
                 <Switch
@@ -403,7 +431,7 @@ class AccountMime extends Component {
                 />
               }
             >
-              是否招募队员
+              是否公开信息
             </List.Item>
           </List>
           <WhiteSpace />

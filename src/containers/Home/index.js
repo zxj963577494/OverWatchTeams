@@ -10,17 +10,17 @@ import styles from './style.css'
 
 const data = [
   {
-    url: '/home/temas',
+    url: '/home/teams',
     icon: config.BASE_PIC_URL + '/logo.png',
     text: '战队'
   },
   {
-    url: '/home/temas',
+    url: '/home/teams',
     icon: config.BASE_PIC_URL + '/logo.png',
     text: '招募令'
   },
   {
-    url: '/home/temas',
+    url: '/home/teams',
     icon: config.BASE_PIC_URL + '/logo.png',
     text: '组队上分'
   },

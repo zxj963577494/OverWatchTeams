@@ -7,7 +7,9 @@ import {
   PUT_TEAMS_REQUEST,
   GET_USER_TEAMS_REQUEST,
   DELETE_TEAM_MEMBER_REQUEST,
-  DELETE_TEAM_REQUEST
+  DELETE_TEAM_REQUEST,
+  GET_HOME_TEAM_LIST_REQUEST,
+  GET_HOME_TEAM_DETAIL_REQUEST
 } from '../constants/actionTypes'
 import * as action from '../actions'
 import { teams } from '../services/leanclound'
@@ -90,6 +92,24 @@ function* deleteTeamWorker(payload) {
   }
 }
 
+function* getHomeTeamListWorker(payload) {
+  try {
+    const response = yield call(teams.getHomeTeamsList, payload)
+    yield put(action.getHomeTeamListSuccess(response))
+  } catch (error) {
+    yield put(action.getHomeTeamListFailed(error))
+  }
+}
+
+function* getHomeTeamDetailWorker(payload) {
+  try {
+    const response = yield call(teams.getHomeTeamsDetail, payload)
+    yield put(action.getHomeMemberDetailSuccess(response))
+  } catch (error) {
+    yield put(action.getHomeMemberDetailFailed(error))
+  }
+}
+
 function* watchPostTeams() {
   while (true) {
     const { payload } = yield take(POST_TEAMS_REQUEST)
@@ -125,10 +145,26 @@ function* watchDeleteTeam() {
   }
 }
 
+function* watchGetHomeTeamList() {
+  while (true) {
+    const { payload } = yield take(GET_HOME_TEAM_LIST_REQUEST)
+    yield fork(getHomeTeamListWorker, payload)
+  }
+}
+
+function* watchGetHomeTeamDetail() {
+  while (true) {
+    const { payload } = yield take(GET_HOME_TEAM_DETAIL_REQUEST)
+    yield fork(getHomeTeamDetailWorker, payload)
+  }
+}
+
 export {
   watchGetTeamsByUser,
   watchPostTeams,
   watchPutTeams,
   watchDeleteTeamMember,
-  watchDeleteTeam
+  watchDeleteTeam,
+  watchGetHomeTeamList,
+  watchGetHomeTeamDetail
 }
