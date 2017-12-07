@@ -3,13 +3,13 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Button, WhiteSpace, Flex, WingBlank, List, Result } from 'antd-mobile'
 import { push, goBack } from 'react-router-redux'
-import { RANKS, TEAMPOSITIONS } from '../../../../constants'
-import { setNavBar, deleteTeamMemberRequest } from '../../../../actions'
-import config from '../../../../config'
+import { RANKS, TEAMPOSITIONS } from '../../../../../constants'
+import { setNavBar, deleteTeamMemberRequest } from '../../../../../actions'
+import config from '../../../../../config'
 // eslint-disable-next-line
 import styles from './style.css'
 
-class AccountMembersDetail extends Component {
+class AccountMemberDetail extends Component {
   constructor(props) {
     super(props)
     this.onRemoveMember = this.onRemoveMember.bind(this)
@@ -177,8 +177,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   }
 }
 
-AccountMembersDetail.propTypes = {}
+AccountMemberDetail.propTypes = {}
 
 export default connect(mapStateToProps, mapDispatchToProps)(
-  AccountMembersDetail
+  AccountMemberDetail
 )

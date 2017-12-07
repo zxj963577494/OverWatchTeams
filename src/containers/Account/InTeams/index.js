@@ -2,12 +2,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
-import { Button, WhiteSpace, WingBlank, Card, Grid } from 'antd-mobile'
-import {
-  setNavBar,
-  getTeamsByUserRequest,
-  deleteTeamRequest
-} from '../../../actions'
+import { WhiteSpace, WingBlank, Card, Grid } from 'antd-mobile'
+import { setNavBar, getInTeamsRequest } from '../../../actions'
 import { MyActivityIndicator } from '../../../components'
 import { getPosition } from '../../../utils/utils'
 import config from '../../../config'
@@ -15,32 +11,18 @@ import config from '../../../config'
 import styles from './style.css'
 
 class AccountTeams extends Component {
-  constructor(props) {
-    super(props)
-    this.onCreateTeam = this.onCreateTeam.bind(this)
-    this.onRemoveTeam = this.onRemoveTeam.bind(this)
-  }
-
-  onCreateTeam() {
-    this.props.navigateTo('/account/teams/create')
-  }
-
-  onRemoveTeam(id) {
-    this.props.deleteTeam({teamid: id})
-  }
-
   componentDidMount() {
-    this.props.setNavBar({ title: '我的战队', isCanBack: true })
+    this.props.setNavBar({ title: '所在战队', isCanBack: true })
     this.props.getTeamsByUser()
   }
 
   render() {
-    const { userteams, app, navigateTo } = this.props
+    const { teams, app, navigateTo } = this.props
     return (
       <div>
         <MyActivityIndicator isFetching={app.isFetching} text={app.text} />
         <WingBlank>
-          {userteams.map(function(item, index) {
+          {teams.map(function(item, index) {
             return (
               <div key={index}>
                 <WhiteSpace />
@@ -53,18 +35,6 @@ class AccountTeams extends Component {
                       item.chineseName
                     }
                     thumb={item.avatar}
-                    extra={
-                      <Button
-                        onClick={() => {
-                          navigateTo('/account/teams/edit/' + item.objectId)
-                        }}
-                        type="ghost"
-                        size="small"
-                        inline
-                      >
-                        编辑
-                      </Button>
-                    }
                   />
                   <Card.Body>
                     <Grid
@@ -118,29 +88,12 @@ class AccountTeams extends Component {
                       )}
                     />
                   </Card.Body>
-                  <Card.Footer
-                    extra={
-                      <Button
-                        onClick={this.onRemoveTeam.bind(this, item.objectId)}
-                        type="warning"
-                        size="small"
-                        inline
-                      >
-                        战队解散
-                      </Button>
-                    }
-                  />
                 </Card>
               </div>
             )
-          }, this)}
+          })}
         </WingBlank>
         <WhiteSpace />
-        <WingBlank>
-          <Button onClick={this.onCreateTeam} type="primary">
-            新 建 战 队
-          </Button>
-        </WingBlank>
       </div>
     )
   }
@@ -149,17 +102,14 @@ class AccountTeams extends Component {
 const mapStateToProps = (state, ownProps) => {
   return {
     app: state.root.app,
-    userteams: state.root.userteams.list
+    teams: state.root.team.account.team.inTeam
   }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    getTeamsByUser: () => {
-      dispatch(getTeamsByUserRequest({ t: 1 }))
-    },
-    deleteTeam: payload => {
-      dispatch(deleteTeamRequest(payload))
+    getInTeams: () => {
+      dispatch(getInTeamsRequest({ t: 0 }))
     },
     setNavBar: payload => {
       dispatch(
@@ -174,8 +124,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 
 AccountTeams.propTypes = {
   app: PropTypes.object.isRequired,
-  userteams: PropTypes.array,
-  getTeamsByUser: PropTypes.func.isRequired,
+  teams: PropTypes.array,
+  getInTeams: PropTypes.func.isRequired,
   navigateTo: PropTypes.func.isRequired,
   setNavBar: PropTypes.func.isRequired
 }

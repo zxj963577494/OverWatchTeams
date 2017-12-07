@@ -25,28 +25,28 @@ import styles from './style.css'
 class AccountTeamsEdit extends Component {
   constructor(props) {
     super(props)
-    if (!props.currentTeam) {
+    if (!props.team) {
       props.navigateTo('/account/teams')
       return 
     }
     this.state = {
-      objectId: props.currentTeam.objectId,
-      chineseFullName: props.currentTeam.chineseFullName,
-      englishFullName: props.currentTeam.englishFullName,
-      chineseName: props.currentTeam.chineseName,
-      englishName: props.currentTeam.englishName,
-      slogan: props.currentTeam.slogan,
-      introduction: props.currentTeam.introduction,
-      files: [{ url: props.currentTeam.avatar }],
-      rank: props.currentTeam.rank,
-      avatar: props.currentTeam.avatar,
-      createDate: props.currentTeam.createDate,
-      createCity: props.currentTeam.createCity,
-      contact: props.currentTeam.contact,
-      honor: props.currentTeam.honor,
-      match: props.currentTeam.match,
-      isRecruit: props.currentTeam.isRecruit,
-      pending: props.currentTeam.pending,
+      objectId: props.team.objectId,
+      chineseFullName: props.team.chineseFullName,
+      englishFullName: props.team.englishFullName,
+      chineseName: props.team.chineseName,
+      englishName: props.team.englishName,
+      slogan: props.team.slogan,
+      introduction: props.team.introduction,
+      files: [{ url: props.team.avatar }],
+      rank: props.team.rank,
+      avatar: props.team.avatar,
+      createDate: props.team.createDate,
+      createCity: props.team.createCity,
+      contact: props.team.contact,
+      honor: props.team.honor,
+      match: props.team.match,
+      isRecruit: props.team.isRecruit,
+      pending: props.team.pending,
     }
     this.onChineseNameChange = this.onChineseNameChange.bind(this)
     this.onImagePickerChange = this.onImagePickerChange.bind(this)
@@ -206,6 +206,7 @@ class AccountTeamsEdit extends Component {
             <InputItem
               {...getFieldProps('chineseName', {
                 onChange: this.onChineseNameChange,
+                initialValue: this.state.chineseName,
                 rules: [
                   {
                     type: 'string',
@@ -247,9 +248,11 @@ class AccountTeamsEdit extends Component {
             <InputItem
               {...getFieldProps('englishName', {
                 onChange: this.onEnglishNameChange,
+                initialValue: this.state.englishName,
                 rules: [
                   {
                     type: 'string',
+                    required: true,
                     min: 2,
                     max: 25,
                     message: '战队英文简称:2-25个字符'
@@ -462,7 +465,7 @@ class AccountTeamsEdit extends Component {
 const mapStateToProps = (state, ownProps) => {
   return {
     app: state.root.app,
-    currentTeam: state.root.userteams.list.filter(
+    team: state.root.team.account.team.myTeams.filter(
       x => x.objectId === ownProps.match.params.id
     )[0]
   }
@@ -489,7 +492,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 
 AccountTeamsEdit.propTypes = {
   app: PropTypes.object.isRequired,
-  currentTeam: PropTypes.object,
+  team: PropTypes.object,
   postUpload: PropTypes.func.isRequired,
   putTeam: PropTypes.func.isRequired,
   navigateTo: PropTypes.func.isRequired,

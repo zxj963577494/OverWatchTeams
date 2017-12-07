@@ -89,7 +89,21 @@ export function cerateTeam(payload) {
 
   userTeamMap.setACL(acl)
 
-  return userTeamMap.save()
+  return userTeamMap.save().then(function(result) {
+    const user = getCurrentUser()
+    user.equalTo('objectId', user.id)
+    user.include('userinfo')
+    return user.first().then(function(result) {
+      const userinfo = result.get('userinfo')
+      const r = members.splice(0, 1, {
+        objectId: user.id,
+        avatar: userinfo.get('avatar'),
+        nickname: userinfo.get('nickname'),
+        leader: true
+      })
+      return { ...result.get('team').toJSON(), members: r }
+    })
+  })
 }
 
 // 更新战队
@@ -103,133 +117,72 @@ export function updateTeams(payload) {
   if (!payload['avatar']) {
     team.set('avatar', config.BASE_DEFAULT_PIC_URL)
   }
-  return team.save()
+  return team.save().then(function(result) {
+    return result.toJSON()
+  })
 }
 
-// 根据个人获取战队
-export function getTeamsByUser(payload) {
-  // 当前用户
+// 获取我的战队
+export function getMyTeams() {
   const user = getCurrentUser()
-
-  // 构建 UserTeamMap 的查询
   const query = new AV.Query('UserTeamMap')
-
-  // 查询所有选择了当前用户的战队
   query.equalTo('user', user)
-
-  // 是否是战队创建者
-  // if (payload.t === 1) {
-  //   query.equalTo('leader', true)
-  // }
+  query.equalTo('leader', true)
   query.descending('createdAt')
   query.include('team')
-
-  let result = []
-
-  // 获取当前用户所在的所有战队
+  query.include('user')
+  query.include('user.userinfo')
   return query.find().then(function(UserTeamMap) {
+    const teams = []
     UserTeamMap.forEach(function(item, i, a) {
-      const team = item.get('team')
-      let o = {
-        objectId: team.id,
-        avatar: team.get('avatar'),
-        chineseFullName: team.get('chineseFullName'),
-        chineseName: team.get('chineseName'),
-        englishFullName: team.get('englishFullName'),
-        englishName: team.get('englishName'),
-        isRecruit: team.get('isRecruit'),
-        createDate: team.get('createDate'),
-        slogan: team.get('slogan'),
-        introduction: team.get('introduction'),
-        rank: team.get('rank'),
-        createCity: team.get('createCity'),
-        contact: team.get('contact'),
-        honor: team.get('honor'),
-        match: team.get('match'),
-        members: members
+      let teaminfo = item.get('team').toJSON()
+      teaminfo = { ...teaminfo, members: members }
+      const userid = item.get('user').id
+      const userinfo = item
+        .get('user')
+        .get('userinfo')
+        .toJSON()
+      const result = {
+        ...userinfo,
+        userid: userid,
+        leader: item.get('leader')
       }
-      result.push(o)
+      teaminfo.members.splice(i, 1, result)
+      teams.push(teaminfo)
     })
-    return result
+    return teams
   })
 }
 
-// 根据战队获取成员
-export function getUsersByTeam(payload) {
-  const teams = []
-  const promises = []
-  payload.forEach(function(item) {
-    promises.push(getTeams(item))
-  })
-  return Promise.all(promises)
-    .then(function(data, error) {
-      teams.push(data)
+// 获取我所在战队
+export function getInTeams() {
+  const user = getCurrentUser()
+  const query = new AV.Query('UserTeamMap')
+  query.equalTo('user', user)
+  query.equalTo('leader', false)
+  query.descending('createdAt')
+  query.include('team')
+  query.include('user')
+  query.include('user.userinfo')
+  return query.find().then(function(UserTeamMap) {
+    const teams = []
+    UserTeamMap.forEach(function(item, i, a) {
+      let teaminfo = item.get('team').toJSON()
+      teaminfo = { ...teaminfo, members: members }
+      const userid = item.get('user').id
+      const userinfo = item
+        .get('user')
+        .get('userinfo')
+        .toJSON()
+      const result = {
+        ...userinfo,
+        userid: userid,
+        leader: item.get('leader')
+      }
+      teaminfo.members.splice(i, 1, result)
+      teams.push(teaminfo)
     })
-    .then(function() {
-      return teams
-    })
-}
-
-function getUserInfo(id, item) {
-  return new Promise(function(resolve) {
-    const user = AV.Object.createWithoutData('_User', id)
-    user
-      .fetch({
-        include: ['userinfo']
-      })
-      .then(function(data) {
-        const objectId = id
-        const userinfo = data.get('userinfo')
-        const avatar = userinfo.get('avatar')
-        const nickname = userinfo.get('nickname')
-        const position = userinfo.get('position')
-        const contact = userinfo.get('contact')
-        const heros = userinfo.get('heros')
-        const introduction = userinfo.get('introduction')
-        const match = userinfo.get('match')
-        const rank = userinfo.get('rank')
-        const leader = item.get('leader')
-        const obj = {
-          objectId,
-          avatar,
-          nickname,
-          position,
-          contact,
-          heros,
-          introduction,
-          match,
-          rank,
-          leader
-        }
-        resolve(obj)
-      })
-  })
-}
-
-function getTeams(payload) {
-  return new Promise(function(resolve) {
-    const query = new AV.Query('UserTeamMap')
-    const team = AV.Object.createWithoutData('Teams', payload.objectId)
-    query.equalTo('team', team)
-    query.include('user')
-    query.find().then(function(UserTeamMap) {
-      const promises = []
-
-      UserTeamMap.forEach(function(item, ii, aa) {
-        const user = item.get('user')
-        promises.push(getUserInfo(user.id, item))
-      })
-
-      Promise.all(promises)
-        .then(function(data, error) {
-          for (let i = 0; i < data.length; i++) {
-            payload.members.splice(i, 1, data[i])
-          }
-        })
-        .then(function() {
-          resolve(payload)
-        })
-    })
+    return teams
   })
 }
 
@@ -250,7 +203,9 @@ export function removeMember(payload) {
         if (scm.get('user').id === memberid) {
           return AV.Query.doCloudQuery(
             `delete from UserTeamMap where user=${memberid} && team=${teamid}`
-          )
+          ).then(function(result) {
+            return result.toJSON()
+          })
         } else {
           throw new Error('该队员不在该战队中，无法移除')
         }
@@ -270,16 +225,16 @@ export function removeTeam(payload) {
   const query = new AV.Query('UserTeamMap')
   query.equalTo('user', user)
   query.equalTo('team', team)
-  return query.find().then(function(UserTeamMap) {
-    UserTeamMap.forEach(function(scm, i, a) {
-      if (scm.get('leader')) {
-        return AV.Query.doCloudQuery(
-          `delete from UserTeamMap where team=${teamid}`
-        )
-      } else {
-        throw new Error('您不是战队管理者，无法执行该操作')
-      }
-    })
+  return query.first().then(function(UserTeamMap) {
+    if (UserTeamMap.get('leader')) {
+      const cql = 'delete from UserTeamMap where objectId=?'
+      const pvalues = [UserTeamMap.id]
+      return AV.Query.doCloudQuery(cql, pvalues).then(function(result) {
+        return { objectId: pvalues }
+      })
+    } else {
+      throw new Error('您不是战队管理者，无法执行该操作')
+    }
   })
 }
 

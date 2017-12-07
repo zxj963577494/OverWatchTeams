@@ -7,21 +7,21 @@ import { HomeTeamsListView, MyActivityIndicator } from '../../../components'
 
 class HomeTeams extends Component {
   componentDidMount() {
-    if (this.props.teams.list.length === 0) {
+    if (this.props.team.list.length === 0) {
       this.props.getHomeTeams({ page: 1 })
     }
   }
 
   render() {
-    const { teams, navigateTo, getHomeTeams } = this.props
+    const { team, navigateTo, getHomeTeams } = this.props
     return (
       <div style={{ height: '100%' }}>
         <MyActivityIndicator
-          isFetching={teams.isFetching}
-          text={teams.fetchingText}
+          isFetching={team.isFetching}
+          text={team.fetchingText}
         />
         <HomeTeamsListView
-          teams={teams}
+          team={team}
           navigateTo={navigateTo}
           getHomeTeams={getHomeTeams}
         />
@@ -32,7 +32,7 @@ class HomeTeams extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    teams: state.root.teams
+    team: state.root.team.home.team
   }
 }
 
@@ -48,7 +48,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 }
 
 HomeTeams.propTypes = {
-  teams: PropTypes.object.isRequired,
+  team: PropTypes.object.isRequired,
   getHomeTeams: PropTypes.func.isRequired,
   navigateTo: PropTypes.func.isRequired
 }

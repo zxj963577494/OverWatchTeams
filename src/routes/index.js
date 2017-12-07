@@ -12,11 +12,11 @@ import {
   HomeTeamDetail,
   HomeTeams,
   AccountMime,
-  AccountTeams,
-  AccountTeamsCreate,
-  AccountTeamsEdit,
-  AccountMembersDetail,
-  AccountTeamsIn
+  AccountMyTeams,
+  AccountMyTeamsCreate,
+  AccountMyTeamsEdit,
+  AccountInTeams,  
+  AccountMemberDetail,
 } from '../containers'
 
 export default (history, navbar) => {
@@ -40,20 +40,20 @@ export default (history, navbar) => {
               <Route exec path="/account/mime" component={AccountMime} />
               <Route
                 exec
-                path="/account/teams/create"
-                component={AccountTeamsCreate}
+                path="/account/myteams/create"
+                component={AccountMyTeamsCreate}
               />
               <Route
                 exec
-                path="/account/teams/edit/:id"
-                component={AccountTeamsEdit}
+                path="/account/myteams/edit/:id"
+                component={AccountMyTeamsEdit}
               />
-              <Route exec path="/account/teams" component={AccountTeams} />
-              <Route exec path="/account/teamsin" component={AccountTeamsIn} />
+              <Route exec path="/account/myteams" component={AccountMyTeams} />
+              <Route exec path="/account/inteams" component={AccountInTeams} />
               <Route
                 exec
-                path="/account/members/detail/:teamid/:memberid"
-                component={AccountMembersDetail}
+                path="/account/myteams/member/detail/:teamid/:memberid"
+                component={AccountMemberDetail}
               />
               <Route exec path="/account" component={Account} />
             </Switch>

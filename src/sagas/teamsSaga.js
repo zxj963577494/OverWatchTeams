@@ -1,15 +1,16 @@
 import { put, fork, take, call } from 'redux-saga/effects'
 import { delay } from 'redux-saga'
-import { replace } from 'react-router-redux'
+import { goBack, replace } from 'react-router-redux'
 import { Toast } from 'antd-mobile'
 import {
   POST_TEAMS_REQUEST,
   PUT_TEAMS_REQUEST,
-  GET_USER_TEAMS_REQUEST,
   DELETE_TEAM_MEMBER_REQUEST,
   DELETE_TEAM_REQUEST,
   GET_HOME_TEAM_LIST_REQUEST,
-  GET_HOME_TEAM_DETAIL_REQUEST
+  GET_HOME_TEAM_DETAIL_REQUEST,
+  GET_MY_TEAMS_REQUEST,
+  GET_IN_TEAMS_REQUEST
 } from '../constants/actionTypes'
 import * as action from '../actions'
 import { teams } from '../services/leanclound'
@@ -17,12 +18,12 @@ import { teams } from '../services/leanclound'
 function* postTeamsWorker(payload) {
   try {
     yield put(action.fetchRequest({ text: '提交中' }))
-    yield call(teams.cerateTeam, payload)
+    const response = yield call(teams.cerateTeam, payload)
     yield put(action.fetchSuccess())
-    yield put(action.postTeamsSuccess())
+    yield put(action.postTeamsSuccess(response))
     Toast.success('提交成功', 1)
     yield delay(1000)
-    yield put(replace('/account/teams'))
+    yield put(goBack())
   } catch (error) {
     yield put(action.fetchFailed())
     yield put(action.postTeamsFailed())
@@ -34,12 +35,11 @@ function* putTeamsWorker(payload) {
   try {
     yield put(action.fetchRequest({ text: '提交中' }))
     const response = yield call(teams.updateTeams, payload)
-    console.log(response)
     yield put(action.fetchSuccess())
-    yield put(action.putTeamsSuccess())
+    yield put(action.putTeamsSuccess(response))
     Toast.success('提交成功', 1)
     yield delay(1000)
-    yield put(replace('/account/teams'))
+    yield put(goBack())
   } catch (error) {
     yield put(action.fetchFailed())
     yield put(action.putTeamsFailed())
@@ -47,16 +47,27 @@ function* putTeamsWorker(payload) {
   }
 }
 
-function* getTeamsByUserWorker(payload) {
+function* getInTeamsWorker() {
   try {
     yield put(action.fetchRequest({ text: '加载中' }))
-    const teams1 = yield call(teams.getTeamsByUser, payload)
-    const teams2 = yield call(teams.getUsersByTeam, teams1)
-    yield put(action.getTeamsByUserSuccess(teams2))
+    const response = yield call(teams.getInTeams)
+    yield put(action.getInTeamsSuccess(response))
     yield put(action.fetchSuccess())
   } catch (error) {
     yield put(action.fetchFailed())
-    yield put(action.getTeamsByUserFailed(error))
+    yield put(action.getInTeamsFailed(error))
+  }
+}
+
+function* getMyTeamsWorker() {
+  try {
+    yield put(action.fetchRequest({ text: '加载中' }))
+    const response = yield call(teams.getMyTeams)
+    yield put(action.getMyTeamsSuccess(response))
+    yield put(action.fetchSuccess())
+  } catch (error) {
+    yield put(action.fetchFailed())
+    yield put(action.getMyTeamsFailed(error))
   }
 }
 
@@ -68,7 +79,7 @@ function* deleteTeamMemberWorker(payload) {
     yield put(action.fetchSuccess())
     Toast.success('移除队员成功', 1.5)
     yield delay(1500)
-    yield put(replace('/account/teams'))
+    yield put(goBack())
   } catch (error) {
     yield put(action.fetchFailed())
     yield put(action.deleteTeamMemberFailed(error))
@@ -82,9 +93,8 @@ function* deleteTeamWorker(payload) {
     const response = yield call(teams.removeTeam, payload)
     yield put(action.deleteTeamSuccess(response))
     yield put(action.fetchSuccess())
-    Toast.success('移除队员成功', 1.5)
+    Toast.success('解散队伍成功', 1.5)
     yield delay(1500)
-    yield put(replace('/account/teams'))
   } catch (error) {
     yield put(action.fetchFailed())
     yield put(action.deleteTeamFailed(error))
@@ -103,7 +113,7 @@ function* getHomeTeamListWorker(payload) {
 
 function* getHomeTeamDetailWorker(payload) {
   try {
-    yield put(action.fetchRequest({text: '加载中'}))
+    yield put(action.fetchRequest({ text: '加载中' }))
     const response = yield call(teams.getHomeTeamDetail, payload)
     yield put(action.getHomeTeamDetailSuccess(response))
     yield put(action.fetchSuccess())
@@ -124,13 +134,6 @@ function* watchPutTeams() {
   while (true) {
     const { payload } = yield take(PUT_TEAMS_REQUEST)
     yield fork(putTeamsWorker, payload)
-  }
-}
-
-function* watchGetTeamsByUser() {
-  while (true) {
-    const { payload } = yield take(GET_USER_TEAMS_REQUEST)
-    yield fork(getTeamsByUserWorker, payload)
   }
 }
 
@@ -162,12 +165,27 @@ function* watchGetHomeTeamDetail() {
   }
 }
 
+function* watchGetMyTeams() {
+  while (true) {
+    yield take(GET_MY_TEAMS_REQUEST)
+    yield fork(getMyTeamsWorker)
+  }
+}
+
+function* watchGetInTeams() {
+  while (true) {
+    yield take(GET_IN_TEAMS_REQUEST)
+    yield fork(getInTeamsWorker)
+  }
+}
+
 export {
-  watchGetTeamsByUser,
   watchPostTeams,
   watchPutTeams,
   watchDeleteTeamMember,
   watchDeleteTeam,
   watchGetHomeTeamList,
-  watchGetHomeTeamDetail
+  watchGetHomeTeamDetail,
+  watchGetMyTeams,
+  watchGetInTeams
 }

@@ -8,13 +8,14 @@ import {
   watchGetUserInfo
 } from './userSaga'
 import {
-  watchGetTeamsByUser,
   watchPostTeams,
   watchPutTeams,
   watchDeleteTeamMember,
   watchDeleteTeam,
   watchGetHomeTeamList,
-  watchGetHomeTeamDetail
+  watchGetHomeTeamDetail,
+  watchGetMyTeams,
+  watchGetInTeams
 } from './teamsSaga'
 import { watchUpload } from './commonSaga'
 import { watchGetHomeUserList, watchGetHomeUserDetail } from './userSaga'
@@ -31,12 +32,13 @@ export default function* rootSaga() {
     fork(watchGetUserInfo),
     fork(watchPostTeams),
     fork(watchPutTeams),
-    fork(watchGetTeamsByUser),
     fork(watchDeleteTeamMember),
     fork(watchDeleteTeam),
     fork(watchGetHomeUserList),
     fork(watchGetHomeUserDetail),
     fork(watchGetHomeTeamList),
-    fork(watchGetHomeTeamDetail)
+    fork(watchGetHomeTeamDetail),
+    fork(watchGetMyTeams),
+    fork(watchGetInTeams)
   ])
 }

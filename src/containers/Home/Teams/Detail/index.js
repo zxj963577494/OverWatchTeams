@@ -20,8 +20,6 @@ class HomeTeamDetail extends Component {
 
   componentDidMount() {
     this.props.setNavBar({ title: '战队详情', isCanBack: true })
-    const id = this.props.match.params.id
-    this.props.getTeamById({ objectId: id })
     if (!this.props.team) {
       const id = this.props.match.params.id
       this.props.getTeamById({ objectId: id })
@@ -37,16 +35,16 @@ class HomeTeamDetail extends Component {
   }
 
   render() {
-    let { team, app, current, navigateTo } = this.props
+    let { team, current, navigateTo, app } = this.props
     if ((team == null && current != null) || this.state.isGetMember) {
       team = current
     }
+    if (!team) {
+      return null
+    }
     return (
       <div>
-        <MyActivityIndicator
-          isFetching={app.isFetching}
-          text={app.fetchingText}
-        />
+        <MyActivityIndicator isFetching={app.isFetching} text={app.text} />
         <Card full>
           <Card.Header
             title={
@@ -156,13 +154,10 @@ class HomeTeamDetail extends Component {
 const mapStateToProps = (state, ownProps) => {
   return {
     app: state.root.app,
-    current: state.root.teams.current,
-    team:
-      state.root.teams.list.length > 0
-        ? state.root.teams.list.filter(
-            x => x.objectId === ownProps.match.params.id
-          )[0]
-        : null
+    current: state.root.team.home.team.current,
+    team: state.root.team.home.team.list.filter(
+      x => x.objectId === ownProps.match.params.id
+    )[0]
   }
 }
 
@@ -183,7 +178,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 }
 
 HomeTeamDetail.propTypes = {
-  app: PropTypes.object.isRequired,
+  app: PropTypes.object,
   current: PropTypes.object,
   team: PropTypes.object,
   setNavBar: PropTypes.func.isRequired,

@@ -2,8 +2,12 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
-import { Button, WhiteSpace, WingBlank, Card, Grid } from 'antd-mobile'
-import { setNavBar, getTeamsByUserRequest } from '../../../actions'
+import { Button, WhiteSpace, WingBlank, Card, Grid, Modal } from 'antd-mobile'
+import {
+  setNavBar,
+  getMyTeamsRequest,
+  deleteTeamRequest
+} from '../../../actions'
 import { MyActivityIndicator } from '../../../components'
 import { getPosition } from '../../../utils/utils'
 import config from '../../../config'
@@ -11,18 +15,38 @@ import config from '../../../config'
 import styles from './style.css'
 
 class AccountTeams extends Component {
+  constructor(props) {
+    super(props)
+    this.onCreateTeam = this.onCreateTeam.bind(this)
+    this.onRemoveTeam = this.onRemoveTeam.bind(this)
+  }
+
+  onCreateTeam() {
+    this.props.navigateTo('/account/myteams/create')
+  }
+
+  onRemoveTeam(id) {
+    
+    Modal.alert('警告', '是否解散该队伍？', [
+      { text: '取消', onPress: () => console.log('cancel') },
+      { text: '确定', onPress: () => this.props.deleteTeam({ teamid: id }) }
+    ])
+  }
+
   componentDidMount() {
-    this.props.setNavBar({ title: '所在战队', isCanBack: true })
-    this.props.getTeamsByUser()
+    this.props.setNavBar({ title: '我的战队', isCanBack: true })
+    if (this.props.teams.length === 0) {
+      this.props.getMyTeams()
+    }
   }
 
   render() {
-    const { userteams, app, navigateTo } = this.props
+    const { teams, app, navigateTo } = this.props
     return (
       <div>
         <MyActivityIndicator isFetching={app.isFetching} text={app.text} />
         <WingBlank>
-          {userteams.map(function(item, index) {
+          {teams.map(function(item, index) {
             return (
               <div key={index}>
                 <WhiteSpace />
@@ -35,6 +59,18 @@ class AccountTeams extends Component {
                       item.chineseName
                     }
                     thumb={item.avatar}
+                    extra={
+                      <Button
+                        onClick={() => {
+                          navigateTo('/account/myteams/edit/' + item.objectId)
+                        }}
+                        type="ghost"
+                        size="small"
+                        inline
+                      >
+                        编辑
+                      </Button>
+                    }
                   />
                   <Card.Body>
                     <Grid
@@ -88,12 +124,29 @@ class AccountTeams extends Component {
                       )}
                     />
                   </Card.Body>
+                  <Card.Footer
+                    extra={
+                      <Button
+                        onClick={this.onRemoveTeam.bind(this, item.objectId)}
+                        type="warning"
+                        size="small"
+                        inline
+                      >
+                        战队解散
+                      </Button>
+                    }
+                  />
                 </Card>
               </div>
             )
-          })}
+          }, this)}
         </WingBlank>
         <WhiteSpace />
+        <WingBlank>
+          <Button onClick={this.onCreateTeam} type="primary">
+            新 建 战 队
+          </Button>
+        </WingBlank>
       </div>
     )
   }
@@ -102,14 +155,17 @@ class AccountTeams extends Component {
 const mapStateToProps = (state, ownProps) => {
   return {
     app: state.root.app,
-    userteams: state.root.userteams.list
+    teams: state.root.team.account.team.myTeams
   }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    getTeamsByUser: () => {
-      dispatch(getTeamsByUserRequest({ t: 0 }))
+    getMyTeams: () => {
+      dispatch(getMyTeamsRequest())
+    },
+    deleteTeam: payload => {
+      dispatch(deleteTeamRequest(payload))
     },
     setNavBar: payload => {
       dispatch(
@@ -124,8 +180,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 
 AccountTeams.propTypes = {
   app: PropTypes.object.isRequired,
-  userteams: PropTypes.array,
-  getTeamsByUser: PropTypes.func.isRequired,
+  teams: PropTypes.array,
+  getMyTeams: PropTypes.func.isRequired,
   navigateTo: PropTypes.func.isRequired,
   setNavBar: PropTypes.func.isRequired
 }

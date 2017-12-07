@@ -10,11 +10,11 @@ import HomeUserDetail from './Home/Users/Detail'
 import HomeTeams from './Home/Teams'
 import HomeTeamDetail from './Home/Teams/Detail'
 import AccountMime from './Account/Mime'
-import AccountTeams from './Account/Teams'
-import AccountTeamsCreate from './Account/Teams/Create'
-import AccountTeamsEdit from './Account/Teams/Edit'
-import AccountMembersDetail from './Account/Members/Detail'
-import AccountTeamsIn from './Account/TeamIn'
+import AccountMyTeams from './Account/MyTeams'
+import AccountMyTeamsCreate from './Account/MyTeams/Create'
+import AccountMyTeamsEdit from './Account/MyTeams/Edit'
+import AccountInTeams from './Account/InTeams'
+import AccountMemberDetail from './Account/MyTeams/Member/Detail'
 
 export {
   Root,
@@ -29,9 +29,9 @@ export {
   HomeTeams,
   HomeTeamDetail,
   AccountMime,
-  AccountTeams,
-  AccountTeamsCreate,
-  AccountTeamsEdit,
-  AccountMembersDetail,
-  AccountTeamsIn
+  AccountMyTeams,
+  AccountMyTeamsCreate,
+  AccountMyTeamsEdit,
+  AccountInTeams,
+  AccountMemberDetail,
 }

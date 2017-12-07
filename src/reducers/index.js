@@ -3,8 +3,7 @@ import { articlesReducer, stickyArticlesReducer } from './articles'
 import { userReducer } from './user'
 import { appReducer } from './app'
 import navbarReducer from './navbar'
-import { userTeamsReducer } from './userteams'
-import { teamsReducer } from './home/teams'
+import { teamReducer } from './team'
 
 const rootReducer = combineReducers({
   app: appReducer,
@@ -12,8 +11,7 @@ const rootReducer = combineReducers({
   articles: articlesReducer,
   sticky: stickyArticlesReducer,
   navbar: navbarReducer,
-  userteams: userTeamsReducer,
-  teams: teamsReducer
+  team: teamReducer,
 })
 
 export default rootReducer

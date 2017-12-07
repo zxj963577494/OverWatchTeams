@@ -33,9 +33,12 @@ import {
   PUT_TEAMS_REQUEST,
   PUT_TEAMS_SUCCESS,
   PUT_TEAMS_FAILED,
-  GET_USER_TEAMS_REQUEST,
-  GET_USER_TEAMS_SUCCESS,
-  GET_USER_TEAMS_FAILED,
+  GET_MY_TEAMS_REQUEST,
+  GET_MY_TEAMS_SUCCESS,
+  GET_MY_TEAMS_FAILED,
+  GET_IN_TEAMS_REQUEST,
+  GET_IN_TEAMS_SUCCESS,
+  GET_IN_TEAMS_FAILED,
   DELETE_TEAM_MEMBER_REQUEST,
   DELETE_TEAM_MEMBER_SUCCESS,
   DELETE_TEAM_MEMBER_FAILED,
@@ -192,16 +195,28 @@ export const putTeamsFailed = function(payload) {
   return { type: PUT_TEAMS_FAILED, payload }
 }
 
-export const getTeamsByUserRequest = function(payload) {
-  return { type: GET_USER_TEAMS_REQUEST, payload }
+export const getMyTeamsRequest = function() {
+  return { type: GET_MY_TEAMS_REQUEST }
 }
 
-export const getTeamsByUserSuccess = function(payload) {
-  return { type: GET_USER_TEAMS_SUCCESS, payload }
+export const getMyTeamsSuccess = function(payload) {
+  return { type: GET_MY_TEAMS_SUCCESS, payload }
 }
 
-export const getTeamsByUserFailed = function(payload) {
-  return { type: GET_USER_TEAMS_FAILED, payload }
+export const getMyTeamsFailed = function(payload) {
+  return { type: GET_MY_TEAMS_FAILED, payload }
+}
+
+export const getInTeamsRequest = function() {
+  return { type: GET_IN_TEAMS_REQUEST }
+}
+
+export const getInTeamsSuccess = function(payload) {
+  return { type: GET_IN_TEAMS_SUCCESS, payload }
+}
+
+export const getInTeamsFailed = function(payload) {
+  return { type: GET_IN_TEAMS_FAILED, payload }
 }
 
 export const deleteTeamMemberRequest = function(payload) {

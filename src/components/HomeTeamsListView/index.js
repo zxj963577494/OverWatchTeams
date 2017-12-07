@@ -11,10 +11,10 @@ export default class HomeTeamsListView extends Component {
   }
 
   onEndReached = event => {
-    if (this.props.teams.isFetching || !this.props.teams.isLoadMore) {
+    if (this.props.team.isFetching || !this.props.team.isLoadMore) {
       return
     }
-    const page = this.props.teams.page + 1
+    const page = this.props.team.page + 1
     this.props.getHomeTeams({ page: page })
   }
 
@@ -25,7 +25,7 @@ export default class HomeTeamsListView extends Component {
   render() {
     const dataSource = new ListView.DataSource({
       rowHasChanged: (row1, row2) => row1 !== row2
-    }).cloneWithRows(this.props.teams.list)
+    }).cloneWithRows(this.props.team.list)
     const separator = (sectionID, rowID) => (
       <WhiteSpace size="xs" key={`${rowID}`} />
     )
@@ -49,9 +49,7 @@ export default class HomeTeamsListView extends Component {
             />
             <Card.Body>
               <Flex>
-                <Flex.Item>
-                  {cutstr(rowData.introduction, 200, 0)}
-                </Flex.Item>
+                <Flex.Item>{cutstr(rowData.introduction, 200, 0)}</Flex.Item>
               </Flex>
               <WhiteSpace />
               {rowData.isRecruit ? (
@@ -74,7 +72,9 @@ export default class HomeTeamsListView extends Component {
                   <WhiteSpace />
                   <Flex>
                     <Flex.Item>
-                      战队地点：{rowData.createCity ? rowData.createCity : '暂无'}
+                      战队地点：{rowData.createCity
+                        ? rowData.createCity
+                        : '暂无'}
                     </Flex.Item>
                   </Flex>
                 </div>
@@ -87,7 +87,7 @@ export default class HomeTeamsListView extends Component {
     const fonter = () => {
       return (
         <div style={{ padding: 5, textAlign: 'center' }}>
-          {this.props.teams.isLoadMore ? '' : '到底了'}
+          {this.props.team.isLoadMore ? '' : '到底了'}
         </div>
       )
     }
@@ -108,7 +108,7 @@ export default class HomeTeamsListView extends Component {
         onEndReachedThreshold={100}
         pullToRefresh={
           <PullToRefresh
-            refreshing={this.props.teams.isRefreshing}
+            refreshing={this.props.team.isRefreshing}
             onRefresh={this.onRefresh}
           />
         }
@@ -118,7 +118,7 @@ export default class HomeTeamsListView extends Component {
 }
 
 HomeTeamsListView.propTypes = {
-  teams: PropTypes.object.isRequired,
+  team: PropTypes.object,
   navigateTo: PropTypes.func.isRequired,
   getHomeTeams: PropTypes.func.isRequired
 }

@@ -89,7 +89,7 @@ class Account extends Component {
             arrow="horizontal"
             onClick={() => {
               if (logined) {
-                navigateTo('/account/teams')
+                navigateTo('/account/myteams')
               } else {
                 Toast.info('请先登录', 1)
               }
@@ -101,7 +101,7 @@ class Account extends Component {
             arrow="horizontal"
             onClick={() => {
               if (logined) {
-                navigateTo('/account/teamsin')
+                navigateTo('/account/inteams')
               } else {
                 Toast.info('请先登录', 1)
               }

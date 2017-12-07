@@ -25,7 +25,7 @@ class HomeUserDetail extends Component {
       <div>
         <MyActivityIndicator
           isFetching={app.isFetching}
-          text={app.fetchingText}
+          text={app.text}
         />
         <WhiteSpace />
         <Result
@@ -141,7 +141,6 @@ HomeUserDetail.propTypes = {
   current: PropTypes.object,
   user: PropTypes.object,
   getUserById: PropTypes.func.isRequired,
-  navigateTo: PropTypes.func.isRequired,
   setNavBar: PropTypes.func.isRequired
 }
 

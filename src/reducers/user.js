@@ -69,7 +69,8 @@ function userReducer(state = initialUserState, action) {
     case POST_SIGNUP_SUCCESS:
       return {
         ...state,
-        home: { ...state.home, signupError: '' }
+        home: { ...state.home, loginError: '' },
+        account: { ...state.account, user: {} }
       }
     case POST_SIGNUP_FAILED:
       return {
