@@ -14,6 +14,7 @@ import { push } from 'react-router-redux'
 import _ from 'lodash'
 import { postLogoutRequest, setNavBar, getUserInfoRequest } from '../../actions'
 import config from '../../config'
+import { user } from '../../services/leanclound'
 
 class Account extends Component {
   constructor(props) {
@@ -25,7 +26,13 @@ class Account extends Component {
 
   componentDidMount() {
     this.props.setNavBar({ title: '个人中心', isCanBack: false })
-    if (_.isEmpty(this.props.account.user)) {
+    // if (_.isEmpty(this.props.account.user)) {
+    //   this.setState({
+    //     logined: true
+    //   })
+    // }
+    const users = user.getCurrentUser()
+    if (!_.isEmpty(users)) {
       this.setState({
         logined: true
       })

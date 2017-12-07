@@ -90,19 +90,7 @@ export function cerateTeam(payload) {
   userTeamMap.setACL(acl)
 
   return userTeamMap.save().then(function(result) {
-    const user = getCurrentUser()
-    user.equalTo('objectId', user.id)
-    user.include('userinfo')
-    return user.first().then(function(result) {
-      const userinfo = result.get('userinfo')
-      const r = members.splice(0, 1, {
-        objectId: user.id,
-        avatar: userinfo.get('avatar'),
-        nickname: userinfo.get('nickname'),
-        leader: true
-      })
-      return { ...result.get('team').toJSON(), members: r }
-    })
+    return result.get('team').toJSON()
   })
 }
 
@@ -230,7 +218,7 @@ export function removeTeam(payload) {
       const cql = 'delete from UserTeamMap where objectId=?'
       const pvalues = [UserTeamMap.id]
       return AV.Query.doCloudQuery(cql, pvalues).then(function(result) {
-        return { objectId: pvalues }
+        return { objectId: teamid }
       })
     } else {
       throw new Error('您不是战队管理者，无法执行该操作')
