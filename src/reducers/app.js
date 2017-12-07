@@ -2,11 +2,15 @@ import {
   FETCH_REQUEST,
   FETCH_SUCCESS,
   FETCH_FAILED,
+  POST_UPLOAD_REQUEST,
+  POST_UPLOAD_SUCCESS,
+  POST_UPLOAD_FAILED
 } from '../constants/actionTypes'
 
 const initialAppState = {
   isFetching: false,
   text: '',
+  file: {}
 }
 
 function appReducer(state = initialAppState, action) {
@@ -27,6 +31,12 @@ function appReducer(state = initialAppState, action) {
         ...state,
         isFetching: false
       }
+    case POST_UPLOAD_REQUEST:
+      return state
+    case POST_UPLOAD_SUCCESS:
+      return { ...state, file: action.payload }
+    case POST_UPLOAD_FAILED:
+      return state
     default:
       return state
   }

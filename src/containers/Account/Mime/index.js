@@ -36,7 +36,7 @@ class AccountMime extends Component {
       contact: props.userinfo.contact,
       introduction: props.userinfo.introduction,
       match: props.userinfo.match,
-      files: props.userinfo.files,
+      files: [{ url: props.userinfo.avatar }],
       avatar: props.userinfo.avatar,
       heros: props.userinfo.heros ? props.userinfo.heros : HEROS,
       rank: props.userinfo.rank,
@@ -155,7 +155,7 @@ class AccountMime extends Component {
   }
 
   onSubmit = () => {
-    const { common, putUserInfo, form } = this.props
+    const { app, putUserInfo, form } = this.props
     form.validateFields((error, value) => {
       if (!error) {
         putUserInfo({
@@ -164,7 +164,7 @@ class AccountMime extends Component {
           position: this.state.position,
           contact: this.state.contact,
           introduction: this.state.introduction,
-          avatar: common.file || this.state.avatar,
+          avatar: app.file.url || this.state.avatar,
           heros: this.state.heros.filter(item => {
             return item.checked === true
           }),
@@ -449,7 +449,6 @@ class AccountMime extends Component {
 const mapStateToProps = (state, ownProps) => {
   return {
     app: state.root.app,
-    common: state.root.common,
     userinfo: state.root.userinfo
   }
 }

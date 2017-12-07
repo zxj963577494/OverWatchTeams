@@ -3,7 +3,6 @@ import { articlesReducer, stickyArticlesReducer } from './articles'
 import { userReducer } from './user'
 import { userInfoReducer } from './userinfo'
 import { appReducer } from './app'
-import { commonReducer } from './common'
 import navbarReducer from './navbar'
 import { userTeamsReducer } from './userteams'
 import { membersReducer } from './home/members'
@@ -16,7 +15,6 @@ const rootReducer = combineReducers({
   articles: articlesReducer,
   sticky: stickyArticlesReducer,
   navbar: navbarReducer,
-  common: commonReducer,
   members: membersReducer,
   userteams: userTeamsReducer,
   teams: teamsReducer

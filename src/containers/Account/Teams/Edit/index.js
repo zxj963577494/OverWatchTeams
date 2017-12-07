@@ -147,7 +147,7 @@ class AccountTeamsEdit extends Component {
   }
 
   onSubmit() {
-    const { common, putTeam, form } = this.props
+    const { app, putTeam, form } = this.props
     form.validateFields((error, value) => {
       if (!error) {
         putTeam({
@@ -159,7 +159,7 @@ class AccountTeamsEdit extends Component {
           slogan: this.state.slogan,
           introduction: this.state.introduction,
           rank: this.state.rank,
-          avatar: common.file || this.state.avatar,
+          avatar: app.file.url || this.state.avatar,
           createDate: this.state.createDate,
           createCity: this.state.createCity,
           contact: this.state.contact,
@@ -462,7 +462,6 @@ class AccountTeamsEdit extends Component {
 const mapStateToProps = (state, ownProps) => {
   return {
     app: state.root.app,
-    common: state.root.common,
     currentTeam: state.root.userteams.list.filter(
       x => x.objectId === ownProps.match.params.id
     )[0]
@@ -490,7 +489,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 
 AccountTeamsEdit.propTypes = {
   app: PropTypes.object.isRequired,
-  common: PropTypes.object,
   currentTeam: PropTypes.object,
   postUpload: PropTypes.func.isRequired,
   putTeam: PropTypes.func.isRequired,

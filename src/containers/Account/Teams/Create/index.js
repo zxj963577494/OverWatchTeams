@@ -141,7 +141,7 @@ class AccountTeamsCreate extends Component {
   }
 
   onSubmit() {
-    const { common, postTeam, form } = this.props
+    const { app, postTeam, form } = this.props
     form.validateFields((error, value) => {
       if (!error) {
         postTeam({
@@ -152,7 +152,7 @@ class AccountTeamsCreate extends Component {
           slogan: this.state.slogan,
           introduction: this.state.introduction,
           rank: this.state.rank,
-          avatar: common.file || this.state.avatar,
+          avatar: app.file.url || this.state.avatar,
           createDate: this.state.createDate,
           createCity: this.state.createCity,
           contact: this.state.contact,
@@ -448,7 +448,6 @@ class AccountTeamsCreate extends Component {
 const mapStateToProps = (state, ownProps) => {
   return {
     app: state.root.app,
-    common: state.root.common
   }
 }
 
@@ -470,7 +469,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 
 AccountTeamsCreate.propTypes = {
   app: PropTypes.object.isRequired,
-  common: PropTypes.object,
   postUpload: PropTypes.func.isRequired,
   postTeam: PropTypes.func.isRequired,
   form: PropTypes.object

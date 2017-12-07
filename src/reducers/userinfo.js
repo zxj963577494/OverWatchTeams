@@ -53,7 +53,6 @@ function userInfoReducer(state = initialUserInfoState, action) {
         keyboard: action.payload.keyboard,
         headphones: action.payload.headphones,
         isPublic: action.payload.isPublic,
-        files: [{ url: action.payload.avatar }],
         heros: merge(HEROS, action.payload.heros)
       }
     case GET_USERINFO_FAILED:
