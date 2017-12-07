@@ -11,26 +11,27 @@ import {
   Toast
 } from 'antd-mobile'
 import { push } from 'react-router-redux'
+import _ from 'lodash'
 import { postLogoutRequest, setNavBar, getUserInfoRequest } from '../../actions'
-import { user } from '../../services/leanclound'
 import config from '../../config'
 
 class Account extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      logined: null
+      logined: false
     }
   }
 
   componentDidMount() {
-    const users = user.getCurrentUser()
     this.props.setNavBar({ title: '个人中心', isCanBack: false })
-    if (users) {
-      this.props.getUserInfo()
+    if (_.isEmpty(this.props.account.user)) {
       this.setState({
-        logined: users
+        logined: true
       })
+    }
+    if (!this.props.account.userinfo.isLoaded) {
+      this.props.getUserInfo()
     }
   }
 
@@ -48,9 +49,9 @@ class Account extends Component {
               style={{ borderRadius: '50%' }}
               src={
                 logined
-                  ? (userinfo.avatar
+                  ? userinfo.avatar
                     ? userinfo.avatar
-                    : config.BASE_DEFAULT_PIC_URL)
+                    : config.BASE_DEFAULT_PIC_URL
                   : config.BASE_DEFAULT_PIC_URL
               }
               onClick={() => navigateTo('/login')}
@@ -128,8 +129,8 @@ class Account extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    user: state.root.user,
-    userinfo: state.root.userinfo
+    account: state.root.user.account,
+    userinfo: state.root.user.account.userinfo
   }
 }
 
@@ -153,7 +154,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 }
 
 Account.propTypes = {
-  user: PropTypes.object.isRequired
+  account: PropTypes.object.isRequired,
+  userinfo: PropTypes.object
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Account)

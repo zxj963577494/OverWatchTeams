@@ -299,7 +299,7 @@ class AccountMime extends Component {
               {introductionErrors ? introductionErrors.join(',') : null}
             </Flex>
           </List>
-          <List renderHeader={() => '个人比赛经历'}>
+          <List renderHeader={() => '比赛经历'}>
             <TextareaItem
               {...getFieldProps('match', {
                 onChange: this.onMatchChange,
@@ -308,13 +308,13 @@ class AccountMime extends Component {
                     type: 'string',
                     min: 4,
                     max: 100,
-                    message: '个人比赛经历:4-100个字符'
+                    message: '比赛经历:4-100个字符'
                   }
                 ]
               })}
               rows={3}
               labelNumber={5}
-              placeholder="个人比赛经历，包括OWOD、战队训练赛等其它任何比赛经历"
+              placeholder="比赛经历，包括OWOD、战队训练赛等其它任何比赛经历"
               value={this.state.match}
             />
             <Flex className="error">
@@ -449,7 +449,7 @@ class AccountMime extends Component {
 const mapStateToProps = (state, ownProps) => {
   return {
     app: state.root.app,
-    userinfo: state.root.userinfo
+    userinfo: state.root.user.account.userinfo
   }
 }
 

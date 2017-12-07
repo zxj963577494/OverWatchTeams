@@ -21,7 +21,9 @@ export function signUp(payload) {
       userinfo.set('isPublic', true)
       userinfo.set('introduction', '这个世界需要更多的英雄')
       loginedUser.set('userinfo', userinfo)
-      return loginedUser.save()
+      return loginedUser.save().then(function(result) {
+        return result.toJSON()
+      })
     }
   })
 }
@@ -38,7 +40,9 @@ export function signUpOrlogInWithAuthData(payload) {}
 // 用户名和密码登录
 export function logIn(payload) {
   const { username, password } = payload
-  return AV.User.logIn(username, password)
+  return AV.User.logIn(username, password).then(function(result) {
+    return result.toJSON()
+  })
 }
 
 // 手机号和密码登录
@@ -103,9 +107,12 @@ export function putUserInfo(payload) {
       userinfo.set(key, payload[key])
     }
   }
-  return userinfo.save()
+  return userinfo.save().then(function(result) {
+    return result.toJSON()
+  })
 }
 
+// 获取会员信息信息
 export function getUserInfo() {
   const current = AV.User.current()
   const user = new AV.Query('_User')
@@ -118,7 +125,7 @@ export function getUserInfo() {
 }
 
 // 获取会员信息列表
-export function getHomeMemberList(payload) {
+export function getHomeUserList(payload) {
   let list = []
   let { page, pagesize } = payload
   pagesize = pagesize || 20
@@ -139,7 +146,7 @@ export function getHomeMemberList(payload) {
 }
 
 // 获取会员详细信息
-export function getHomeMemberDetail(payload) {
+export function getHomeUserDetail(payload) {
   const { objectId } = payload
   const user = new AV.Query('_User')
   user.equalTo('objectId', objectId)

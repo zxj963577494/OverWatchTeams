@@ -59,7 +59,7 @@ class SignUp extends Component {
 
   render() {
     const { getFieldProps, getFieldError } = this.props.form
-    const { app, user, goBack } = this.props
+    const { app, user_home, goBack } = this.props
     const usernameErrors = getFieldError('username')
     const passwordErrors = getFieldError('password')
     const emailErrors = getFieldError('email')
@@ -74,11 +74,10 @@ class SignUp extends Component {
         </NavBar>
         <WhiteSpace />
         <form>
-          <MyActivityIndicator isFetching={app.isFetching} text={app.text}/>
+          <MyActivityIndicator isFetching={app.isFetching} text={app.text} />
           <InputItem
             {...getFieldProps('username', {
               onChange: this.onUserNameChange,
-              validateFirst: true,
               rules: [
                 {
                   type: 'string',
@@ -100,7 +99,6 @@ class SignUp extends Component {
             type="password"
             {...getFieldProps('password', {
               onChange: this.onPasswordChange,
-              validateFirst: true,
               rules: [
                 {
                   type: 'string',
@@ -122,7 +120,6 @@ class SignUp extends Component {
             type="email"
             {...getFieldProps('email', {
               onChange: this.onEmailChange,
-              validateFirst: true,
               rules: [
                 { type: 'email', required: true, message: '邮箱格式不正确' }
               ]
@@ -143,7 +140,9 @@ class SignUp extends Component {
             </Button>
           </WingBlank>
           <WhiteSpace />
-          <Flex className="error">{user ? user.signupError : null}</Flex>
+          <Flex className="error">
+            {user_home ? user_home.signupError : null}
+          </Flex>
         </form>
       </div>
     )
@@ -153,7 +152,7 @@ class SignUp extends Component {
 const mapStateToProps = (state, ownProps) => {
   return {
     app: state.root.app,
-    user: state.root.user
+    user_home: state.root.user.home
   }
 }
 
@@ -170,7 +169,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 
 SignUp.propTypes = {
   app: PropTypes.object.isRequired,
-  user: PropTypes.object.isRequired,
+  user_home: PropTypes.object.isRequired,
   postSignUp: PropTypes.func.isRequired,
   form: PropTypes.object
 }

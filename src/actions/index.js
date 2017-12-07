@@ -42,12 +42,12 @@ import {
   DELETE_TEAM_REQUEST,
   DELETE_TEAM_SUCCESS,
   DELETE_TEAM_FAILED,
-  GET_HOME_MEMBER_DETAIL_REQUEST,
-  GET_HOME_MEMBER_DETAIL_SUCCESS,
-  GET_HOME_MEMBER_DETAIL_FAILED,
-  GET_HOME_MEMBER_LIST_REQUEST,
-  GET_HOME_MEMBER_LIST_SUCCESS,
-  GET_HOME_MEMBER_LIST_FAILED,
+  GET_HOME_USER_DETAIL_REQUEST,
+  GET_HOME_USER_DETAIL_SUCCESS,
+  GET_HOME_USER_DETAIL_FAILED,
+  GET_HOME_USER_LIST_REQUEST,
+  GET_HOME_USER_LIST_SUCCESS,
+  GET_HOME_USER_LIST_FAILED,
   GET_HOME_TEAM_DETAIL_REQUEST,
   GET_HOME_TEAM_DETAIL_SUCCESS,
   GET_HOME_TEAM_DETAIL_FAILED,
@@ -228,28 +228,28 @@ export const deleteTeamFailed = function(payload) {
   return { type: DELETE_TEAM_FAILED, payload }
 }
 
-export const getHomeMemberDetailRequest = function(payload) {
-  return { type: GET_HOME_MEMBER_DETAIL_REQUEST, payload }
+export const getHomeUserDetailRequest = function(payload) {
+  return { type: GET_HOME_USER_DETAIL_REQUEST, payload }
 }
 
-export const getHomeMemberDetailSuccess = function(payload) {
-  return { type: GET_HOME_MEMBER_DETAIL_SUCCESS, payload }
+export const getHomeUserDetailSuccess = function(payload) {
+  return { type: GET_HOME_USER_DETAIL_SUCCESS, payload }
 }
 
-export const getHomeMemberDetailFailed = function(payload) {
-  return { type: GET_HOME_MEMBER_DETAIL_FAILED, payload }
+export const getHomeUserDetailFailed = function(payload) {
+  return { type: GET_HOME_USER_DETAIL_FAILED, payload }
 }
 
-export const getHomeMemberListRequest = function(payload) {
-  return { type: GET_HOME_MEMBER_LIST_REQUEST, payload }
+export const getHomeUserListRequest = function(payload) {
+  return { type: GET_HOME_USER_LIST_REQUEST, payload }
 }
 
-export const getHomeMemberListSuccess = function(payload) {
-  return { type: GET_HOME_MEMBER_LIST_SUCCESS, payload }
+export const getHomeUserListSuccess = function(payload) {
+  return { type: GET_HOME_USER_LIST_SUCCESS, payload }
 }
 
-export const getHomeMemberListFailed = function(payload) {
-  return { type: GET_HOME_MEMBER_LIST_FAILED, payload }
+export const getHomeUserListFailed = function(payload) {
+  return { type: GET_HOME_USER_LIST_FAILED, payload }
 }
 
 export const getHomeTeamDetailRequest = function(payload) {

@@ -55,7 +55,7 @@ class Login extends Component {
 
   render() {
     const { getFieldProps, getFieldError } = this.props.form
-    const { app, user, goBack } = this.props
+    const { app, user_home, goBack } = this.props
     const usernameErrors = getFieldError('username')
     const passwordErrors = getFieldError('password')
     return (
@@ -130,7 +130,9 @@ class Login extends Component {
             </Flex>
           </WingBlank>
           <WhiteSpace />
-          <Flex className="error">{user ? user.loginError : null}</Flex>
+          <Flex className="error">
+            {user_home ? user_home.loginError : null}
+          </Flex>
         </form>
       </div>
     )
@@ -140,7 +142,7 @@ class Login extends Component {
 const mapStateToProps = (state, ownProps) => {
   return {
     app: state.root.app,
-    user: state.root.user
+    user_home: state.root.user.home
   }
 }
 
@@ -160,7 +162,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 
 Login.propTypes = {
   app: PropTypes.object.isRequired,
-  user: PropTypes.object.isRequired,
+  user_home: PropTypes.object.isRequired,
   postLogin: PropTypes.func.isRequired,
   navigateTo: PropTypes.func.isRequired,
   form: PropTypes.object

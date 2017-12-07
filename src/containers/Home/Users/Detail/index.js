@@ -3,23 +3,23 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { WhiteSpace, List, Result } from 'antd-mobile'
 import { RANKS, TEAMPOSITIONS } from '../../../../constants'
-import { setNavBar, getHomeMemberDetailRequest } from '../../../../actions'
+import { setNavBar, getHomeUserDetailRequest } from '../../../../actions'
 import config from '../../../../config'
 import { MyActivityIndicator } from '../../../../components'
 
-class HomeMemberDetail extends Component {
+class HomeUserDetail extends Component {
   componentDidMount() {
     this.props.setNavBar({ title: '个人详情', isCanBack: true })
-    if (!this.props.member) {
+    if (!this.props.user) {
       const id = this.props.match.params.id
-      this.props.getMemberById({ objectId: id })
+      this.props.getUserById({ objectId: id })
     }
   }
 
   render() {
-    let { member, current, app } = this.props
-    if (member == null && current != null) {
-      member = current
+    let { user, current, app } = this.props
+    if (user == null && current != null) {
+      user = current
     }
     return (
       <div>
@@ -34,24 +34,22 @@ class HomeMemberDetail extends Component {
               width="60px"
               height="60px"
               style={{ borderRadius: '50%' }}
-              src={member.avatar ? member.avatar : config.BASE_DEFAULT_PIC_URL}
-              alt={member.nickname}
+              src={user.avatar ? user.avatar : config.BASE_DEFAULT_PIC_URL}
+              alt={user.nickname}
             />
           }
-          title={member.nickname}
-          message={member.introduction}
+          title={user.nickname}
+          message={user.introduction}
         />
         <WhiteSpace />
         <List>
-          <List.Item
-            extra={member.rankscore ? member.rankscore + '分' : '未知'}
-          >
+          <List.Item extra={user.rankscore ? user.rankscore + '分' : '未知'}>
             天梯分
           </List.Item>
           <List.Item
             extra={
-              member.rank
-                ? RANKS.filter(x => x.value === member.rank)[0].label
+              user.rank
+                ? RANKS.filter(x => x.value === user.rank)[0].label
                 : '未知'
             }
           >
@@ -61,9 +59,8 @@ class HomeMemberDetail extends Component {
         <List>
           <List.Item
             extra={
-              member.position
-                ? TEAMPOSITIONS.filter(x => x.value === member.position)[0]
-                    .label
+              user.position
+                ? TEAMPOSITIONS.filter(x => x.value === user.position)[0].label
                 : '未知'
             }
           >
@@ -72,8 +69,8 @@ class HomeMemberDetail extends Component {
         </List>
         <List renderHeader={() => '擅长英雄'}>
           <List.Item style={{ textAlign: 'center' }}>
-            {member.heros ? (
-              member.heros.map((item, index) => {
+            {user.heros ? (
+              user.heros.map((item, index) => {
                 return (
                   <img
                     key={index}
@@ -103,12 +100,12 @@ class HomeMemberDetail extends Component {
           </List.Item>
         </List>
         <List renderHeader={() => '个人比赛经历'}>
-          <List.Item wrap>{member.match}</List.Item>
+          <List.Item wrap>{user.match}</List.Item>
         </List>
         <List renderHeader={() => '其他'}>
-          <List.Item extra={member.mouse}>鼠标</List.Item>
-          <List.Item extra={member.keyboard}>键盘</List.Item>
-          <List.Item extra={member.headphones}>耳机</List.Item>
+          <List.Item extra={user.mouse}>鼠标</List.Item>
+          <List.Item extra={user.keyboard}>键盘</List.Item>
+          <List.Item extra={user.headphones}>耳机</List.Item>
         </List>
         <WhiteSpace />
       </div>
@@ -119,20 +116,17 @@ class HomeMemberDetail extends Component {
 const mapStateToProps = (state, ownProps) => {
   return {
     app: state.root.app,
-    current: state.root.members.current,
-    member:
-      state.root.members.list.length > 0
-        ? state.root.members.list.filter(
-            x => x.objectId === ownProps.match.params.id
-          )[0]
-        : null
+    current: state.root.user.home.user.current,
+    user: state.root.user.home.user.list.filter(
+      x => x.userid === ownProps.match.params.id
+    )[0]
   }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    getMemberById: payload => {
-      dispatch(getHomeMemberDetailRequest(payload))
+    getUserById: payload => {
+      dispatch(getHomeUserDetailRequest(payload))
     },
     setNavBar: payload => {
       dispatch(
@@ -142,6 +136,13 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   }
 }
 
-HomeMemberDetail.propTypes = {}
+HomeUserDetail.propTypes = {
+  app: PropTypes.object,
+  current: PropTypes.object,
+  user: PropTypes.object,
+  getUserById: PropTypes.func.isRequired,
+  navigateTo: PropTypes.func.isRequired,
+  setNavBar: PropTypes.func.isRequired
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomeMemberDetail)
+export default connect(mapStateToProps, mapDispatchToProps)(HomeUserDetail)

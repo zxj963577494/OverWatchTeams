@@ -10,7 +10,7 @@ import {
 } from 'antd-mobile'
 import { RANKS, TEAMPOSITIONS } from '../../constants'
 
-export default class HomeMemberListView extends Component {
+export default class HomeUserListView extends Component {
   constructor(props) {
     super(props)
     this.onEndReached = this.onEndReached.bind(this)
@@ -18,21 +18,21 @@ export default class HomeMemberListView extends Component {
   }
 
   onEndReached = event => {
-    if (this.props.members.isFetching || !this.props.members.isLoadMore) {
+    if (this.props.user.isFetching || !this.props.user.isLoadMore) {
       return
     }
-    const page = this.props.members.page + 1
-    this.props.getHomeMembers({ page: page })
+    const page = this.props.user.page + 1
+    this.props.getHomeUsers({ page: page })
   }
 
   onRefresh = () => {
-    this.props.getHomeMembers({ isRefreshing: true })
+    this.props.getHomeUsers({ isRefreshing: true })
   }
 
   render() {
     const dataSource = new ListView.DataSource({
       rowHasChanged: (row1, row2) => row1 !== row2
-    }).cloneWithRows(this.props.members.list)
+    }).cloneWithRows(this.props.user.list)
     const separator = (sectionID, rowID) => (
       <WhiteSpace size="xs" key={`${rowID}`} />
     )
@@ -40,7 +40,7 @@ export default class HomeMemberListView extends Component {
       return (
         <div
           onClick={() => {
-            this.props.navigateTo('/home/member/' + rowData.userid)
+            this.props.navigateTo('/home/user/' + rowData.userid)
           }}
           key={rowID}
         >
@@ -49,7 +49,7 @@ export default class HomeMemberListView extends Component {
             <Card.Body>
               <Flex>
                 <Flex.Item>
-                  天梯分：{rowData.rankscore
+                  天梯：{rowData.rankscore
                     ? rowData.rankscore + '分'
                     : '未知'}
                 </Flex.Item>
@@ -98,7 +98,7 @@ export default class HomeMemberListView extends Component {
     const fonter = () => {
       return (
         <div style={{ padding: 5, textAlign: 'center' }}>
-          {this.props.members.isFetching ? '' : '到底了'}
+          {this.props.user.isFetching ? '' : '到底了'}
         </div>
       )
     }
@@ -119,7 +119,7 @@ export default class HomeMemberListView extends Component {
         onEndReachedThreshold={100}
         pullToRefresh={
           <PullToRefresh
-            refreshing={this.props.members.isRefreshing}
+            refreshing={this.props.user.isRefreshing}
             onRefresh={this.onRefresh}
           />
         }
@@ -128,8 +128,8 @@ export default class HomeMemberListView extends Component {
   }
 }
 
-HomeMemberListView.propTypes = {
-  members: PropTypes.object.isRequired,
+HomeUserListView.propTypes = {
+  user: PropTypes.object.isRequired,
   navigateTo: PropTypes.func.isRequired,
-  getHomeMembers: PropTypes.func.isRequired
+  getHomeUsers: PropTypes.func.isRequired
 }

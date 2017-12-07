@@ -25,7 +25,7 @@ const data = [
     text: '组队上分'
   },
   {
-    url: '/home/members',
+    url: '/home/users',
     icon: config.BASE_PIC_URL + '/logo.png',
     text: '个人库'
   }
