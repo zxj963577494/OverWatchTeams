@@ -15,7 +15,7 @@ const data = [
     text: '战队'
   },
   {
-    url: '/home/teams',
+    url: '/home/recruitorders',
     icon: config.BASE_PIC_URL + '/logo.png',
     text: '招募令'
   },

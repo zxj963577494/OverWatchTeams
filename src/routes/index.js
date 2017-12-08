@@ -11,12 +11,15 @@ import {
   HomeUsers,
   HomeTeamDetail,
   HomeTeams,
+  HomeRecruitOrders,
   AccountMime,
   AccountMyTeams,
   AccountMyTeamsCreate,
   AccountMyTeamsEdit,
-  AccountInTeams,  
+  AccountInTeams,
   AccountMemberDetail,
+  AccountRecruitOrdersCreate,
+  AccountRecruitOrders
 } from '../containers'
 
 export default (history, navbar) => {
@@ -28,15 +31,26 @@ export default (history, navbar) => {
           <Route exec path="/signup" component={SignUp} />
           <App history={history}>
             <Switch>
-              <Route exec path="/home/team/:id" component={HomeTeamDetail} />
-              <Route exec path="/home/teams" component={HomeTeams} />
               <Route
                 exec
-                path="/home/user/:id"
-                component={HomeUserDetail}
+                path="/home/recruitorders"
+                component={HomeRecruitOrders}
               />
+              <Route exec path="/home/team/:id" component={HomeTeamDetail} />
+              <Route exec path="/home/teams" component={HomeTeams} />
+              <Route exec path="/home/user/:id" component={HomeUserDetail} />
               <Route exec path="/home/users" component={HomeUsers} />
               <Route exec path="/home" component={Home} />
+              <Route
+                exec
+                path="/account/recruitorders/create"
+                component={AccountRecruitOrdersCreate}
+              />
+              <Route
+                exec
+                path="/account/recruitorders"
+                component={AccountRecruitOrders}
+              />
               <Route exec path="/account/mime" component={AccountMime} />
               <Route
                 exec

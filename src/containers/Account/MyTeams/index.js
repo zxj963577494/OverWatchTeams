@@ -26,7 +26,6 @@ class AccountTeams extends Component {
   }
 
   onRemoveTeam(id) {
-    
     Modal.alert('警告', '是否解散该队伍？', [
       { text: '取消', onPress: () => console.log('cancel') },
       { text: '确定', onPress: () => this.props.deleteTeam({ teamid: id }) }

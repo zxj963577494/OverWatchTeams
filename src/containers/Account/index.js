@@ -117,6 +117,58 @@ class Account extends Component {
             所在战队
           </List.Item>
         </List>
+        <List renderHeader={() => '战队招募令'}>
+          <List.Item
+            arrow="horizontal"
+            onClick={() => {
+              if (logined) {
+                navigateTo('/account/recruitorders/create')
+              } else {
+                Toast.info('请先登录', 1)
+              }
+            }}
+          >
+            发布招募令
+          </List.Item>
+          <List.Item
+            arrow="horizontal"
+            onClick={() => {
+              if (logined) {
+                navigateTo('/account/recruitorders')
+              } else {
+                Toast.info('请先登录', 1)
+              }
+            }}
+          >
+            我的招募令
+          </List.Item>
+        </List>
+        <List renderHeader={() => '组队英雄帖'}>
+          <List.Item
+            arrow="horizontal"
+            onClick={() => {
+              if (logined) {
+                navigateTo('/account/recruitadd')
+              } else {
+                Toast.info('请先登录', 1)
+              }
+            }}
+          >
+            发布英雄帖
+          </List.Item>
+          <List.Item
+            arrow="horizontal"
+            onClick={() => {
+              if (logined) {
+                navigateTo('/account/recruitlist')
+              } else {
+                Toast.info('请先登录', 1)
+              }
+            }}
+          >
+            我的英雄帖
+          </List.Item>
+        </List>
         <WhiteSpace />
         {logined ? (
           <WingBlank>

@@ -34,7 +34,7 @@ export default class HomeUserListView extends Component {
       rowHasChanged: (row1, row2) => row1 !== row2
     }).cloneWithRows(this.props.user.list)
     const separator = (sectionID, rowID) => (
-      <WhiteSpace size="xs" key={`${rowID}`} />
+      <WhiteSpace key={`${rowID}`} />
     )
     const row = (rowData, sectionID, rowID) => {
       return (

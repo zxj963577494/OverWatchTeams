@@ -280,7 +280,6 @@ class AccountMime extends Component {
             <TextareaItem
               {...getFieldProps('introduction', {
                 onChange: this.onIntroductionChange,
-                validateFirst: true,
                 rules: [
                   {
                     type: 'string',

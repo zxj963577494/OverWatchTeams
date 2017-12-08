@@ -68,7 +68,8 @@ function teamReducer(state = initialTeamState, action) {
           ...state.account,
           team: {
             ...state.account.team,
-            myTeams: state.account.team.myTeams.splice(0, 0, action.payload)
+            myTeams: state.account.team.myTeams.splice(0, 0, action.payload),
+            pending: false
           }
         }
       }

@@ -19,6 +19,11 @@ import {
 } from './teamsSaga'
 import { watchUpload } from './commonSaga'
 import { watchGetHomeUserList, watchGetHomeUserDetail } from './userSaga'
+import {
+  watchGetAccountRecruitOrderList,
+  watchGetHomeRecruitOrderList,
+  watchPostRecruitOrder
+} from './recruitOrderSaga'
 
 export default function* rootSaga() {
   yield all([
@@ -39,6 +44,9 @@ export default function* rootSaga() {
     fork(watchGetHomeTeamList),
     fork(watchGetHomeTeamDetail),
     fork(watchGetMyTeams),
-    fork(watchGetInTeams)
+    fork(watchGetInTeams),
+    fork(watchGetAccountRecruitOrderList),
+    fork(watchGetHomeRecruitOrderList),
+    fork(watchPostRecruitOrder)
   ])
 }

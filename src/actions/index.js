@@ -56,7 +56,22 @@ import {
   GET_HOME_TEAM_DETAIL_FAILED,
   GET_HOME_TEAM_LIST_REQUEST,
   GET_HOME_TEAM_LIST_SUCCESS,
-  GET_HOME_TEAM_LIST_FAILED
+  GET_HOME_TEAM_LIST_FAILED,
+  GET_HOME_RECRUIT_ORDER_LIST_REQUEST,
+  GET_HOME_RECRUIT_ORDER_LIST_SUCCESS,
+  GET_HOME_RECRUIT_ORDER_LIST_FAILED,
+  GET_ACCOUNT_RECRUIT_ORDER_LIST_REQUEST,
+  GET_ACCOUNT_RECRUIT_ORDER_LIST_SUCCESS,
+  GET_ACCOUNT_RECRUIT_ORDER_LIST_FAILED,
+  GET_RECRUIT_ORDER_DETAIL_REQUEST,
+  GET_RECRUIT_ORDER_DETAIL_SUCCESS,
+  GET_RECRUIT_ORDER_DETAIL_FAILED,
+  POST_RECRUIT_ORDER_REQUEST,
+  POST_RECRUIT_ORDER_SUCCESS,
+  POST_RECRUIT_ORDER_FAILED,
+  DELETE_RECRUIT_ORDER_REQUEST,
+  DELETE_RECRUIT_ORDER_SUCCESS,
+  DELETE_RECRUIT_ORDER_FAILED
 } from '../constants/actionTypes'
 
 export const getArticlesRequest = function(payload) {
@@ -289,4 +304,64 @@ export const getHomeTeamListSuccess = function(payload) {
 
 export const getHomeTeamListFailed = function(payload) {
   return { type: GET_HOME_TEAM_LIST_FAILED, payload }
+}
+
+export const getHomeRecruitOrderListRequest = function(payload) {
+  return { type: GET_HOME_RECRUIT_ORDER_LIST_REQUEST, payload }
+}
+
+export const getHomeRecruitOrderListSuccess = function(payload) {
+  return { type: GET_HOME_RECRUIT_ORDER_LIST_SUCCESS, payload }
+}
+
+export const getHomeRecruitOrderListFailed = function(payload) {
+  return { type: GET_HOME_RECRUIT_ORDER_LIST_FAILED, payload }
+}
+
+export const getAccountRecruitOrderListRequest = function(payload) {
+  return { type: GET_ACCOUNT_RECRUIT_ORDER_LIST_REQUEST, payload }
+}
+
+export const getAccountRecruitOrderListSuccess = function(payload) {
+  return { type: GET_ACCOUNT_RECRUIT_ORDER_LIST_SUCCESS, payload }
+}
+
+export const getAccountRecruitOrderListFailed = function(payload) {
+  return { type: GET_ACCOUNT_RECRUIT_ORDER_LIST_FAILED, payload }
+}
+
+export const getRecruitOrderDetailRequest = function(payload) {
+  return { type: GET_RECRUIT_ORDER_DETAIL_REQUEST, payload }
+}
+
+export const getRecruitOrderDetailSuccess = function(payload) {
+  return { type: GET_RECRUIT_ORDER_DETAIL_SUCCESS, payload }
+}
+
+export const getRecruitOrderDetailFailed = function(payload) {
+  return { type: GET_RECRUIT_ORDER_DETAIL_FAILED, payload }
+}
+
+export const postRecruitOrderRequest = function(payload) {
+  return { type: POST_RECRUIT_ORDER_REQUEST, payload }
+}
+
+export const postRecruitOrderSuccess = function(payload) {
+  return { type: POST_RECRUIT_ORDER_SUCCESS, payload }
+}
+
+export const postRecruitOrderFailed = function(payload) {
+  return { type: POST_RECRUIT_ORDER_FAILED, payload }
+}
+
+export const deleteRecruitOrderRequest = function(payload) {
+  return { type: DELETE_RECRUIT_ORDER_REQUEST, payload }
+}
+
+export const deleteRecruitOrderSuccess = function(payload) {
+  return { type: DELETE_RECRUIT_ORDER_SUCCESS, payload }
+}
+
+export const deleteRecruitOrderFailed = function(payload) {
+  return { type: DELETE_RECRUIT_ORDER_FAILED, payload }
 }
