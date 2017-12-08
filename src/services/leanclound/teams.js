@@ -118,7 +118,7 @@ export function getInTeams() {
   const user = getCurrentUser()
   const query = new AV.Query('UserTeamMap')
   query.equalTo('user', user)
-  query.equalTo('leader', true)
+  query.equalTo('leader', false)
   query.descending('createdAt')
   query.include('team')
   let result = []

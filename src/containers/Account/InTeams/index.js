@@ -13,7 +13,9 @@ import styles from './style.css'
 class AccountTeams extends Component {
   componentDidMount() {
     this.props.setNavBar({ title: '所在战队', isCanBack: true })
-    this.props.getTeamsByUser()
+    if (this.props.teams.length === 0) {
+      this.props.getInTeams()
+    }
   }
 
   render() {
@@ -102,14 +104,14 @@ class AccountTeams extends Component {
 const mapStateToProps = (state, ownProps) => {
   return {
     app: state.root.app,
-    teams: state.root.team.account.team.inTeam
+    teams: state.root.team.account.team.inTeams
   }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     getInTeams: () => {
-      dispatch(getInTeamsRequest({ t: 0 }))
+      dispatch(getInTeamsRequest())
     },
     setNavBar: payload => {
       dispatch(
