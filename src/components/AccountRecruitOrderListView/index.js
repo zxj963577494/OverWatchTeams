@@ -1,6 +1,13 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { ListView, PullToRefresh, Card, Flex, WhiteSpace } from 'antd-mobile'
+import {
+  ListView,
+  PullToRefresh,
+  Card,
+  Flex,
+  WhiteSpace,
+  Button
+} from 'antd-mobile'
 import TimeAgo from 'timeago-react'
 
 export default class AccountRecruitOrderListView extends Component {
@@ -37,8 +44,19 @@ export default class AccountRecruitOrderListView extends Component {
             <Card.Header
               title={rowData.title}
               thumb={rowData.team.avatar}
-              onClick={() =>
-                this.props.navigateTo(`/home/team/${rowData.team.objectId}`)
+              extra={
+                <Button
+                  onClick={() => {
+                    this.props.navigateTo(
+                      '/account/recruitorders/edit/' + rowData.objectId
+                    )
+                  }}
+                  type="ghost"
+                  size="small"
+                  inline
+                >
+                  编辑
+                </Button>
               }
             />
             <Card.Body>
@@ -78,7 +96,7 @@ export default class AccountRecruitOrderListView extends Component {
               }
               extra={
                 <div style={{ color: 'red' }}>
-                  截止日期:<TimeAgo datetime={rowData.endDate} locale="zh_CN" />
+                  截止日期：<TimeAgo datetime={rowData.endDate} locale="zh_CN" />
                 </div>
               }
             />

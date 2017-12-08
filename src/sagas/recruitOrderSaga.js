@@ -1,13 +1,12 @@
 import { put, fork, take, call } from 'redux-saga/effects'
 import { delay } from 'redux-saga'
 import { Toast } from 'antd-mobile'
-import { goBack, replace } from 'react-router-redux'
+import { replace } from 'react-router-redux'
 import {
   GET_HOME_RECRUIT_ORDER_LIST_REQUEST,
   GET_ACCOUNT_RECRUIT_ORDER_LIST_REQUEST,
-  GET_RECRUIT_ORDER_DETAIL_REQUEST,
   POST_RECRUIT_ORDER_REQUEST,
-  DELETE_RECRUIT_ORDER_REQUEST
+  PUT_RECRUIT_ORDER_REQUEST
 } from '../constants/actionTypes'
 import * as action from '../actions'
 import { recruitOrder } from '../services/leanclound'
@@ -20,9 +19,26 @@ function* postRecruitOrderWorker(payload) {
     yield put(action.fetchSuccess())
     Toast.success('提交成功', 1)
     yield delay(1000)
-    yield replace('/account/recruitorders')
+    yield put(replace('/account/recruitorders'))
   } catch (error) {
     yield put(action.postRecruitOrderFailed(error))
+    yield put(action.fetchFailed())
+    Toast.success('提交失败', 1)
+  }
+}
+
+function* putRecruitOrderWorker(payload) {
+  try {
+    yield put(action.fetchRequest({ text: '提交中' }))
+    const team = yield call(recruitOrder.getTeam, payload)
+    const response = yield call(recruitOrder.updateRecruitOrder, payload, team)
+    yield put(action.putRecruitOrderSuccess(response))
+    yield put(action.fetchSuccess())
+    Toast.success('提交成功', 1)
+    yield delay(1000)
+    yield put(replace('/account/recruitorders'))
+  } catch (error) {
+    yield put(action.putRecruitOrderFailed(error))
     yield put(action.fetchFailed())
     Toast.success('提交失败', 1)
   }
@@ -42,10 +58,7 @@ function* getAccountRecruitOrderListWorker(payload) {
 
 function* getHomeRecruitOrderListWorker(payload) {
   try {
-    const response = yield call(
-      recruitOrder.getHomeRecruitOrderList,
-      payload
-    )
+    const response = yield call(recruitOrder.getHomeRecruitOrderList, payload)
     yield put(action.getHomeRecruitOrderListSuccess(response))
   } catch (error) {
     yield put(action.getHomeRecruitOrderListFailed(error))
@@ -73,4 +86,16 @@ function* watchGetHomeRecruitOrderList() {
   }
 }
 
-export { watchGetHomeRecruitOrderList, watchPostRecruitOrder, watchGetAccountRecruitOrderList }
+function* watchPutRecruitOrder() {
+  while (true) {
+    const { payload } = yield take(PUT_RECRUIT_ORDER_REQUEST)
+    yield fork(putRecruitOrderWorker, payload)
+  }
+}
+
+export {
+  watchGetHomeRecruitOrderList,
+  watchPostRecruitOrder,
+  watchGetAccountRecruitOrderList,
+  watchPutRecruitOrder
+}

@@ -177,7 +177,15 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   }
 }
 
-AccountMemberDetail.propTypes = {}
+AccountMemberDetail.propTypes = {
+  userteams: PropTypes.object,
+  pickerTeam: PropTypes.object,
+  pickerMember: PropTypes.array,
+  deleteTeamMember: PropTypes.func.isRequired,
+  navigateTo: PropTypes.func.isRequired,
+  setNavBar: PropTypes.func.isRequired,
+  goBack: PropTypes.func.isRequired
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(
   AccountMemberDetail

@@ -25,6 +25,36 @@ export function cerateRecruitOrder(payload) {
   })
 }
 
+export function getTeam(payload) {
+  const team = new AV.Query('Teams')
+  team.equalTo('objectId', payload.teamid)
+  return team.first().then(function(result) {
+    return result
+  })
+}
+
+export function updateRecruitOrder(payload, team) {
+  const user = getCurrentUser()
+  const recruitOrders = AV.Object.createWithoutData(
+    'RecruitOrders',
+    payload.objectId
+  )
+  recruitOrders.set('title', payload.title)
+  recruitOrders.set('description', payload.description)
+  recruitOrders.set('contact', payload.contact)
+  const endDate = new Date(payload.endDate)
+  recruitOrders.set('endDate', endDate)
+  recruitOrders.set('user', user)
+  recruitOrders.set('team', team)
+
+  return recruitOrders.save().then(function(result) {
+    return {
+      ...result.toJSON(),
+      team: team.toJSON()
+    }
+  })
+}
+
 export function getAccountRecruitOrderList(payload) {
   let list = []
   let { page, pagesize } = payload

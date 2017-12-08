@@ -16,6 +16,7 @@ import AccountMyTeamsEdit from './Account/MyTeams/Edit'
 import AccountInTeams from './Account/InTeams'
 import AccountMemberDetail from './Account/MyTeams/Member/Detail'
 import AccountRecruitOrdersCreate from './Account/RecruitOrders/Create'
+import AccountRecruitOrdersEdit from './Account/RecruitOrders/Edit'
 import AccountRecruitOrders from './Account/RecruitOrders'
 import HomeRecruitOrders from './Home/RecruitOrders'
 
@@ -39,5 +40,6 @@ export {
   AccountInTeams,
   AccountMemberDetail,
   AccountRecruitOrdersCreate,
+  AccountRecruitOrdersEdit,
   AccountRecruitOrders
 }

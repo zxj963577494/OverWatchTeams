@@ -11,6 +11,9 @@ import {
   POST_RECRUIT_ORDER_REQUEST,
   POST_RECRUIT_ORDER_SUCCESS,
   POST_RECRUIT_ORDER_FAILED,
+  PUT_RECRUIT_ORDER_REQUEST,
+  PUT_RECRUIT_ORDER_SUCCESS,
+  PUT_RECRUIT_ORDER_FAILED,
   DELETE_RECRUIT_ORDER_REQUEST,
   DELETE_RECRUIT_ORDER_SUCCESS,
   DELETE_RECRUIT_ORDER_FAILED
@@ -148,6 +151,50 @@ function recruitOrderReducer(state = initialRecruitOrderState, action) {
         }
       }
     case POST_RECRUIT_ORDER_FAILED:
+      return {
+        ...state,
+        account: {
+          ...state.account,
+          recruitOrder: {
+            ...state.account.recruitOrder,
+            pending: false
+          }
+        }
+      }
+    case PUT_RECRUIT_ORDER_REQUEST:
+      return {
+        ...state,
+        account: {
+          ...state.account,
+          recruitOrder: {
+            ...state.account.recruitOrder,
+            pending: true
+          }
+        }
+      }
+    case PUT_RECRUIT_ORDER_SUCCESS:
+      const data = state.account.recruitOrder.list.map(item => {
+        if (item.objectId === action.payload.objectId) {
+          return {
+            ...item,
+            ...action.payload
+          }
+        } else {
+          return item
+        }
+      })
+      return {
+        ...state,
+        account: {
+          ...state.account,
+          recruitOrder: {
+            ...state.account.recruitOrder,
+            list: data,
+            pending: false
+          }
+        }
+      }
+    case PUT_RECRUIT_ORDER_FAILED:
       return {
         ...state,
         account: {

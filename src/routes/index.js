@@ -19,6 +19,7 @@ import {
   AccountInTeams,
   AccountMemberDetail,
   AccountRecruitOrdersCreate,
+  AccountRecruitOrdersEdit,
   AccountRecruitOrders
 } from '../containers'
 
@@ -45,6 +46,11 @@ export default (history, navbar) => {
                 exec
                 path="/account/recruitorders/create"
                 component={AccountRecruitOrdersCreate}
+              />
+              <Route
+                exec
+                path="/account/recruitorders/edit/:id"
+                component={AccountRecruitOrdersEdit}
               />
               <Route
                 exec

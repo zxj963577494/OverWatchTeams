@@ -22,7 +22,8 @@ import { watchGetHomeUserList, watchGetHomeUserDetail } from './userSaga'
 import {
   watchGetAccountRecruitOrderList,
   watchGetHomeRecruitOrderList,
-  watchPostRecruitOrder
+  watchPostRecruitOrder,
+  watchPutRecruitOrder
 } from './recruitOrderSaga'
 
 export default function* rootSaga() {
@@ -47,6 +48,7 @@ export default function* rootSaga() {
     fork(watchGetInTeams),
     fork(watchGetAccountRecruitOrderList),
     fork(watchGetHomeRecruitOrderList),
-    fork(watchPostRecruitOrder)
+    fork(watchPostRecruitOrder),
+    fork(watchPutRecruitOrder)
   ])
 }

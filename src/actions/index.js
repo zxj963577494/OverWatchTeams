@@ -69,6 +69,9 @@ import {
   POST_RECRUIT_ORDER_REQUEST,
   POST_RECRUIT_ORDER_SUCCESS,
   POST_RECRUIT_ORDER_FAILED,
+  PUT_RECRUIT_ORDER_REQUEST,
+  PUT_RECRUIT_ORDER_SUCCESS,
+  PUT_RECRUIT_ORDER_FAILED,
   DELETE_RECRUIT_ORDER_REQUEST,
   DELETE_RECRUIT_ORDER_SUCCESS,
   DELETE_RECRUIT_ORDER_FAILED
@@ -352,6 +355,18 @@ export const postRecruitOrderSuccess = function(payload) {
 
 export const postRecruitOrderFailed = function(payload) {
   return { type: POST_RECRUIT_ORDER_FAILED, payload }
+}
+
+export const putRecruitOrderRequest = function(payload) {
+  return { type: PUT_RECRUIT_ORDER_REQUEST, payload }
+}
+
+export const putRecruitOrderSuccess = function(payload) {
+  return { type: PUT_RECRUIT_ORDER_SUCCESS, payload }
+}
+
+export const putRecruitOrderFailed = function(payload) {
+  return { type: PUT_RECRUIT_ORDER_FAILED, payload }
 }
 
 export const deleteRecruitOrderRequest = function(payload) {

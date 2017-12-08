@@ -1,6 +1,6 @@
 import { put, fork, take, call } from 'redux-saga/effects'
 import { delay } from 'redux-saga'
-import { goBack, replace } from 'react-router-redux'
+import { goBack } from 'react-router-redux'
 import { Toast } from 'antd-mobile'
 import {
   POST_TEAMS_REQUEST,
