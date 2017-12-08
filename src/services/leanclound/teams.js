@@ -94,6 +94,83 @@ export function cerateTeam(payload) {
   })
 }
 
+// 1.获取我的战队
+export function getMyTeams() {
+  const user = getCurrentUser()
+  const query = new AV.Query('UserTeamMap')
+  query.equalTo('user', user)
+  query.equalTo('leader', true)
+  query.descending('createdAt')
+  query.include('team')
+  let result = []
+  return query.find().then(function(UserTeamMap) {
+    UserTeamMap.forEach(function(item, i, a) {
+      let teaminfo = item.get('team').toJSON()
+      teaminfo = { ...teaminfo, members: members }
+      result.push(teaminfo)
+    })
+    return result
+  })
+}
+
+// 1.获取我所在的战队
+export function getInTeams() {
+  const user = getCurrentUser()
+  const query = new AV.Query('UserTeamMap')
+  query.equalTo('user', user)
+  query.equalTo('leader', true)
+  query.descending('createdAt')
+  query.include('team')
+  let result = []
+  return query.find().then(function(UserTeamMap) {
+    UserTeamMap.forEach(function(item, i, a) {
+      let teaminfo = item.get('team').toJSON()
+      result.push(teaminfo)
+    })
+    return result
+  })
+}
+
+// 2.根据战队获取成员
+export function getTeamResult(payload) {
+  const promises = []
+  payload.forEach(function(item) {
+    promises.push(getUserInfoByTeam(item))
+  })
+  return Promise.all(promises).then(data => {
+    return data
+  })
+}
+
+// 3.获取队员信息
+function getUserInfoByTeam(payload) {
+  return new Promise(function(resolve) {
+    const query = new AV.Query('UserTeamMap')
+    const team = AV.Object.createWithoutData('Teams', payload.objectId)
+    query.equalTo('team', team)
+    query.include('user')
+    query.include('user.userinfo')
+    return query.find().then(function(UserTeamMap) {
+      let s = Object.assign([], members)
+      UserTeamMap.forEach(function(item, i, a) {
+        const userid = item.get('user').id
+        const userinfo = item
+          .get('user')
+          .get('userinfo')
+          .toJSON()
+        const result = {
+          ...userinfo,
+          userid: userid,
+          leader: item.get('leader')
+        }
+        s.splice(i, 1, result)
+      })
+      payload = { ...payload, members: s }
+      resolve(payload)
+    })
+  })
+}
+
 // 更新战队
 export function updateTeams(payload) {
   const team = AV.Object.createWithoutData('Teams', payload.objectId)
@@ -107,70 +184,6 @@ export function updateTeams(payload) {
   }
   return team.save().then(function(result) {
     return result.toJSON()
-  })
-}
-
-// 获取我的战队
-export function getMyTeams() {
-  const user = getCurrentUser()
-  const query = new AV.Query('UserTeamMap')
-  query.equalTo('user', user)
-  query.equalTo('leader', true)
-  query.descending('createdAt')
-  query.include('team')
-  query.include('user')
-  query.include('user.userinfo')
-  return query.find().then(function(UserTeamMap) {
-    const teams = []
-    UserTeamMap.forEach(function(item, i, a) {
-      let teaminfo = item.get('team').toJSON()
-      teaminfo = { ...teaminfo, members: members }
-      const userid = item.get('user').id
-      const userinfo = item
-        .get('user')
-        .get('userinfo')
-        .toJSON()
-      const result = {
-        ...userinfo,
-        userid: userid,
-        leader: item.get('leader')
-      }
-      teaminfo.members.splice(i, 1, result)
-      teams.push(teaminfo)
-    })
-    return teams
-  })
-}
-
-// 获取我所在战队
-export function getInTeams() {
-  const user = getCurrentUser()
-  const query = new AV.Query('UserTeamMap')
-  query.equalTo('user', user)
-  query.equalTo('leader', false)
-  query.descending('createdAt')
-  query.include('team')
-  query.include('user')
-  query.include('user.userinfo')
-  return query.find().then(function(UserTeamMap) {
-    const teams = []
-    UserTeamMap.forEach(function(item, i, a) {
-      let teaminfo = item.get('team').toJSON()
-      teaminfo = { ...teaminfo, members: members }
-      const userid = item.get('user').id
-      const userinfo = item
-        .get('user')
-        .get('userinfo')
-        .toJSON()
-      const result = {
-        ...userinfo,
-        userid: userid,
-        leader: item.get('leader')
-      }
-      teaminfo.members.splice(i, 1, result)
-      teams.push(teaminfo)
-    })
-    return teams
   })
 }
 
@@ -246,17 +259,13 @@ export function getHomeTeamsList(payload) {
 export function getHomeTeamDetail(payload) {
   const { objectId } = payload
   const team = AV.Object.createWithoutData('Teams', objectId)
-
-  // 构建 UserTeamMap 的查询
   const query = new AV.Query('UserTeamMap')
   query.equalTo('team', team)
   query.descending('createdAt')
   query.include('team')
   query.include('user')
   query.include('user.userinfo')
-  // 获取当前用户所在的所有战队
   return query.find().then(function(UserTeamMap) {
-    // 获取战队
     let teaminfo = UserTeamMap[0].get('team').toJSON()
     teaminfo = { ...teaminfo, members: members }
     UserTeamMap.forEach(function(item, i, a) {

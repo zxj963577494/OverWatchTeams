@@ -97,7 +97,7 @@ export default class HomeTeamsListView extends Component {
         renderFooter={fonter}
         renderRow={row}
         renderSeparator={separator}
-        initialListSize={2}
+        initialListSize={20}
         pageSize={20}
         style={{
           height: '100%',

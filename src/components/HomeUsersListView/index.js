@@ -108,7 +108,7 @@ export default class HomeUserListView extends Component {
         renderFooter={fonter}
         renderRow={row}
         renderSeparator={separator}
-        initialListSize={10}
+        initialListSize={20}
         pageSize={20}
         style={{
           height: '100%',

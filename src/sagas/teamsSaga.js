@@ -50,8 +50,9 @@ function* putTeamsWorker(payload) {
 function* getInTeamsWorker() {
   try {
     yield put(action.fetchRequest({ text: '加载中' }))
-    const response = yield call(teams.getInTeams)
-    yield put(action.getInTeamsSuccess(response))
+    const response1 = yield call(teams.getInTeams)
+    const response2 = yield call(teams.getTeamResult, response1)
+    yield put(action.getInTeamsSuccess(response2))
     yield put(action.fetchSuccess())
   } catch (error) {
     yield put(action.fetchFailed())
@@ -62,8 +63,9 @@ function* getInTeamsWorker() {
 function* getMyTeamsWorker() {
   try {
     yield put(action.fetchRequest({ text: '加载中' }))
-    const response = yield call(teams.getMyTeams)
-    yield put(action.getMyTeamsSuccess(response))
+    const response1 = yield call(teams.getMyTeams)
+    const response2 = yield call(teams.getTeamResult, response1)
+    yield put(action.getMyTeamsSuccess(response2))
     yield put(action.fetchSuccess())
   } catch (error) {
     yield put(action.fetchFailed())
