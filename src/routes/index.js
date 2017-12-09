@@ -20,7 +20,8 @@ import {
   AccountMemberDetail,
   AccountRecruitOrdersCreate,
   AccountRecruitOrdersEdit,
-  AccountRecruitOrders
+  AccountRecruitOrders,
+  AccountMemberRemove
 } from '../containers'
 
 export default (history, navbar) => {
@@ -58,6 +59,17 @@ export default (history, navbar) => {
                 component={AccountRecruitOrders}
               />
               <Route exec path="/account/mime" component={AccountMime} />
+              <Route exec path="/account/inteams" component={AccountInTeams} />
+              <Route
+                exec
+                path="/account/myteams/member/detail/:teamid/:memberid"
+                component={AccountMemberDetail}
+              />
+              <Route
+                exec
+                path="/account/myteams/member/remove/:teamid"
+                component={AccountMemberRemove}
+              />
               <Route
                 exec
                 path="/account/myteams/create"
@@ -69,12 +81,6 @@ export default (history, navbar) => {
                 component={AccountMyTeamsEdit}
               />
               <Route exec path="/account/myteams" component={AccountMyTeams} />
-              <Route exec path="/account/inteams" component={AccountInTeams} />
-              <Route
-                exec
-                path="/account/myteams/member/detail/:teamid/:memberid"
-                component={AccountMemberDetail}
-              />
               <Route exec path="/account" component={Account} />
             </Switch>
           </App>

@@ -4,9 +4,9 @@
   line-height: 2;
 }
 
-:global(.am-modal-popup) {
+/* :global(.am-modal-popup) {
   height: 100%;
-}
+} */
 
 :global(.am-image-picker-list) {
   padding: 9px 8px;

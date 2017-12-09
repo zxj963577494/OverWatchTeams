@@ -2,7 +2,15 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
-import { Button, WhiteSpace, WingBlank, Card, Grid, Modal } from 'antd-mobile'
+import {
+  Button,
+  WhiteSpace,
+  WingBlank,
+  Card,
+  Grid,
+  Modal,
+  List
+} from 'antd-mobile'
 import {
   setNavBar,
   getMyTeamsRequest,
@@ -17,19 +25,29 @@ import styles from './style.css'
 class AccountTeams extends Component {
   constructor(props) {
     super(props)
-    this.onCreateTeam = this.onCreateTeam.bind(this)
-    this.onRemoveTeam = this.onRemoveTeam.bind(this)
+    this.state = {
+      modal: false,
+      teamid: ''
+    }
   }
 
-  onCreateTeam() {
+  onCreateTeam = () => e => {
     this.props.navigateTo('/account/myteams/create')
   }
 
-  onRemoveTeam(id) {
+  onRemoveTeam = id => e => {
     Modal.alert('警告', '是否解散该队伍？', [
       { text: '取消', onPress: () => console.log('cancel') },
       { text: '确定', onPress: () => this.props.deleteTeam({ teamid: id }) }
     ])
+  }
+
+  onManageMember = id => e => {
+    e.preventDefault()
+    this.setState({
+      modal: true,
+      teamid: id
+    })
   }
 
   componentDidMount() {
@@ -124,9 +142,19 @@ class AccountTeams extends Component {
                     />
                   </Card.Body>
                   <Card.Footer
+                    content={
+                      <Button
+                        onClick={this.onManageMember(item.objectId)}
+                        type="primary"
+                        size="small"
+                        inline
+                      >
+                        成员管理
+                      </Button>
+                    }
                     extra={
                       <Button
-                        onClick={this.onRemoveTeam.bind(this, item.objectId)}
+                        onClick={this.onRemoveTeam(item.objectId)}
                         type="warning"
                         size="small"
                         inline
@@ -142,10 +170,48 @@ class AccountTeams extends Component {
         </WingBlank>
         <WhiteSpace />
         <WingBlank>
-          <Button onClick={this.onCreateTeam} type="primary">
+          <Button onClick={this.onCreateTeam()} type="primary">
             新 建 战 队
           </Button>
         </WingBlank>
+        <Modal
+          popup
+          visible={this.state.modal}
+          maskClosable={true}
+          onClose={() =>
+            this.setState({
+              modal: false
+            })
+          }
+          animationType="slide-up"
+        >
+          <List renderHeader={() => <div>成员管理</div>} className="popup-list">
+            <List.Item
+              onClick={() => {
+                this.setState({
+                  modal: false
+                })
+                navigateTo(
+                  `/account/myteams/member/create/${this.state.teamid}`
+                )
+              }}
+            >
+              添加队员
+            </List.Item>
+            <List.Item
+              onClick={() => {
+                this.setState({
+                  modal: false
+                })
+                navigateTo(
+                  `/account/myteams/member/remove/${this.state.teamid}`
+                )
+              }}
+            >
+              移除队员
+            </List.Item>
+          </List>
+        </Modal>
       </div>
     )
   }

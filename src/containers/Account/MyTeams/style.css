@@ -1,0 +1,4 @@
+:global(.popup-list .am-list-body) {
+  height: 88px;
+  overflow: auto;
+}

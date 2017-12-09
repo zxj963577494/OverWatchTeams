@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { Button, WhiteSpace, Flex, WingBlank, List, Result } from 'antd-mobile'
 import { push, goBack } from 'react-router-redux'
 import { RANKS, TEAMPOSITIONS } from '../../../../../constants'
-import { setNavBar, deleteTeamMemberRequest } from '../../../../../actions'
+import { setNavBar } from '../../../../../actions'
 import config from '../../../../../config'
 // eslint-disable-next-line
 import styles from './style.css'
@@ -123,16 +123,6 @@ class AccountMemberDetail extends Component {
         <List renderHeader={() => '个人比赛经历'}>
           <List.Item wrap>{pickerMember.match}</List.Item>
         </List>
-        <WhiteSpace />
-        <WingBlank>
-          <Flex>
-            <Flex.Item>
-              <Button onClick={this.onRemoveMember} type="warning">
-                移除队员
-              </Button>
-            </Flex.Item>
-          </Flex>
-        </WingBlank>
       </div>
     )
   }
@@ -160,9 +150,6 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    deleteTeamMember: payload => {
-      dispatch(deleteTeamMemberRequest(payload))
-    },
     setNavBar: payload => {
       dispatch(
         setNavBar({ title: payload.title, isCanBack: payload.isCanBack })
@@ -181,7 +168,6 @@ AccountMemberDetail.propTypes = {
   userteams: PropTypes.object,
   pickerTeam: PropTypes.object,
   pickerMember: PropTypes.array,
-  deleteTeamMember: PropTypes.func.isRequired,
   navigateTo: PropTypes.func.isRequired,
   setNavBar: PropTypes.func.isRequired,
   goBack: PropTypes.func.isRequired

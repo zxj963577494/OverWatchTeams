@@ -199,29 +199,21 @@ export function updateTeams(payload) {
 export function removeMember(payload) {
   const { teamid, memberid } = payload
   // 当前登录用户
-  const currentUser = AV.User.current()
-  const user = AV.Object.createWithoutData('_User', currentUser.id)
+  // const currentUser = AV.User.current()
+  // const user = AV.Object.createWithoutData('_User', currentUser.id)
   const team = AV.Object.createWithoutData('Teams', teamid)
+  const member = AV.Object.createWithoutData('_User', memberid)
   const query = new AV.Query('UserTeamMap')
-  query.equalTo('user', user)
+  query.equalTo('user', member)
   query.equalTo('team', team)
-  query.include('user')
-  return query.find().then(function(UserTeamMap) {
-    UserTeamMap.forEach(function(scm, i, a) {
-      if (scm.get('leader')) {
-        if (scm.get('user').id === memberid) {
-          return AV.Query.doCloudQuery(
-            `delete from UserTeamMap where user=${memberid} && team=${teamid}`
-          ).then(function(result) {
-            return result.toJSON()
-          })
-        } else {
-          throw new Error('该队员不在该战队中，无法移除')
-        }
-      } else {
-        throw new Error('您不是战队管理者，无法执行该操作')
-      }
-    })
+  return query.first().then(function(result) {
+    if (!result.get('leader')) {
+      return query.destroy().then(function(success) {
+        return success.toJSON()
+      })
+    } else {
+      throw new Error('无法删除战队创始人')
+    }
   })
 }
 

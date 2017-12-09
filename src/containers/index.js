@@ -13,8 +13,9 @@ import AccountMime from './Account/Mime'
 import AccountMyTeams from './Account/MyTeams'
 import AccountMyTeamsCreate from './Account/MyTeams/Create'
 import AccountMyTeamsEdit from './Account/MyTeams/Edit'
-import AccountInTeams from './Account/InTeams'
+import AccountMemberRemove from './Account/MyTeams/Member/Remove'
 import AccountMemberDetail from './Account/MyTeams/Member/Detail'
+import AccountInTeams from './Account/InTeams'
 import AccountRecruitOrdersCreate from './Account/RecruitOrders/Create'
 import AccountRecruitOrdersEdit from './Account/RecruitOrders/Edit'
 import AccountRecruitOrders from './Account/RecruitOrders'
@@ -39,7 +40,8 @@ export {
   AccountMyTeamsEdit,
   AccountInTeams,
   AccountMemberDetail,
+  AccountMemberRemove,
   AccountRecruitOrdersCreate,
   AccountRecruitOrdersEdit,
-  AccountRecruitOrders
+  AccountRecruitOrders,
 }
