@@ -25,14 +25,6 @@ export function cerateRecruitOrder(payload) {
   })
 }
 
-export function getTeam(payload) {
-  const team = new AV.Query('Teams')
-  team.equalTo('objectId', payload.teamid)
-  return team.first().then(function(result) {
-    return result
-  })
-}
-
 export function updateRecruitOrder(payload, team) {
   const user = getCurrentUser()
   const recruitOrders = AV.Object.createWithoutData(
@@ -52,6 +44,13 @@ export function updateRecruitOrder(payload, team) {
       ...result.toJSON(),
       team: team.toJSON()
     }
+  })
+}
+
+export function removeRecruitOrder(payload) {
+  var recruitOrders = AV.Object.createWithoutData('RecruitOrders', payload.objectId)
+  return recruitOrders.destroy().then(function(success) {
+    return success.toJSON()
   })
 }
 

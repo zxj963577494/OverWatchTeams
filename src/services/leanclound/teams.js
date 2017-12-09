@@ -171,6 +171,14 @@ function getUserInfoByTeam(payload) {
   })
 }
 
+export function getTeam(payload) {
+  const team = new AV.Query('Teams')
+  team.equalTo('objectId', payload.teamid)
+  return team.first().then(function(result) {
+    return result
+  })
+}
+
 // 更新战队
 export function updateTeams(payload) {
   const team = AV.Object.createWithoutData('Teams', payload.objectId)

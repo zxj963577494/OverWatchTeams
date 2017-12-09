@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
-import { getAccountRecruitOrderListRequest } from '../../../actions'
+import { getAccountRecruitOrderListRequest, deleteRecruitOrderRequest } from '../../../actions'
 import { AccountRecruitOrderListView, MyActivityIndicator } from '../../../components'
 
 class AccountRecruitOrders extends Component {
@@ -13,7 +13,7 @@ class AccountRecruitOrders extends Component {
   }
 
   render() {
-    const { recruitOrder, navigateTo, getAccountRecruitOrderList } = this.props
+    const { recruitOrder, navigateTo, getAccountRecruitOrderList, deleteRecruitOrder } = this.props
     return (
       <div style={{ height: '100%' }}>
         <MyActivityIndicator
@@ -24,6 +24,7 @@ class AccountRecruitOrders extends Component {
           recruitOrder={recruitOrder}
           navigateTo={navigateTo}
           getAccountRecruitOrderList={getAccountRecruitOrderList}
+          deleteRecruitOrder={deleteRecruitOrder}
         />
       </div>
     )
@@ -41,6 +42,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     getAccountRecruitOrderList: payload => {
       dispatch(getAccountRecruitOrderListRequest(payload))
     },
+    deleteRecruitOrder: payload => {
+      dispatch(deleteRecruitOrderRequest(payload))
+    },
     navigateTo: location => {
       dispatch(push(location))
     }
@@ -50,7 +54,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 AccountRecruitOrders.propTypes = {
   recruitOrder: PropTypes.object.isRequired,
   getAccountRecruitOrderList: PropTypes.func.isRequired,
-  navigateTo: PropTypes.func.isRequired
+  navigateTo: PropTypes.func.isRequired,
+  deleteRecruitOrder: PropTypes.func.isRequired,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(

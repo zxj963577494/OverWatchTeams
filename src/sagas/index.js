@@ -23,7 +23,8 @@ import {
   watchGetAccountRecruitOrderList,
   watchGetHomeRecruitOrderList,
   watchPostRecruitOrder,
-  watchPutRecruitOrder
+  watchPutRecruitOrder,
+  watchDeleteRecruitOrder
 } from './recruitOrderSaga'
 
 export default function* rootSaga() {
@@ -49,6 +50,7 @@ export default function* rootSaga() {
     fork(watchGetAccountRecruitOrderList),
     fork(watchGetHomeRecruitOrderList),
     fork(watchPostRecruitOrder),
-    fork(watchPutRecruitOrder)
+    fork(watchPutRecruitOrder),
+    fork(watchDeleteRecruitOrder)
   ])
 }
