@@ -23,7 +23,7 @@ export function cerateGroupOrder(payload) {
   })
 }
 
-export function updateGroupOrder(payload, team) {
+export function updateGroupOrder(payload) {
   const user = getCurrentUser()
   const recruitOrders = AV.Object.createWithoutData(
     'GroupOrders',

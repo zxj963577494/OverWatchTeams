@@ -20,7 +20,7 @@ const data = [
     text: '招募令'
   },
   {
-    url: '/home/teams',
+    url: '/home/grouporders',
     icon: config.BASE_PIC_URL + '/logo.png',
     text: '组队上分'
   },

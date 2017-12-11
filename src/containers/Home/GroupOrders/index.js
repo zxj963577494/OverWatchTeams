@@ -2,28 +2,28 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
-import { getHomeRecruitOrderListRequest } from '../../../actions'
-import { HomeRecruitOrderListView, MyActivityIndicator } from '../../../components'
+import { getHomeGroupOrderListRequest } from '../../../actions'
+import { HomeGroupOrderListView, MyActivityIndicator } from '../../../components'
 
 class HomeGroupOrders extends Component {
   componentDidMount() {
-    if (this.props.recruitOrder.list.length === 0) {
-      this.props.getHomeRecruitOrderList({ page: 1 })
+    if (this.props.groupOrder.list.length === 0) {
+      this.props.getHomeGroupOrderList({ page: 1 })
     }
   }
 
   render() {
-    const { recruitOrder, navigateTo, getHomeRecruitOrderList } = this.props
+    const { groupOrder, navigateTo, getHomeGroupOrderList } = this.props
     return (
       <div style={{ height: '100%' }}>
         <MyActivityIndicator
-          isFetching={recruitOrder.isFetching}
-          text={recruitOrder.fetchingText}
+          isFetching={groupOrder.isFetching}
+          text={groupOrder.fetchingText}
         />
-        <HomeRecruitOrderListView
-          recruitOrder={recruitOrder}
+        <HomeGroupOrderListView
+          groupOrder={groupOrder}
           navigateTo={navigateTo}
-          getHomeRecruitOrderList={getHomeRecruitOrderList}
+          getHomeGroupOrderList={getHomeGroupOrderList}
         />
       </div>
     )
@@ -32,14 +32,14 @@ class HomeGroupOrders extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    recruitOrder: state.root.recruitOrder.home.recruitOrder
+    groupOrder: state.root.groupOrder.home.groupOrder
   }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    getHomeRecruitOrderList: payload => {
-      dispatch(getHomeRecruitOrderListRequest(payload))
+    getHomeGroupOrderList: payload => {
+      dispatch(getHomeGroupOrderListRequest(payload))
     },
     navigateTo: location => {
       dispatch(push(location))
@@ -48,8 +48,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 }
 
 HomeGroupOrders.propTypes = {
-  recruitOrder: PropTypes.object.isRequired,
-  getHomeRecruitOrderList: PropTypes.func.isRequired,
+  groupOrder: PropTypes.object.isRequired,
+  getHomeGroupOrderList: PropTypes.func.isRequired,
   navigateTo: PropTypes.func.isRequired
 }
 

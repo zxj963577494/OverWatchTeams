@@ -31,8 +31,7 @@ function* postGroupOrderWorker(payload) {
 function* putGroupOrderWorker(payload) {
   try {
     yield put(action.fetchRequest({ text: '提交中' }))
-    const team = yield call(teams.getTeam, payload)
-    const response = yield call(groupOrder.updateGroupOrder, payload, team)
+    const response = yield call(groupOrder.updateGroupOrder, payload)
     yield put(action.putGroupOrderSuccess(response))
     yield put(action.fetchSuccess())
     Toast.success('提交成功', 1)

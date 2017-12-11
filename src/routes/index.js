@@ -12,6 +12,7 @@ import {
   HomeTeamDetail,
   HomeTeams,
   HomeRecruitOrders,
+  HomeGroupOrders,
   AccountMime,
   AccountMyTeams,
   AccountMyTeamsCreate,
@@ -40,6 +41,11 @@ export default (history, navbar) => {
                 exec
                 path="/home/recruitorders"
                 component={HomeRecruitOrders}
+              />
+              <Route
+                exec
+                path="/home/grouporders"
+                component={HomeGroupOrders}
               />
               <Route exec path="/home/team/:id" component={HomeTeamDetail} />
               <Route exec path="/home/teams" component={HomeTeams} />
