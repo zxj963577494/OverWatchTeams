@@ -1,13 +1,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { List, Card, Grid, Button } from 'antd-mobile'
+import { List, Card } from 'antd-mobile'
 import { push } from 'react-router-redux'
 import { setNavBar, getHomeTeamDetailRequest } from '../../../../actions'
 import { RANKS } from '../../../../constants'
 import { MyActivityIndicator } from '../../../../components'
-import config from '../../../../config'
-import { getPosition } from '../../../../utils/utils'
 
 class HomeTeamDetail extends Component {
   constructor(props) {
@@ -35,7 +33,7 @@ class HomeTeamDetail extends Component {
   }
 
   render() {
-    let { team, current, navigateTo, app } = this.props
+    let { team, current, app } = this.props
     if ((team == null && current != null) || this.state.isGetMember) {
       team = current
     }
@@ -74,62 +72,6 @@ class HomeTeamDetail extends Component {
                 }
               >
                 平均段位
-              </List.Item>
-            </List>
-            <List renderHeader={() => '战队成员'}>
-              <List.Item>
-                {team.members ? (
-                  <Grid
-                    data={team.members}
-                    columnNum={3}
-                    hasLine={false}
-                    renderItem={(dataItem, index) => (
-                      <div
-                        key={index}
-                        onClick={() => {
-                          if (dataItem.objectId) {
-                            navigateTo(`/home/member/${dataItem.userid}`)
-                          }
-                        }}
-                      >
-                        <img
-                          src={dataItem.avatar}
-                          style={{
-                            width: '60px',
-                            height: '60px',
-                            borderRadius: '50%'
-                          }}
-                          alt={dataItem.nickname}
-                        />
-                        <div
-                          style={{
-                            color: '#888',
-                            fontSize: '14px',
-                            marginTop: '6px'
-                          }}
-                        >
-                          <span>{dataItem.nickname}</span>
-                          <img
-                            src={getPosition(dataItem.position)}
-                            alt={dataItem.position}
-                            className="teams--position"
-                          />
-                          {dataItem.leader ? (
-                            <img
-                              src={config.BASE_PIC_URL + '/leader.png'}
-                              alt="队长"
-                              className="teams--leader"
-                            />
-                          ) : null}
-                        </div>
-                      </div>
-                    )}
-                  />
-                ) : (
-                  <Button type="primary" onClick={this.getTeamById}>
-                    获取战队成员
-                  </Button>
-                )}
               </List.Item>
             </List>
             <List renderHeader={() => '战队口号'}>
@@ -171,9 +113,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         setNavBar({ title: payload.title, isCanBack: payload.isCanBack })
       )
     },
-    navigateTo: location => {
-      dispatch(push(location))
-    }
   }
 }
 
@@ -182,7 +121,6 @@ HomeTeamDetail.propTypes = {
   current: PropTypes.object,
   team: PropTypes.object,
   setNavBar: PropTypes.func.isRequired,
-  navigateTo: PropTypes.func.isRequired
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeTeamDetail)

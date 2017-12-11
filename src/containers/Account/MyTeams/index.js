@@ -7,7 +7,6 @@ import {
   WhiteSpace,
   WingBlank,
   Card,
-  Grid,
   Modal,
   List
 } from 'antd-mobile'
@@ -17,8 +16,7 @@ import {
   deleteTeamRequest
 } from '../../../actions'
 import { MyActivityIndicator } from '../../../components'
-import { getPosition } from '../../../utils/utils'
-import config from '../../../config'
+import { cutstr } from '../../../utils/utils'
 // eslint-disable-next-line
 import styles from './style.css'
 
@@ -90,68 +88,13 @@ class AccountTeams extends Component {
                     }
                   />
                   <Card.Body>
-                    <Grid
-                      data={item.members}
-                      columnNum={3}
-                      hasLine={false}
-                      renderItem={(dataItem, index) => (
-                        <div
-                          key={index}
-                          onClick={() => {
-                            if (dataItem.objectId) {
-                              navigateTo(
-                                `/account/members/detail/${item.objectId}/${
-                                  dataItem.objectId
-                                }`
-                              )
-                            }
-                          }}
-                        >
-                          <img
-                            src={dataItem.avatar}
-                            style={{
-                              width: '60px',
-                              height: '60px',
-                              borderRadius: '50%'
-                            }}
-                            alt={dataItem.nickname}
-                          />
-                          <div
-                            style={{
-                              color: '#888',
-                              fontSize: '14px',
-                              marginTop: '6px'
-                            }}
-                          >
-                            <span>{dataItem.nickname}</span>
-                            <img
-                              src={getPosition(dataItem.position)}
-                              alt={dataItem.position}
-                              className="teams--position"
-                            />
-                            {dataItem.leader ? (
-                              <img
-                                src={config.BASE_PIC_URL + '/leader.png'}
-                                alt="队长"
-                                className="teams--leader"
-                              />
-                            ) : null}
-                          </div>
-                        </div>
-                      )}
-                    />
+                    <List>
+                      <List.Item wrap>
+                        {cutstr(item.introduction, 200, 0)}
+                      </List.Item>
+                    </List>
                   </Card.Body>
                   <Card.Footer
-                    content={
-                      <Button
-                        onClick={this.onManageMember(item.objectId)}
-                        type="primary"
-                        size="small"
-                        inline
-                      >
-                        成员管理
-                      </Button>
-                    }
                     extra={
                       <Button
                         onClick={this.onRemoveTeam(item.objectId)}

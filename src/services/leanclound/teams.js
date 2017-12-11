@@ -106,7 +106,6 @@ export function getMyTeams() {
   return query.find().then(function(UserTeamMap) {
     UserTeamMap.forEach(function(item, i, a) {
       let teaminfo = item.get('team').toJSON()
-      teaminfo = { ...teaminfo, members: members }
       result.push(teaminfo)
     })
     return result
@@ -180,7 +179,7 @@ export function getTeam(payload) {
 }
 
 // 更新战队
-export function updateTeams(payload) {
+export function updateTeam(payload) {
   const team = AV.Object.createWithoutData('Teams', payload.objectId)
   for (let key of Object.keys(payload)) {
     if (key !== 'objectId') {

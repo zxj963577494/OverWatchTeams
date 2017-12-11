@@ -34,7 +34,7 @@ function* postTeamsWorker(payload) {
 function* putTeamsWorker(payload) {
   try {
     yield put(action.fetchRequest({ text: '提交中' }))
-    const response = yield call(teams.updateTeams, payload)
+    const response = yield call(teams.updateTeam, payload)
     yield put(action.fetchSuccess())
     yield put(action.putTeamsSuccess(response))
     Toast.success('提交成功', 1)
@@ -50,9 +50,8 @@ function* putTeamsWorker(payload) {
 function* getInTeamsWorker() {
   try {
     yield put(action.fetchRequest({ text: '加载中' }))
-    const response1 = yield call(teams.getInTeams)
-    const response2 = yield call(teams.getTeamResult, response1)
-    yield put(action.getInTeamsSuccess(response2))
+    const response = yield call(teams.getInTeams)
+    yield put(action.getInTeamsSuccess(response))
     yield put(action.fetchSuccess())
   } catch (error) {
     yield put(action.fetchFailed())
@@ -63,9 +62,8 @@ function* getInTeamsWorker() {
 function* getMyTeamsWorker() {
   try {
     yield put(action.fetchRequest({ text: '加载中' }))
-    const response1 = yield call(teams.getMyTeams)
-    const response2 = yield call(teams.getTeamResult, response1)
-    yield put(action.getMyTeamsSuccess(response2))
+    const response = yield call(teams.getMyTeams)
+    yield put(action.getMyTeamsSuccess(response))
     yield put(action.fetchSuccess())
   } catch (error) {
     yield put(action.fetchFailed())
