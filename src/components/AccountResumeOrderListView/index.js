@@ -1,13 +1,22 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { ListView, PullToRefresh, Card, Flex, WhiteSpace } from 'antd-mobile'
+import {
+  ListView,
+  PullToRefresh,
+  Card,
+  Flex,
+  WhiteSpace,
+  Button,
+  Modal
+} from 'antd-mobile'
 import TimeAgo from 'timeago-react'
 
-export default class HomeResumeOrderListView extends Component {
+export default class AccountResumeOrderListView extends Component {
   constructor(props) {
     super(props)
     this.onEndReached = this.onEndReached.bind(this)
     this.onRefresh = this.onRefresh.bind(this)
+    this.onRemove = this.onRemove.bind(this)
   }
 
   onEndReached = event => {
@@ -18,11 +27,21 @@ export default class HomeResumeOrderListView extends Component {
       return
     }
     const page = this.props.resumeOrder.page + 1
-    this.props.getHomeResumeOrderList({ page: page })
+    this.props.getAccountResumeOrderList({ page: page })
   }
 
   onRefresh = () => {
-    this.props.getHomeResumeOrderList({ isRefreshing: true })
+    this.props.getAccountResumeOrderList({ isRefreshing: true })
+  }
+
+  onRemove = objectId => {
+    Modal.alert('警告', '是否删除该约战贴？', [
+      { text: '取消', onPress: () => console.log('cancel') },
+      {
+        text: '确定',
+        onPress: () => this.props.deleteResumeOrder({ objectId: objectId })
+      }
+    ])
   }
 
   render() {
@@ -37,8 +56,29 @@ export default class HomeResumeOrderListView extends Component {
             <Card.Header
               title={rowData.title}
               thumb={rowData.team.avatar}
-              onClick={() =>
-                this.props.navigateTo(`/home/team/${rowData.team.objectId}`)
+              extra={
+                <div>
+                  <Button
+                    onClick={() => {
+                      this.props.navigateTo(
+                        '/account/resumeorders/edit/' + rowData.objectId
+                      )
+                    }}
+                    type="ghost"
+                    size="small"
+                    inline
+                  >
+                    编辑
+                  </Button>
+                  <Button
+                    onClick={this.onRemove.bind(this, rowData.objectId)}
+                    type="resumening"
+                    size="small"
+                    inline
+                  >
+                    删除
+                  </Button>
+                </div>
               }
             />
             <Card.Body>
@@ -78,7 +118,10 @@ export default class HomeResumeOrderListView extends Component {
               }
               extra={
                 <div style={{ color: 'red' }}>
-                  截止日期：<TimeAgo datetime={rowData.endDate} locale="zh_CN" />
+                  截止日期：<TimeAgo
+                    datetime={rowData.endDate}
+                    locale="zh_CN"
+                  />
                 </div>
               }
             />
@@ -119,8 +162,9 @@ export default class HomeResumeOrderListView extends Component {
   }
 }
 
-HomeResumeOrderListView.propTypes = {
+AccountResumeOrderListView.propTypes = {
   resumeOrder: PropTypes.object.isRequired,
   navigateTo: PropTypes.func.isRequired,
-  getHomeResumeOrderList: PropTypes.func.isRequired
+  getAccountResumeOrderList: PropTypes.func.isRequired,
+  deleteResumeOrder: PropTypes.func.isRequired
 }

@@ -110,7 +110,25 @@ import {
   PUT_WAR_ORDER_FAILED,
   DELETE_WAR_ORDER_REQUEST,
   DELETE_WAR_ORDER_SUCCESS,
-  DELETE_WAR_ORDER_FAILED
+  DELETE_WAR_ORDER_FAILED,
+  GET_HOME_RESUME_ORDER_LIST_REQUEST,
+  GET_HOME_RESUME_ORDER_LIST_SUCCESS,
+  GET_HOME_RESUME_ORDER_LIST_FAILED,
+  GET_ACCOUNT_RESUME_ORDER_LIST_REQUEST,
+  GET_ACCOUNT_RESUME_ORDER_LIST_SUCCESS,
+  GET_ACCOUNT_RESUME_ORDER_LIST_FAILED,
+  GET_RESUME_ORDER_DETAIL_REQUEST,
+  GET_RESUME_ORDER_DETAIL_SUCCESS,
+  GET_RESUME_ORDER_DETAIL_FAILED,
+  POST_RESUME_ORDER_REQUEST,
+  POST_RESUME_ORDER_SUCCESS,
+  POST_RESUME_ORDER_FAILED,
+  PUT_RESUME_ORDER_REQUEST,
+  PUT_RESUME_ORDER_SUCCESS,
+  PUT_RESUME_ORDER_FAILED,
+  DELETE_RESUME_ORDER_REQUEST,
+  DELETE_RESUME_ORDER_SUCCESS,
+  DELETE_RESUME_ORDER_FAILED
 } from '../constants/actionTypes'
 
 export const getArticlesRequest = function(payload) {
@@ -559,4 +577,77 @@ export const deleteWarOrderSuccess = function(payload) {
 
 export const deleteWarOrderFailed = function(payload) {
   return { type: DELETE_WAR_ORDER_FAILED, payload }
+}
+
+
+export const getHomeResumeOrderListRequest = function(payload) {
+  return { type: GET_HOME_RESUME_ORDER_LIST_REQUEST, payload }
+}
+
+export const getHomeResumeOrderListSuccess = function(payload) {
+  return { type: GET_HOME_RESUME_ORDER_LIST_SUCCESS, payload }
+}
+
+export const getHomeResumeOrderListFailed = function(payload) {
+  return { type: GET_HOME_RESUME_ORDER_LIST_FAILED, payload }
+}
+
+export const getAccountResumeOrderListRequest = function(payload) {
+  return { type: GET_ACCOUNT_RESUME_ORDER_LIST_REQUEST, payload }
+}
+
+export const getAccountResumeOrderListSuccess = function(payload) {
+  return { type: GET_ACCOUNT_RESUME_ORDER_LIST_SUCCESS, payload }
+}
+
+export const getAccountResumeOrderListFailed = function(payload) {
+  return { type: GET_ACCOUNT_RESUME_ORDER_LIST_FAILED, payload }
+}
+
+export const getResumeOrderDetailRequest = function(payload) {
+  return { type: GET_RESUME_ORDER_DETAIL_REQUEST, payload }
+}
+
+export const getResumeOrderDetailSuccess = function(payload) {
+  return { type: GET_RESUME_ORDER_DETAIL_SUCCESS, payload }
+}
+
+export const getResumeOrderDetailFailed = function(payload) {
+  return { type: GET_RESUME_ORDER_DETAIL_FAILED, payload }
+}
+
+export const postResumeOrderRequest = function(payload) {
+  return { type: POST_RESUME_ORDER_REQUEST, payload }
+}
+
+export const postResumeOrderSuccess = function(payload) {
+  return { type: POST_RESUME_ORDER_SUCCESS, payload }
+}
+
+export const postResumeOrderFailed = function(payload) {
+  return { type: POST_RESUME_ORDER_FAILED, payload }
+}
+
+export const putResumeOrderRequest = function(payload) {
+  return { type: PUT_RESUME_ORDER_REQUEST, payload }
+}
+
+export const putResumeOrderSuccess = function(payload) {
+  return { type: PUT_RESUME_ORDER_SUCCESS, payload }
+}
+
+export const putResumeOrderFailed = function(payload) {
+  return { type: PUT_RESUME_ORDER_FAILED, payload }
+}
+
+export const deleteResumeOrderRequest = function(payload) {
+  return { type: DELETE_RESUME_ORDER_REQUEST, payload }
+}
+
+export const deleteResumeOrderSuccess = function(payload) {
+  return { type: DELETE_RESUME_ORDER_SUCCESS, payload }
+}
+
+export const deleteResumeOrderFailed = function(payload) {
+  return { type: DELETE_RESUME_ORDER_FAILED, payload }
 }

@@ -7,6 +7,7 @@ import { teamReducer } from './team'
 import {recruitOrderReducer} from './recruitOrder'
 import {groupOrderReducer} from './groupOrder'
 import {warOrderReducer} from './warOrder'
+import {resumeOrderReducer} from './resumeOrder'
 
 const rootReducer = combineReducers({
   app: appReducer,
@@ -17,7 +18,8 @@ const rootReducer = combineReducers({
   team: teamReducer,
   recruitOrder: recruitOrderReducer,
   groupOrder: groupOrderReducer,
-  warOrder: warOrderReducer
+  warOrder: warOrderReducer,
+  resumeOrder: resumeOrderReducer
 })
 
 export default rootReducer

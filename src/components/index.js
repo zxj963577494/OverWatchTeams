@@ -11,6 +11,8 @@ import AccountGroupOrderListView from './AccountGroupOrderListView'
 import HomeGroupOrderListView from './HomeGroupOrderListView'
 import AccountWarOrderListView from './AccountWarOrderListView'
 import HomeWarOrderListView from './HomeWarOrderListView'
+import AccountResumeOrderListView from './AccountResumeOrderListView'
+import HomeResumeOrderListView from './HomeResumeOrderListView'
 
 export {
   MyTabBar,
@@ -25,5 +27,7 @@ export {
   AccountGroupOrderListView,
   HomeGroupOrderListView,
   AccountWarOrderListView,
-  HomeWarOrderListView
+  HomeWarOrderListView,
+  AccountResumeOrderListView,
+  HomeResumeOrderListView
 }
