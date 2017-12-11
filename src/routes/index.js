@@ -13,6 +13,7 @@ import {
   HomeTeams,
   HomeRecruitOrders,
   HomeGroupOrders,
+  HomeWarOrders,
   AccountMime,
   AccountMyTeams,
   AccountMyTeamsCreate,
@@ -26,6 +27,9 @@ import {
   AccountGroupOrdersCreate,
   AccountGroupOrdersEdit,
   AccountGroupOrders,
+  AccountWarOrdersCreate,
+  AccountWarOrdersEdit,
+  AccountWarOrders,
 } from '../containers'
 
 export default (history, navbar) => {
@@ -46,6 +50,11 @@ export default (history, navbar) => {
                 exec
                 path="/home/grouporders"
                 component={HomeGroupOrders}
+              />
+              <Route
+                exec
+                path="/home/warorders"
+                component={HomeWarOrders}
               />
               <Route exec path="/home/team/:id" component={HomeTeamDetail} />
               <Route exec path="/home/teams" component={HomeTeams} />
@@ -81,6 +90,21 @@ export default (history, navbar) => {
                 exec
                 path="/account/grouporders"
                 component={AccountGroupOrders}
+              />
+              <Route
+                exec
+                path="/account/warorders/create"
+                component={AccountWarOrdersCreate}
+              />
+              <Route
+                exec
+                path="/account/warorders/edit/:id"
+                component={AccountWarOrdersEdit}
+              />
+              <Route
+                exec
+                path="/account/warorders"
+                component={AccountWarOrders}
               />
               <Route exec path="/account/mime" component={AccountMime} />
               <Route exec path="/account/inteams" component={AccountInTeams} />

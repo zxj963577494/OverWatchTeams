@@ -92,7 +92,25 @@ import {
   PUT_GROUP_ORDER_FAILED,
   DELETE_GROUP_ORDER_REQUEST,
   DELETE_GROUP_ORDER_SUCCESS,
-  DELETE_GROUP_ORDER_FAILED
+  DELETE_GROUP_ORDER_FAILED,
+  GET_HOME_WAR_ORDER_LIST_REQUEST,
+  GET_HOME_WAR_ORDER_LIST_SUCCESS,
+  GET_HOME_WAR_ORDER_LIST_FAILED,
+  GET_ACCOUNT_WAR_ORDER_LIST_REQUEST,
+  GET_ACCOUNT_WAR_ORDER_LIST_SUCCESS,
+  GET_ACCOUNT_WAR_ORDER_LIST_FAILED,
+  GET_WAR_ORDER_DETAIL_REQUEST,
+  GET_WAR_ORDER_DETAIL_SUCCESS,
+  GET_WAR_ORDER_DETAIL_FAILED,
+  POST_WAR_ORDER_REQUEST,
+  POST_WAR_ORDER_SUCCESS,
+  POST_WAR_ORDER_FAILED,
+  PUT_WAR_ORDER_REQUEST,
+  PUT_WAR_ORDER_SUCCESS,
+  PUT_WAR_ORDER_FAILED,
+  DELETE_WAR_ORDER_REQUEST,
+  DELETE_WAR_ORDER_SUCCESS,
+  DELETE_WAR_ORDER_FAILED
 } from '../constants/actionTypes'
 
 export const getArticlesRequest = function(payload) {
@@ -469,4 +487,76 @@ export const deleteGroupOrderSuccess = function(payload) {
 
 export const deleteGroupOrderFailed = function(payload) {
   return { type: DELETE_GROUP_ORDER_FAILED, payload }
+}
+
+export const getHomeWarOrderListRequest = function(payload) {
+  return { type: GET_HOME_WAR_ORDER_LIST_REQUEST, payload }
+}
+
+export const getHomeWarOrderListSuccess = function(payload) {
+  return { type: GET_HOME_WAR_ORDER_LIST_SUCCESS, payload }
+}
+
+export const getHomeWarOrderListFailed = function(payload) {
+  return { type: GET_HOME_WAR_ORDER_LIST_FAILED, payload }
+}
+
+export const getAccountWarOrderListRequest = function(payload) {
+  return { type: GET_ACCOUNT_WAR_ORDER_LIST_REQUEST, payload }
+}
+
+export const getAccountWarOrderListSuccess = function(payload) {
+  return { type: GET_ACCOUNT_WAR_ORDER_LIST_SUCCESS, payload }
+}
+
+export const getAccountWarOrderListFailed = function(payload) {
+  return { type: GET_ACCOUNT_WAR_ORDER_LIST_FAILED, payload }
+}
+
+export const getWarOrderDetailRequest = function(payload) {
+  return { type: GET_WAR_ORDER_DETAIL_REQUEST, payload }
+}
+
+export const getWarOrderDetailSuccess = function(payload) {
+  return { type: GET_WAR_ORDER_DETAIL_SUCCESS, payload }
+}
+
+export const getWarOrderDetailFailed = function(payload) {
+  return { type: GET_WAR_ORDER_DETAIL_FAILED, payload }
+}
+
+export const postWarOrderRequest = function(payload) {
+  return { type: POST_WAR_ORDER_REQUEST, payload }
+}
+
+export const postWarOrderSuccess = function(payload) {
+  return { type: POST_WAR_ORDER_SUCCESS, payload }
+}
+
+export const postWarOrderFailed = function(payload) {
+  return { type: POST_WAR_ORDER_FAILED, payload }
+}
+
+export const putWarOrderRequest = function(payload) {
+  return { type: PUT_WAR_ORDER_REQUEST, payload }
+}
+
+export const putWarOrderSuccess = function(payload) {
+  return { type: PUT_WAR_ORDER_SUCCESS, payload }
+}
+
+export const putWarOrderFailed = function(payload) {
+  return { type: PUT_WAR_ORDER_FAILED, payload }
+}
+
+export const deleteWarOrderRequest = function(payload) {
+  return { type: DELETE_WAR_ORDER_REQUEST, payload }
+}
+
+export const deleteWarOrderSuccess = function(payload) {
+  return { type: DELETE_WAR_ORDER_SUCCESS, payload }
+}
+
+export const deleteWarOrderFailed = function(payload) {
+  return { type: DELETE_WAR_ORDER_FAILED, payload }
 }

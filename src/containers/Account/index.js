@@ -143,6 +143,32 @@ class Account extends Component {
             我的招募令
           </List.Item>
         </List>
+        <List renderHeader={() => '约战紫禁之巅'}>
+          <List.Item
+            arrow="horizontal"
+            onClick={() => {
+              if (logined) {
+                navigateTo('/account/warorders/create')
+              } else {
+                Toast.info('请先登录', 1)
+              }
+            }}
+          >
+            发布约战贴
+          </List.Item>
+          <List.Item
+            arrow="horizontal"
+            onClick={() => {
+              if (logined) {
+                navigateTo('/account/warorders')
+              } else {
+                Toast.info('请先登录', 1)
+              }
+            }}
+          >
+            我的约战贴
+          </List.Item>
+        </List>
         <List renderHeader={() => '组队上分帖'}>
           <List.Item
             arrow="horizontal"

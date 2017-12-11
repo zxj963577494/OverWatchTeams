@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { Button, WhiteSpace, Flex, WingBlank, List, Result } from 'antd-mobile'
+import { WhiteSpace, List, Result } from 'antd-mobile'
 import { push, goBack } from 'react-router-redux'
 import { RANKS, TEAMPOSITIONS } from '../../../../../constants'
 import { setNavBar } from '../../../../../actions'

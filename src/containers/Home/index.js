@@ -12,7 +12,7 @@ const data = [
   {
     url: '/home/teams',
     icon: config.BASE_PIC_URL + '/logo.png',
-    text: '战队'
+    text: '战队库'
   },
   {
     url: '/home/recruitorders',
@@ -28,6 +28,16 @@ const data = [
     url: '/home/users',
     icon: config.BASE_PIC_URL + '/logo.png',
     text: '个人库'
+  },
+  {
+    url: '/home/warorders',
+    icon: config.BASE_PIC_URL + '/logo.png',
+    text: '训练赛约战'
+  },
+  {
+    url: '/home/warorders',
+    icon: config.BASE_PIC_URL + '/logo.png',
+    text: '想打比赛'
   }
 ]
 
@@ -73,7 +83,7 @@ class Home extends Component {
         <WhiteSpace size="xs" />
         <Grid
           data={data}
-          columnNum={4}
+          columnNum={3}
           hasLine={false}
           renderItem={(dataItem, index) => (
             <div key={index} onClick={() => navigateTo(dataItem.url)}>

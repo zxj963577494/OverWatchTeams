@@ -6,6 +6,7 @@ import navbarReducer from './navbar'
 import { teamReducer } from './team'
 import {recruitOrderReducer} from './recruitOrder'
 import {groupOrderReducer} from './groupOrder'
+import {warOrderReducer} from './warOrder'
 
 const rootReducer = combineReducers({
   app: appReducer,
@@ -15,7 +16,8 @@ const rootReducer = combineReducers({
   navbar: navbarReducer,
   team: teamReducer,
   recruitOrder: recruitOrderReducer,
-  groupOrder: groupOrderReducer
+  groupOrder: groupOrderReducer,
+  warOrder: warOrderReducer
 })
 
 export default rootReducer

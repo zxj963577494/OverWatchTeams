@@ -10,7 +10,7 @@ import {
   DELETE_GROUP_ORDER_REQUEST
 } from '../constants/actionTypes'
 import * as action from '../actions'
-import { groupOrder, teams } from '../services/leanclound'
+import { groupOrder } from '../services/leanclound'
 
 function* postGroupOrderWorker(payload) {
   try {
