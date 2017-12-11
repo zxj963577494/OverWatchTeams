@@ -143,7 +143,7 @@ class Account extends Component {
             我的招募令
           </List.Item>
         </List>
-        <List renderHeader={() => '约战紫禁之巅'}>
+        <List renderHeader={() => '决战紫禁之巅'}>
           <List.Item
             arrow="horizontal"
             onClick={() => {
