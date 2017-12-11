@@ -40,6 +40,13 @@ import {
   watchPutWarOrder,
   watchDeleteWarOrder
 } from './warOrderSaga'
+import {
+  watchGetAccountResumeOrderList,
+  watchGetHomeResumeOrderList,
+  watchPostResumeOrder,
+  watchPutResumeOrder,
+  watchDeleteResumeOrder
+} from './resumeOrderSaga'
 
 export default function* rootSaga() {
   yield all([
@@ -75,6 +82,11 @@ export default function* rootSaga() {
     fork(watchGetHomeWarOrderList),
     fork(watchPostWarOrder),
     fork(watchPutWarOrder),
-    fork(watchDeleteWarOrder)
+    fork(watchDeleteWarOrder),
+    fork(watchGetAccountResumeOrderList),
+    fork(watchGetHomeResumeOrderList),
+    fork(watchPostResumeOrder),
+    fork(watchPutResumeOrder),
+    fork(watchDeleteResumeOrder)
   ])
 }

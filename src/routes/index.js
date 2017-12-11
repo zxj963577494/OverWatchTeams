@@ -60,6 +60,11 @@ export default (history, navbar) => {
                 path="/home/warorders"
                 component={HomeWarOrders}
               />
+              <Route
+                exec
+                path="/home/resumeorders"
+                component={HomeResumeOrders}
+              />
               <Route exec path="/home/team/:id" component={HomeTeamDetail} />
               <Route exec path="/home/teams" component={HomeTeams} />
               <Route exec path="/home/user/:id" component={HomeUserDetail} />
@@ -107,8 +112,8 @@ export default (history, navbar) => {
               />
               <Route
                 exec
-                path="/account/resumeorders"
-                component={AccountResumeOrders}
+                path="/account/warorders"
+                component={AccountWarOrders}
               />
               <Route
                 exec

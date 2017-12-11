@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { ListView, PullToRefresh, Card, Flex, WhiteSpace } from 'antd-mobile'
 import TimeAgo from 'timeago-react'
 
-export default class HomeResumeOrderListView extends Component {
+export default class HomeWarOrderListView extends Component {
   constructor(props) {
     super(props)
     this.onEndReached = this.onEndReached.bind(this)
@@ -12,23 +12,23 @@ export default class HomeResumeOrderListView extends Component {
 
   onEndReached = event => {
     if (
-      this.props.resumeOrder.isFetching ||
-      !this.props.resumeOrder.isLoadMore
+      this.props.warOrder.isFetching ||
+      !this.props.warOrder.isLoadMore
     ) {
       return
     }
-    const page = this.props.resumeOrder.page + 1
-    this.props.getHomeResumeOrderList({ page: page })
+    const page = this.props.warOrder.page + 1
+    this.props.getHomeWarOrderList({ page: page })
   }
 
   onRefresh = () => {
-    this.props.getHomeResumeOrderList({ isRefreshing: true })
+    this.props.getHomeWarOrderList({ isRefreshing: true })
   }
 
   render() {
     const dataSource = new ListView.DataSource({
       rowHasChanged: (row1, row2) => row1 !== row2
-    }).cloneWithRows(this.props.resumeOrder.list)
+    }).cloneWithRows(this.props.warOrder.list)
     const separator = (sectionID, rowID) => <WhiteSpace key={`${rowID}`} />
     const row = (rowData, sectionID, rowID) => {
       return (
@@ -89,7 +89,7 @@ export default class HomeResumeOrderListView extends Component {
     const fonter = () => {
       return (
         <div style={{ padding: 5, textAlign: 'center' }}>
-          {this.props.resumeOrder.isFetching ? '' : '到底了'}
+          {this.props.warOrder.isFetching ? '' : '到底了'}
         </div>
       )
     }
@@ -110,7 +110,7 @@ export default class HomeResumeOrderListView extends Component {
         onEndReachedThreshold={100}
         pullToRefresh={
           <PullToRefresh
-            refreshing={this.props.resumeOrder.isRefreshing}
+            refreshing={this.props.warOrder.isRefreshing}
             onRefresh={this.onRefresh}
           />
         }
@@ -119,8 +119,8 @@ export default class HomeResumeOrderListView extends Component {
   }
 }
 
-HomeResumeOrderListView.propTypes = {
-  resumeOrder: PropTypes.object.isRequired,
+HomeWarOrderListView.propTypes = {
+  warOrder: PropTypes.object.isRequired,
   navigateTo: PropTypes.func.isRequired,
-  getHomeResumeOrderList: PropTypes.func.isRequired
+  getHomeWarOrderList: PropTypes.func.isRequired
 }

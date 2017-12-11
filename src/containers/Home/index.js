@@ -10,33 +10,33 @@ import styles from './style.css'
 
 const data = [
   {
-    url: '/home/warorders',
-    icon: config.BASE_PIC_URL + '/logo.png',
+    url: '/home/resumeorders',
+    icon: config.BASE_DEFAULT_PIC_URL,
     text: '战队自荐'
   },
   {
     url: '/home/recruitorders',
-    icon: config.BASE_PIC_URL + '/logo.png',
+    icon: config.BASE_DEFAULT_PIC_URL,
     text: '战队招募'
   },
   {
     url: '/home/warorders',
-    icon: config.BASE_PIC_URL + '/logo.png',
+    icon: config.BASE_DEFAULT_PIC_URL,
     text: '比赛约战'
   },
   {
     url: '/home/grouporders',
-    icon: config.BASE_PIC_URL + '/logo.png',
+    icon: config.BASE_DEFAULT_PIC_URL,
     text: '组队上分'
   },
   {
     url: '/home/teams',
-    icon: config.BASE_PIC_URL + '/logo.png',
+    icon: config.BASE_DEFAULT_PIC_URL,
     text: '战队库'
   },
   {
     url: '/home/users',
-    icon: config.BASE_PIC_URL + '/logo.png',
+    icon: config.BASE_DEFAULT_PIC_URL,
     text: '个人库'
   }
 ]

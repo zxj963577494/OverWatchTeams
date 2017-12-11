@@ -35,7 +35,7 @@ export default class AccountResumeOrderListView extends Component {
   }
 
   onRemove = objectId => {
-    Modal.alert('警告', '是否删除该自荐贴？', [
+    Modal.alert('警告', '是否删除该组队贴？', [
       { text: '取消', onPress: () => console.log('cancel') },
       {
         text: '确定',
@@ -55,7 +55,7 @@ export default class AccountResumeOrderListView extends Component {
           <Card full>
             <Card.Header
               title={rowData.title}
-              thumb={rowData.team.avatar}
+              thumb={rowData.userinfo.avatar}
               extra={
                 <div>
                   <Button
@@ -72,7 +72,7 @@ export default class AccountResumeOrderListView extends Component {
                   </Button>
                   <Button
                     onClick={this.onRemove.bind(this, rowData.objectId)}
-                    type="resumening"
+                    type="warning"
                     size="small"
                     inline
                   >
@@ -87,15 +87,12 @@ export default class AccountResumeOrderListView extends Component {
                   <span
                     onClick={() =>
                       this.props.navigateTo(
-                        `/home/team/${rowData.team.objectId}`
+                        `/home/user/${rowData.userinfo.objectId}`
                       )
                     }
                     style={{ color: 'red' }}
                   >
-                    {rowData.team.englishFullName ||
-                      rowData.team.chineseFullName ||
-                      rowData.team.englishName ||
-                      rowData.team.chineseName}
+                    {rowData.userinfo.nickname}
                   </span>
                 </Flex.Item>
                 <Flex.Item>
