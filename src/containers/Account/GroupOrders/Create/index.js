@@ -21,7 +21,7 @@ import {
 import { MyActivityIndicator } from '../../../../components'
 
 let date = new Date()
-date.setDate(date.getDate() + 14)
+date.setDate(date.getDate() + 3)
 
 class AccountGroupOrdersCreate extends Component {
   constructor(props) {
@@ -79,8 +79,8 @@ class AccountGroupOrdersCreate extends Component {
 
   render() {
     const { getFieldProps, getFieldError } = this.props.form
-    const { app, pending, navigateTo } = this.props
-    const { teamid, title, description, contact, endDate } = this.state
+    const { app, pending } = this.props
+    const { title, description, contact, endDate } = this.state
     const titleErrors = getFieldError('title')
     const descriptionErrors = getFieldError('description')
     const contactErrors = getFieldError('contact')

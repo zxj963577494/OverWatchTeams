@@ -3,5 +3,6 @@ import * as user from './user'
 import * as data from './data'
 import * as teams from './teams'
 import * as recruitOrder from './recruitOrder'
+import * as groupOrder from './groupOrder'
 
-export { common, user, data, teams, recruitOrder }
+export { common, user, data, teams, recruitOrder, groupOrder }

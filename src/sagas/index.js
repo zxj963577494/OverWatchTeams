@@ -26,6 +26,13 @@ import {
   watchPutRecruitOrder,
   watchDeleteRecruitOrder
 } from './recruitOrderSaga'
+import {
+  watchGetAccountGroupOrderList,
+  watchGetHomeGroupOrderList,
+  watchPostGroupOrder,
+  watchPutGroupOrder,
+  watchDeleteGroupOrder
+} from './groupOrderSaga'
 
 export default function* rootSaga() {
   yield all([
@@ -51,6 +58,11 @@ export default function* rootSaga() {
     fork(watchGetHomeRecruitOrderList),
     fork(watchPostRecruitOrder),
     fork(watchPutRecruitOrder),
-    fork(watchDeleteRecruitOrder)
+    fork(watchDeleteRecruitOrder),
+    fork(watchGetAccountGroupOrderList),
+    fork(watchGetHomeGroupOrderList),
+    fork(watchPostGroupOrder),
+    fork(watchPutGroupOrder),
+    fork(watchDeleteGroupOrder)
   ])
 }
