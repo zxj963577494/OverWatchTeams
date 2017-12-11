@@ -49,14 +49,18 @@ class Home extends Component {
     return (
       <div>
         <Flex>
-          <img
-            src={config.BASE_DEFAULT_PIC_URL}
-            alt="这个世界需要更多的英雄"
-            style={{ height: 60, width: 200 }}
-          />
+          <WhiteSpace size="lg" />
+          <Flex.Item>
+            <img
+              src={config.BASE_PIC_HOME_LOGO_URL}
+              alt="这个世界需要更多的英雄"
+              style={{ height: 150, width: 300 }}
+            />
+          </Flex.Item>
         </Flex>
-        <WhiteSpace size="lg" />
-        <Flex>这个世界需要更多的英雄</Flex>
+        <Flex>
+          <Flex.Item>这个世界需要更多的英雄</Flex.Item>
+        </Flex>
       </div>
     )
   }
