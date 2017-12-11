@@ -97,6 +97,7 @@ function resumeOrderReducer(state = initialResumeOrderState, action) {
             ...state.account.resumeOrder,
             isFetching: true,
             isRefreshing: action.payload.isRefreshing || false,
+            list: action.payload.isRefreshing ? [] : state.account.resumeOrder.list,
             page: action.payload.page ? action.payload.page : 1
           }
         }

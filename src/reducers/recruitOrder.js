@@ -58,6 +58,9 @@ function recruitOrderReducer(state = initialRecruitOrderState, action) {
             ...state.home.recruitOrder,
             isFetching: true,
             isRefreshing: action.payload.isRefreshing || false,
+            list: action.payload.isRefreshing
+              ? []
+              : state.home.recruitOrder.list,
             page: action.payload.page ? action.payload.page : 1
           }
         }
@@ -153,7 +156,7 @@ function recruitOrderReducer(state = initialRecruitOrderState, action) {
           ...state.home,
           recruitOrder: {
             ...state.home.recruitOrder,
-            list: state.home.recruitOrder.list.splice(0, 0, action.payload),
+            list: state.home.recruitOrder.list.splice(0, 0, action.payload)
           }
         }
       }
@@ -204,7 +207,7 @@ function recruitOrderReducer(state = initialRecruitOrderState, action) {
           ...state.home,
           recruitOrder: {
             ...state.home.recruitOrder,
-            list: data,
+            list: data
           }
         }
       }

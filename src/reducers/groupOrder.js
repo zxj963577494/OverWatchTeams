@@ -58,6 +58,7 @@ function groupOrderReducer(state = initialGroupOrderState, action) {
             ...state.home.groupOrder,
             isFetching: true,
             isRefreshing: action.payload.isRefreshing || false,
+            list: action.payload.isRefreshing ? [] : state.home.groupOrder.list,
             page: action.payload.page ? action.payload.page : 1
           }
         }

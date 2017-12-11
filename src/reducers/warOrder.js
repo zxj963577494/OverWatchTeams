@@ -97,6 +97,7 @@ function warOrderReducer(state = initialWarOrderState, action) {
             ...state.account.warOrder,
             isFetching: true,
             isRefreshing: action.payload.isRefreshing || false,
+            list: action.payload.isRefreshing ? [] : state.account.warOrder.list,
             page: action.payload.page ? action.payload.page : 1
           }
         }

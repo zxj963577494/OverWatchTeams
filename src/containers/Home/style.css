@@ -9,3 +9,7 @@
 :global(.home__Grid > div) {
   height: 90px;
 }
+
+:global(.home__List .am-list-view-scrollview-content am-list){
+  position: unset;
+}

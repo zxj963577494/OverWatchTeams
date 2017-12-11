@@ -46,6 +46,15 @@ const data = [
 ]
 
 class Home extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      refreshing: false,
+      down: true,
+      height: document.documentElement.clientHeight,
+      data: []
+    }
+  }
   componentDidMount() {
     if (this.props.groupOrder.list.length === 0) {
       this.props.getHomeGroupOrderList({ page: 1 })
@@ -86,10 +95,13 @@ class Home extends Component {
     const { navigateTo, groupOrder } = this.props
     return (
       <div>
-        <MyActivityIndicator isFetching={groupOrder.isFetching} text={groupOrder.fetchingText} />
-        <WhiteSpace/>
+        <MyActivityIndicator
+          isFetching={groupOrder.isFetching}
+          text={groupOrder.fetchingText}
+        />
+        <WhiteSpace />
         <div className={styles['header__sticky']}>{this.renderLogo()}</div>
-        <WhiteSpace/>
+        <WhiteSpace />
         <Grid
           data={data}
           columnNum={3}
@@ -110,7 +122,7 @@ class Home extends Component {
             </div>
           )}
         />
-        <List className="home__List" renderHeader={() => '组队上分'}>
+        <List renderHeader={() => '组队上分'}>
           <HomeGroupListView groupOrder={groupOrder} navigateTo={navigateTo} />
         </List>
       </div>

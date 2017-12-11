@@ -139,6 +139,7 @@ function userReducer(state = initialUserState, action) {
             ...state.home.user,
             isFetching: true,
             isRefreshing: action.payload.isRefreshing || false,
+            list: action.payload.isRefreshing ? [] : state.home.user.list,
             page: action.payload.page ? action.payload.page : 1
           }
         }
