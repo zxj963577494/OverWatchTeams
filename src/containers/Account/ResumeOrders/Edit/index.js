@@ -75,7 +75,7 @@ class AccountResumeOrdersEdit extends Component {
   }
 
   componentDidMount() {
-    this.props.setNavBar({ title: '编辑组队上分贴', isCanBack: true })
+    this.props.setNavBar({ title: '编辑战队自荐贴', isCanBack: true })
   }
 
   render() {
@@ -90,7 +90,7 @@ class AccountResumeOrdersEdit extends Component {
       <div>
         <MyActivityIndicator isFetching={app.isFetching} text={app.text} />
         <form>
-          <List renderHeader={() => '组队标题'}>
+          <List renderHeader={() => '自荐标题'}>
             <InputItem
               {...getFieldProps('title', {
                 onChange: this.onTitleChange,
@@ -104,14 +104,14 @@ class AccountResumeOrdersEdit extends Component {
                   }
                 ]
               })}
-              placeholder="请输入组队标题"
+              placeholder="请输入自荐标题"
               value={title}
             />
             <Flex className="error">
               {titleErrors ? titleErrors.join(',') : null}
             </Flex>
           </List>
-          <List renderHeader={() => '组队内容'}>
+          <List renderHeader={() => '自荐内容'}>
             <TextareaItem
               {...getFieldProps('description', {
                 onChange: this.onDescriptionChange,
@@ -121,14 +121,14 @@ class AccountResumeOrdersEdit extends Component {
                     type: 'string',
                     required: true,
                     min: 2,
-                    max: 400,
-                    message: '组队内容:2-400个字符'
+                    max: 200,
+                    message: '组队内容:2-200个字符'
                   }
                 ]
               })}
               rows={8}
               labelNumber={5}
-              placeholder="请输入组队内容"
+              placeholder="请输入自荐内容"
               value={description}
             />
             <Flex className="error">

@@ -10,7 +10,7 @@ class HomeResumeOrders extends Component {
     if (this.props.resumeOrder.list.length === 0) {
       this.props.getHomeResumeOrderList({ page: 1 })
     }
-    this.props.setNavBar({ title: '组队上分贴', isCanBack: true })
+    this.props.setNavBar({ title: '战队自荐贴', isCanBack: true })
   }
 
   render() {

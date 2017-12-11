@@ -10,14 +10,19 @@ import styles from './style.css'
 
 const data = [
   {
-    url: '/home/teams',
+    url: '/home/warorders',
     icon: config.BASE_PIC_URL + '/logo.png',
-    text: '战队库'
+    text: '战队自荐'
   },
   {
     url: '/home/recruitorders',
     icon: config.BASE_PIC_URL + '/logo.png',
-    text: '招募令'
+    text: '战队招募'
+  },
+  {
+    url: '/home/warorders',
+    icon: config.BASE_PIC_URL + '/logo.png',
+    text: '比赛约战'
   },
   {
     url: '/home/grouporders',
@@ -25,19 +30,14 @@ const data = [
     text: '组队上分'
   },
   {
+    url: '/home/teams',
+    icon: config.BASE_PIC_URL + '/logo.png',
+    text: '战队库'
+  },
+  {
     url: '/home/users',
     icon: config.BASE_PIC_URL + '/logo.png',
     text: '个人库'
-  },
-  {
-    url: '/home/warorders',
-    icon: config.BASE_PIC_URL + '/logo.png',
-    text: '训练赛约战'
-  },
-  {
-    url: '/home/warorders',
-    icon: config.BASE_PIC_URL + '/logo.png',
-    text: '想打比赛'
   }
 ]
 

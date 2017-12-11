@@ -118,8 +118,8 @@ class AccountGroupOrdersCreate extends Component {
                     type: 'string',
                     required: true,
                     min: 2,
-                    max: 400,
-                    message: '组队内容:2-400个字符'
+                    max: 200,
+                    message: '组队内容:2-200个字符'
                   }
                 ]
               })}

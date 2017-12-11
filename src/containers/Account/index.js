@@ -117,6 +117,32 @@ class Account extends Component {
             所在战队
           </List.Item>
         </List>
+        <List renderHeader={() => '战队自荐贴'}>
+          <List.Item
+            arrow="horizontal"
+            onClick={() => {
+              if (logined) {
+                navigateTo('/account/resumeorders/create')
+              } else {
+                Toast.info('请先登录', 1)
+              }
+            }}
+          >
+            发布自荐贴
+          </List.Item>
+          <List.Item
+            arrow="horizontal"
+            onClick={() => {
+              if (logined) {
+                navigateTo('/account/resumeorders')
+              } else {
+                Toast.info('请先登录', 1)
+              }
+            }}
+          >
+            我的自荐贴
+          </List.Item>
+        </List>
         <List renderHeader={() => '战队招募令'}>
           <List.Item
             arrow="horizontal"

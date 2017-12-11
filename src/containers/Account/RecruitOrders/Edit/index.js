@@ -162,7 +162,7 @@ class AccountRecruitOrdersEdit extends Component {
                     type: 'string',
                     required: true,
                     min: 2,
-                    max: 400,
+                    max: 200,
                     message: '战队口号:2-400个字符'
                   }
                 ]
