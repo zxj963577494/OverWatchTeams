@@ -2,9 +2,13 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
-import { Flex, WhiteSpace, Grid } from 'antd-mobile'
-import { getArticlesRequest, getStickyArticlesRequest } from '../../actions'
-import { MyCarousel, HomeListView, MyActivityIndicator } from '../../components'
+import { Flex, WhiteSpace, Grid, List } from 'antd-mobile'
+import { setNavBar, getHomeGroupOrderListRequest } from '../../actions'
+import {
+  MyCarousel,
+  HomeGroupListView,
+  MyActivityIndicator
+} from '../../components'
 import config from '../../config'
 import styles from './style.css'
 
@@ -42,7 +46,12 @@ const data = [
 ]
 
 class Home extends Component {
-  componentDidMount() {}
+  componentDidMount() {
+    if (this.props.groupOrder.list.length === 0) {
+      this.props.getHomeGroupOrderList({ page: 1 })
+    }
+    this.props.setNavBar({ title: 'OverWatch Teams', isCanBack: false })
+  }
 
   // 展示LOGO
   renderLogo(sticky) {
@@ -66,21 +75,21 @@ class Home extends Component {
   }
 
   // 展示轮播图
-  renderCarousel() {
-    const { navigateTo } = this.props
-    return (
-      <MyCarousel content={this.props.sticky.list} navigateTo={navigateTo} />
-    )
-  }
+  // renderCarousel() {
+  //   const { navigateTo } = this.props
+  //   return (
+  //     <MyCarousel content={} navigateTo={navigateTo} />
+  //   )
+  // }
 
   render() {
-    const { navigateTo, app } = this.props
+    const { navigateTo, groupOrder } = this.props
     return (
       <div>
-        <MyActivityIndicator isFetching={app.isFetching} text={app.text} />
-        <WhiteSpace size="xs" />
+        <MyActivityIndicator isFetching={groupOrder.isFetching} text={groupOrder.fetchingText} />
+        <WhiteSpace/>
         <div className={styles['header__sticky']}>{this.renderLogo()}</div>
-        <WhiteSpace size="xs" />
+        <WhiteSpace/>
         <Grid
           data={data}
           columnNum={3}
@@ -101,7 +110,10 @@ class Home extends Component {
             </div>
           )}
         />
-        <WhiteSpace size="xs" />
+        <WhiteSpace/>
+        <List className="home__List" renderHeader={() => '组队上分'}>
+          <HomeGroupListView groupOrder={groupOrder} navigateTo={navigateTo} />
+        </List>
       </div>
     )
   }
@@ -109,20 +121,30 @@ class Home extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    app: state.root.app
+    groupOrder: state.root.groupOrder.home.groupOrder
   }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
+    getHomeGroupOrderList: payload => {
+      dispatch(getHomeGroupOrderListRequest(payload))
+    },
     navigateTo: location => {
       dispatch(push(location))
+    },
+    setNavBar: payload => {
+      dispatch(
+        setNavBar({ title: payload.title, isCanBack: payload.isCanBack })
+      )
     }
   }
 }
 
 Home.propTypes = {
-  navigateTo: PropTypes.func.isRequired
+  setNavBar: PropTypes.func.isRequired,
+  navigateTo: PropTypes.func.isRequired,
+  getHomeGroupOrderList: PropTypes.func.isRequired
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home)
