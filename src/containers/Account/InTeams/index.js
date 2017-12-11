@@ -2,11 +2,10 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
-import { WhiteSpace, WingBlank, Card, Grid } from 'antd-mobile'
+import { WhiteSpace, WingBlank, Card, List } from 'antd-mobile'
 import { setNavBar, getInTeamsRequest } from '../../../actions'
 import { MyActivityIndicator } from '../../../components'
-import { getPosition } from '../../../utils/utils'
-import config from '../../../config'
+import { cutstr } from '../../../utils/utils'
 // eslint-disable-next-line
 import styles from './style.css'
 
@@ -26,7 +25,12 @@ class AccountTeams extends Component {
         <WingBlank>
           {teams.map(function(item, index) {
             return (
-              <div key={index}>
+              <div
+                onClick={() => {
+                  navigateTo('/home/team/' + item.objectId)
+                }}
+                key={index}
+              >
                 <WhiteSpace />
                 <Card>
                   <Card.Header
@@ -39,56 +43,11 @@ class AccountTeams extends Component {
                     thumb={item.avatar}
                   />
                   <Card.Body>
-                    <Grid
-                      data={item.members}
-                      columnNum={3}
-                      hasLine={false}
-                      renderItem={(dataItem, index) => (
-                        <div
-                          key={index}
-                          onClick={() => {
-                            if (dataItem.objectId) {
-                              navigateTo(
-                                `/account/members/detail/${item.objectId}/${
-                                  dataItem.objectId
-                                }`
-                              )
-                            }
-                          }}
-                        >
-                          <img
-                            src={dataItem.avatar}
-                            style={{
-                              width: '60px',
-                              height: '60px',
-                              borderRadius: '50%'
-                            }}
-                            alt={dataItem.nickname}
-                          />
-                          <div
-                            style={{
-                              color: '#888',
-                              fontSize: '14px',
-                              marginTop: '6px'
-                            }}
-                          >
-                            <span>{dataItem.nickname}</span>
-                            <img
-                              src={getPosition(dataItem.position)}
-                              alt={dataItem.position}
-                              className="teams--position"
-                            />
-                            {dataItem.leader ? (
-                              <img
-                                src={config.BASE_PIC_URL + '/leader.png'}
-                                alt="队长"
-                                className="teams--leader"
-                              />
-                            ) : null}
-                          </div>
-                        </div>
-                      )}
-                    />
+                    <List>
+                      <List.Item wrap>
+                        {cutstr(item.introduction, 200, 0)}
+                      </List.Item>
+                    </List>
                   </Card.Body>
                 </Card>
               </div>

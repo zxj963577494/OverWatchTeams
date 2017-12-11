@@ -62,7 +62,6 @@ export function getAccountResumeOrderList(payload) {
   query.skip(pagesize * (page - 1))
   query.equalTo('user', user)
   query.greaterThanOrEqualTo('endDate', new Date())
-  query.equalTo('hidden', 0)
   query.include('user')
   query.include('user.userinfo')
   return query.find().then(function(result) {

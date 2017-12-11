@@ -60,11 +60,11 @@ export function getAccountGroupOrderList(payload) {
   pagesize = pagesize || 20
   const user = getCurrentUser()
   const query = new AV.Query('GroupOrders')
+  query.equalTo('user', user)
+  query.greaterThanOrEqualTo('endDate', new Date())
   query.descending('updatedAt')
   query.limit(pagesize)
   query.skip(pagesize * (page - 1))
-  query.equalTo('user', user)
-  query.greaterThanOrEqualTo('endDate', new Date())
   query.include('user')
   query.include('user.userinfo')
   return query.find().then(function(result) {

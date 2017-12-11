@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
-import { getAccountWarOrderListRequest, deleteWarOrderRequest } from '../../../actions'
+import { setNavBar, getAccountWarOrderListRequest, deleteWarOrderRequest } from '../../../actions'
 import { AccountWarOrderListView, MyActivityIndicator } from '../../../components'
 
 class AccountWarOrders extends Component {
@@ -10,6 +10,7 @@ class AccountWarOrders extends Component {
     if (this.props.warOrder.list.length === 0) {
       this.props.getAccountWarOrderList({ page: 1 })
     }
+    this.props.setNavBar({ title: '战队约战贴', isCanBack: true })
   }
 
   render() {
@@ -47,7 +48,12 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     },
     navigateTo: location => {
       dispatch(push(location))
-    }
+    },
+    setNavBar: payload => {
+      dispatch(
+        setNavBar({ title: payload.title, isCanBack: payload.isCanBack })
+      )
+    },
   }
 }
 
@@ -56,6 +62,7 @@ AccountWarOrders.propTypes = {
   getAccountWarOrderList: PropTypes.func.isRequired,
   navigateTo: PropTypes.func.isRequired,
   deleteWarOrder: PropTypes.func.isRequired,
+  setNavBar: PropTypes.func.isRequired,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(

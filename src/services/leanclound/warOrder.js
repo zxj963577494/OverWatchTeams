@@ -62,11 +62,11 @@ export function getAccountWarOrderList(payload) {
   pagesize = pagesize || 20
   const user = getCurrentUser()
   const query = new AV.Query('WarOrders')
+  query.equalTo('user', user)
+  query.greaterThanOrEqualTo('endDate', new Date())
   query.descending('updatedAt')
   query.limit(pagesize)
   query.skip(pagesize * (page - 1))
-  query.equalTo('user', user)
-  query.greaterThanOrEqualTo('endDate', new Date())
   query.include('user')
   query.include('user.userinfo')
   query.include('team')
