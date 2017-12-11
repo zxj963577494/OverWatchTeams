@@ -71,6 +71,8 @@ export function cerateTeam(payload) {
   for (let key of Object.keys(payload)) {
     teams.set(key, payload[key])
   }
+  // 默认不置顶
+  teams.set('stick', 0)
 
   if (!payload['avatar']) {
     teams.set('avatar', config.BASE_PIC_URL + '/logo.png')
@@ -244,6 +246,8 @@ export function getHomeTeamsList(payload) {
   let { page, pagesize } = payload
   pagesize = pagesize || 20
   const teams = new AV.Query('Teams')
+  teams.descending('stick')
+  teams.descending('createdAt')
   teams.limit(pagesize)
   teams.skip(pagesize * (page - 1))
   return teams.find().then(function(result) {

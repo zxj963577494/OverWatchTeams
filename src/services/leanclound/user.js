@@ -132,6 +132,7 @@ export function getHomeUserList(payload) {
   const userinfo = new AV.Query('UserInfo')
   userinfo.equalTo('isPublic', true)
   const user = new AV.Query('_User')
+  user.descending('createdAt')
   user.limit(pagesize)
   user.skip(pagesize * (page - 1))
   user.include('userinfo')

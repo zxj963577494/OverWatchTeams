@@ -11,6 +11,7 @@ export function cerateGroupOrder(payload) {
   const endDate = new Date(payload.endDate)
   groupOrders.set('endDate', endDate)
   groupOrders.set('user', user)
+  groupOrders.set('stick', 0)
 
   var acl = new AV.ACL()
   acl.setPublicReadAccess(true)
@@ -44,7 +45,10 @@ export function updateGroupOrder(payload) {
 }
 
 export function removeGroupOrder(payload) {
-  var recruitOrders = AV.Object.createWithoutData('GroupOrders', payload.objectId)
+  var recruitOrders = AV.Object.createWithoutData(
+    'GroupOrders',
+    payload.objectId
+  )
   return recruitOrders.destroy().then(function(success) {
     return success.toJSON()
   })
@@ -81,12 +85,13 @@ export function getHomeGroupOrderList(payload) {
   let { page, pagesize } = payload
   pagesize = pagesize || 20
   const query = new AV.Query('GroupOrders')
+  query.descending('stick')
+  query.descending('createdAt')
   query.limit(pagesize)
   query.skip(pagesize * (page - 1))
   query.greaterThanOrEqualTo('endDate', new Date())
   query.include('user')
   query.include('user.userinfo')
-  query.include('team')
   return query.find().then(function(result) {
     result.forEach(item => {
       const userinfo = item

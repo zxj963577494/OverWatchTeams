@@ -9,6 +9,7 @@ export function cerateWarOrder(payload) {
   warOrders.set('title', payload.title)
   warOrders.set('description', payload.description)
   warOrders.set('contact', payload.contact)
+  warOrders.set('stick', 0)
   const endDate = new Date(payload.endDate)
   warOrders.set('endDate', endDate)
   warOrders.set('user', user)
@@ -87,6 +88,8 @@ export function getHomeWarOrderList(payload) {
   let { page, pagesize } = payload
   pagesize = pagesize || 20
   const query = new AV.Query('WarOrders')
+  query.descending('stick')
+  query.descending('createdAt')
   query.limit(pagesize)
   query.skip(pagesize * (page - 1))
   query.greaterThanOrEqualTo('endDate', new Date())
