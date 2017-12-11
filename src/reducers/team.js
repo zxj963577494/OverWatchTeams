@@ -71,6 +71,13 @@ function teamReducer(state = initialTeamState, action) {
             myTeams: state.account.team.myTeams.splice(0, 0, action.payload),
             pending: false
           }
+        },
+        home: {
+          ...state.home,
+          team: {
+            ...state.home.team,
+            myTeams: state.home.team.myTeams.splice(0, 0, action.payload),
+          }
         }
       }
     case POST_TEAMS_FAILED:
@@ -114,6 +121,13 @@ function teamReducer(state = initialTeamState, action) {
             ...state.account.team,
             myTeams: data
           }
+        },
+        home: {
+          ...state.home,
+          team: {
+            ...state.home.team,
+            myTeams: data
+          }
         }
       }
     case PUT_TEAMS_FAILED:
@@ -143,6 +157,15 @@ function teamReducer(state = initialTeamState, action) {
           team: {
             ...state.account.team,
             myTeams: state.account.team.myTeams.filter(
+              x => x.objectId !== action.payload.objectId
+            )
+          }
+        },
+        home: {
+          ...state.home,
+          team: {
+            ...state.home.team,
+            myTeams: state.home.team.myTeams.filter(
               x => x.objectId !== action.payload.objectId
             )
           }

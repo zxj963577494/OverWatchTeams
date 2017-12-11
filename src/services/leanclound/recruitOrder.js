@@ -10,6 +10,7 @@ export function cerateRecruitOrder(payload) {
   recruitOrders.set('description', payload.description)
   recruitOrders.set('contact', payload.contact)
   recruitOrders.set('stick', 0)
+  recruitOrders.set('show', 1)
   const endDate = new Date(payload.endDate)
   recruitOrders.set('endDate', endDate)
   recruitOrders.set('user', user)
@@ -88,11 +89,12 @@ export function getHomeRecruitOrderList(payload) {
   let { page, pagesize } = payload
   pagesize = pagesize || 20
   const query = new AV.Query('RecruitOrders')
+  query.equalTo('show', 1)
+  query.greaterThanOrEqualTo('endDate', new Date())
   query.descending('stick')
   query.descending('createdAt')
   query.limit(pagesize)
   query.skip(pagesize * (page - 1))
-  query.greaterThanOrEqualTo('endDate', new Date())
   query.include('user')
   query.include('user.userinfo')
   query.include('team')

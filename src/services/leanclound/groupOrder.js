@@ -12,7 +12,7 @@ export function cerateGroupOrder(payload) {
   groupOrders.set('endDate', endDate)
   groupOrders.set('user', user)
   groupOrders.set('stick', 0)
-
+  groupOrders.set('show', 1)
   var acl = new AV.ACL()
   acl.setPublicReadAccess(true)
   acl.setWriteAccess(user, true)
@@ -85,11 +85,12 @@ export function getHomeGroupOrderList(payload) {
   let { page, pagesize } = payload
   pagesize = pagesize || 20
   const query = new AV.Query('GroupOrders')
+  query.equalTo('show', 1)
+  query.greaterThanOrEqualTo('endDate', new Date())
   query.descending('stick')
   query.descending('createdAt')
   query.limit(pagesize)
   query.skip(pagesize * (page - 1))
-  query.greaterThanOrEqualTo('endDate', new Date())
   query.include('user')
   query.include('user.userinfo')
   return query.find().then(function(result) {

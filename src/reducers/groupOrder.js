@@ -148,6 +148,13 @@ function groupOrderReducer(state = initialGroupOrderState, action) {
             list: state.account.groupOrder.list.splice(0, 0, action.payload),
             pending: false
           }
+        },
+        home: {
+          ...state.home,
+          groupOrder: {
+            ...state.home.groupOrder,
+            list: state.home.groupOrder.list.splice(0, 0, action.payload),
+          }
         }
       }
     case POST_GROUP_ORDER_FAILED:
@@ -192,6 +199,14 @@ function groupOrderReducer(state = initialGroupOrderState, action) {
             list: data,
             pending: false
           }
+        },
+        home: {
+          ...state.home,
+          groupOrder: {
+            ...state.home.groupOrder,
+            list: data,
+            pending: false
+          }
         }
       }
     case PUT_GROUP_ORDER_FAILED:
@@ -215,6 +230,15 @@ function groupOrderReducer(state = initialGroupOrderState, action) {
           groupOrder: {
             ...state.account.groupOrder,
             list: state.account.groupOrder.list.filter(
+              x => x.objectId !== action.payload.objectId
+            )
+          }
+        },
+        home: {
+          ...state.home,
+          groupOrder: {
+            ...state.home.groupOrder,
+            list: state.home.groupOrder.list.filter(
               x => x.objectId !== action.payload.objectId
             )
           }

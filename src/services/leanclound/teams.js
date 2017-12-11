@@ -73,7 +73,7 @@ export function cerateTeam(payload) {
   }
   // 默认不置顶
   teams.set('stick', 0)
-
+  teams.set('show', 1)
   if (!payload['avatar']) {
     teams.set('avatar', config.BASE_PIC_URL + '/logo.png')
   }
@@ -245,12 +245,13 @@ export function getHomeTeamsList(payload) {
   let list = []
   let { page, pagesize } = payload
   pagesize = pagesize || 20
-  const teams = new AV.Query('Teams')
-  teams.descending('stick')
-  teams.descending('createdAt')
-  teams.limit(pagesize)
-  teams.skip(pagesize * (page - 1))
-  return teams.find().then(function(result) {
+  const query = new AV.Query('Teams')
+  query.equalTo('show', 1)
+  query.descending('stick')
+  query.descending('createdAt')
+  query.limit(pagesize)
+  query.skip(pagesize * (page - 1))
+  return query.find().then(function(result) {
     result.forEach(item => {
       list.push(item.toJSON())
     })

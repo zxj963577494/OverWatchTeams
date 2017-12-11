@@ -211,7 +211,7 @@ class AccountWarOrdersEdit extends Component {
               value={endDate}
               onChange={date => this.setState({ endDate: date })}
             >
-              <List.Item arrow="horizontal">截止日期</List.Item>
+              <List.Item arrow="horizontal">有效日期</List.Item>
             </DatePicker>
             <Flex className="error">
               {endDateErrors ? endDateErrors.join(',') : null}

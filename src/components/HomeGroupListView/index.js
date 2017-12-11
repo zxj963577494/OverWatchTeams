@@ -54,7 +54,7 @@ export default class HomeGroupListView extends Component {
               }
               extra={
                 <div style={{ color: 'red' }}>
-                  截止日期：<TimeAgo
+                  有效日期：<TimeAgo
                     datetime={rowData.endDate}
                     locale="zh_CN"
                   />

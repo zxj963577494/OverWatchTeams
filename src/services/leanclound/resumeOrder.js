@@ -12,7 +12,7 @@ export function cerateResumeOrder(payload) {
   resumeOrders.set('endDate', endDate)
   resumeOrders.set('user', user)
   resumeOrders.set('stick', 0)
-  
+  resumeOrders.set('show', 1)
   var acl = new AV.ACL()
   acl.setPublicReadAccess(true)
   acl.setWriteAccess(user, true)
@@ -62,6 +62,7 @@ export function getAccountResumeOrderList(payload) {
   query.skip(pagesize * (page - 1))
   query.equalTo('user', user)
   query.greaterThanOrEqualTo('endDate', new Date())
+  query.equalTo('hidden', 0)
   query.include('user')
   query.include('user.userinfo')
   return query.find().then(function(result) {
@@ -82,11 +83,12 @@ export function getHomeResumeOrderList(payload) {
   let { page, pagesize } = payload
   pagesize = pagesize || 20
   const query = new AV.Query('ResumeOrders')
+  query.equalTo('show', 1)
+  query.greaterThanOrEqualTo('endDate', new Date())
   query.descending('stick')
   query.descending('createdAt')
   query.limit(pagesize)
   query.skip(pagesize * (page - 1))
-  query.greaterThanOrEqualTo('endDate', new Date())
   query.include('user')
   query.include('user.userinfo')
   query.include('team')

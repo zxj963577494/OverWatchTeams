@@ -148,6 +148,13 @@ function recruitOrderReducer(state = initialRecruitOrderState, action) {
             list: state.account.recruitOrder.list.splice(0, 0, action.payload),
             pending: false
           }
+        },
+        home: {
+          ...state.home,
+          recruitOrder: {
+            ...state.home.recruitOrder,
+            list: state.home.recruitOrder.list.splice(0, 0, action.payload),
+          }
         }
       }
     case POST_RECRUIT_ORDER_FAILED:
@@ -192,6 +199,13 @@ function recruitOrderReducer(state = initialRecruitOrderState, action) {
             list: data,
             pending: false
           }
+        },
+        home: {
+          ...state.home,
+          recruitOrder: {
+            ...state.home.recruitOrder,
+            list: data,
+          }
         }
       }
     case PUT_RECRUIT_ORDER_FAILED:
@@ -215,6 +229,15 @@ function recruitOrderReducer(state = initialRecruitOrderState, action) {
           recruitOrder: {
             ...state.account.recruitOrder,
             list: state.account.recruitOrder.list.filter(
+              x => x.objectId !== action.payload.objectId
+            )
+          }
+        },
+        home: {
+          ...state.home,
+          recruitOrder: {
+            ...state.home.recruitOrder,
+            list: state.home.recruitOrder.list.filter(
               x => x.objectId !== action.payload.objectId
             )
           }

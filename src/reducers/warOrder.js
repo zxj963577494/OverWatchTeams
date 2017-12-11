@@ -148,6 +148,13 @@ function warOrderReducer(state = initialWarOrderState, action) {
             list: state.account.warOrder.list.splice(0, 0, action.payload),
             pending: false
           }
+        },
+        home: {
+          ...state.home,
+          warOrder: {
+            ...state.home.warOrder,
+            list: state.home.warOrder.list.splice(0, 0, action.payload),
+          }
         }
       }
     case POST_WAR_ORDER_FAILED:
@@ -192,6 +199,14 @@ function warOrderReducer(state = initialWarOrderState, action) {
             list: data,
             pending: false
           }
+        },
+        home: {
+          ...state.home,
+          warOrder: {
+            ...state.home.warOrder,
+            list: data,
+            pending: false
+          }
         }
       }
     case PUT_WAR_ORDER_FAILED:
@@ -215,6 +230,15 @@ function warOrderReducer(state = initialWarOrderState, action) {
           warOrder: {
             ...state.account.warOrder,
             list: state.account.warOrder.list.filter(
+              x => x.objectId !== action.payload.objectId
+            )
+          }
+        },
+        home: {
+          ...state.home,
+          warOrder: {
+            ...state.home.warOrder,
+            list: state.home.warOrder.list.filter(
               x => x.objectId !== action.payload.objectId
             )
           }

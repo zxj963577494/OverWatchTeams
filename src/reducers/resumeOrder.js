@@ -148,6 +148,13 @@ function resumeOrderReducer(state = initialResumeOrderState, action) {
             list: state.account.resumeOrder.list.splice(0, 0, action.payload),
             pending: false
           }
+        },
+        home: {
+          ...state.home,
+          resumeOrder: {
+            ...state.home.resumeOrder,
+            list: state.home.resumeOrder.list.splice(0, 0, action.payload),
+          }
         }
       }
     case POST_RESUME_ORDER_FAILED:
@@ -192,6 +199,14 @@ function resumeOrderReducer(state = initialResumeOrderState, action) {
             list: data,
             pending: false
           }
+        },
+        home: {
+          ...state.account,
+          home: {
+            ...state.home.resumeOrder,
+            list: data,
+            pending: false
+          }
         }
       }
     case PUT_RESUME_ORDER_FAILED:
@@ -215,6 +230,15 @@ function resumeOrderReducer(state = initialResumeOrderState, action) {
           resumeOrder: {
             ...state.account.resumeOrder,
             list: state.account.resumeOrder.list.filter(
+              x => x.objectId !== action.payload.objectId
+            )
+          }
+        },
+        home: {
+          ...state.home,
+          resumeOrder: {
+            ...state.home.resumeOrder,
+            list: state.home.resumeOrder.list.filter(
               x => x.objectId !== action.payload.objectId
             )
           }

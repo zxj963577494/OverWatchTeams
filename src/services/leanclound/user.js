@@ -10,6 +10,8 @@ export function signUp(payload) {
   user.setUsername(username)
   user.setPassword(password)
   user.setEmail(email)
+  user.set('show', 1)
+  user.set('stick', 0)
   return user.signUp().then(function(loginedUser) {
     if (!loginedUser.get('userinfo')) {
       const Userinfo = AV.Object.extend('UserInfo')
@@ -132,6 +134,8 @@ export function getHomeUserList(payload) {
   const userinfo = new AV.Query('UserInfo')
   userinfo.equalTo('isPublic', true)
   const user = new AV.Query('_User')
+  user.equalTo('show', 1)
+  user.descending('stick')
   user.descending('createdAt')
   user.limit(pagesize)
   user.skip(pagesize * (page - 1))

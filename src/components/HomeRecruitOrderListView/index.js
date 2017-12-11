@@ -78,7 +78,7 @@ export default class HomeRecruitOrderListView extends Component {
               }
               extra={
                 <div style={{ color: 'red' }}>
-                  截止日期：<TimeAgo datetime={rowData.endDate} locale="zh_CN" />
+                  有效日期：<TimeAgo datetime={rowData.endDate} locale="zh_CN" />
                 </div>
               }
             />
