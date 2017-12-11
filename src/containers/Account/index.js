@@ -143,30 +143,30 @@ class Account extends Component {
             我的招募令
           </List.Item>
         </List>
-        <List renderHeader={() => '组队英雄帖'}>
+        <List renderHeader={() => '组队上分帖'}>
           <List.Item
             arrow="horizontal"
             onClick={() => {
               if (logined) {
-                navigateTo('/account/recruitadd')
+                navigateTo('/account/grouporders/create')
               } else {
                 Toast.info('请先登录', 1)
               }
             }}
           >
-            发布英雄帖
+            发布组队帖
           </List.Item>
           <List.Item
             arrow="horizontal"
             onClick={() => {
               if (logined) {
-                navigateTo('/account/recruitlist')
+                navigateTo('/account/grouporders')
               } else {
                 Toast.info('请先登录', 1)
               }
             }}
           >
-            我的英雄帖
+            我的组队帖
           </List.Item>
         </List>
         <WhiteSpace />

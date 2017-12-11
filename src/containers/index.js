@@ -20,6 +20,10 @@ import AccountRecruitOrdersCreate from './Account/RecruitOrders/Create'
 import AccountRecruitOrdersEdit from './Account/RecruitOrders/Edit'
 import AccountRecruitOrders from './Account/RecruitOrders'
 import HomeRecruitOrders from './Home/RecruitOrders'
+import AccountGroupOrdersCreate from './Account/GroupOrders/Create'
+import AccountGroupOrdersEdit from './Account/GroupOrders/Edit'
+import AccountGroupOrders from './Account/GroupOrders'
+import HomeGroupOrders from './Home/GroupOrders'
 
 export {
   Root,
@@ -34,6 +38,7 @@ export {
   HomeTeams,
   HomeTeamDetail,
   HomeRecruitOrders,
+  HomeGroupOrders,  
   AccountMime,
   AccountMyTeams,
   AccountMyTeamsCreate,
@@ -44,4 +49,7 @@ export {
   AccountRecruitOrdersCreate,
   AccountRecruitOrdersEdit,
   AccountRecruitOrders,
+  AccountGroupOrdersCreate,
+  AccountGroupOrdersEdit,
+  AccountGroupOrders,
 }

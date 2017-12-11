@@ -74,7 +74,25 @@ import {
   PUT_RECRUIT_ORDER_FAILED,
   DELETE_RECRUIT_ORDER_REQUEST,
   DELETE_RECRUIT_ORDER_SUCCESS,
-  DELETE_RECRUIT_ORDER_FAILED
+  DELETE_RECRUIT_ORDER_FAILED,
+  GET_HOME_GROUP_ORDER_LIST_REQUEST,
+  GET_HOME_GROUP_ORDER_LIST_SUCCESS,
+  GET_HOME_GROUP_ORDER_LIST_FAILED,
+  GET_ACCOUNT_GROUP_ORDER_LIST_REQUEST,
+  GET_ACCOUNT_GROUP_ORDER_LIST_SUCCESS,
+  GET_ACCOUNT_GROUP_ORDER_LIST_FAILED,
+  GET_GROUP_ORDER_DETAIL_REQUEST,
+  GET_GROUP_ORDER_DETAIL_SUCCESS,
+  GET_GROUP_ORDER_DETAIL_FAILED,
+  POST_GROUP_ORDER_REQUEST,
+  POST_GROUP_ORDER_SUCCESS,
+  POST_GROUP_ORDER_FAILED,
+  PUT_GROUP_ORDER_REQUEST,
+  PUT_GROUP_ORDER_SUCCESS,
+  PUT_GROUP_ORDER_FAILED,
+  DELETE_GROUP_ORDER_REQUEST,
+  DELETE_GROUP_ORDER_SUCCESS,
+  DELETE_GROUP_ORDER_FAILED
 } from '../constants/actionTypes'
 
 export const getArticlesRequest = function(payload) {
@@ -379,4 +397,76 @@ export const deleteRecruitOrderSuccess = function(payload) {
 
 export const deleteRecruitOrderFailed = function(payload) {
   return { type: DELETE_RECRUIT_ORDER_FAILED, payload }
+}
+
+export const getHomeGroupOrderListRequest = function(payload) {
+  return { type: GET_HOME_GROUP_ORDER_LIST_REQUEST, payload }
+}
+
+export const getHomeGroupOrderListSuccess = function(payload) {
+  return { type: GET_HOME_GROUP_ORDER_LIST_SUCCESS, payload }
+}
+
+export const getHomeGroupOrderListFailed = function(payload) {
+  return { type: GET_HOME_GROUP_ORDER_LIST_FAILED, payload }
+}
+
+export const getAccountGroupOrderListRequest = function(payload) {
+  return { type: GET_ACCOUNT_GROUP_ORDER_LIST_REQUEST, payload }
+}
+
+export const getAccountGroupOrderListSuccess = function(payload) {
+  return { type: GET_ACCOUNT_GROUP_ORDER_LIST_SUCCESS, payload }
+}
+
+export const getAccountGroupOrderListFailed = function(payload) {
+  return { type: GET_ACCOUNT_GROUP_ORDER_LIST_FAILED, payload }
+}
+
+export const getGroupOrderDetailRequest = function(payload) {
+  return { type: GET_GROUP_ORDER_DETAIL_REQUEST, payload }
+}
+
+export const getGroupOrderDetailSuccess = function(payload) {
+  return { type: GET_GROUP_ORDER_DETAIL_SUCCESS, payload }
+}
+
+export const getGroupOrderDetailFailed = function(payload) {
+  return { type: GET_GROUP_ORDER_DETAIL_FAILED, payload }
+}
+
+export const postGroupOrderRequest = function(payload) {
+  return { type: POST_GROUP_ORDER_REQUEST, payload }
+}
+
+export const postGroupOrderSuccess = function(payload) {
+  return { type: POST_GROUP_ORDER_SUCCESS, payload }
+}
+
+export const postGroupOrderFailed = function(payload) {
+  return { type: POST_GROUP_ORDER_FAILED, payload }
+}
+
+export const putGroupOrderRequest = function(payload) {
+  return { type: PUT_GROUP_ORDER_REQUEST, payload }
+}
+
+export const putGroupOrderSuccess = function(payload) {
+  return { type: PUT_GROUP_ORDER_SUCCESS, payload }
+}
+
+export const putGroupOrderFailed = function(payload) {
+  return { type: PUT_GROUP_ORDER_FAILED, payload }
+}
+
+export const deleteGroupOrderRequest = function(payload) {
+  return { type: DELETE_GROUP_ORDER_REQUEST, payload }
+}
+
+export const deleteGroupOrderSuccess = function(payload) {
+  return { type: DELETE_GROUP_ORDER_SUCCESS, payload }
+}
+
+export const deleteGroupOrderFailed = function(payload) {
+  return { type: DELETE_GROUP_ORDER_FAILED, payload }
 }

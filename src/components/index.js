@@ -7,6 +7,8 @@ import HomeTeamsListView from './HomeTeamsListView'
 import MyActivityIndicator from './ActivityIndicator'
 import AccountRecruitOrderListView from './AccountRecruitOrderListView'
 import HomeRecruitOrderListView from './HomeRecruitOrderListView'
+import AccountGroupOrderListView from './AccountGroupOrderListView'
+import HomeGroupOrderListView from './HomeGroupOrderListView'
 
 export {
   MyTabBar,
@@ -17,5 +19,7 @@ export {
   HomeListView,
   MyActivityIndicator,
   AccountRecruitOrderListView,
-  HomeRecruitOrderListView
+  HomeRecruitOrderListView,
+  AccountGroupOrderListView,
+  HomeGroupOrderListView
 }

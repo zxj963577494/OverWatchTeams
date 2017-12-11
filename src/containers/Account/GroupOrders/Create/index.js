@@ -13,28 +13,25 @@ import {
   TextareaItem,
   Toast,
   DatePicker,
-  Radio
 } from 'antd-mobile'
 import {
   setNavBar,
-  postRecruitOrderRequest,
-  getMyTeamsRequest
+  postGroupOrderRequest,
 } from '../../../../actions'
 import { MyActivityIndicator } from '../../../../components'
 
 let date = new Date()
 date.setDate(date.getDate() + 14)
 
-class AccountRecruitOrdersCreate extends Component {
+class AccountGroupOrdersCreate extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      teamid: '',
       title: '',
       description: '',
       endDate: date,
       contact: props.userinfo.contact || '',
-      pending: props.recruitOrder.pending
+      pending: props.groupOrder.pending
     }
     this.onTitleChange = this.onTitleChange.bind(this)
     this.onDescriptionChange = this.onDescriptionChange.bind(this)
@@ -60,27 +57,16 @@ class AccountRecruitOrdersCreate extends Component {
     })
   }
 
-  onTeamSelectedChange(value) {
-    this.setState({
-      teamid: value
-    })
-  }
-
   onSubmit() {
-    const { postRecruit, form } = this.props
+    const { postGroup, form } = this.props
     form.validateFields((error, value) => {
       if (!error) {
-        if (this.state.teamid) {
-          postRecruit({
-            teamid: this.state.teamid,
-            contact: this.state.contact,
-            title: this.state.title,
-            description: this.state.description,
-            endDate: this.state.endDate
-          })
-        } else {
-          Toast.fail('请选择战队', 1.5)
-        }
+        postGroup({
+          contact: this.state.contact,
+          title: this.state.title,
+          description: this.state.description,
+          endDate: this.state.endDate
+        })
       } else {
         Toast.fail('格式错误，请检查后提交', 1.5)
       }
@@ -88,15 +74,12 @@ class AccountRecruitOrdersCreate extends Component {
   }
 
   componentDidMount() {
-    if (this.props.teams.length === 0) {
-      this.props.getMyTeams()
-    }
-    this.props.setNavBar({ title: '新建战队招募令', isCanBack: true })
+    this.props.setNavBar({ title: '新建组队上分贴', isCanBack: true })
   }
 
   render() {
     const { getFieldProps, getFieldError } = this.props.form
-    const { app, pending, teams, navigateTo } = this.props
+    const { app, pending, navigateTo } = this.props
     const { teamid, title, description, contact, endDate } = this.state
     const titleErrors = getFieldError('title')
     const descriptionErrors = getFieldError('description')
@@ -106,30 +89,7 @@ class AccountRecruitOrdersCreate extends Component {
       <div>
         <MyActivityIndicator isFetching={app.isFetching} text={app.text} />
         <form>
-          <List renderHeader={() => '选择战队'}>
-            {teams.length > 0 ? (
-              teams.map((item, index) => (
-                <Radio.RadioItem
-                  key={index}
-                  onChange={() => this.onTeamSelectedChange(item.objectId)}
-                  checked={teamid === item.objectId}
-                >
-                  {item.englishFullName ||
-                    item.chineseFullName ||
-                    item.englishName ||
-                    item.chineseName}
-                </Radio.RadioItem>
-              ))
-            ) : (
-              <Button
-                type="warning"
-                onClick={() => navigateTo('/account/teams/create')}
-              >
-                必须先创建战队，点击前往
-              </Button>
-            )}
-          </List>
-          <List renderHeader={() => '招募令标题'}>
+          <List renderHeader={() => '组队标题'}>
             <InputItem
               {...getFieldProps('title', {
                 onChange: this.onTitleChange,
@@ -142,14 +102,14 @@ class AccountRecruitOrdersCreate extends Component {
                   }
                 ]
               })}
-              placeholder="请输入招募令标题"
+              placeholder="请输入组队标题"
               value={title}
             />
             <Flex className="error">
               {titleErrors ? titleErrors.join(',') : null}
             </Flex>
           </List>
-          <List renderHeader={() => '招募令内容'}>
+          <List renderHeader={() => '组队内容'}>
             <TextareaItem
               {...getFieldProps('description', {
                 onChange: this.onDescriptionChange,
@@ -159,13 +119,13 @@ class AccountRecruitOrdersCreate extends Component {
                     required: true,
                     min: 2,
                     max: 400,
-                    message: '招募令内容:2-400个字符'
+                    message: '组队内容:2-400个字符'
                   }
                 ]
               })}
               rows={8}
               labelNumber={5}
-              placeholder="请输入招募令内容"
+              placeholder="请输入组队内容"
               value={description}
             />
             <Flex className="error">
@@ -228,9 +188,8 @@ class AccountRecruitOrdersCreate extends Component {
 const mapStateToProps = (state, ownProps) => {
   return {
     app: state.root.app,
-    teams: state.root.team.account.team.myTeams,
     userinfo: state.root.user.account.userinfo,
-    recruitOrder: state.root.recruitOrder.account
+    groupOrder: state.root.groupOrder.account
   }
 }
 
@@ -241,11 +200,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         setNavBar({ title: payload.title, isCanBack: payload.isCanBack })
       )
     },
-    postRecruit: payload => {
-      dispatch(postRecruitOrderRequest(payload))
-    },
-    getMyTeams: () => {
-      dispatch(getMyTeamsRequest())
+    postGroup: payload => {
+      dispatch(postGroupOrderRequest(payload))
     },
     navigateTo: location => {
       dispatch(push(location))
@@ -253,15 +209,15 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   }
 }
 
-AccountRecruitOrdersCreate.propTypes = {
+AccountGroupOrdersCreate.propTypes = {
   app: PropTypes.object.isRequired,
   userinfo: PropTypes.object,
-  recruitOrder: PropTypes.object,
-  postRecruit: PropTypes.func.isRequired,
+  groupOrder: PropTypes.object,
+  postGroup: PropTypes.func.isRequired,
   navigateTo: PropTypes.func.isRequired,
   form: PropTypes.object
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(
-  createForm()(AccountRecruitOrdersCreate)
+  createForm()(AccountGroupOrdersCreate)
 )
