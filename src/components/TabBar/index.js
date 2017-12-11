@@ -33,8 +33,8 @@ export default class MyTabBar extends Component {
             <TabBar.Item
               title="我的"
               key="account"
-              icon={require('../../assets/images/tar-topic.png')}
-              selectedIcon={require('../../assets/images/tar-topic-on.png')}
+              icon={require('../../assets/images/tar-person.png')}
+              selectedIcon={require('../../assets/images/tar-person-on.png')}
               selected={pathname.startsWith('/account')}
               onPress={() => {
                 this.props.navigateTo('/account')
