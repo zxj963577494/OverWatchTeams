@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
-import { getHomeTeamListRequest } from '../../../actions'
+import { setNavBar, getHomeTeamListRequest } from '../../../actions'
 import { HomeTeamsListView, MyActivityIndicator } from '../../../components'
 
 class HomeTeams extends Component {
@@ -10,6 +10,7 @@ class HomeTeams extends Component {
     if (this.props.team.list.length === 0) {
       this.props.getHomeTeams({ page: 1 })
     }
+    this.props.setNavBar({ title: '战队库', isCanBack: true })
   }
 
   render() {
@@ -43,13 +44,19 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     },
     navigateTo: location => {
       dispatch(push(location))
-    }
+    },
+    setNavBar: payload => {
+      dispatch(
+        setNavBar({ title: payload.title, isCanBack: payload.isCanBack })
+      )
+    },
   }
 }
 
 HomeTeams.propTypes = {
   team: PropTypes.object.isRequired,
   getHomeTeams: PropTypes.func.isRequired,
+  setNavBar: PropTypes.func.isRequired,
   navigateTo: PropTypes.func.isRequired
 }
 

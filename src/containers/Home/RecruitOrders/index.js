@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
-import { getHomeRecruitOrderListRequest } from '../../../actions'
+import { setNavBar, getHomeRecruitOrderListRequest } from '../../../actions'
 import { HomeRecruitOrderListView, MyActivityIndicator } from '../../../components'
 
 class HomeRecruitOrders extends Component {
@@ -10,6 +10,7 @@ class HomeRecruitOrders extends Component {
     if (this.props.recruitOrder.list.length === 0) {
       this.props.getHomeRecruitOrderList({ page: 1 })
     }
+    this.props.setNavBar({ title: '战队招募令', isCanBack: true })
   }
 
   render() {
@@ -43,13 +44,19 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     },
     navigateTo: location => {
       dispatch(push(location))
-    }
+    },
+    setNavBar: payload => {
+      dispatch(
+        setNavBar({ title: payload.title, isCanBack: payload.isCanBack })
+      )
+    },
   }
 }
 
 HomeRecruitOrders.propTypes = {
   recruitOrder: PropTypes.object.isRequired,
   getHomeRecruitOrderList: PropTypes.func.isRequired,
+  setNavBar: PropTypes.func.isRequired,
   navigateTo: PropTypes.func.isRequired
 }
 

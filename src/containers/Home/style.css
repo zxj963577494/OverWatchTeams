@@ -6,3 +6,7 @@
   height: 200px;
   background-color: #ffffff;
 }
+
+:global(.home__Grid > div) {
+  height: 90px;
+}

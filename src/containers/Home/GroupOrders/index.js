@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
-import { getHomeGroupOrderListRequest } from '../../../actions'
+import { setNavBar, getHomeGroupOrderListRequest } from '../../../actions'
 import { HomeGroupOrderListView, MyActivityIndicator } from '../../../components'
 
 class HomeGroupOrders extends Component {
@@ -10,6 +10,7 @@ class HomeGroupOrders extends Component {
     if (this.props.groupOrder.list.length === 0) {
       this.props.getHomeGroupOrderList({ page: 1 })
     }
+    this.props.setNavBar({ title: '组队上分贴', isCanBack: true })
   }
 
   render() {
@@ -43,13 +44,19 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     },
     navigateTo: location => {
       dispatch(push(location))
-    }
+    },
+    setNavBar: payload => {
+      dispatch(
+        setNavBar({ title: payload.title, isCanBack: payload.isCanBack })
+      )
+    },
   }
 }
 
 HomeGroupOrders.propTypes = {
   groupOrder: PropTypes.object.isRequired,
   getHomeGroupOrderList: PropTypes.func.isRequired,
+  setNavBar: PropTypes.func.isRequired,
   navigateTo: PropTypes.func.isRequired
 }
 

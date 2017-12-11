@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
-import { getAccountGroupOrderListRequest, deleteGroupOrderRequest } from '../../../actions'
+import { setNavBar, getAccountGroupOrderListRequest, deleteGroupOrderRequest } from '../../../actions'
 import { AccountGroupOrderListView, MyActivityIndicator } from '../../../components'
 
 class AccountGroupOrders extends Component {
@@ -10,6 +10,7 @@ class AccountGroupOrders extends Component {
     if (this.props.groupOrder.list.length === 0) {
       this.props.getAccountGroupOrderList({ page: 1 })
     }
+    this.props.setNavBar({ title: '组队上分贴', isCanBack: true })
   }
 
   render() {
@@ -47,7 +48,12 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     },
     navigateTo: location => {
       dispatch(push(location))
-    }
+    },
+    setNavBar: payload => {
+      dispatch(
+        setNavBar({ title: payload.title, isCanBack: payload.isCanBack })
+      )
+    },
   }
 }
 
@@ -56,6 +62,7 @@ AccountGroupOrders.propTypes = {
   getAccountGroupOrderList: PropTypes.func.isRequired,
   navigateTo: PropTypes.func.isRequired,
   deleteGroupOrder: PropTypes.func.isRequired,
+  setNavBar: PropTypes.func.isRequired,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(

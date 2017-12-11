@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
-import { getHomeUserListRequest } from '../../../actions'
+import { setNavBar, getHomeUserListRequest } from '../../../actions'
 import { HomeUsersListView, MyActivityIndicator } from '../../../components'
 
 class HomeUsers extends Component {
@@ -10,6 +10,7 @@ class HomeUsers extends Component {
     if (this.props.user.list.length === 0) {
       this.props.getHomeUsers({ page: 1 })
     }
+    this.props.setNavBar({ title: '会员库', isCanBack: true })
   }
 
   render() {
@@ -43,13 +44,19 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     },
     navigateTo: location => {
       dispatch(push(location))
-    }
+    },
+    setNavBar: payload => {
+      dispatch(
+        setNavBar({ title: payload.title, isCanBack: payload.isCanBack })
+      )
+    },
   }
 }
 
 HomeUsers.propTypes = {
   user: PropTypes.object.isRequired,
   getHomeUsers: PropTypes.func.isRequired,
+  setNavBar: PropTypes.func.isRequired,
   navigateTo: PropTypes.func.isRequired
 }
 

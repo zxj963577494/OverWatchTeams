@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
-import { getHomeWarOrderListRequest } from '../../../actions'
+import { setNavBar, getHomeWarOrderListRequest } from '../../../actions'
 import { HomeWarOrderListView, MyActivityIndicator } from '../../../components'
 
 class HomeWarOrders extends Component {
@@ -10,6 +10,7 @@ class HomeWarOrders extends Component {
     if (this.props.warOrder.list.length === 0) {
       this.props.getHomeWarOrderList({ page: 1 })
     }
+    this.props.setNavBar({ title: '训练赛约战贴', isCanBack: true })
   }
 
   render() {
@@ -43,13 +44,19 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     },
     navigateTo: location => {
       dispatch(push(location))
-    }
+    },
+    setNavBar: payload => {
+      dispatch(
+        setNavBar({ title: payload.title, isCanBack: payload.isCanBack })
+      )
+    },
   }
 }
 
 HomeWarOrders.propTypes = {
   warOrder: PropTypes.object.isRequired,
   getHomeWarOrderList: PropTypes.func.isRequired,
+  setNavBar: PropTypes.func.isRequired,
   navigateTo: PropTypes.func.isRequired
 }
 

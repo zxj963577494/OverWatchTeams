@@ -8,7 +8,7 @@ import { getArticles, getStickyArticles } from '../services/api'
 
 function* getArticlesWorker(payload) {
   try {
-    yield put(action.setNavBar({ title: '奇葩林', isCanBack: false }))
+    yield put(action.setNavBar({ title: 'Over', isCanBack: false }))
     yield put(action.fetchRequest({text: '加载中'}))
     const response = yield call(getArticles, payload)
     yield put(action.getArticlesSuccess(response.data))

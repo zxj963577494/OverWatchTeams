@@ -42,10 +42,7 @@ const data = [
 ]
 
 class Home extends Component {
-  componentDidMount() {
-    this.props.getStickyArticles({})
-    this.props.getArticles({ page: 1 })
-  }
+  componentDidMount() {}
 
   // 展示LOGO
   renderLogo(sticky) {
@@ -53,13 +50,13 @@ class Home extends Component {
       <div>
         <Flex>
           <img
-            src={sticky.default.pic}
-            alt={sticky.default.title}
+            src={config.BASE_DEFAULT_PIC_URL}
+            alt="这个世界需要更多的英雄"
             style={{ height: 60, width: 200 }}
           />
         </Flex>
         <WhiteSpace size="lg" />
-        <Flex>{sticky.default.title}</Flex>
+        <Flex>这个世界需要更多的英雄</Flex>
       </div>
     )
   }
@@ -73,18 +70,18 @@ class Home extends Component {
   }
 
   render() {
-    const { sticky, articles, navigateTo, app } = this.props
+    const { navigateTo, app } = this.props
     return (
       <div>
         <MyActivityIndicator isFetching={app.isFetching} text={app.text} />
-        <div className={styles['header__sticky']}>
-          {sticky.isShowLogo ? this.renderLogo(sticky) : this.renderCarousel()}
-        </div>
+        <WhiteSpace size="xs" />
+        <div className={styles['header__sticky']}>{this.renderLogo()}</div>
         <WhiteSpace size="xs" />
         <Grid
           data={data}
           columnNum={3}
           hasLine={false}
+          className="home__Grid"
           renderItem={(dataItem, index) => (
             <div key={index} onClick={() => navigateTo(dataItem.url)}>
               <img
@@ -101,9 +98,6 @@ class Home extends Component {
           )}
         />
         <WhiteSpace size="xs" />
-        <div>
-          <HomeListView articles={articles} navigateTo={navigateTo} />
-        </div>
       </div>
     )
   }
@@ -111,20 +105,12 @@ class Home extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    app: state.root.app,
-    sticky: state.root.sticky,
-    articles: state.root.articles
+    app: state.root.app
   }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    getArticles: payload => {
-      dispatch(getArticlesRequest(payload))
-    },
-    getStickyArticles: () => {
-      dispatch(getStickyArticlesRequest())
-    },
     navigateTo: location => {
       dispatch(push(location))
     }
@@ -132,10 +118,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 }
 
 Home.propTypes = {
-  sticky: PropTypes.object.isRequired,
-  articles: PropTypes.object.isRequired,
-  getArticles: PropTypes.func.isRequired,
-  getStickyArticles: PropTypes.func.isRequired,
   navigateTo: PropTypes.func.isRequired
 }
 

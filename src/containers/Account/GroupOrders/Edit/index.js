@@ -217,6 +217,7 @@ AccountGroupOrdersEdit.propTypes = {
   userinfo: PropTypes.object,
   groupOrder: PropTypes.object,
   putGroup: PropTypes.func.isRequired,
+  setNavBar: PropTypes.func.isRequired,
   form: PropTypes.object
 }
 

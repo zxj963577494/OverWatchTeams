@@ -38,7 +38,7 @@ export default class HomeGroupOrderListView extends Component {
               title={rowData.title}
               thumb={rowData.userinfo.avatar}
               onClick={() =>
-                this.props.navigateTo(`/home/user/${rowData.userinfo.objectId}`)
+                this.props.navigateTo(`/home/user/${rowData.user.objectId}`)
               }
             />
             <Card.Body>
