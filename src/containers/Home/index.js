@@ -110,7 +110,6 @@ class Home extends Component {
             </div>
           )}
         />
-        <WhiteSpace/>
         <List className="home__List" renderHeader={() => '组队上分'}>
           <HomeGroupListView groupOrder={groupOrder} navigateTo={navigateTo} />
         </List>
