@@ -133,9 +133,9 @@ ansi-styles@^3.0.0, ansi-styles@^3.1.0:
   dependencies:
     color-convert "^1.9.0"
 
-antd-mobile@^2.0.3:
-  version "2.0.3"
-  resolved "http://registry.npm.taobao.org/antd-mobile/download/antd-mobile-2.0.3.tgz#7eee0f2e251f70a7f074dd07ba20efc59b05e885"
+antd-mobile@^2.1.1:
+  version "2.1.1"
+  resolved "http://registry.npm.taobao.org/antd-mobile/download/antd-mobile-2.1.1.tgz#09aeab83107456340255425473fd7213bb1e7c86"
   dependencies:
     array-tree-filter "~1.0.0"
     babel-runtime "6.x"
@@ -144,7 +144,6 @@ antd-mobile@^2.0.3:
     rc-checkbox "~2.0.0"
     rc-collapse "~1.7.0"
     rc-drawer "~0.4.9"
-    rc-notification "~3.0.0"
     rc-slider "~8.2.0"
     rc-swipeout "~2.0.0"
     react-native-camera-roll-picker "^1.2.1"
@@ -158,6 +157,7 @@ antd-mobile@^2.0.3:
     rmc-feedback "^1.0.0"
     rmc-input-number "^1.0.0"
     rmc-list-view "^0.11.0"
+    rmc-notification "~1.0.0"
     rmc-nuka-carousel "~3.0.0"
     rmc-picker "~5.0.0"
     rmc-pull-to-refresh "~1.0.1"
@@ -5460,16 +5460,6 @@ rc-gesture@^0.0.15:
   dependencies:
     babel-runtime "6.x"
 
-rc-notification@~3.0.0:
-  version "3.0.0"
-  resolved "http://registry.npm.taobao.org/rc-notification/download/rc-notification-3.0.0.tgz#cefbeb8a03052dc5b988a07f9ba31895e886ac2e"
-  dependencies:
-    babel-runtime "6.x"
-    classnames "2.x"
-    prop-types "^15.5.8"
-    rc-animate "2.x"
-    rc-util "^4.0.4"
-
 rc-slider@~8.2.0:
   version "8.2.0"
   resolved "http://registry.npm.taobao.org/rc-slider/download/rc-slider-8.2.0.tgz#ae37d17144cad60e1da6eac0ee4ffcfea0b0a6e8"
@@ -6134,6 +6124,16 @@ rmc-list-view@^0.11.0:
     prop-types "^15.5.8"
     warning "^3.0.0"
     zscroller "~0.4.0"
+
+rmc-notification@~1.0.0:
+  version "1.0.0"
+  resolved "http://registry.npm.taobao.org/rmc-notification/download/rmc-notification-1.0.0.tgz#1fcee98f99b9733f7ce63a91d7663a578743d075"
+  dependencies:
+    babel-runtime "6.x"
+    classnames "2.x"
+    prop-types "^15.5.8"
+    rc-animate "2.x"
+    rc-util "^4.0.4"
 
 rmc-nuka-carousel@~3.0.0:
   version "3.0.1"
