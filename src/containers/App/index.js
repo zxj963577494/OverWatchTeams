@@ -7,16 +7,19 @@ import globalcss from '../../assets/css/style.css'
 
 class App extends Component {
   componentDidMount() {
-    setTimeout(() => {
-      this.props.history.replace('/home')
-    }, 0)
+    // 请求根目录是转至/home
+    if (this.props.history.location.pathname === '/') {
+      setTimeout(() => {
+        this.props.history.replace('/home')
+      }, 0)
+    }
   }
 
   render() {
     return (
       <div>
         <MyTabBar
-          navbar = {this.props.navbar}
+          navbar={this.props.navbar}
           history={this.props.history}
           children={this.props.children}
           navigateTo={this.props.navigateTo}
