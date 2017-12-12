@@ -10,7 +10,7 @@ class HomeUsers extends Component {
     if (this.props.user.list.length === 0) {
       this.props.getHomeUsers({ page: 1 })
     }
-    this.props.setNavBar({ title: '会员库', isCanBack: true })
+    this.props.setNavBar({ title: '个人列表', isCanBack: true })
   }
 
   render() {

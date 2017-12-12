@@ -10,7 +10,7 @@ class HomeRecruitOrders extends Component {
     if (this.props.recruitOrder.list.length === 0) {
       this.props.getHomeRecruitOrderList({ page: 1 })
     }
-    this.props.setNavBar({ title: '战队招募令', isCanBack: true })
+    this.props.setNavBar({ title: '战队招募', isCanBack: true })
   }
 
   render() {

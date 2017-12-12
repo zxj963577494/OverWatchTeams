@@ -10,7 +10,7 @@ class HomeWarOrders extends Component {
     if (this.props.warOrder.list.length === 0) {
       this.props.getHomeWarOrderList({ page: 1 })
     }
-    this.props.setNavBar({ title: '训练赛约战贴', isCanBack: true })
+    this.props.setNavBar({ title: '比赛约战', isCanBack: true })
   }
 
   render() {

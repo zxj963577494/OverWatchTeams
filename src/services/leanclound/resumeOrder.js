@@ -1,7 +1,7 @@
 import AV from 'leancloud-storage'
 import { getCurrentUser } from './user'
 
-// 创建战队自荐贴
+// 创建战队自荐帖
 export function cerateResumeOrder(payload) {
   const user = getCurrentUser()
   const resumeOrders = new AV.Object('ResumeOrders')

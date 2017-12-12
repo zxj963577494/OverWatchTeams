@@ -91,7 +91,7 @@ class AccountRecruitOrdersCreate extends Component {
     if (this.props.teams.length === 0) {
       this.props.getMyTeams()
     }
-    this.props.setNavBar({ title: '新建战队招募令', isCanBack: true })
+    this.props.setNavBar({ title: '新建招募令', isCanBack: true })
   }
 
   render() {

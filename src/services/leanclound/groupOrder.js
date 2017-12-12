@@ -1,7 +1,7 @@
 import AV from 'leancloud-storage'
 import { getCurrentUser } from './user'
 
-// 创建组队贴
+// 创建组队帖
 export function cerateGroupOrder(payload) {
   const user = getCurrentUser()
   const groupOrders = new AV.Object('GroupOrders')

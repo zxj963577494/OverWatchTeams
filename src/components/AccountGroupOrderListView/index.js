@@ -35,7 +35,7 @@ export default class AccountGroupOrderListView extends Component {
   }
 
   onRemove = objectId => {
-    Modal.alert('警告', '是否删除该组队贴？', [
+    Modal.alert('警告', '是否删除该组队帖？', [
       { text: '取消', onPress: () => console.log('cancel') },
       {
         text: '确定',

@@ -75,7 +75,7 @@ class AccountResumeOrdersEdit extends Component {
   }
 
   componentDidMount() {
-    this.props.setNavBar({ title: '编辑战队自荐贴', isCanBack: true })
+    this.props.setNavBar({ title: '编辑自荐帖', isCanBack: true })
   }
 
   render() {

@@ -16,7 +16,7 @@ const data = [
   {
     url: '/home/resumeorders',
     icon: config.BASE_DEFAULT_PIC_URL,
-    text: '战队自荐'
+    text: '寻找战队'
   },
   {
     url: '/home/recruitorders',
@@ -36,12 +36,12 @@ const data = [
   {
     url: '/home/teams',
     icon: config.BASE_DEFAULT_PIC_URL,
-    text: '战队库'
+    text: '战队列表'
   },
   {
     url: '/home/users',
     icon: config.BASE_DEFAULT_PIC_URL,
-    text: '个人库'
+    text: '个人列表'
   }
 ]
 

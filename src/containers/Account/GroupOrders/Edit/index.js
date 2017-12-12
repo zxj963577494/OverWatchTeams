@@ -75,7 +75,7 @@ class AccountGroupOrdersEdit extends Component {
   }
 
   componentDidMount() {
-    this.props.setNavBar({ title: '编辑组队上分贴', isCanBack: true })
+    this.props.setNavBar({ title: '编辑组队帖', isCanBack: true })
   }
 
   render() {

@@ -10,7 +10,7 @@ class HomeTeams extends Component {
     if (this.props.team.list.length === 0) {
       this.props.getHomeTeams({ page: 1 })
     }
-    this.props.setNavBar({ title: '战队库', isCanBack: true })
+    this.props.setNavBar({ title: '战队列表', isCanBack: true })
   }
 
   render() {

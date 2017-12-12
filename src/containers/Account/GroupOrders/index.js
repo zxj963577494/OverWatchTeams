@@ -10,7 +10,7 @@ class AccountGroupOrders extends Component {
     if (this.props.groupOrder.list.length === 0) {
       this.props.getAccountGroupOrderList({ page: 1 })
     }
-    this.props.setNavBar({ title: '组队上分贴', isCanBack: true })
+    this.props.setNavBar({ title: '组队上分', isCanBack: true })
   }
 
   render() {

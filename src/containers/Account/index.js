@@ -117,7 +117,7 @@ class Account extends Component {
             所在战队
           </List.Item>
         </List>
-        <List renderHeader={() => '战队自荐贴'}>
+        <List renderHeader={() => '寻找战队'}>
           <List.Item
             arrow="horizontal"
             onClick={() => {
@@ -128,7 +128,7 @@ class Account extends Component {
               }
             }}
           >
-            发布自荐贴
+            发布自荐帖
           </List.Item>
           <List.Item
             arrow="horizontal"
@@ -140,10 +140,10 @@ class Account extends Component {
               }
             }}
           >
-            我的自荐贴
+            我的自荐帖
           </List.Item>
         </List>
-        <List renderHeader={() => '战队招募令'}>
+        <List renderHeader={() => '战队招募'}>
           <List.Item
             arrow="horizontal"
             onClick={() => {
@@ -180,7 +180,7 @@ class Account extends Component {
               }
             }}
           >
-            发布约战贴
+            发布约战帖
           </List.Item>
           <List.Item
             arrow="horizontal"
@@ -192,10 +192,10 @@ class Account extends Component {
               }
             }}
           >
-            我的约战贴
+            我的约战帖
           </List.Item>
         </List>
-        <List renderHeader={() => '组队上分帖'}>
+        <List renderHeader={() => '组队上分'}>
           <List.Item
             arrow="horizontal"
             onClick={() => {

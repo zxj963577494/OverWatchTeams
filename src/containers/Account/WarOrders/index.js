@@ -10,7 +10,7 @@ class AccountWarOrders extends Component {
     if (this.props.warOrder.list.length === 0) {
       this.props.getAccountWarOrderList({ page: 1 })
     }
-    this.props.setNavBar({ title: '战队约战贴', isCanBack: true })
+    this.props.setNavBar({ title: '决战紫禁之巅', isCanBack: true })
   }
 
   render() {

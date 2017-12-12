@@ -74,7 +74,7 @@ class AccountGroupOrdersCreate extends Component {
   }
 
   componentDidMount() {
-    this.props.setNavBar({ title: '新建组队上分贴', isCanBack: true })
+    this.props.setNavBar({ title: '新建组队帖', isCanBack: true })
   }
 
   render() {

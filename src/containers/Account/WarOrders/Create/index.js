@@ -91,7 +91,7 @@ class AccountWarOrdersCreate extends Component {
     if (this.props.teams.length === 0) {
       this.props.getMyTeams()
     }
-    this.props.setNavBar({ title: '新建战队约战贴', isCanBack: true })
+    this.props.setNavBar({ title: '新建约战帖', isCanBack: true })
   }
 
   render() {
@@ -129,7 +129,7 @@ class AccountWarOrdersCreate extends Component {
               </Button>
             )}
           </List>
-          <List renderHeader={() => '约战贴标题'}>
+          <List renderHeader={() => '约战帖标题'}>
             <InputItem
               {...getFieldProps('title', {
                 onChange: this.onTitleChange,
@@ -142,14 +142,14 @@ class AccountWarOrdersCreate extends Component {
                   }
                 ]
               })}
-              placeholder="请输入约战贴标题"
+              placeholder="请输入约战帖标题"
               value={title}
             />
             <Flex className="error">
               {titleErrors ? titleErrors.join(',') : null}
             </Flex>
           </List>
-          <List renderHeader={() => '约战贴内容'}>
+          <List renderHeader={() => '约战帖内容'}>
             <TextareaItem
               {...getFieldProps('description', {
                 onChange: this.onDescriptionChange,
@@ -159,13 +159,13 @@ class AccountWarOrdersCreate extends Component {
                     required: true,
                     min: 2,
                     max: 400,
-                    message: '约战贴内容:2-400个字符'
+                    message: '约战帖内容:2-400个字符'
                   }
                 ]
               })}
               rows={8}
               labelNumber={5}
-              placeholder="请输入约战贴内容"
+              placeholder="请输入约战帖内容"
               value={description}
             />
             <Flex className="error">
