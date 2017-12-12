@@ -10,12 +10,12 @@ import {
   DELETE_GROUP_ORDER_REQUEST
 } from '../constants/actionTypes'
 import * as action from '../actions'
-import { groupOrder } from '../services/leanclound'
+import { groupOrderService } from '../services/leanclound'
 
 function* postGroupOrderWorker(payload) {
   try {
     yield put(action.fetchRequest({ text: '提交中' }))
-    const response = yield call(groupOrder.cerateGroupOrder, payload)
+    const response = yield call(groupOrderService.cerateGroupOrder, payload)
     yield put(action.postGroupOrderSuccess(response))
     yield put(action.fetchSuccess())
     Toast.success('提交成功', 1)
@@ -31,7 +31,7 @@ function* postGroupOrderWorker(payload) {
 function* putGroupOrderWorker(payload) {
   try {
     yield put(action.fetchRequest({ text: '提交中' }))
-    const response = yield call(groupOrder.updateGroupOrder, payload)
+    const response = yield call(groupOrderService.updateGroupOrder, payload)
     yield put(action.putGroupOrderSuccess(response))
     yield put(action.fetchSuccess())
     Toast.success('提交成功', 1)
@@ -47,7 +47,7 @@ function* putGroupOrderWorker(payload) {
 function* deleteGroupOrderWorker(payload) {
   try {
     yield put(action.fetchRequest({ text: '提交中' }))
-    const response = yield call(groupOrder.removeGroupOrder, payload)
+    const response = yield call(groupOrderService.removeGroupOrder, payload)
     yield put(action.deleteGroupOrderSuccess(response))
     yield put(action.fetchSuccess())
     Toast.success('删除成功', 1)
@@ -61,7 +61,7 @@ function* deleteGroupOrderWorker(payload) {
 function* getAccountGroupOrderListWorker(payload) {
   try {
     const response = yield call(
-      groupOrder.getAccountGroupOrderList,
+      groupOrderService.getAccountGroupOrderList,
       payload
     )
     yield put(action.getAccountGroupOrderListSuccess(response))
@@ -72,7 +72,7 @@ function* getAccountGroupOrderListWorker(payload) {
 
 function* getHomeGroupOrderListWorker(payload) {
   try {
-    const response = yield call(groupOrder.getHomeGroupOrderList, payload)
+    const response = yield call(groupOrderService.getHomeGroupOrderList, payload)
     yield put(action.getHomeGroupOrderListSuccess(response))
   } catch (error) {
     yield put(action.getHomeGroupOrderListFailed(error))

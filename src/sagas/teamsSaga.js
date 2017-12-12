@@ -13,15 +13,15 @@ import {
   GET_IN_TEAMS_REQUEST
 } from '../constants/actionTypes'
 import * as action from '../actions'
-import { teams, userService } from '../services/leanclound'
+import { teamsService, userService } from '../services/leanclound'
 
 function* postTeamsWorker(payload) {
   try {
     yield put(action.fetchRequest({ text: '提交中' }))
-    const team = yield call(teams.getMyTeams, payload)
+    const team = yield call(teamsService.getMyTeams, payload)
     const usr = yield call(userService.getCurrentUser)
     if(team.length < usr.get('teamLimit')) {
-      const response = yield call(teams.cerateTeam, payload)
+      const response = yield call(teamsService.cerateTeam, payload)
       yield put(action.fetchSuccess())
       yield put(action.postTeamsSuccess(response))
       Toast.success('提交成功', 1)
@@ -43,7 +43,7 @@ function* postTeamsWorker(payload) {
 function* putTeamsWorker(payload) {
   try {
     yield put(action.fetchRequest({ text: '提交中' }))
-    const response = yield call(teams.updateTeam, payload)
+    const response = yield call(teamsService.updateTeam, payload)
     yield put(action.fetchSuccess())
     yield put(action.putTeamsSuccess(response))
     Toast.success('提交成功', 1)
@@ -59,7 +59,7 @@ function* putTeamsWorker(payload) {
 function* getInTeamsWorker() {
   try {
     yield put(action.fetchRequest({ text: '加载中' }))
-    const response = yield call(teams.getInTeams)
+    const response = yield call(teamsService.getInTeams)
     yield put(action.getInTeamsSuccess(response))
     yield put(action.fetchSuccess())
   } catch (error) {
@@ -71,7 +71,7 @@ function* getInTeamsWorker() {
 function* getMyTeamsWorker() {
   try {
     yield put(action.fetchRequest({ text: '加载中' }))
-    const response = yield call(teams.getMyTeams)
+    const response = yield call(teamsService.getMyTeams)
     yield put(action.getMyTeamsSuccess(response))
     yield put(action.fetchSuccess())
   } catch (error) {
@@ -83,7 +83,7 @@ function* getMyTeamsWorker() {
 function* deleteTeamMemberWorker(payload) {
   try {
     yield put(action.fetchRequest({ text: '提交中' }))
-    const response = yield call(teams.removeMember, payload)
+    const response = yield call(teamsService.removeMember, payload)
     yield put(action.deleteTeamMemberSuccess(response))
     yield put(action.fetchSuccess())
     Toast.success('移除队员成功', 1.5)
@@ -99,7 +99,7 @@ function* deleteTeamMemberWorker(payload) {
 function* deleteTeamWorker(payload) {
   try {
     yield put(action.fetchRequest({ text: '提交中' }))
-    const response = yield call(teams.removeTeam, payload)
+    const response = yield call(teamsService.removeTeam, payload)
     yield put(action.deleteTeamSuccess(response))
     yield put(action.fetchSuccess())
     Toast.success('解散队伍成功', 1.5)
@@ -113,7 +113,7 @@ function* deleteTeamWorker(payload) {
 
 function* getHomeTeamListWorker(payload) {
   try {
-    const response = yield call(teams.getHomeTeamsList, payload)
+    const response = yield call(teamsService.getHomeTeamsList, payload)
     yield put(action.getHomeTeamListSuccess(response))
   } catch (error) {
     yield put(action.getHomeTeamListFailed(error))
@@ -123,7 +123,7 @@ function* getHomeTeamListWorker(payload) {
 function* getHomeTeamDetailWorker(payload) {
   try {
     yield put(action.fetchRequest({ text: '加载中' }))
-    const response = yield call(teams.getHomeTeamDetail, payload)
+    const response = yield call(teamsService.getHomeTeamDetail, payload)
     yield put(action.getHomeTeamDetailSuccess(response))
     yield put(action.fetchSuccess())
   } catch (error) {

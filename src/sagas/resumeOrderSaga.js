@@ -10,12 +10,12 @@ import {
   DELETE_RESUME_ORDER_REQUEST
 } from '../constants/actionTypes'
 import * as action from '../actions'
-import { resumeOrder } from '../services/leanclound'
+import { resumeOrderService } from '../services/leanclound'
 
 function* postResumeOrderWorker(payload) {
   try {
     yield put(action.fetchRequest({ text: '提交中' }))
-    const response = yield call(resumeOrder.cerateResumeOrder, payload)
+    const response = yield call(resumeOrderService.cerateResumeOrder, payload)
     yield put(action.postResumeOrderSuccess(response))
     yield put(action.fetchSuccess())
     Toast.success('提交成功', 1)
@@ -31,7 +31,7 @@ function* postResumeOrderWorker(payload) {
 function* putResumeOrderWorker(payload) {
   try {
     yield put(action.fetchRequest({ text: '提交中' }))
-    const response = yield call(resumeOrder.updateResumeOrder, payload)
+    const response = yield call(resumeOrderService.updateResumeOrder, payload)
     yield put(action.putResumeOrderSuccess(response))
     yield put(action.fetchSuccess())
     Toast.success('提交成功', 1)
@@ -47,7 +47,7 @@ function* putResumeOrderWorker(payload) {
 function* deleteResumeOrderWorker(payload) {
   try {
     yield put(action.fetchRequest({ text: '提交中' }))
-    const response = yield call(resumeOrder.removeResumeOrder, payload)
+    const response = yield call(resumeOrderService.removeResumeOrder, payload)
     yield put(action.deleteResumeOrderSuccess(response))
     yield put(action.fetchSuccess())
     Toast.success('删除成功', 1)
@@ -61,7 +61,7 @@ function* deleteResumeOrderWorker(payload) {
 function* getAccountResumeOrderListWorker(payload) {
   try {
     const response = yield call(
-      resumeOrder.getAccountResumeOrderList,
+      resumeOrderService.getAccountResumeOrderList,
       payload
     )
     yield put(action.getAccountResumeOrderListSuccess(response))
@@ -72,7 +72,7 @@ function* getAccountResumeOrderListWorker(payload) {
 
 function* getHomeResumeOrderListWorker(payload) {
   try {
-    const response = yield call(resumeOrder.getHomeResumeOrderList, payload)
+    const response = yield call(resumeOrderService.getHomeResumeOrderList, payload)
     yield put(action.getHomeResumeOrderListSuccess(response))
   } catch (error) {
     yield put(action.getHomeResumeOrderListFailed(error))

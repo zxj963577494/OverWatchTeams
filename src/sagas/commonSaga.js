@@ -1,17 +1,18 @@
 import { put, fork, take, call } from 'redux-saga/effects'
+import { replace } from 'react-router-redux'
+import { Toast } from 'antd-mobile'
 import {
   POST_UPLOAD_REQUEST,
   SEND_EMAIL_REQUEST,
   SEND_PASSWORD_RESET_REQUEST
 } from '../constants/actionTypes'
 import * as action from '../actions'
-import { common } from '../services/leanclound'
+import { commonService, userService } from '../services/leanclound'
 
 function* postUploadWorker(payload) {
   try {
     yield put(action.fetchRequest({ text: '上传中' }))
-    const response = yield call(common.uploadPic, payload)
-    console.log(response)
+    const response = yield call(commonService.uploadPic, payload)
     yield put(action.postUploadSuccess(response))
     yield put(action.fetchSuccess())
   } catch (error) {
@@ -23,7 +24,7 @@ function* postUploadWorker(payload) {
 function* sendEmailWorker(payload) {
   try {
     yield put(action.fetchRequest({ text: '提交中' }))
-    const response = yield call(common.requestEmailVerify, payload)
+    const response = yield call(commonService.requestEmailVerify, payload)
     yield put(action.sendEmailSuccess(response))
     yield put(action.fetchSuccess())
   } catch (error) {
@@ -34,13 +35,14 @@ function* sendEmailWorker(payload) {
 
 function* sendPasswordResetWorker(payload) {
   try {
-    yield put(action.fetchRequest({ text: '提交中' }))
-    const response = yield call(common.requestPasswordReset, payload)
-    yield put(action.sendEmailSuccess(response))
-    yield put(action.fetchSuccess())
+    const response = yield call(commonService.requestPasswordReset, payload)
+    yield put(action.sendPasswordResetSuccess(response))
+    yield call(userService.logOut)
+    yield put(replace('/home'))
+    Toast.success('重置密码的邮件已发送', 1.5)
   } catch (error) {
-    yield put(action.sendEmailFailed(error))
-    yield put(action.fetchFailed())
+    yield put(action.sendPasswordResetFailed(error))
+    Toast.fail('重置密码的邮件发送失败', 1.5)
   }
 }
 

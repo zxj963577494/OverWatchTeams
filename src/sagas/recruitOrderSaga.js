@@ -10,12 +10,12 @@ import {
   DELETE_RECRUIT_ORDER_REQUEST
 } from '../constants/actionTypes'
 import * as action from '../actions'
-import { recruitOrder, teams } from '../services/leanclound'
+import { recruitOrderService, teamsService } from '../services/leanclound'
 
 function* postRecruitOrderWorker(payload) {
   try {
     yield put(action.fetchRequest({ text: '提交中' }))
-    const response = yield call(recruitOrder.cerateRecruitOrder, payload)
+    const response = yield call(recruitOrderService.cerateRecruitOrder, payload)
     yield put(action.postRecruitOrderSuccess(response))
     yield put(action.fetchSuccess())
     Toast.success('提交成功', 1)
@@ -31,8 +31,8 @@ function* postRecruitOrderWorker(payload) {
 function* putRecruitOrderWorker(payload) {
   try {
     yield put(action.fetchRequest({ text: '提交中' }))
-    const team = yield call(teams.getTeam, payload)
-    const response = yield call(recruitOrder.updateRecruitOrder, payload, team)
+    const team = yield call(teamsService.getTeam, payload)
+    const response = yield call(recruitOrderService.updateRecruitOrder, payload, team)
     yield put(action.putRecruitOrderSuccess(response))
     yield put(action.fetchSuccess())
     Toast.success('提交成功', 1)
@@ -48,7 +48,7 @@ function* putRecruitOrderWorker(payload) {
 function* deleteRecruitOrderWorker(payload) {
   try {
     yield put(action.fetchRequest({ text: '提交中' }))
-    const response = yield call(recruitOrder.removeRecruitOrder, payload)
+    const response = yield call(recruitOrderService.removeRecruitOrder, payload)
     yield put(action.deleteRecruitOrderSuccess(response))
     yield put(action.fetchSuccess())
     Toast.success('删除成功', 1)
@@ -62,7 +62,7 @@ function* deleteRecruitOrderWorker(payload) {
 function* getAccountRecruitOrderListWorker(payload) {
   try {
     const response = yield call(
-      recruitOrder.getAccountRecruitOrderList,
+      recruitOrderService.getAccountRecruitOrderList,
       payload
     )
     yield put(action.getAccountRecruitOrderListSuccess(response))
@@ -73,7 +73,7 @@ function* getAccountRecruitOrderListWorker(payload) {
 
 function* getHomeRecruitOrderListWorker(payload) {
   try {
-    const response = yield call(recruitOrder.getHomeRecruitOrderList, payload)
+    const response = yield call(recruitOrderService.getHomeRecruitOrderList, payload)
     yield put(action.getHomeRecruitOrderListSuccess(response))
   } catch (error) {
     yield put(action.getHomeRecruitOrderListFailed(error))

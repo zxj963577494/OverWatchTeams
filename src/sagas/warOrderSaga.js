@@ -10,12 +10,12 @@ import {
   DELETE_WAR_ORDER_REQUEST
 } from '../constants/actionTypes'
 import * as action from '../actions'
-import { warOrder, teams } from '../services/leanclound'
+import { warOrderService, teamsService } from '../services/leanclound'
 
 function* postWarOrderWorker(payload) {
   try {
     yield put(action.fetchRequest({ text: '提交中' }))
-    const response = yield call(warOrder.cerateWarOrder, payload)
+    const response = yield call(warOrderService.cerateWarOrder, payload)
     yield put(action.postWarOrderSuccess(response))
     yield put(action.fetchSuccess())
     Toast.success('提交成功', 1)
@@ -31,8 +31,8 @@ function* postWarOrderWorker(payload) {
 function* putWarOrderWorker(payload) {
   try {
     yield put(action.fetchRequest({ text: '提交中' }))
-    const team = yield call(teams.getTeam, payload)
-    const response = yield call(warOrder.updateWarOrder, payload, team)
+    const team = yield call(teamsService.getTeam, payload)
+    const response = yield call(warOrderService.updateWarOrder, payload, team)
     yield put(action.putWarOrderSuccess(response))
     yield put(action.fetchSuccess())
     Toast.success('提交成功', 1)
@@ -48,7 +48,7 @@ function* putWarOrderWorker(payload) {
 function* deleteWarOrderWorker(payload) {
   try {
     yield put(action.fetchRequest({ text: '提交中' }))
-    const response = yield call(warOrder.removeWarOrder, payload)
+    const response = yield call(warOrderService.removeWarOrder, payload)
     yield put(action.deleteWarOrderSuccess(response))
     yield put(action.fetchSuccess())
     Toast.success('删除成功', 1)
@@ -62,7 +62,7 @@ function* deleteWarOrderWorker(payload) {
 function* getAccountWarOrderListWorker(payload) {
   try {
     const response = yield call(
-      warOrder.getAccountWarOrderList,
+      warOrderService.getAccountWarOrderList,
       payload
     )
     yield put(action.getAccountWarOrderListSuccess(response))
@@ -73,7 +73,7 @@ function* getAccountWarOrderListWorker(payload) {
 
 function* getHomeWarOrderListWorker(payload) {
   try {
-    const response = yield call(warOrder.getHomeWarOrderList, payload)
+    const response = yield call(warOrderService.getHomeWarOrderList, payload)
     yield put(action.getHomeWarOrderListSuccess(response))
   } catch (error) {
     yield put(action.getHomeWarOrderListFailed(error))

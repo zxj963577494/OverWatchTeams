@@ -1,19 +1,17 @@
-import * as common from './common'
+import * as commonService from './common'
 import * as userService from './user'
-import * as data from './data'
-import * as teams from './teams'
-import * as recruitOrder from './recruitOrder'
-import * as groupOrder from './groupOrder'
-import * as warOrder from './warOrder'
-import * as resumeOrder from './resumeOrder'
+import * as teamsService from './teams'
+import * as recruitOrderService from './recruitOrder'
+import * as groupOrderService from './groupOrder'
+import * as warOrderService from './warOrder'
+import * as resumeOrderService from './resumeOrder'
 
 export {
-  common,
+  commonService,
   userService,
-  data,
-  teams,
-  recruitOrder,
-  groupOrder,
-  warOrder,
-  resumeOrder
+  teamsService,
+  recruitOrderService,
+  groupOrderService,
+  warOrderService,
+  resumeOrderService
 }
