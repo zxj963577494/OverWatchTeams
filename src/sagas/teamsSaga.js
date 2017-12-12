@@ -13,13 +13,13 @@ import {
   GET_IN_TEAMS_REQUEST
 } from '../constants/actionTypes'
 import * as action from '../actions'
-import { teams, user } from '../services/leanclound'
+import { teams, userService } from '../services/leanclound'
 
 function* postTeamsWorker(payload) {
   try {
     yield put(action.fetchRequest({ text: '提交中' }))
     const team = yield call(teams.getMyTeams, payload)
-    const usr = yield call(user.getCurrentUser)
+    const usr = yield call(userService.getCurrentUser)
     if(team.length < usr.get('teamLimit')) {
       const response = yield call(teams.cerateTeam, payload)
       yield put(action.fetchSuccess())

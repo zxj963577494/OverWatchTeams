@@ -33,7 +33,8 @@ import {
   AccountWarOrders,
   AccountResumeOrdersCreate,
   AccountResumeOrdersEdit,
-  AccountResumeOrders
+  AccountResumeOrders,
+  AccountEmaiVerify,
 } from '../containers'
 
 export default (history, navbar) => {
@@ -149,6 +150,7 @@ export default (history, navbar) => {
                 component={AccountMyTeamsEdit}
               />
               <Route exec path="/account/myteams" component={AccountMyTeams} />
+              <Route exec path="/account/emailverify" component={AccountEmaiVerify} />
               <Route exec path="/account" component={Account} />
             </Switch>
           </App>

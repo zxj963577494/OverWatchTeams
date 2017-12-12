@@ -12,12 +12,12 @@ import {
   GET_HOME_USER_DETAIL_REQUEST
 } from '../constants/actionTypes'
 import * as action from '../actions'
-import { user } from '../services/leanclound'
+import { userService } from '../services/leanclound'
 
 function* postSignUpWorker(payload) {
   try {
     yield put(action.fetchRequest({ text: '注册中' }))
-    const response = yield call(user.signUp, payload)
+    const response = yield call(userService.signUp, payload)
     yield put(action.fetchSuccess())
     yield put(action.postSignUpSuccess(response))
     yield put(replace('/account'))
@@ -30,7 +30,7 @@ function* postSignUpWorker(payload) {
 function* postLoginWorker(payload) {
   try {
     yield put(action.fetchRequest({ text: '登录中' }))
-    const response = yield call(user.logIn, payload)
+    const response = yield call(userService.logIn, payload)
     console.log(response)
     yield put(action.fetchSuccess())
     yield put(action.postLoginSuccess(response))
@@ -46,7 +46,7 @@ function* postLogoutWorker() {
   try {
     yield put(action.fetchRequest({ text: '注销中' }))
     yield delay(1000)
-    yield call(user.logOut)
+    yield call(userService.logOut)
     yield put(action.fetchSuccess())
     yield put(replace('/home'))
   } catch (error) {
@@ -57,7 +57,7 @@ function* postLogoutWorker() {
 function* putUserInfoWorker(payload) {
   try {
     yield put(action.fetchRequest({ text: '提交中' }))
-    const response = yield call(user.putUserInfo, payload)
+    const response = yield call(userService.putUserInfo, payload)
     yield put(action.fetchSuccess())
     yield put(action.putUserInfoSuccess(response))
     Toast.success('提交成功', 1.5)
@@ -72,7 +72,7 @@ function* putUserInfoWorker(payload) {
 
 function* getUserInfoWorker() {
   try {
-    const response = yield call(user.getUserInfo)
+    const response = yield call(userService.getUserInfo)
     yield put(action.getUserInfoSuccess(response))
   } catch (error) {
     yield put(action.getUserInfoFailed(error))
@@ -81,7 +81,7 @@ function* getUserInfoWorker() {
 
 function* getHomeUserListWorker(payload) {
   try {
-    const response = yield call(user.getHomeUserList, payload)
+    const response = yield call(userService.getHomeUserList, payload)
     yield put(action.getHomeUserListSuccess(response))
   } catch (error) {
     yield put(action.getHomeUserListFailed(error))
@@ -91,7 +91,7 @@ function* getHomeUserListWorker(payload) {
 function* getHomeUserDetailWorker(payload) {
   try {
     yield put(action.fetchRequest({ text: '加载中' }))
-    const response = yield call(user.getHomeUserDetail, payload)
+    const response = yield call(userService.getHomeUserDetail, payload)
     yield put(action.getHomeUserDetailSuccess(response))
     yield put(action.fetchSuccess())
   } catch (error) {

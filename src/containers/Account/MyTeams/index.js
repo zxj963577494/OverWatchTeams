@@ -11,7 +11,7 @@ import {
 } from '../../../actions'
 import { MyActivityIndicator } from '../../../components'
 import { cutstr } from '../../../utils/utils'
-import { user } from '../../../services/leanclound'
+import { userService } from '../../../services/leanclound'
 // eslint-disable-next-line
 import styles from './style.css'
 
@@ -25,7 +25,6 @@ class AccountTeams extends Component {
   }
 
   onCreateTeam = () => e => {
-    console.log(this)
     if (!_.isEmpty(this.props.user)) {
       if (this.props.teams.length < this.props.user.teamLimit) {
         this.props.navigateTo('/account/myteams/create')
@@ -40,7 +39,7 @@ class AccountTeams extends Component {
         )
       }
     } else {
-      const currentUser = user.getCurrentUser()
+      const currentUser = userService.getCurrentUser()
       if (this.props.teams.length < currentUser.get('teamLimit')) {
         this.props.navigateTo('/account/myteams/create')
       } else {

@@ -128,7 +128,13 @@ import {
   PUT_RESUME_ORDER_FAILED,
   DELETE_RESUME_ORDER_REQUEST,
   DELETE_RESUME_ORDER_SUCCESS,
-  DELETE_RESUME_ORDER_FAILED
+  DELETE_RESUME_ORDER_FAILED,
+  SEND_EMAIL_REQUEST,
+  SEND_EMAIL_SUCCESS,
+  SEND_EMAIL_FAILED,
+  SEND_PASSWORD_RESET_REQUEST,
+  SEND_PASSWORD_RESET_SUCCESS,
+  SEND_PASSWORD_RESET_FAILED,
 } from '../constants/actionTypes'
 
 export const getArticlesRequest = function(payload) {
@@ -650,4 +656,28 @@ export const deleteResumeOrderSuccess = function(payload) {
 
 export const deleteResumeOrderFailed = function(payload) {
   return { type: DELETE_RESUME_ORDER_FAILED, payload }
+}
+
+export const sendEmailRequest = function(payload) {
+  return { type: SEND_EMAIL_REQUEST, payload }
+}
+
+export const sendEmailSuccess = function(payload) {
+  return { type: SEND_EMAIL_SUCCESS, payload }
+}
+
+export const sendEmailFailed = function(payload) {
+  return { type: SEND_EMAIL_FAILED, payload }
+}
+
+export const sendPasswordResetRequest = function(payload) {
+  return { type: SEND_PASSWORD_RESET_REQUEST, payload }
+}
+
+export const sendPasswordResetSuccess = function(payload) {
+  return { type: SEND_PASSWORD_RESET_SUCCESS, payload }
+}
+
+export const sendPasswordResetFailed = function(payload) {
+  return { type: SEND_PASSWORD_RESET_FAILED, payload }
 }

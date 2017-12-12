@@ -8,13 +8,19 @@ import {
   Button,
   List,
   WingBlank,
-  Toast
+  Toast,
+  Modal
 } from 'antd-mobile'
 import { push } from 'react-router-redux'
 import _ from 'lodash'
-import { postLogoutRequest, setNavBar, getUserInfoRequest } from '../../actions'
+import {
+  postLogoutRequest,
+  setNavBar,
+  getUserInfoRequest,
+  sendPasswordResetRequest
+} from '../../actions'
 import config from '../../config'
-import { user } from '../../services/leanclound'
+import { userService } from '../../services/leanclound'
 
 class Account extends Component {
   constructor(props) {
@@ -31,7 +37,7 @@ class Account extends Component {
     //     logined: true
     //   })
     // }
-    const users = user.getCurrentUser()
+    const users = userService.getCurrentUser()
     if (!_.isEmpty(users)) {
       this.setState({
         logined: true
@@ -89,6 +95,48 @@ class Account extends Component {
             }}
           >
             个人简介
+          </List.Item>
+          <List.Item
+            arrow="horizontal"
+            onClick={() => {
+              if (logined) {
+                navigateTo('/account/emailverify')
+              } else {
+                Toast.info('请先登录', 1)
+              }
+            }}
+          >
+            验证邮箱
+          </List.Item>
+          <List.Item
+            arrow="horizontal"
+            onClick={() => {
+              if (logined) {
+                Modal.alert('提示', '是否重置密码？', [
+                  { text: '取消', onPress: () => console.log('cancel') },
+                  {
+                    text: '确定',
+                    onPress: () => {
+                      const isVerify = _.isEmpty(this.props.user)
+                        ? userService.getCurrentUser().get('emailVerified')
+                        : this.props.user.emailVerified
+                      if (isVerify) {
+                        const email = _.isEmpty(this.props.user)
+                          ? userService.getCurrentUser().get('email')
+                          : this.props.user.email
+                        this.props.sendPasswordReset({ email: email })
+                      } else {
+                        Toast.info('邮箱未验证，无法重置密码', 1.5)
+                      }
+                    }
+                  }
+                ])
+              } else {
+                Toast.info('请先登录', 1)
+              }
+            }}
+          >
+            重置密码
           </List.Item>
         </List>
         <List renderHeader={() => '战队'}>
@@ -249,6 +297,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     getUserInfo: () => {
       dispatch(getUserInfoRequest())
+    },
+    sendPasswordReset: payload => {
+      dispatch(sendPasswordResetRequest(payload))
     },
     postLogout: () => {
       dispatch(postLogoutRequest())

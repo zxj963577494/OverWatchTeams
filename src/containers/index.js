@@ -32,6 +32,7 @@ import AccountResumeOrdersCreate from './Account/ResumeOrders/Create'
 import AccountResumeOrdersEdit from './Account/ResumeOrders/Edit'
 import AccountResumeOrders from './Account/ResumeOrders'
 import HomeResumeOrders from './Home/ResumeOrders'
+import AccountEmaiVerify from './Account/EmaiVerify'
 
 export {
   Root,
@@ -68,4 +69,5 @@ export {
   AccountResumeOrdersCreate,
   AccountResumeOrdersEdit,
   AccountResumeOrders,
+  AccountEmaiVerify,
 }

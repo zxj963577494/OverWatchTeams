@@ -78,24 +78,6 @@ export function logInWithSessionToken(payload) {
   return AV.User.become(sessionToken)
 }
 
-// 邮箱重置密码
-export function requestPasswordReset(payload) {
-  const { email } = payload
-  return AV.User.requestPasswordReset(email)
-}
-
-// 手机号码重置密码, 发送验证码
-export function requestPasswordResetBySmsCode(payload) {
-  const { phone } = payload
-  return AV.User.requestPasswordResetBySmsCode(phone)
-}
-
-// 手机号码重置密码
-export function resetPasswordBySmsCode(payload) {
-  const { code, password } = payload
-  return AV.User.resetPasswordBySmsCode(code, password)
-}
-
 // 登出
 export function logOut() {
   return AV.User.logOut()

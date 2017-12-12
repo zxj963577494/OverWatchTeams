@@ -4,7 +4,9 @@ import {
   watchLogin,
   watchLogout,
   watchPutUserInfo,
-  watchGetUserInfo
+  watchGetUserInfo,
+  watchGetHomeUserList,
+  watchGetHomeUserDetail
 } from './userSaga'
 import {
   watchPostTeams,
@@ -16,8 +18,11 @@ import {
   watchGetMyTeams,
   watchGetInTeams
 } from './teamsSaga'
-import { watchUpload } from './commonSaga'
-import { watchGetHomeUserList, watchGetHomeUserDetail } from './userSaga'
+import {
+  watchUpload,
+  watchSendEmail,
+  watchSendPasswordReset
+} from './commonSaga'
 import {
   watchGetAccountRecruitOrderList,
   watchGetHomeRecruitOrderList,
@@ -84,6 +89,8 @@ export default function* rootSaga() {
     fork(watchGetHomeResumeOrderList),
     fork(watchPostResumeOrder),
     fork(watchPutResumeOrder),
-    fork(watchDeleteResumeOrder)
+    fork(watchDeleteResumeOrder),
+    fork(watchSendEmail),
+    fork(watchSendPasswordReset)
   ])
 }
