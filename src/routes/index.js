@@ -33,7 +33,7 @@ import {
   AccountWarOrders,
   AccountResumeOrdersCreate,
   AccountResumeOrdersEdit,
-  AccountResumeOrders,
+  AccountResumeOrders
 } from '../containers'
 
 export default (history, navbar) => {
@@ -55,11 +55,7 @@ export default (history, navbar) => {
                 path="/home/grouporders"
                 component={HomeGroupOrders}
               />
-              <Route
-                exec
-                path="/home/warorders"
-                component={HomeWarOrders}
-              />
+              <Route exec path="/home/warorders" component={HomeWarOrders} />
               <Route
                 exec
                 path="/home/resumeorders"

@@ -6,6 +6,12 @@ import { MyTabBar } from '../../components'
 import globalcss from '../../assets/css/style.css'
 
 class App extends Component {
+  componentDidMount() {
+    setTimeout(() => {
+      this.props.history.replace('/home')
+    }, 0)
+  }
+
   render() {
     return (
       <div>
