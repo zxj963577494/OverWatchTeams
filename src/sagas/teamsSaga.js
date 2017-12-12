@@ -13,17 +13,26 @@ import {
   GET_IN_TEAMS_REQUEST
 } from '../constants/actionTypes'
 import * as action from '../actions'
-import { teams } from '../services/leanclound'
+import { teams, user } from '../services/leanclound'
 
 function* postTeamsWorker(payload) {
   try {
     yield put(action.fetchRequest({ text: '提交中' }))
-    const response = yield call(teams.cerateTeam, payload)
-    yield put(action.fetchSuccess())
-    yield put(action.postTeamsSuccess(response))
-    Toast.success('提交成功', 1)
-    yield delay(1000)
-    yield put(goBack())
+    const team = yield call(teams.getMyTeams, payload)
+    const usr = yield call(user.getCurrentUser)
+    if(team.length < usr.get('teamLimit')) {
+      const response = yield call(teams.cerateTeam, payload)
+      yield put(action.fetchSuccess())
+      yield put(action.postTeamsSuccess(response))
+      Toast.success('提交成功', 1)
+      yield delay(1000)
+      yield put(goBack())
+    }
+    else {
+      Toast.fail('提交失败，每位用户最多可创建一支战队，若想创建多支战队，请联系管理员963577494@qq.com', 3)
+      yield put(action.fetchFailed())
+      yield put(action.postTeamsFailed())
+    }
   } catch (error) {
     yield put(action.fetchFailed())
     yield put(action.postTeamsFailed())

@@ -12,6 +12,7 @@ export function signUp(payload) {
   user.setEmail(email)
   user.set('show', 1)
   user.set('stick', 0)
+  user.set('teamLimit', 1)
   return user.signUp().then(function(loginedUser) {
     if (!loginedUser.get('userinfo')) {
       const Userinfo = AV.Object.extend('UserInfo')

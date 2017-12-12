@@ -2,14 +2,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
-import {
-  Button,
-  WhiteSpace,
-  WingBlank,
-  Card,
-  Modal,
-  List
-} from 'antd-mobile'
+import { Button, WhiteSpace, WingBlank, Card, Modal, List } from 'antd-mobile'
+import _ from 'lodash'
 import {
   setNavBar,
   getMyTeamsRequest,
@@ -17,6 +11,7 @@ import {
 } from '../../../actions'
 import { MyActivityIndicator } from '../../../components'
 import { cutstr } from '../../../utils/utils'
+import { user } from '../../../services/leanclound'
 // eslint-disable-next-line
 import styles from './style.css'
 
@@ -30,7 +25,35 @@ class AccountTeams extends Component {
   }
 
   onCreateTeam = () => e => {
-    this.props.navigateTo('/account/myteams/create')
+    console.log(this)
+    if (!_.isEmpty(this.props.user)) {
+      if (this.props.teams.length < this.props.user.teamLimit) {
+        this.props.navigateTo('/account/myteams/create')
+      } else {
+        Modal.alert(
+          '提示',
+          '每位用户最多可创建一支战队，若想创建多支战队，请联系管理员963577494@qq.com',
+          [
+            { text: '取消', onPress: () => console.log('cancel') },
+            { text: '确定', onPress: () => console.log('success') }
+          ]
+        )
+      }
+    } else {
+      const currentUser = user.getCurrentUser()
+      if (this.props.teams.length < currentUser.get('teamLimit')) {
+        this.props.navigateTo('/account/myteams/create')
+      } else {
+        Modal.alert(
+          '提示',
+          '每位用户最多可创建一支战队，若想创建多支战队，请联系管理员963577494@qq.com',
+          [
+            { text: '取消', onPress: () => console.log('cancel') },
+            { text: '确定', onPress: () => console.log('success') }
+          ]
+        )
+      }
+    }
   }
 
   onRemoveTeam = id => e => {
@@ -163,7 +186,8 @@ class AccountTeams extends Component {
 const mapStateToProps = (state, ownProps) => {
   return {
     app: state.root.app,
-    teams: state.root.team.account.team.myTeams
+    teams: state.root.team.account.team.myTeams,
+    user: state.root.user.account.user
   }
 }
 
