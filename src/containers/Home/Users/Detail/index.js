@@ -23,10 +23,7 @@ class HomeUserDetail extends Component {
     }
     return (
       <div>
-        <MyActivityIndicator
-          isFetching={app.isFetching}
-          text={app.text}
-        />
+        <MyActivityIndicator isFetching={app.isFetching} text={app.text} />
         <WhiteSpace />
         <Result
           img={
@@ -103,9 +100,13 @@ class HomeUserDetail extends Component {
           <List.Item wrap>{user.match}</List.Item>
         </List>
         <List renderHeader={() => '其他'}>
-          <List.Item extra={user.mouse}>鼠标</List.Item>
-          <List.Item extra={user.keyboard}>键盘</List.Item>
-          <List.Item extra={user.headphones}>耳机</List.Item>
+          <List.Item extra={user.mouse ? user.mouse : '未知'}>鼠标</List.Item>
+          <List.Item extra={user.keyboard ? user.keyboard : '未知'}>
+            键盘
+          </List.Item>
+          <List.Item extra={user.headphones ? user.headphones : '未知'}>
+            耳机
+          </List.Item>
         </List>
         <WhiteSpace />
       </div>

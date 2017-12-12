@@ -5,7 +5,6 @@ import { push } from 'react-router-redux'
 import { Flex, WhiteSpace, Grid, List } from 'antd-mobile'
 import { setNavBar, getHomeGroupOrderListRequest } from '../../actions'
 import {
-  MyCarousel,
   HomeGroupListView,
   MyActivityIndicator
 } from '../../components'
