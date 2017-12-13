@@ -69,6 +69,7 @@ export default class AccountGroupOrderListView extends PureComponent {
                   >
                     编辑
                   </Button>
+                  <WhiteSpace size="xs" />
                   <Button
                     onClick={this.onRemove(rowData.objectId)}
                     type="warning"
