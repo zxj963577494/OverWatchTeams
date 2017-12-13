@@ -52,8 +52,6 @@ class HomeUserDetail extends Component {
           >
             天梯段位
           </List.Item>
-        </List>
-        <List>
           <List.Item
             extra={
               user.position

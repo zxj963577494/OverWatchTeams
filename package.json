@@ -55,13 +55,14 @@
     "whatwg-fetch": "2.0.3"
   },
   "scripts": {
-    "dev": "DEBUG=leancloud* node scripts/start.js",
-    "start": "NODE_ENV=production node scripts/start.js",
+    "dev": "cross-env DEBUG=leancloud* node scripts/start.js",
+    "start": "cross-env NODE_ENV=production node scripts/start.js",
     "build": "node scripts/build",
     "test": "node scripts/test.js --env=jsdom"
   },
   "devDependencies": {
     "babel-plugin-import": "^1.6.2",
+    "cross-env": "^5.1.1",
     "react-app-rewired": "^1.3.5",
     "redux-devtools": "^3.4.1",
     "redux-devtools-dock-monitor": "^1.1.2",
