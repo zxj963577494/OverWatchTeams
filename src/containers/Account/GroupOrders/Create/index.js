@@ -122,7 +122,7 @@ class AccountGroupOrdersCreate extends Component {
                   }
                 ]
               })}
-              rows={8}
+              rows={6}
               labelNumber={5}
               placeholder="请输入组队内容"
               value={description}
@@ -146,8 +146,6 @@ class AccountGroupOrdersCreate extends Component {
                   }
                 ]
               })}
-              rows={8}
-              labelNumber={5}
               placeholder="请输入联系方式"
               value={contact}
             />

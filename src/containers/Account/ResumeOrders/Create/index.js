@@ -122,8 +122,7 @@ class AccountResumeOrdersCreate extends Component {
                   }
                 ]
               })}
-              rows={8}
-              labelNumber={5}
+              rows={6}
               placeholder="请输入自荐内容"
               value={description}
             />
@@ -146,8 +145,6 @@ class AccountResumeOrdersCreate extends Component {
                   }
                 ]
               })}
-              rows={8}
-              labelNumber={5}
               placeholder="请输入联系方式"
               value={contact}
             />

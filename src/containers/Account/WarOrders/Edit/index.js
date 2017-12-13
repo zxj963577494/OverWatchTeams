@@ -143,8 +143,7 @@ class AccountWarOrdersEdit extends Component {
                   }
                 ]
               })}
-              rows={8}
-              labelNumber={5}
+              rows={6}
               placeholder="请输入约战帖内容"
               value={description}
             />
@@ -167,8 +166,6 @@ class AccountWarOrdersEdit extends Component {
                   }
                 ]
               })}
-              rows={8}
-              labelNumber={5}
               placeholder="请输入联系方式"
               value={contact}
             />
