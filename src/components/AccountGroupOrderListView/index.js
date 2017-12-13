@@ -16,7 +16,6 @@ export default class AccountGroupOrderListView extends PureComponent {
     super(props)
     this.onEndReached = this.onEndReached.bind(this)
     this.onRefresh = this.onRefresh.bind(this)
-    this.onRemove = this.onRemove.bind(this)
   }
 
   onEndReached = event => {
@@ -34,7 +33,7 @@ export default class AccountGroupOrderListView extends PureComponent {
     this.props.getAccountGroupOrderList({ isRefreshing: true })
   }
 
-  onRemove = objectId => {
+  onRemove = objectId => e => {
     Modal.alert('警告', '是否删除该组队帖？', [
       { text: '取消', onPress: () => console.log('cancel') },
       {
@@ -71,7 +70,7 @@ export default class AccountGroupOrderListView extends PureComponent {
                     编辑
                   </Button>
                   <Button
-                    onClick={this.onRemove.bind(this, rowData.objectId)}
+                    onClick={this.onRemove(rowData.objectId)}
                     type="warning"
                     size="small"
                     inline

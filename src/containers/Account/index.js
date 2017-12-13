@@ -152,7 +152,7 @@ class Account extends Component {
           >
             我的战队
           </List.Item>
-          <List.Item
+          {/* <List.Item
             arrow="horizontal"
             onClick={() => {
               if (logined) {
@@ -163,7 +163,7 @@ class Account extends Component {
             }}
           >
             所在战队
-          </List.Item>
+          </List.Item> */}
         </List>
         <List renderHeader={() => '寻找战队'}>
           <List.Item

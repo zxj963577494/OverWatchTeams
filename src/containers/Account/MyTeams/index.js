@@ -22,9 +22,10 @@ class AccountTeams extends Component {
       modal: false,
       teamid: ''
     }
+    this.onCreateTeam = this.onCreateTeam.bind(this)
   }
 
-  onCreateTeam = () => e => {
+  onCreateTeam() {
     if (!_.isEmpty(this.props.user)) {
       if (this.props.teams.length < this.props.user.teamLimit) {
         this.props.navigateTo('/account/myteams/create')
@@ -83,59 +84,57 @@ class AccountTeams extends Component {
       <div>
         <MyActivityIndicator isFetching={app.isFetching} text={app.text} />
         <WingBlank>
-          {teams.map(function(item, index) {
-            return (
-              <div key={index}>
-                <WhiteSpace />
-                <Card>
-                  <Card.Header
-                    title={
-                      item.englishFullName ||
-                      item.chineseFullName ||
-                      item.englishName ||
-                      item.chineseName
-                    }
-                    thumb={item.avatar}
-                    extra={
-                      <Button
-                        onClick={() => {
-                          navigateTo('/account/myteams/edit/' + item.objectId)
-                        }}
-                        type="ghost"
-                        size="small"
-                        inline
-                      >
-                        编辑
-                      </Button>
-                    }
-                  />
-                  <Card.Body>
-                    <List>
-                      <List.Item wrap>
-                        {cutstr(item.introduction, 200, 0)}
-                      </List.Item>
-                    </List>
-                  </Card.Body>
-                  <Card.Footer
-                    extra={
-                      <Button
-                        onClick={this.onRemoveTeam(item.objectId)}
-                        type="warning"
-                        size="small"
-                        inline
-                      >
-                        战队解散
-                      </Button>
-                    }
-                  />
-                </Card>
-              </div>
-            )
-          }, this)}
+          {teams.map((item, index) => (
+            <div key={index}>
+              <WhiteSpace />
+              <Card>
+                <Card.Header
+                  title={
+                    item.englishFullName ||
+                    item.chineseFullName ||
+                    item.englishName ||
+                    item.chineseName
+                  }
+                  thumb={item.avatar}
+                  extra={
+                    <Button
+                      onClick={() => {
+                        navigateTo('/account/myteams/edit/' + item.objectId)
+                      }}
+                      type="ghost"
+                      size="small"
+                      inline
+                    >
+                      编辑
+                    </Button>
+                  }
+                />
+                <Card.Body>
+                  <List>
+                    <List.Item wrap>
+                      {cutstr(item.introduction, 200, 0)}
+                    </List.Item>
+                  </List>
+                </Card.Body>
+                <Card.Footer
+                  extra={
+                    <Button
+                      onClick={this.onRemoveTeam(item.objectId)}
+                      type="warning"
+                      size="small"
+                      inline
+                    >
+                      战队解散
+                    </Button>
+                  }
+                />
+              </Card>
+            </div>
+          ))}
         </WingBlank>
         <WhiteSpace />
         <WingBlank>
-          <Button onClick={this.onCreateTeam()} type="primary">
+          <Button onClick={this.onCreateTeam} type="primary">
             新 建 战 队
           </Button>
         </WingBlank>
