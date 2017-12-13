@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { ListView, PullToRefresh, Card, Flex, WhiteSpace } from 'antd-mobile'
-import TimeAgo from 'timeago-react'
+import { ListView, PullToRefresh, WhiteSpace } from 'antd-mobile'
+import HomeRecruitCard from '../HomeRecruitCard'
 
 export default class HomeRecruitOrderListView extends PureComponent {
   constructor(props) {
@@ -32,58 +32,11 @@ export default class HomeRecruitOrderListView extends PureComponent {
     const separator = (sectionID, rowID) => <WhiteSpace key={`${rowID}`} />
     const row = (rowData, sectionID, rowID) => {
       return (
-        <div key={rowID}>
-          <Card full>
-            <Card.Header
-              title={rowData.title}
-              thumb={rowData.team.avatar}
-              onClick={() =>
-                this.props.navigateTo(`/home/team/${rowData.team.objectId}`)
-              }
-            />
-            <Card.Body>
-              <Flex>
-                <Flex.Item>
-                  <span
-                    onClick={() =>
-                      this.props.navigateTo(
-                        `/home/team/${rowData.team.objectId}`
-                      )
-                    }
-                    style={{ color: 'red' }}
-                  >
-                    {rowData.team.englishFullName ||
-                      rowData.team.chineseFullName ||
-                      rowData.team.englishName ||
-                      rowData.team.chineseName}
-                  </span>
-                </Flex.Item>
-                <Flex.Item>
-                  <span style={{ color: 'red' }}>{rowData.contact}</span>
-                </Flex.Item>
-              </Flex>
-              <WhiteSpace />
-              <Flex>
-                <Flex.Item>{rowData.description}</Flex.Item>
-              </Flex>
-            </Card.Body>
-            <Card.Footer
-              content={
-                <div>
-                  开始时间：<TimeAgo
-                    datetime={rowData.createdAt}
-                    locale="zh_CN"
-                  />
-                </div>
-              }
-              extra={
-                <div style={{ color: 'red' }}>
-                  有效日期：<TimeAgo datetime={rowData.endDate} locale="zh_CN" />
-                </div>
-              }
-            />
-          </Card>
-        </div>
+        <HomeRecruitCard
+          key={rowID}
+          item={rowData}
+          navigateTo={this.props.navigateTo}
+        />
       )
     }
     const fonter = () => {

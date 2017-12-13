@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { ListView, PullToRefresh, Card, Flex, WhiteSpace } from 'antd-mobile'
-import TimeAgo from 'timeago-react'
+import { ListView, PullToRefresh, WhiteSpace } from 'antd-mobile'
+import HomeGroupCard from '../HomeGroupCard'
 
 export default class HomeGroupOrderListView extends PureComponent {
   constructor(props) {
@@ -11,10 +11,7 @@ export default class HomeGroupOrderListView extends PureComponent {
   }
 
   onEndReached = event => {
-    if (
-      this.props.groupOrder.isFetching ||
-      !this.props.groupOrder.isLoadMore
-    ) {
+    if (this.props.groupOrder.isFetching || !this.props.groupOrder.isLoadMore) {
       return
     }
     const page = this.props.groupOrder.page + 1
@@ -32,55 +29,11 @@ export default class HomeGroupOrderListView extends PureComponent {
     const separator = (sectionID, rowID) => <WhiteSpace key={`${rowID}`} />
     const row = (rowData, sectionID, rowID) => {
       return (
-        <div key={rowID}>
-          <Card full>
-            <Card.Header
-              title={rowData.title}
-              thumb={rowData.userinfo.avatar}
-              onClick={() =>
-                this.props.navigateTo(`/home/user/${rowData.user.objectId}`)
-              }
-            />
-            <Card.Body>
-              <Flex>
-                <Flex.Item>
-                  <span
-                    onClick={() =>
-                      this.props.navigateTo(
-                        `/home/user/${rowData.userinfo.objectId}`
-                      )
-                    }
-                    style={{ color: 'red' }}
-                  >
-                    {rowData.userinfo.nickname}
-                  </span>
-                </Flex.Item>
-                <Flex.Item>
-                  <span style={{ color: 'red' }}>{rowData.contact}</span>
-                </Flex.Item>
-              </Flex>
-              <WhiteSpace />
-              <Flex>
-                <Flex.Item>{rowData.description}</Flex.Item>
-              </Flex>
-            </Card.Body>
-            <Card.Footer
-              content={
-                <div>
-                  开始时间：<TimeAgo
-                    datetime={rowData.createdAt}
-                    locale="zh_CN"
-                  />
-                </div>
-              }
-              extra={
-                <div style={{ color: 'red' }}>
-                  有效日期：<TimeAgo datetime={rowData.endDate} locale="zh_CN" />
-                </div>
-              }
-            />
-          </Card>
-        </div>
+        <HomeGroupCard
+          key={rowID}
+          item={rowData}
+          navigateTo={this.props.navigateTo}
+        />
       )
     }
     const fonter = () => {

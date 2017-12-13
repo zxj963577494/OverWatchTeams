@@ -1,7 +1,6 @@
 import MyTabBar from './TabBar'
 import MyCarousel from './Carousel'
 import MyNavBar from './NavBar'
-import HomeGroupListView from './HomeGroupListView'
 import HomeUsersListView from './HomeUsersListView'
 import HomeTeamsListView from './HomeTeamsListView'
 import MyActivityIndicator from './ActivityIndicator'
@@ -13,6 +12,8 @@ import AccountWarOrderListView from './AccountWarOrderListView'
 import HomeWarOrderListView from './HomeWarOrderListView'
 import AccountResumeOrderListView from './AccountResumeOrderListView'
 import HomeResumeOrderListView from './HomeResumeOrderListView'
+import HomeRecruitCard from './HomeRecruitCard'
+import HomeGroupCard from './HomeGroupCard'
 
 export {
   MyTabBar,
@@ -20,7 +21,6 @@ export {
   MyNavBar,
   HomeUsersListView,
   HomeTeamsListView,
-  HomeGroupListView,
   MyActivityIndicator,
   AccountRecruitOrderListView,
   HomeRecruitOrderListView,
@@ -29,5 +29,7 @@ export {
   AccountWarOrderListView,
   HomeWarOrderListView,
   AccountResumeOrderListView,
-  HomeResumeOrderListView
+  HomeResumeOrderListView,
+  HomeRecruitCard,
+  HomeGroupCard
 }

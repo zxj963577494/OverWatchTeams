@@ -3,10 +3,15 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import { Flex, WhiteSpace, Grid, List } from 'antd-mobile'
-import { setNavBar, getHomeGroupOrderListRequest } from '../../actions'
 import {
-  HomeGroupListView,
-  MyActivityIndicator
+  setNavBar,
+  getHomeGroupOrderListRequest,
+  getHomeRecruitOrderListRequest
+} from '../../actions'
+import {
+  MyActivityIndicator,
+  HomeRecruitCard,
+  HomeGroupCard
 } from '../../components'
 import config from '../../config'
 import styles from './style.css'
@@ -58,6 +63,9 @@ class Home extends Component {
     if (this.props.groupOrder.list.length === 0) {
       this.props.getHomeGroupOrderList({ page: 1 })
     }
+    if (this.props.recruitOrder.list.length === 0) {
+      this.props.getHomeRecruitOrderList({ page: 1 })
+    }
     this.props.setNavBar({ title: 'OverWatch Teams', isCanBack: false })
   }
 
@@ -91,7 +99,7 @@ class Home extends Component {
   // }
 
   render() {
-    const { navigateTo, groupOrder } = this.props
+    const { navigateTo, groupOrder, recruitOrder } = this.props
     return (
       <div>
         <MyActivityIndicator
@@ -122,7 +130,26 @@ class Home extends Component {
           )}
         />
         <List renderHeader={() => '组队上分'}>
-          <HomeGroupListView groupOrder={groupOrder} navigateTo={navigateTo} />
+          {groupOrder.list.slice(0, 3).map((item, index) => {
+            return (
+              <List.Item key={index}>
+                <HomeGroupCard item={item} navigateTo={navigateTo} />
+                <WhiteSpace />
+              </List.Item>
+            )
+          })}
+        </List>
+        <List renderHeader={() => '战队招募'}>
+          {recruitOrder.list.slice(0, 3).map((item, index) => {
+            return (
+              <div key={index}>
+                <List.Item>
+                  <HomeRecruitCard item={item} navigateTo={navigateTo} />
+                </List.Item>
+                <WhiteSpace />
+              </div>
+            )
+          })}
         </List>
       </div>
     )
@@ -131,7 +158,8 @@ class Home extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    groupOrder: state.root.groupOrder.home.groupOrder
+    groupOrder: state.root.groupOrder.home.groupOrder,
+    recruitOrder: state.root.recruitOrder.home.recruitOrder
   }
 }
 
@@ -139,6 +167,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     getHomeGroupOrderList: payload => {
       dispatch(getHomeGroupOrderListRequest(payload))
+    },
+    getHomeRecruitOrderList: payload => {
+      dispatch(getHomeRecruitOrderListRequest(payload))
     },
     navigateTo: location => {
       dispatch(push(location))
@@ -154,7 +185,10 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 Home.propTypes = {
   setNavBar: PropTypes.func.isRequired,
   navigateTo: PropTypes.func.isRequired,
-  getHomeGroupOrderList: PropTypes.func.isRequired
+  groupOrder: PropTypes.object,
+  getHomeGroupOrderList: PropTypes.func.isRequired,
+  recruitOrder: PropTypes.object,
+  getHomeRecruitOrderList: PropTypes.func.isRequired
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home)
