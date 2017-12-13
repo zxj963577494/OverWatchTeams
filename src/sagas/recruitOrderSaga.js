@@ -15,7 +15,8 @@ import { recruitOrderService, teamsService } from '../services/leanclound'
 function* postRecruitOrderWorker(payload) {
   try {
     yield put(action.fetchRequest({ text: '提交中' }))
-    const response = yield call(recruitOrderService.cerateRecruitOrder, payload)
+    const team = yield call(teamsService.getTeamToJson, payload)
+    const response = yield call(recruitOrderService.cerateRecruitOrder, payload, team)
     yield put(action.postRecruitOrderSuccess(response))
     yield put(action.fetchSuccess())
     Toast.success('提交成功', 1)

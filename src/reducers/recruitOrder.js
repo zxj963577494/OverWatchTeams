@@ -148,7 +148,7 @@ function recruitOrderReducer(state = initialRecruitOrderState, action) {
           ...state.account,
           recruitOrder: {
             ...state.account.recruitOrder,
-            list: state.account.recruitOrder.list.splice(0, 0, action.payload),
+            list: [...state.account.recruitOrder.list, action.payload],
             pending: false
           }
         },
@@ -156,7 +156,7 @@ function recruitOrderReducer(state = initialRecruitOrderState, action) {
           ...state.home,
           recruitOrder: {
             ...state.home.recruitOrder,
-            list: state.home.recruitOrder.list.splice(0, 0, action.payload)
+            list: [...state.home.recruitOrder.list, action.payload]
           }
         }
       }
@@ -225,24 +225,23 @@ function recruitOrderReducer(state = initialRecruitOrderState, action) {
     case DELETE_RECRUIT_ORDER_REQUEST:
       return state
     case DELETE_RECRUIT_ORDER_SUCCESS:
+      const list = state.account.recruitOrder.list.filter(
+        x => x.objectId !== action.payload.objectId
+      )
       return {
         ...state,
         account: {
           ...state.account,
           recruitOrder: {
             ...state.account.recruitOrder,
-            list: state.account.recruitOrder.list.filter(
-              x => x.objectId !== action.payload.objectId
-            )
+            list: list
           }
         },
         home: {
           ...state.home,
           recruitOrder: {
             ...state.home.recruitOrder,
-            list: state.home.recruitOrder.list.filter(
-              x => x.objectId !== action.payload.objectId
-            )
+            list: list
           }
         }
       }

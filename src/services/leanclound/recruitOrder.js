@@ -2,9 +2,9 @@ import AV from 'leancloud-storage'
 import { getCurrentUser } from './user'
 
 // 创建招募令
-export function cerateRecruitOrder(payload) {
+export function cerateRecruitOrder(payload, team) {
   const user = getCurrentUser()
-  const team = AV.Object.createWithoutData('Teams', payload.teamid)
+  const teamData = AV.Object.createWithoutData('Teams', payload.teamid)
   const recruitOrders = new AV.Object('RecruitOrders')
   recruitOrders.set('title', payload.title)
   recruitOrders.set('description', payload.description)
@@ -14,7 +14,7 @@ export function cerateRecruitOrder(payload) {
   const endDate = new Date(payload.endDate)
   recruitOrders.set('endDate', endDate)
   recruitOrders.set('user', user)
-  recruitOrders.set('team', team)
+  recruitOrders.set('team', teamData)
 
   var acl = new AV.ACL()
   acl.setPublicReadAccess(true)
@@ -23,7 +23,7 @@ export function cerateRecruitOrder(payload) {
   recruitOrders.setACL(acl)
 
   return recruitOrders.save().then(function(result) {
-    return result.toJSON()
+    return { ...result.toJSON(), team }
   })
 }
 
@@ -50,7 +50,10 @@ export function updateRecruitOrder(payload, team) {
 }
 
 export function removeRecruitOrder(payload) {
-  var recruitOrders = AV.Object.createWithoutData('RecruitOrders', payload.objectId)
+  var recruitOrders = AV.Object.createWithoutData(
+    'RecruitOrders',
+    payload.objectId
+  )
   return recruitOrders.destroy().then(function(success) {
     return success.toJSON()
   })

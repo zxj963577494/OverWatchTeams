@@ -12,12 +12,9 @@ import {
   List,
   TextareaItem,
   Toast,
-  DatePicker,
+  DatePicker
 } from 'antd-mobile'
-import {
-  setNavBar,
-  postGroupOrderRequest,
-} from '../../../../actions'
+import { setNavBar, postGroupOrderRequest } from '../../../../actions'
 import { MyActivityIndicator } from '../../../../components'
 
 let date = new Date()
@@ -31,7 +28,6 @@ class AccountGroupOrdersCreate extends Component {
       description: '',
       endDate: date,
       contact: props.userinfo.contact || '',
-      pending: props.groupOrder.pending
     }
     this.onTitleChange = this.onTitleChange.bind(this)
     this.onDescriptionChange = this.onDescriptionChange.bind(this)
@@ -79,7 +75,8 @@ class AccountGroupOrdersCreate extends Component {
 
   render() {
     const { getFieldProps, getFieldError } = this.props.form
-    const { app, pending } = this.props
+    const { app } = this.props
+    const { pending } = this.props.groupOrder
     const { title, description, contact, endDate } = this.state
     const titleErrors = getFieldError('title')
     const descriptionErrors = getFieldError('description')
@@ -93,6 +90,7 @@ class AccountGroupOrdersCreate extends Component {
             <InputItem
               {...getFieldProps('title', {
                 onChange: this.onTitleChange,
+                initialValue: title,
                 rules: [
                   {
                     required: true,
@@ -113,6 +111,7 @@ class AccountGroupOrdersCreate extends Component {
             <TextareaItem
               {...getFieldProps('description', {
                 onChange: this.onDescriptionChange,
+                initialValue: description,
                 rules: [
                   {
                     type: 'string',
@@ -189,7 +188,7 @@ const mapStateToProps = (state, ownProps) => {
   return {
     app: state.root.app,
     userinfo: state.root.user.account.userinfo,
-    groupOrder: state.root.groupOrder.account
+    groupOrder: state.root.groupOrder.account.groupOrder
   }
 }
 

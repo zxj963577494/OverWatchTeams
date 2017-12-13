@@ -73,9 +73,6 @@ class HomeTeamDetail extends Component {
                 平均段位
               </List.Item>
             </List>
-            <List renderHeader={() => '战队口号'}>
-              <List.Item wrap>{team.slogan}</List.Item>
-            </List>
             <List renderHeader={() => '战队介绍'}>
               <List.Item wrap>{team.introduction}</List.Item>
             </List>

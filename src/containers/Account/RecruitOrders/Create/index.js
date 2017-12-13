@@ -33,8 +33,7 @@ class AccountRecruitOrdersCreate extends Component {
       title: '',
       description: '',
       endDate: date,
-      contact: props.userinfo.contact || '',
-      pending: props.recruitOrder.pending
+      contact: props.userinfo.contact || ''
     }
     this.onTitleChange = this.onTitleChange.bind(this)
     this.onDescriptionChange = this.onDescriptionChange.bind(this)
@@ -96,7 +95,8 @@ class AccountRecruitOrdersCreate extends Component {
 
   render() {
     const { getFieldProps, getFieldError } = this.props.form
-    const { app, pending, teams, navigateTo } = this.props
+    const { app, teams, navigateTo } = this.props
+    const { pending } = this.props.recruitOrder
     const { teamid, title, description, contact, endDate } = this.state
     const titleErrors = getFieldError('title')
     const descriptionErrors = getFieldError('description')
@@ -106,33 +106,11 @@ class AccountRecruitOrdersCreate extends Component {
       <div>
         <MyActivityIndicator isFetching={app.isFetching} text={app.text} />
         <form>
-          <List renderHeader={() => '选择战队'}>
-            {teams.length > 0 ? (
-              teams.map((item, index) => (
-                <Radio.RadioItem
-                  key={index}
-                  onChange={() => this.onTeamSelectedChange(item.objectId)}
-                  checked={teamid === item.objectId}
-                >
-                  {item.englishFullName ||
-                    item.chineseFullName ||
-                    item.englishName ||
-                    item.chineseName}
-                </Radio.RadioItem>
-              ))
-            ) : (
-              <Button
-                type="warning"
-                onClick={() => navigateTo('/account/teams/create')}
-              >
-                必须先创建战队，点击前往
-              </Button>
-            )}
-          </List>
           <List renderHeader={() => '招募令标题'}>
             <InputItem
               {...getFieldProps('title', {
                 onChange: this.onTitleChange,
+                initialValue: title,
                 rules: [
                   {
                     required: true,
@@ -153,6 +131,7 @@ class AccountRecruitOrdersCreate extends Component {
             <TextareaItem
               {...getFieldProps('description', {
                 onChange: this.onDescriptionChange,
+                initialValue: description,
                 rules: [
                   {
                     type: 'string',
@@ -196,6 +175,29 @@ class AccountRecruitOrdersCreate extends Component {
               {contactErrors ? contactErrors.join(',') : null}
             </Flex>
           </List>
+          <List renderHeader={() => '选择战队'}>
+            {teams.length > 0 ? (
+              teams.map((item, index) => (
+                <Radio.RadioItem
+                  key={index}
+                  onChange={() => this.onTeamSelectedChange(item.objectId)}
+                  checked={teamid === item.objectId}
+                >
+                  {item.englishFullName ||
+                    item.chineseFullName ||
+                    item.englishName ||
+                    item.chineseName}
+                </Radio.RadioItem>
+              ))
+            ) : (
+              <Button
+                type="warning"
+                onClick={() => navigateTo('/account/teams/create')}
+              >
+                必须先创建战队，点击前往
+              </Button>
+            )}
+          </List>
           <List renderHeader={() => '截止时间'}>
             <DatePicker
               {...getFieldProps('endDate', {
@@ -230,7 +232,7 @@ const mapStateToProps = (state, ownProps) => {
     app: state.root.app,
     teams: state.root.team.account.team.myTeams,
     userinfo: state.root.user.account.userinfo,
-    recruitOrder: state.root.recruitOrder.account
+    recruitOrder: state.root.recruitOrder.account.recruitOrder
   }
 }
 

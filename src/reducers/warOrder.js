@@ -146,7 +146,7 @@ function warOrderReducer(state = initialWarOrderState, action) {
           ...state.account,
           warOrder: {
             ...state.account.warOrder,
-            list: state.account.warOrder.list.splice(0, 0, action.payload),
+            list: [...state.account.warOrder.list, action.payload],
             pending: false
           }
         },
@@ -154,7 +154,7 @@ function warOrderReducer(state = initialWarOrderState, action) {
           ...state.home,
           warOrder: {
             ...state.home.warOrder,
-            list: state.home.warOrder.list.splice(0, 0, action.payload),
+            list: [...state.home.warOrder.list, action.payload],
           }
         }
       }
@@ -224,24 +224,23 @@ function warOrderReducer(state = initialWarOrderState, action) {
     case DELETE_WAR_ORDER_REQUEST:
       return state
     case DELETE_WAR_ORDER_SUCCESS:
+      const list = state.account.warOrder.list.filter(
+        x => x.objectId !== action.payload.objectId
+      )
       return {
         ...state,
         account: {
           ...state.account,
           warOrder: {
             ...state.account.warOrder,
-            list: state.account.warOrder.list.filter(
-              x => x.objectId !== action.payload.objectId
-            )
+            list: list
           }
         },
         home: {
           ...state.home,
           warOrder: {
             ...state.home.warOrder,
-            list: state.home.warOrder.list.filter(
-              x => x.objectId !== action.payload.objectId
-            )
+            list: list
           }
         }
       }

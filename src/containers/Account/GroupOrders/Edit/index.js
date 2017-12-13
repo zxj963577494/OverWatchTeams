@@ -31,7 +31,6 @@ class AccountGroupOrdersEdit extends Component {
       description: props.groupOrder.description,
       endDate: new Date(props.groupOrder.endDate),
       contact: props.groupOrder.contact,
-      pending: props.pending
     }
     this.onTitleChange = this.onTitleChange.bind(this)
     this.onDescriptionChange = this.onDescriptionChange.bind(this)

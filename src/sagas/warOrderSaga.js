@@ -15,9 +15,10 @@ import { warOrderService, teamsService } from '../services/leanclound'
 function* postWarOrderWorker(payload) {
   try {
     yield put(action.fetchRequest({ text: '提交中' }))
-    const response = yield call(warOrderService.cerateWarOrder, payload)
-    yield put(action.postWarOrderSuccess(response))
+    const team = yield call(teamsService.getTeamToJson, payload)
+    const response = yield call(warOrderService.cerateWarOrder, payload, team)
     yield put(action.fetchSuccess())
+    yield put(action.postWarOrderSuccess(response))
     Toast.success('提交成功', 1)
     yield delay(1000)
     yield put(replace('/account/warorders'))
@@ -33,8 +34,8 @@ function* putWarOrderWorker(payload) {
     yield put(action.fetchRequest({ text: '提交中' }))
     const team = yield call(teamsService.getTeam, payload)
     const response = yield call(warOrderService.updateWarOrder, payload, team)
-    yield put(action.putWarOrderSuccess(response))
     yield put(action.fetchSuccess())
+    yield put(action.putWarOrderSuccess(response))
     Toast.success('提交成功', 1)
     yield delay(1000)
     yield put(replace('/account/warorders'))

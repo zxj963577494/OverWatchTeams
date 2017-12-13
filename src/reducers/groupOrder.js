@@ -146,7 +146,7 @@ function groupOrderReducer(state = initialGroupOrderState, action) {
           ...state.account,
           groupOrder: {
             ...state.account.groupOrder,
-            list: state.account.groupOrder.list.splice(0, 0, action.payload),
+            list: [...state.account.groupOrder.list, action.payload],
             pending: false
           }
         },
@@ -154,7 +154,7 @@ function groupOrderReducer(state = initialGroupOrderState, action) {
           ...state.home,
           groupOrder: {
             ...state.home.groupOrder,
-            list: state.home.groupOrder.list.splice(0, 0, action.payload),
+            list: [...state.home.groupOrder.list, action.payload]
           }
         }
       }
@@ -224,24 +224,23 @@ function groupOrderReducer(state = initialGroupOrderState, action) {
     case DELETE_GROUP_ORDER_REQUEST:
       return state
     case DELETE_GROUP_ORDER_SUCCESS:
+      const list = state.account.groupOrder.list.filter(
+        x => x.objectId !== action.payload.objectId
+      )
       return {
         ...state,
         account: {
           ...state.account,
           groupOrder: {
             ...state.account.groupOrder,
-            list: state.account.groupOrder.list.filter(
-              x => x.objectId !== action.payload.objectId
-            )
+            list: list
           }
         },
         home: {
           ...state.home,
           groupOrder: {
             ...state.home.groupOrder,
-            list: state.home.groupOrder.list.filter(
-              x => x.objectId !== action.payload.objectId
-            )
+            list: list
           }
         }
       }

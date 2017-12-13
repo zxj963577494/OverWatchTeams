@@ -31,7 +31,6 @@ class AccountResumeOrdersEdit extends Component {
       description: props.resumeOrder.description,
       endDate: new Date(props.resumeOrder.endDate),
       contact: props.resumeOrder.contact,
-      pending: props.pending
     }
     this.onTitleChange = this.onTitleChange.bind(this)
     this.onDescriptionChange = this.onDescriptionChange.bind(this)

@@ -10,14 +10,15 @@ import {
   DELETE_GROUP_ORDER_REQUEST
 } from '../constants/actionTypes'
 import * as action from '../actions'
-import { groupOrderService } from '../services/leanclound'
+import { groupOrderService, userService } from '../services/leanclound'
 
 function* postGroupOrderWorker(payload) {
   try {
     yield put(action.fetchRequest({ text: '提交中' }))
-    const response = yield call(groupOrderService.cerateGroupOrder, payload)
-    yield put(action.postGroupOrderSuccess(response))
+    const userinfo = yield call(userService.getUserInfoToJson)
+    const response = yield call(groupOrderService.cerateGroupOrder, payload, userinfo)
     yield put(action.fetchSuccess())
+    yield put(action.postGroupOrderSuccess(response))
     Toast.success('提交成功', 1)
     yield delay(1000)
     yield put(replace('/account/grouporders'))
@@ -32,8 +33,8 @@ function* putGroupOrderWorker(payload) {
   try {
     yield put(action.fetchRequest({ text: '提交中' }))
     const response = yield call(groupOrderService.updateGroupOrder, payload)
-    yield put(action.putGroupOrderSuccess(response))
     yield put(action.fetchSuccess())
+    yield put(action.putGroupOrderSuccess(response))
     Toast.success('提交成功', 1)
     yield delay(1000)
     yield put(replace('/account/grouporders'))

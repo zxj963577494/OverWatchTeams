@@ -180,6 +180,14 @@ export function getTeam(payload) {
   })
 }
 
+export function getTeamToJson(payload) {
+  const team = new AV.Query('Teams')
+  team.equalTo('objectId', payload.teamid)
+  return team.first().then(function(result) {
+    return result.toJSON()
+  })
+}
+
 // 更新战队
 export function updateTeam(payload) {
   const team = AV.Object.createWithoutData('Teams', payload.objectId)

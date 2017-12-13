@@ -35,7 +35,6 @@ class AccountWarOrdersEdit extends Component {
       description: props.warOrder.description,
       endDate: new Date(props.warOrder.endDate),
       contact: props.warOrder.contact,
-      pending: props.pending
     }
     this.onTitleChange = this.onTitleChange.bind(this)
     this.onDescriptionChange = this.onDescriptionChange.bind(this)
@@ -108,29 +107,6 @@ class AccountWarOrdersEdit extends Component {
       <div>
         <MyActivityIndicator isFetching={app.isFetching} text={app.text} />
         <form>
-          <List renderHeader={() => '选择战队'}>
-            {teams.length > 0 ? (
-              teams.map((item, index) => (
-                <Radio.RadioItem
-                  key={index}
-                  onChange={() => this.onTeamSelectedChange(item.objectId)}
-                  checked={teamid === item.objectId}
-                >
-                  {item.englishFullName ||
-                    item.chineseFullName ||
-                    item.englishName ||
-                    item.chineseName}
-                </Radio.RadioItem>
-              ))
-            ) : (
-              <Button
-                type="warning"
-                onClick={() => navigateTo('/account/teams/create')}
-              >
-                必须先创建战队，点击前往
-              </Button>
-            )}
-          </List>
           <List renderHeader={() => '约战帖标题'}>
             <InputItem
               {...getFieldProps('title', {
@@ -199,6 +175,29 @@ class AccountWarOrdersEdit extends Component {
             <Flex className="error">
               {contactErrors ? contactErrors.join(',') : null}
             </Flex>
+          </List>
+          <List renderHeader={() => '选择战队'}>
+            {teams.length > 0 ? (
+              teams.map((item, index) => (
+                <Radio.RadioItem
+                  key={index}
+                  onChange={() => this.onTeamSelectedChange(item.objectId)}
+                  checked={teamid === item.objectId}
+                >
+                  {item.englishFullName ||
+                    item.chineseFullName ||
+                    item.englishName ||
+                    item.chineseName}
+                </Radio.RadioItem>
+              ))
+            ) : (
+              <Button
+                type="warning"
+                onClick={() => navigateTo('/account/teams/create')}
+              >
+                必须先创建战队，点击前往
+              </Button>
+            )}
           </List>
           <List renderHeader={() => '截止时间'}>
             <DatePicker

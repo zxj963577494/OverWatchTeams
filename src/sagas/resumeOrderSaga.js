@@ -10,12 +10,13 @@ import {
   DELETE_RESUME_ORDER_REQUEST
 } from '../constants/actionTypes'
 import * as action from '../actions'
-import { resumeOrderService } from '../services/leanclound'
+import { resumeOrderService, userService } from '../services/leanclound'
 
 function* postResumeOrderWorker(payload) {
   try {
     yield put(action.fetchRequest({ text: '提交中' }))
-    const response = yield call(resumeOrderService.cerateResumeOrder, payload)
+    const userinfo = yield call(userService.getUserInfoToJson)
+    const response = yield call(resumeOrderService.cerateResumeOrder, payload, userinfo)
     yield put(action.postResumeOrderSuccess(response))
     yield put(action.fetchSuccess())
     Toast.success('提交成功', 1)

@@ -35,7 +35,6 @@ class AccountTeamsEdit extends Component {
       englishFullName: props.team.englishFullName,
       chineseName: props.team.chineseName,
       englishName: props.team.englishName,
-      slogan: props.team.slogan,
       introduction: props.team.introduction,
       files: [{ url: props.team.avatar }],
       rank: props.team.rank,
@@ -57,7 +56,6 @@ class AccountTeamsEdit extends Component {
     this.onEnglishNameChange = this.onEnglishNameChange.bind(this)
     this.onEnglishFullNameChange = this.onEnglishFullNameChange.bind(this)
     this.onCreateCityChange = this.onCreateCityChange.bind(this)
-    this.onSloganChange = this.onSloganChange.bind(this)
     this.onHonorChange = this.onHonorChange.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
   }
@@ -128,12 +126,6 @@ class AccountTeamsEdit extends Component {
     })
   }
 
-  onSloganChange(value) {
-    this.setState({
-      slogan: value
-    })
-  }
-
   onHonorChange(value) {
     this.setState({
       honor: value
@@ -156,7 +148,6 @@ class AccountTeamsEdit extends Component {
           englishFullName: this.state.englishFullName,
           chineseName: this.state.chineseName,
           englishName: this.state.englishName,
-          slogan: this.state.slogan,
           introduction: this.state.introduction,
           rank: this.state.rank,
           avatar: app.file.url || this.state.avatar,
@@ -185,7 +176,6 @@ class AccountTeamsEdit extends Component {
     const englishFullNameErrors = getFieldError('englishFullName')
     const chineseNameErrors = getFieldError('chineseName')
     const englishNameErrors = getFieldError('englishName')
-    const sloganErrors = getFieldError('slogan')
     const introductionErrors = getFieldError('introduction')
     const createCityErrors = getFieldError('createCity')
     const contactErrors = getFieldError('contact')
@@ -344,30 +334,6 @@ class AccountTeamsEdit extends Component {
             >
               是否招募队员
             </List.Item>
-          </List>
-          <List renderHeader={() => '战队口号'}>
-            <TextareaItem
-              {...getFieldProps('slogan', {
-                onChange: this.onSloganChange,
-                validateFirst: true,
-                rules: [
-                  {
-                    type: 'string',
-                    required: false,
-                    min: 2,
-                    max: 100,
-                    message: '战队口号:2-100个字符'
-                  }
-                ]
-              })}
-              rows={3}
-              labelNumber={5}
-              placeholder="请输入战队口号"
-              value={this.state.slogan}
-            />
-            <Flex className="error">
-              {sloganErrors ? sloganErrors.join(',') : null}
-            </Flex>
           </List>
           <List renderHeader={() => '战队介绍'}>
             <TextareaItem

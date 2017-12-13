@@ -146,7 +146,7 @@ function resumeOrderReducer(state = initialResumeOrderState, action) {
           ...state.account,
           resumeOrder: {
             ...state.account.resumeOrder,
-            list: state.account.resumeOrder.list.splice(0, 0, action.payload),
+            list: [...state.account.resumeOrder.list, action.payload],
             pending: false
           }
         },
@@ -154,7 +154,7 @@ function resumeOrderReducer(state = initialResumeOrderState, action) {
           ...state.home,
           resumeOrder: {
             ...state.home.resumeOrder,
-            list: state.home.resumeOrder.list.splice(0, 0, action.payload),
+            list: [...state.home.resumeOrder.list, action.payload],
           }
         }
       }
@@ -224,24 +224,23 @@ function resumeOrderReducer(state = initialResumeOrderState, action) {
     case DELETE_RESUME_ORDER_REQUEST:
       return state
     case DELETE_RESUME_ORDER_SUCCESS:
+      const list = state.account.resumeOrder.list.filter(
+        x => x.objectId !== action.payload.objectId
+      )
       return {
         ...state,
         account: {
           ...state.account,
           resumeOrder: {
             ...state.account.resumeOrder,
-            list: state.account.resumeOrder.list.filter(
-              x => x.objectId !== action.payload.objectId
-            )
+            list: list
           }
         },
         home: {
           ...state.home,
           resumeOrder: {
             ...state.home.resumeOrder,
-            list: state.home.resumeOrder.list.filter(
-              x => x.objectId !== action.payload.objectId
-            )
+            list: list
           }
         }
       }

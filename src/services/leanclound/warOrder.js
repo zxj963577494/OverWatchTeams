@@ -2,9 +2,9 @@ import AV from 'leancloud-storage'
 import { getCurrentUser } from './user'
 
 // 创建战队训练赛约战
-export function cerateWarOrder(payload) {
+export function cerateWarOrder(payload, team) {
   const user = getCurrentUser()
-  const team = AV.Object.createWithoutData('Teams', payload.teamid)
+  const teamData = AV.Object.createWithoutData('Teams', payload.teamid)
   const warOrders = new AV.Object('WarOrders')
   warOrders.set('title', payload.title)
   warOrders.set('description', payload.description)
@@ -14,7 +14,7 @@ export function cerateWarOrder(payload) {
   const endDate = new Date(payload.endDate)
   warOrders.set('endDate', endDate)
   warOrders.set('user', user)
-  warOrders.set('team', team)
+  warOrders.set('team', teamData)
 
   var acl = new AV.ACL()
   acl.setPublicReadAccess(true)
@@ -23,7 +23,7 @@ export function cerateWarOrder(payload) {
   warOrders.setACL(acl)
 
   return warOrders.save().then(function(result) {
-    return result.toJSON()
+    return {...result.toJSON(), team}
   })
 }
 

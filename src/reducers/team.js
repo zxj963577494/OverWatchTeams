@@ -68,7 +68,7 @@ function teamReducer(state = initialTeamState, action) {
           ...state.account,
           team: {
             ...state.account.team,
-            myTeams: state.account.team.myTeams.splice(0, 0, action.payload),
+            myTeams: [...state.account.team.myTeams, action.payload],
             pending: false
           }
         },
@@ -76,7 +76,7 @@ function teamReducer(state = initialTeamState, action) {
           ...state.home,
           team: {
             ...state.home.team,
-            myTeams: state.home.team.myTeams.splice(0, 0, action.payload),
+            myTeams: [...state.home.team.myTeams, action.payload],
           }
         }
       }
@@ -150,24 +150,23 @@ function teamReducer(state = initialTeamState, action) {
     case DELETE_TEAM_REQUEST:
       return state
     case DELETE_TEAM_SUCCESS:
+      const teams = state.account.team.myTeams.filter(
+        x => x.objectId !== action.payload.objectId
+      )
       return {
         ...state,
         account: {
           ...state.account,
           team: {
             ...state.account.team,
-            myTeams: state.account.team.myTeams.filter(
-              x => x.objectId !== action.payload.objectId
-            )
+            myTeams: teams
           }
         },
         home: {
           ...state.home,
           team: {
             ...state.home.team,
-            myTeams: state.home.team.myTeams.filter(
-              x => x.objectId !== action.payload.objectId
-            )
+            myTeams: teams
           }
         }
       }

@@ -34,7 +34,6 @@ class AccountTeams extends Component {
           '提示',
           '每位用户最多可创建一支战队，若想创建多支战队，请联系管理员963577494@qq.com',
           [
-            { text: '取消', onPress: () => console.log('cancel') },
             { text: '确定', onPress: () => console.log('success') }
           ]
         )
@@ -48,7 +47,6 @@ class AccountTeams extends Component {
           '提示',
           '每位用户最多可创建一支战队，若想创建多支战队，请联系管理员963577494@qq.com',
           [
-            { text: '取消', onPress: () => console.log('cancel') },
             { text: '确定', onPress: () => console.log('success') }
           ]
         )
@@ -116,7 +114,7 @@ class AccountTeams extends Component {
                     </List.Item>
                   </List>
                 </Card.Body>
-                <Card.Footer
+                {/* <Card.Footer
                   extra={
                     <Button
                       onClick={this.onRemoveTeam(item.objectId)}
@@ -127,7 +125,7 @@ class AccountTeams extends Component {
                       战队解散
                     </Button>
                   }
-                />
+                /> */}
               </Card>
             </div>
           ))}

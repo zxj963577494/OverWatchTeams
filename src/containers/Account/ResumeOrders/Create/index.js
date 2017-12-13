@@ -12,12 +12,9 @@ import {
   List,
   TextareaItem,
   Toast,
-  DatePicker,
+  DatePicker
 } from 'antd-mobile'
-import {
-  setNavBar,
-  postResumeOrderRequest,
-} from '../../../../actions'
+import { setNavBar, postResumeOrderRequest } from '../../../../actions'
 import { MyActivityIndicator } from '../../../../components'
 
 let date = new Date()
@@ -30,8 +27,7 @@ class AccountResumeOrdersCreate extends Component {
       title: '',
       description: '',
       endDate: date,
-      contact: props.userinfo.contact || '',
-      pending: props.resumeOrder.pending
+      contact: props.userinfo.contact || ''
     }
     this.onTitleChange = this.onTitleChange.bind(this)
     this.onDescriptionChange = this.onDescriptionChange.bind(this)
@@ -79,7 +75,8 @@ class AccountResumeOrdersCreate extends Component {
 
   render() {
     const { getFieldProps, getFieldError } = this.props.form
-    const { app, pending } = this.props
+    const { app } = this.props
+    const { pending } = this.props.resumeOrder
     const { title, description, contact, endDate } = this.state
     const titleErrors = getFieldError('title')
     const descriptionErrors = getFieldError('description')
@@ -93,6 +90,7 @@ class AccountResumeOrdersCreate extends Component {
             <InputItem
               {...getFieldProps('title', {
                 onChange: this.onTitleChange,
+                initialValue: title,
                 rules: [
                   {
                     required: true,
@@ -113,6 +111,7 @@ class AccountResumeOrdersCreate extends Component {
             <TextareaItem
               {...getFieldProps('description', {
                 onChange: this.onDescriptionChange,
+                initialValue: description,
                 rules: [
                   {
                     type: 'string',
@@ -189,7 +188,7 @@ const mapStateToProps = (state, ownProps) => {
   return {
     app: state.root.app,
     userinfo: state.root.user.account.userinfo,
-    resumeOrder: state.root.resumeOrder.account
+    resumeOrder: state.root.resumeOrder.account.resumeOrder
   }
 }
 

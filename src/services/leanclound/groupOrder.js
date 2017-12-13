@@ -2,7 +2,7 @@ import AV from 'leancloud-storage'
 import { getCurrentUser } from './user'
 
 // 创建组队帖
-export function cerateGroupOrder(payload) {
+export function cerateGroupOrder(payload, userinfo) {
   const user = getCurrentUser()
   const groupOrders = new AV.Object('GroupOrders')
   groupOrders.set('title', payload.title)
@@ -20,7 +20,7 @@ export function cerateGroupOrder(payload) {
   groupOrders.setACL(acl)
 
   return groupOrders.save().then(function(result) {
-    return result.toJSON()
+    return { ...result.toJSON(), userinfo }
   })
 }
 

@@ -72,7 +72,7 @@ function* putUserInfoWorker(payload) {
 
 function* getUserInfoWorker() {
   try {
-    const response = yield call(userService.getUserInfo)
+    const response = yield call(userService.getUserInfoToJson)
     yield put(action.getUserInfoSuccess(response))
   } catch (error) {
     yield put(action.getUserInfoFailed(error))

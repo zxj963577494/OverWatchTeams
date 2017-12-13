@@ -2,7 +2,7 @@ import AV from 'leancloud-storage'
 import { getCurrentUser } from './user'
 
 // 创建战队自荐帖
-export function cerateResumeOrder(payload) {
+export function cerateResumeOrder(payload, userinfo) {
   const user = getCurrentUser()
   const resumeOrders = new AV.Object('ResumeOrders')
   resumeOrders.set('title', payload.title)
@@ -20,7 +20,7 @@ export function cerateResumeOrder(payload) {
   resumeOrders.setACL(acl)
 
   return resumeOrders.save().then(function(result) {
-    return result.toJSON()
+    return { ...result.toJSON(), userinfo }
   })
 }
 
@@ -45,7 +45,10 @@ export function updateResumeOrder(payload) {
 }
 
 export function removeResumeOrder(payload) {
-  var recruitOrders = AV.Object.createWithoutData('ResumeOrders', payload.objectId)
+  var recruitOrders = AV.Object.createWithoutData(
+    'ResumeOrders',
+    payload.objectId
+  )
   return recruitOrders.destroy().then(function(success) {
     return success.toJSON()
   })

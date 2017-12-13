@@ -97,19 +97,16 @@ export function putUserInfo(payload) {
   })
 }
 
-// 获取会员信息信息
-export function getUserInfo() {
+export function getUserInfoToJson() {
   const current = AV.User.current()
   const user = new AV.Query('_User')
   user.equalTo('objectId', current.id)
   user.include('userinfo')
   return user.first().then(function(result) {
-    const userinfo = result.get('userinfo')
-    return userinfo.toJSON()
+    return result.get('userinfo').toJSON()
   })
 }
 
-// 获取会员信息列表
 export function getHomeUserList(payload) {
   let list = []
   let { page, pagesize } = payload

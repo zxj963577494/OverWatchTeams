@@ -11,7 +11,7 @@ export default class MyTabBar extends PureComponent {
       <div>
         <MyNavBar navbar={navbar} history={history} />
         <div
-          style={{ position: 'fixed', height: '93%', width: '100%', top: '7%' }}
+          style={{ position: 'absolute', height: '93%', width: '100%', top: '7%' }}
         >
           <TabBar
             unselectedTintColor="#949494"
