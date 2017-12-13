@@ -1,16 +1,15 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import { createPortal } from 'react-dom'
 import PropTypes from 'prop-types'
 import { ActivityIndicator } from 'antd-mobile'
 
-export default class MyActivityIndicator extends Component {
+export default class MyActivityIndicator extends PureComponent {
   constructor(props) {
     super(props)
     const doc = window.document
     this.node = doc.createElement('div')
     doc.body.appendChild(this.node)
   }
-
   render() {
     return createPortal(
       <div>

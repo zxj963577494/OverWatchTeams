@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { TabBar } from 'antd-mobile'
 import MyNavBar from '../NavBar'
 
-export default class MyTabBar extends Component {
+export default class MyTabBar extends PureComponent {
   render() {
     const pathname = this.props.history.location.pathname
     const { children, navbar, history } = this.props

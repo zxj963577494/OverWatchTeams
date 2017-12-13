@@ -1,10 +1,9 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import { NavBar, Icon } from 'antd-mobile'
 
-export default class MyNavBar extends Component {
+export default class MyNavBar extends PureComponent {
   render() {
     const { navbar, history } = this.props
-    console.log(history)
     if (navbar.isCanBack) {
       return (
         <NavBar

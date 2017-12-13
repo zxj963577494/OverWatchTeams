@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { ListView, Card, Flex, WhiteSpace } from 'antd-mobile'
 import TimeAgo from 'timeago-react'
 
-export default class HomeGroupListView extends Component {
+export default class HomeGroupListView extends PureComponent {
   render() {
     const dataSource = new ListView.DataSource({
       rowHasChanged: (row1, row2) => row1 !== row2

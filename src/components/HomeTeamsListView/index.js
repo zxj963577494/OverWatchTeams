@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { ListView, PullToRefresh, Card, Flex, WhiteSpace } from 'antd-mobile'
 import { cutstr } from '../../utils/utils'
 
-export default class HomeTeamsListView extends Component {
+export default class HomeTeamsListView extends PureComponent {
   constructor(props) {
     super(props)
     this.onEndReached = this.onEndReached.bind(this)

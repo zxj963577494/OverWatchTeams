@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import {
   ListView,
@@ -11,7 +11,7 @@ import {
 } from 'antd-mobile'
 import TimeAgo from 'timeago-react'
 
-export default class AccountGroupOrderListView extends Component {
+export default class AccountGroupOrderListView extends PureComponent {
   constructor(props) {
     super(props)
     this.onEndReached = this.onEndReached.bind(this)
@@ -43,7 +43,7 @@ export default class AccountGroupOrderListView extends Component {
       }
     ])
   }
-
+  
   render() {
     const dataSource = new ListView.DataSource({
       rowHasChanged: (row1, row2) => row1 !== row2

@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import {
   ListView,
@@ -10,7 +10,7 @@ import {
 } from 'antd-mobile'
 import { RANKS, TEAMPOSITIONS } from '../../constants'
 
-export default class HomeUserListView extends Component {
+export default class HomeUserListView extends PureComponent {
   constructor(props) {
     super(props)
     this.onEndReached = this.onEndReached.bind(this)
