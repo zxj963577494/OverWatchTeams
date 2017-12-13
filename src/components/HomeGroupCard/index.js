@@ -30,7 +30,7 @@ export default class HomeGroupCard extends PureComponent {
         <Card.Footer
           content={
             <div>
-              开始时间：<TimeAgo datetime={item.createdAt} locale="zh_CN" />
+              发布时间：<TimeAgo datetime={item.createdAt} locale="zh_CN" />
             </div>
           }
           extra={

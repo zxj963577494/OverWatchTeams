@@ -70,7 +70,7 @@ export default class HomeWarOrderListView extends PureComponent {
             <Card.Footer
               content={
                 <div>
-                  开始时间：<TimeAgo
+                  发布时间：<TimeAgo
                     datetime={rowData.createdAt}
                     locale="zh_CN"
                   />
