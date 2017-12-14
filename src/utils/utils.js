@@ -187,3 +187,11 @@ export function getPosition(type) {
     return config.BASE_PIC_URL + '/position.png'
   }
 }
+
+export function getDayStart() {
+  new Date(new Date(new Date().toLocaleDateString()).getTime())
+}
+
+export function getDayEnd() {
+  new Date(new Date(new Date().toLocaleDateString()).getTime()+24*60*60*1000-1)
+}

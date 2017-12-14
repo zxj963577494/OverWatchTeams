@@ -1,5 +1,6 @@
 import AV from 'leancloud-storage'
 import { getCurrentUser } from './user'
+import { getDayStart, getDayEnd } from '../../utils/utils'
 
 // 创建战队训练赛约战
 export function cerateWarOrder(payload, team) {
@@ -97,5 +98,16 @@ export function getHomeWarOrderList(payload) {
       list.push(res)
     })
     return list
+  })
+}
+
+export function getWarOrderCountOfToday(payload) {
+  const user = getCurrentUser()
+  const query = new AV.Query('WarOrders')
+  query.equalTo('user', user)
+  query.lessThanOrEqualTo('createdAt', getDayStart())
+  query.greaterThanOrEqualTo('createdAt', getDayEnd())
+  return query.count().then(function(result) {
+    return result
   })
 }

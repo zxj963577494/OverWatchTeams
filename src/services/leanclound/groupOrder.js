@@ -1,5 +1,6 @@
 import AV from 'leancloud-storage'
 import { getCurrentUser } from './user'
+import { getDayStart, getDayEnd } from '../../utils/utils'
 
 // 创建组队帖
 export function cerateGroupOrder(payload, userinfo) {
@@ -91,5 +92,16 @@ export function getHomeGroupOrderList(payload) {
       list.push(item.toJSON())
     })
     return list
+  })
+}
+
+export function getGroupOrderCountOfToday(payload) {
+  const user = getCurrentUser()
+  const query = new AV.Query('GroupOrders')
+  query.equalTo('user', user)
+  query.lessThanOrEqualTo('createdAt', getDayStart())
+  query.greaterThanOrEqualTo('createdAt', getDayEnd())
+  return query.count().then(function(result) {
+    return result
   })
 }

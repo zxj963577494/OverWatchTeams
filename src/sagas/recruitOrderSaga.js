@@ -10,18 +10,33 @@ import {
   DELETE_RECRUIT_ORDER_REQUEST
 } from '../constants/actionTypes'
 import * as action from '../actions'
-import { recruitOrderService, teamsService } from '../services/leanclound'
+import {
+  recruitOrderService,
+  teamsService,
+  userService
+} from '../services/leanclound'
 
 function* postRecruitOrderWorker(payload) {
   try {
     yield put(action.fetchRequest({ text: '提交中' }))
-    const team = yield call(teamsService.getTeamToJson, payload)
-    const response = yield call(recruitOrderService.cerateRecruitOrder, payload, team)
-    yield put(action.postRecruitOrderSuccess(response))
-    yield put(action.fetchSuccess())
-    Toast.success('提交成功', 1)
-    yield delay(1000)
-    yield put(replace('/account/recruitorders'))
+    const count = yield call(recruitOrderService.getRecruitOrderCountOfToday)
+    const usre = yield call(userService.getCurrentUser)
+    const recruitOrderLimit = usre.get('recruitOrderLimit')
+    if (count <= recruitOrderLimit) {
+      const team = yield call(teamsService.getTeamToJson, payload)
+      const response = yield call(
+        recruitOrderService.cerateRecruitOrder,
+        payload,
+        team
+      )
+      yield put(action.postRecruitOrderSuccess(response))
+      yield put(action.fetchSuccess())
+      Toast.success('提交成功', 1)
+      yield delay(1000)
+      yield put(replace('/account/recruitorders'))
+    } else {
+      Toast.success(`1天最多发布${recruitOrderLimit}条战队招募令`, 1)
+    }
   } catch (error) {
     yield put(action.postRecruitOrderFailed(error))
     yield put(action.fetchFailed())
@@ -33,7 +48,11 @@ function* putRecruitOrderWorker(payload) {
   try {
     yield put(action.fetchRequest({ text: '提交中' }))
     const team = yield call(teamsService.getTeam, payload)
-    const response = yield call(recruitOrderService.updateRecruitOrder, payload, team)
+    const response = yield call(
+      recruitOrderService.updateRecruitOrder,
+      payload,
+      team
+    )
     yield put(action.putRecruitOrderSuccess(response))
     yield put(action.fetchSuccess())
     Toast.success('提交成功', 1)
@@ -74,7 +93,10 @@ function* getAccountRecruitOrderListWorker(payload) {
 
 function* getHomeRecruitOrderListWorker(payload) {
   try {
-    const response = yield call(recruitOrderService.getHomeRecruitOrderList, payload)
+    const response = yield call(
+      recruitOrderService.getHomeRecruitOrderList,
+      payload
+    )
     yield put(action.getHomeRecruitOrderListSuccess(response))
   } catch (error) {
     yield put(action.getHomeRecruitOrderListFailed(error))

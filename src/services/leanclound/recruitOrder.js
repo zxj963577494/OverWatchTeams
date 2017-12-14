@@ -1,5 +1,6 @@
 import AV from 'leancloud-storage'
 import { getCurrentUser } from './user'
+import { getDayStart, getDayEnd } from '../../utils/utils'
 
 // 创建招募令
 export function cerateRecruitOrder(payload, team) {
@@ -100,5 +101,16 @@ export function getHomeRecruitOrderList(payload) {
       list.push(res)
     })
     return list
+  })
+}
+
+export function getRecruitOrderCountOfToday(payload) {
+  const user = getCurrentUser()
+  const query = new AV.Query('RecruitOrders')
+  query.equalTo('user', user)
+  query.lessThanOrEqualTo('createdAt', getDayStart())
+  query.greaterThanOrEqualTo('createdAt', getDayEnd())
+  return query.count().then(function(result) {
+    return result
   })
 }

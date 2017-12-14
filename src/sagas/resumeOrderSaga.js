@@ -16,12 +16,23 @@ function* postResumeOrderWorker(payload) {
   try {
     yield put(action.fetchRequest({ text: '提交中' }))
     const userinfo = yield call(userService.getUserInfoToJson)
-    const response = yield call(resumeOrderService.cerateResumeOrder, payload, userinfo)
-    yield put(action.postResumeOrderSuccess(response))
-    yield put(action.fetchSuccess())
-    Toast.success('提交成功', 1)
-    yield delay(1000)
-    yield put(replace('/account/resumeorders'))
+    const count = yield call(resumeOrderService.getResumeOrderCountOfToday)
+    const usre = yield call(userService.getCurrentUser)
+    const resumeOrderLimit = usre.get('resumeOrderLimit')
+    if (count <= resumeOrderLimit) {
+      const response = yield call(
+        resumeOrderService.cerateResumeOrder,
+        payload,
+        userinfo
+      )
+      yield put(action.postResumeOrderSuccess(response))
+      yield put(action.fetchSuccess())
+      Toast.success('提交成功', 1)
+      yield delay(1000)
+      yield put(replace('/account/resumeorders'))
+    } else {
+      Toast.success(`1天最多发布${resumeOrderLimit}条寻找队友帖`, 1)
+    }
   } catch (error) {
     yield put(action.postResumeOrderFailed(error))
     yield put(action.fetchFailed())
@@ -73,7 +84,10 @@ function* getAccountResumeOrderListWorker(payload) {
 
 function* getHomeResumeOrderListWorker(payload) {
   try {
-    const response = yield call(resumeOrderService.getHomeResumeOrderList, payload)
+    const response = yield call(
+      resumeOrderService.getHomeResumeOrderList,
+      payload
+    )
     yield put(action.getHomeResumeOrderListSuccess(response))
   } catch (error) {
     yield put(action.getHomeResumeOrderListFailed(error))

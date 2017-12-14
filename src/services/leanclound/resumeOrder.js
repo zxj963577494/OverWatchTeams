@@ -1,5 +1,6 @@
 import AV from 'leancloud-storage'
 import { getCurrentUser } from './user'
+import { getDayStart, getDayEnd } from '../../utils/utils'
 
 export function cerateResumeOrder(payload, userinfo) {
   const user = getCurrentUser()
@@ -90,5 +91,16 @@ export function getHomeResumeOrderList(payload) {
       list.push(item.toJSON())
     })
     return list
+  })
+}
+
+export function getResumeOrderCountOfToday(payload) {
+  const user = getCurrentUser()
+  const query = new AV.Query('ResumeOrders')
+  query.equalTo('user', user)
+  query.lessThanOrEqualTo('createdAt', getDayStart())
+  query.greaterThanOrEqualTo('createdAt', getDayEnd())
+  return query.count().then(function(result) {
+    return result
   })
 }

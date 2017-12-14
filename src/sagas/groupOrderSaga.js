@@ -16,7 +16,11 @@ function* postGroupOrderWorker(payload) {
   try {
     yield put(action.fetchRequest({ text: '提交中' }))
     const userinfo = yield call(userService.getUserInfoToJson)
-    const response = yield call(groupOrderService.cerateGroupOrder, payload, userinfo)
+    const response = yield call(
+      groupOrderService.cerateGroupOrder,
+      payload,
+      userinfo
+    )
     yield put(action.fetchSuccess())
     yield put(action.postGroupOrderSuccess(response))
     Toast.success('提交成功', 1)
@@ -32,12 +36,19 @@ function* postGroupOrderWorker(payload) {
 function* putGroupOrderWorker(payload) {
   try {
     yield put(action.fetchRequest({ text: '提交中' }))
-    const response = yield call(groupOrderService.updateGroupOrder, payload)
-    yield put(action.fetchSuccess())
-    yield put(action.putGroupOrderSuccess(response))
-    Toast.success('提交成功', 1)
-    yield delay(1000)
-    yield put(replace('/account/grouporders'))
+    const count = yield call(groupOrderService.getGroupOrderCountOfToday)
+    const usre = yield call(userService.getCurrentUser)
+    const groupOrderLimit = usre.get('groupOrderLimit')
+    if (count <= groupOrderLimit) {
+      const response = yield call(groupOrderService.updateGroupOrder, payload)
+      yield put(action.fetchSuccess())
+      yield put(action.putGroupOrderSuccess(response))
+      Toast.success('提交成功', 1)
+      yield delay(1000)
+      yield put(replace('/account/grouporders'))
+    } else {
+      Toast.success(`1天最多发布${groupOrderLimit}条组队上分帖`, 1)
+    }
   } catch (error) {
     yield put(action.putGroupOrderFailed(error))
     yield put(action.fetchFailed())
@@ -73,7 +84,10 @@ function* getAccountGroupOrderListWorker(payload) {
 
 function* getHomeGroupOrderListWorker(payload) {
   try {
-    const response = yield call(groupOrderService.getHomeGroupOrderList, payload)
+    const response = yield call(
+      groupOrderService.getHomeGroupOrderList,
+      payload
+    )
     yield put(action.getHomeGroupOrderListSuccess(response))
   } catch (error) {
     yield put(action.getHomeGroupOrderListFailed(error))

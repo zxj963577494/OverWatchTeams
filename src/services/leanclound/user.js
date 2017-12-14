@@ -22,6 +22,10 @@ export function signUp(payload) {
       userinfo.set('show', 1)
       userinfo.set('stick', 0)
       userinfo.set('teamLimit', 1)
+      userinfo.set('groupOrderLimit', 1)
+      userinfo.set('recruitOrderLimit', 1)
+      userinfo.set('resumeOrderLimit', 1)
+      userinfo.set('warOrderLimit', 1)
       userinfo.set('introduction', '这个世界需要更多的英雄')
       loginedUser.set('userinfo', userinfo)
       return loginedUser.save().then(function(result) {

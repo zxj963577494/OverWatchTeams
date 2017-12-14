@@ -10,18 +10,29 @@ import {
   DELETE_WAR_ORDER_REQUEST
 } from '../constants/actionTypes'
 import * as action from '../actions'
-import { warOrderService, teamsService } from '../services/leanclound'
+import {
+  warOrderService,
+  teamsService,
+  userService
+} from '../services/leanclound'
 
 function* postWarOrderWorker(payload) {
   try {
     yield put(action.fetchRequest({ text: '提交中' }))
-    const team = yield call(teamsService.getTeamToJson, payload)
-    const response = yield call(warOrderService.cerateWarOrder, payload, team)
-    yield put(action.fetchSuccess())
-    yield put(action.postWarOrderSuccess(response))
-    Toast.success('提交成功', 1)
-    yield delay(1000)
-    yield put(replace('/account/warorders'))
+    const count = yield call(warOrderService.getWarOrderCountOfToday)
+    const usre = yield call(userService.getCurrentUser)
+    const warOrderLimit = usre.get('warOrderLimit')
+    if (count <= warOrderLimit) {
+      const team = yield call(teamsService.getTeamToJson, payload)
+      const response = yield call(warOrderService.cerateWarOrder, payload, team)
+      yield put(action.fetchSuccess())
+      yield put(action.postWarOrderSuccess(response))
+      Toast.success('提交成功', 1)
+      yield delay(1000)
+      yield put(replace('/account/warorders'))
+    } else {
+      Toast.success(`1天最多发布${warOrderLimit}条比赛约战帖`, 1)
+    }
   } catch (error) {
     yield put(action.postWarOrderFailed(error))
     yield put(action.fetchFailed())
@@ -62,10 +73,7 @@ function* deleteWarOrderWorker(payload) {
 
 function* getAccountWarOrderListWorker(payload) {
   try {
-    const response = yield call(
-      warOrderService.getAccountWarOrderList,
-      payload
-    )
+    const response = yield call(warOrderService.getAccountWarOrderList, payload)
     yield put(action.getAccountWarOrderListSuccess(response))
   } catch (error) {
     yield put(action.getAccountWarOrderListFailed(error))
