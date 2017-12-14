@@ -10,9 +10,6 @@ export function signUp(payload) {
   user.setUsername(username)
   user.setPassword(password)
   user.setEmail(email)
-  user.set('show', 1)
-  user.set('stick', 0)
-  user.set('teamLimit', 1)
   return user.signUp().then(function(loginedUser) {
     if (!loginedUser.get('userinfo')) {
       const Userinfo = AV.Object.extend('UserInfo')
@@ -22,6 +19,9 @@ export function signUp(payload) {
       userinfo.set('avatar', avatar)
       userinfo.set('avatar', avatar)
       userinfo.set('isPublic', true)
+      userinfo.set('show', 1)
+      userinfo.set('stick', 0)
+      userinfo.set('teamLimit', 1)
       userinfo.set('introduction', '这个世界需要更多的英雄')
       loginedUser.set('userinfo', userinfo)
       return loginedUser.save().then(function(result) {
@@ -107,37 +107,30 @@ export function getUserInfoToJson() {
   })
 }
 
-export function getHomeUserList(payload) {
+export function getHomeUserInfoList(payload) {
   let list = []
   let { page, pagesize } = payload
   pagesize = pagesize || 20
-  const userinfo = new AV.Query('UserInfo')
-  userinfo.equalTo('isPublic', true)
-  const user = new AV.Query('_User')
-  user.equalTo('show', 1)
-  user.descending('stick')
-  user.descending('createdAt')
-  user.limit(pagesize)
-  user.skip(pagesize * (page - 1))
-  user.include('userinfo')
-  user.matchesQuery('userinfo', userinfo)
-  return user.find().then(function(result) {
+  const query = new AV.Query('UserInfo')
+  query.equalTo('isPublic', true)
+  query.equalTo('show', 1)
+  query.descending('stick')
+  query.descending('createdAt')
+  query.limit(pagesize)
+  query.skip(pagesize * (page - 1))
+  return query.find().then(function(result) {
     result.forEach(item => {
-      const userinfo = { ...item.get('userinfo').toJSON(), userid: item.id }
-      list.push(userinfo)
+      list.push(item.toJSON())
     })
     return list
   })
 }
 
-// 获取会员详细信息
-export function getHomeUserDetail(payload) {
+export function getHomeUserInfoDetail(payload) {
   const { objectId } = payload
-  const user = new AV.Query('_User')
-  user.equalTo('objectId', objectId)
-  user.include('userinfo')
-  return user.first().then(function(result) {
-    const userinfo = result.get('userinfo')
-    return userinfo.toJSON()
+  const query = new AV.Query('UserInfo')
+  query.equalTo('objectId', objectId)
+  return query.first().then(function(result) {
+    return result.toJSON()
   })
 }

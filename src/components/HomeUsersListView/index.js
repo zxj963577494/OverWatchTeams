@@ -40,7 +40,7 @@ export default class HomeUserListView extends PureComponent {
       return (
         <div
           onClick={() => {
-            this.props.navigateTo('/home/user/' + rowData.userid)
+            this.props.navigateTo('/home/userinfo/' + rowData.objectId)
           }}
           key={rowID}
         >

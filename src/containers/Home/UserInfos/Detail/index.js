@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { WhiteSpace, List, Result } from 'antd-mobile'
 import { RANKS, TEAMPOSITIONS } from '../../../../constants'
-import { setNavBar, getHomeUserDetailRequest } from '../../../../actions'
+import { setNavBar, getHomeUserInfoDetailRequest } from '../../../../actions'
 import config from '../../../../config'
 import { MyActivityIndicator } from '../../../../components'
 
@@ -117,7 +117,7 @@ const mapStateToProps = (state, ownProps) => {
     app: state.root.app,
     current: state.root.user.home.user.current,
     user: state.root.user.home.user.list.filter(
-      x => x.userid === ownProps.match.params.id
+      x => x.objectId === ownProps.match.params.id
     )[0]
   }
 }
@@ -125,7 +125,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     getUserById: payload => {
-      dispatch(getHomeUserDetailRequest(payload))
+      dispatch(getHomeUserInfoDetailRequest(payload))
     },
     setNavBar: payload => {
       dispatch(

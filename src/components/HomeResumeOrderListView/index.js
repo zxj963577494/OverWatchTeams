@@ -36,23 +36,18 @@ export default class HomeResumeOrderListView extends PureComponent {
           <Card full>
             <Card.Header
               title={rowData.title}
-              thumb={rowData.userinfo.avatar}
+              thumb={rowData.user.userinfo.avatar}
               onClick={() =>
-                this.props.navigateTo(`/home/user/${rowData.user.objectId}`)
+                this.props.navigateTo(
+                  `/home/userinfo/${rowData.user.userinfo.objectId}`
+                )
               }
             />
             <Card.Body>
               <Flex>
                 <Flex.Item>
-                  <span
-                    onClick={() =>
-                      this.props.navigateTo(
-                        `/home/user/${rowData.userinfo.objectId}`
-                      )
-                    }
-                    style={{ color: 'red' }}
-                  >
-                    {rowData.userinfo.nickname}
+                  <span style={{ color: 'red' }}>
+                    {rowData.user.userinfo.nickname}
                   </span>
                 </Flex.Item>
                 <Flex.Item>
@@ -75,7 +70,10 @@ export default class HomeResumeOrderListView extends PureComponent {
               }
               extra={
                 <div style={{ color: 'red' }}>
-                  有效日期：<TimeAgo datetime={rowData.endDate} locale="zh_CN" />
+                  有效日期：<TimeAgo
+                    datetime={rowData.endDate}
+                    locale="zh_CN"
+                  />
                 </div>
               }
             />

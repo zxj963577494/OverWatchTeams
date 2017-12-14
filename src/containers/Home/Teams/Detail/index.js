@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { List, Card } from 'antd-mobile'
+import { List, Card, WhiteSpace } from 'antd-mobile'
 import { setNavBar, getHomeTeamDetailRequest } from '../../../../actions'
 import { RANKS } from '../../../../constants'
 import { MyActivityIndicator } from '../../../../components'
@@ -42,6 +42,7 @@ class HomeTeamDetail extends Component {
     return (
       <div>
         <MyActivityIndicator isFetching={app.isFetching} text={app.text} />
+        <WhiteSpace />
         <Card full>
           <Card.Header
             title={

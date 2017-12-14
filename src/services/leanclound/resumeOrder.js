@@ -1,7 +1,6 @@
 import AV from 'leancloud-storage'
 import { getCurrentUser } from './user'
 
-// 创建战队自荐帖
 export function cerateResumeOrder(payload, userinfo) {
   const user = getCurrentUser()
   const resumeOrders = new AV.Object('ResumeOrders')
@@ -65,16 +64,10 @@ export function getAccountResumeOrderList(payload) {
   query.skip(pagesize * (page - 1))
   query.equalTo('user', user)
   query.greaterThanOrEqualTo('endDate', new Date())
-  query.include('user')
   query.include('user.userinfo')
   return query.find().then(function(result) {
     result.forEach(item => {
-      const userinfo = item
-        .get('user')
-        .get('userinfo')
-        .toJSON()
-      const res = { ...item.toJSON(), userinfo }
-      list.push(res)
+      list.push(item.toJSON())
     })
     return list
   })
@@ -91,17 +84,10 @@ export function getHomeResumeOrderList(payload) {
   query.descending('createdAt')
   query.limit(pagesize)
   query.skip(pagesize * (page - 1))
-  query.include('user')
   query.include('user.userinfo')
-  query.include('team')
   return query.find().then(function(result) {
     result.forEach(item => {
-      const userinfo = item
-        .get('user')
-        .get('userinfo')
-        .toJSON()
-      const res = { ...item.toJSON(), userinfo }
-      list.push(res)
+      list.push(item.toJSON())
     })
     return list
   })

@@ -5,8 +5,8 @@ import Login from './Login'
 import Account from './Account'
 import Welcome from './Welcome'
 import SignUp from './SignUp'
-import HomeUsers from './Home/Users'
-import HomeUserDetail from './Home/Users/Detail'
+import HomeUserInfos from './Home/UserInfos'
+import HomeUserInfoDetail from './Home/UserInfos/Detail'
 import HomeTeams from './Home/Teams'
 import HomeTeamDetail from './Home/Teams/Detail'
 import AccountMime from './Account/Mime'
@@ -42,8 +42,8 @@ export {
   Account,
   Welcome,
   SignUp,
-  HomeUsers,
-  HomeUserDetail,
+  HomeUserInfos,
+  HomeUserInfoDetail,
   HomeTeams,
   HomeTeamDetail,
   HomeRecruitOrders,

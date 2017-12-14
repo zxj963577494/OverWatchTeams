@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
-import { setNavBar, getHomeUserListRequest } from '../../../actions'
+import { setNavBar, getHomeUserInfoListRequest } from '../../../actions'
 import { HomeUsersListView, MyActivityIndicator } from '../../../components'
 
 class HomeUsers extends Component {
@@ -40,7 +40,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     getHomeUsers: payload => {
-      dispatch(getHomeUserListRequest(payload))
+      dispatch(getHomeUserInfoListRequest(payload))
     },
     navigateTo: location => {
       dispatch(push(location))

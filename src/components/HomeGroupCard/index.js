@@ -10,13 +10,13 @@ export default class HomeGroupCard extends PureComponent {
       <Card full>
         <Card.Header
           title={item.title}
-          thumb={item.userinfo.avatar}
-          onClick={() => navigateTo(`/home/user/${item.user.objectId}`)}
+          thumb={item.user.userinfo.avatar}
+          onClick={() => navigateTo(`/home/userinfo/${item.user.userinfo.objectId}`)}
         />
         <Card.Body>
           <Flex>
             <Flex.Item>
-              <span style={{ color: 'red' }}>{item.userinfo.nickname}</span>
+              <span style={{ color: 'red' }}>{item.user.userinfo.nickname}</span>
             </Flex.Item>
             <Flex.Item>
               <span style={{ color: 'red' }}>{item.contact}</span>

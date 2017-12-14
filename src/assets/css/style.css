@@ -65,7 +65,7 @@
   height: 20px;
 }
 
-:global(.account--create) {
+:global(.page--scrolltop) {
   position: relative;
   overflow: auto; 
   height: 100%;

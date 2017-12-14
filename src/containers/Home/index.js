@@ -43,7 +43,7 @@ const data = [
     text: '战队列表'
   },
   {
-    url: '/home/users',
+    url: '/home/userinfos',
     icon: config.BASE_DEFAULT_PIC_URL,
     text: '个人列表'
   }
@@ -101,7 +101,7 @@ class Home extends Component {
   render() {
     const { navigateTo, groupOrder, recruitOrder } = this.props
     return (
-      <div>
+      <div className='page--scrolltop'>
         <MyActivityIndicator
           isFetching={groupOrder.isFetching}
           text={groupOrder.fetchingText}

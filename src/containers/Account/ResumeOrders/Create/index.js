@@ -83,7 +83,7 @@ class AccountResumeOrdersCreate extends Component {
     const contactErrors = getFieldError('contact')
     const endDateErrors = getFieldError('endDate')
     return (
-      <div className="account--create">
+      <div className="page--scrolltop">
         <MyActivityIndicator isFetching={app.isFetching} text={app.text} />
         <form>
           <List renderHeader={() => '自荐标题'}>

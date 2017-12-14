@@ -7,8 +7,8 @@ import {
   Login,
   Account,
   SignUp,
-  HomeUserDetail,
-  HomeUsers,
+  HomeUserInfoDetail,
+  HomeUserInfos,
   HomeTeamDetail,
   HomeTeams,
   HomeRecruitOrders,
@@ -64,8 +64,8 @@ export default (history, navbar) => {
               />
               <Route exec path="/home/team/:id" component={HomeTeamDetail} />
               <Route exec path="/home/teams" component={HomeTeams} />
-              <Route exec path="/home/user/:id" component={HomeUserDetail} />
-              <Route exec path="/home/users" component={HomeUsers} />
+              <Route exec path="/home/userinfo/:id" component={HomeUserInfoDetail} />
+              <Route exec path="/home/userinfos" component={HomeUserInfos} />
               <Route exec path="/home" component={Home} />
               <Route
                 exec

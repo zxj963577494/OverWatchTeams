@@ -54,7 +54,7 @@ export default class AccountResumeOrderListView extends PureComponent {
           <Card full>
             <Card.Header
               title={rowData.title}
-              thumb={rowData.userinfo.avatar}
+              thumb={rowData.user.userinfo.avatar}
               extra={
                 <div>
                   <Button
@@ -87,12 +87,12 @@ export default class AccountResumeOrderListView extends PureComponent {
                   <span
                     onClick={() =>
                       this.props.navigateTo(
-                        `/home/user/${rowData.userinfo.objectId}`
+                        `/home/userinfo/${rowData.user.userinfo.objectId}`
                       )
                     }
                     style={{ color: 'red' }}
                   >
-                    {rowData.userinfo.nickname}
+                    {rowData.user.userinfo.nickname}
                   </span>
                 </Flex.Item>
                 <Flex.Item>

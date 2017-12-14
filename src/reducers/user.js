@@ -11,12 +11,12 @@ import {
   GET_USERINFO_REQUEST,
   GET_USERINFO_SUCCESS,
   GET_USERINFO_FAILED,
-  GET_HOME_USER_LIST_REQUEST,
-  GET_HOME_USER_LIST_SUCCESS,
-  GET_HOME_USER_LIST_FAILED,
-  GET_HOME_USER_DETAIL_REQUEST,
-  GET_HOME_USER_DETAIL_SUCCESS,
-  GET_HOME_USER_DETAIL_FAILED
+  GET_HOME_USERINFO_LIST_REQUEST,
+  GET_HOME_USERINFO_LIST_SUCCESS,
+  GET_HOME_USERINFO_LIST_FAILED,
+  GET_HOME_USERINFO_DETAIL_REQUEST,
+  GET_HOME_USERINFO_DETAIL_SUCCESS,
+  GET_HOME_USERINFO_DETAIL_FAILED
 } from '../constants/actionTypes'
 import { HEROS } from '../constants'
 
@@ -130,7 +130,7 @@ function userReducer(state = initialUserState, action) {
       }
     case GET_USERINFO_FAILED:
       return state
-    case GET_HOME_USER_LIST_REQUEST:
+    case GET_HOME_USERINFO_LIST_REQUEST:
       return {
         ...state,
         home: {
@@ -144,7 +144,7 @@ function userReducer(state = initialUserState, action) {
           }
         }
       }
-    case GET_HOME_USER_LIST_SUCCESS:
+    case GET_HOME_USERINFO_LIST_SUCCESS:
       return {
         ...state,
         home: {
@@ -158,7 +158,7 @@ function userReducer(state = initialUserState, action) {
           }
         }
       }
-    case GET_HOME_USER_LIST_FAILED:
+    case GET_HOME_USERINFO_LIST_FAILED:
       return {
         ...state,
         home: {
@@ -170,7 +170,7 @@ function userReducer(state = initialUserState, action) {
           }
         }
       }
-    case GET_HOME_USER_DETAIL_REQUEST:
+    case GET_HOME_USERINFO_DETAIL_REQUEST:
       return {
         ...state,
         home: {
@@ -181,7 +181,7 @@ function userReducer(state = initialUserState, action) {
           }
         }
       }
-    case GET_HOME_USER_DETAIL_SUCCESS:
+    case GET_HOME_USERINFO_DETAIL_SUCCESS:
       return {
         ...state,
         home: {
@@ -193,7 +193,7 @@ function userReducer(state = initialUserState, action) {
           }
         }
       }
-    case GET_HOME_USER_DETAIL_FAILED:
+    case GET_HOME_USERINFO_DETAIL_FAILED:
       return {
         ...state,
         home: {

@@ -8,8 +8,8 @@ import {
   POST_LOGOUT_REQUEST,
   PUT_USERINFO_REQUEST,
   GET_USERINFO_REQUEST,
-  GET_HOME_USER_LIST_REQUEST,
-  GET_HOME_USER_DETAIL_REQUEST
+  GET_HOME_USERINFO_LIST_REQUEST,
+  GET_HOME_USERINFO_DETAIL_REQUEST
 } from '../constants/actionTypes'
 import * as action from '../actions'
 import { userService } from '../services/leanclound'
@@ -79,23 +79,23 @@ function* getUserInfoWorker() {
   }
 }
 
-function* getHomeUserListWorker(payload) {
+function* getHomeUserInfoListWorker(payload) {
   try {
-    const response = yield call(userService.getHomeUserList, payload)
-    yield put(action.getHomeUserListSuccess(response))
+    const response = yield call(userService.getHomeUserInfoList, payload)
+    yield put(action.getHomeUserInfoListSuccess(response))
   } catch (error) {
-    yield put(action.getHomeUserListFailed(error))
+    yield put(action.getHomeUserInfoListFailed(error))
   }
 }
 
-function* getHomeUserDetailWorker(payload) {
+function* getHomeUserInfoDetailWorker(payload) {
   try {
     yield put(action.fetchRequest({ text: '加载中' }))
-    const response = yield call(userService.getHomeUserDetail, payload)
-    yield put(action.getHomeUserDetailSuccess(response))
+    const response = yield call(userService.getHomeUserInfoDetail, payload)
+    yield put(action.getHomeUserInfoDetailSuccess(response))
     yield put(action.fetchSuccess())
   } catch (error) {
-    yield put(action.getHomeUserDetailFailed(error))
+    yield put(action.getHomeUserInfoDetailFailed(error))
     yield put(action.fetchFailed())
   }
 }
@@ -137,15 +137,15 @@ function* watchGetUserInfo() {
 
 function* watchGetHomeUserList() {
   while (true) {
-    const { payload } = yield take(GET_HOME_USER_LIST_REQUEST)
-    yield fork(getHomeUserListWorker, payload)
+    const { payload } = yield take(GET_HOME_USERINFO_LIST_REQUEST)
+    yield fork(getHomeUserInfoListWorker, payload)
   }
 }
 
 function* watchGetHomeUserDetail() {
   while (true) {
-    const { payload } = yield take(GET_HOME_USER_DETAIL_REQUEST)
-    yield fork(getHomeUserDetailWorker, payload)
+    const { payload } = yield take(GET_HOME_USERINFO_DETAIL_REQUEST)
+    yield fork(getHomeUserInfoDetailWorker, payload)
   }
 }
 
