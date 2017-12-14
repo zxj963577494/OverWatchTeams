@@ -64,3 +64,9 @@
   width: 20px;
   height: 20px;
 }
+
+:global(.account--create) {
+  position: relative;
+  overflow: auto; 
+  height: 100%;
+}

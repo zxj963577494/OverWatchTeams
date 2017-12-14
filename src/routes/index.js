@@ -39,7 +39,7 @@ import {
 
 export default (history, navbar) => {
   const routes = (
-    <Router history={history}>
+    <Router keyLength={12} history={history}>
       <div>
         <Switch>
           <Route exec path="/login" component={Login} />

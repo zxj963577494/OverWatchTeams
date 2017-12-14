@@ -31,5 +31,5 @@ export {
   AccountResumeOrderListView,
   HomeResumeOrderListView,
   HomeRecruitCard,
-  HomeGroupCard
+  HomeGroupCard,
 }

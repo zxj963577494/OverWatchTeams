@@ -83,7 +83,7 @@ class AccountGroupOrdersCreate extends Component {
     const contactErrors = getFieldError('contact')
     const endDateErrors = getFieldError('endDate')
     return (
-      <div>
+      <div className="account--create">
         <MyActivityIndicator isFetching={app.isFetching} text={app.text} />
         <form>
           <List renderHeader={() => '组队标题'}>
