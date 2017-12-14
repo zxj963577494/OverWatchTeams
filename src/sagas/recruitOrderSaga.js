@@ -20,8 +20,8 @@ function* postRecruitOrderWorker(payload) {
   try {
     yield put(action.fetchRequest({ text: '提交中' }))
     const count = yield call(recruitOrderService.getRecruitOrderCountOfToday)
-    const usre = yield call(userService.getCurrentUser)
-    const recruitOrderLimit = usre.get('recruitOrderLimit')
+    const userinfo = yield call(userService.getUserInfoToJson)
+    const recruitOrderLimit = userinfo.recruitOrderLimit
     if (count <= recruitOrderLimit) {
       const team = yield call(teamsService.getTeamToJson, payload)
       const response = yield call(
@@ -35,6 +35,8 @@ function* postRecruitOrderWorker(payload) {
       yield delay(1000)
       yield put(replace('/account/recruitorders'))
     } else {
+      yield put(action.postRecruitOrderFailed())
+      yield put(action.fetchFailed())
       Toast.success(`1天最多发布${recruitOrderLimit}条战队招募令`, 1)
     }
   } catch (error) {

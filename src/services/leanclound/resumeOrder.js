@@ -98,8 +98,8 @@ export function getResumeOrderCountOfToday(payload) {
   const user = getCurrentUser()
   const query = new AV.Query('ResumeOrders')
   query.equalTo('user', user)
-  query.lessThanOrEqualTo('createdAt', getDayStart())
-  query.greaterThanOrEqualTo('createdAt', getDayEnd())
+  query.lessThanOrEqualTo('createdAt', getDayEnd())
+  query.greaterThanOrEqualTo('createdAt', getDayStart())
   return query.count().then(function(result) {
     return result
   })

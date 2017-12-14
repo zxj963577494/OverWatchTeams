@@ -108,8 +108,10 @@ export function getRecruitOrderCountOfToday(payload) {
   const user = getCurrentUser()
   const query = new AV.Query('RecruitOrders')
   query.equalTo('user', user)
-  query.lessThanOrEqualTo('createdAt', getDayStart())
-  query.greaterThanOrEqualTo('createdAt', getDayEnd())
+  console.log(getDayEnd())
+  console.log(getDayStart())
+  query.lessThanOrEqualTo('createdAt', getDayEnd())
+  query.greaterThanOrEqualTo('createdAt', getDayStart())
   return query.count().then(function(result) {
     return result
   })

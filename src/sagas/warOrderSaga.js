@@ -20,8 +20,8 @@ function* postWarOrderWorker(payload) {
   try {
     yield put(action.fetchRequest({ text: '提交中' }))
     const count = yield call(warOrderService.getWarOrderCountOfToday)
-    const usre = yield call(userService.getCurrentUser)
-    const warOrderLimit = usre.get('warOrderLimit')
+    const userinfo = yield call(userService.getUserInfoToJson)
+    const warOrderLimit = userinfo.warOrderLimit
     if (count <= warOrderLimit) {
       const team = yield call(teamsService.getTeamToJson, payload)
       const response = yield call(warOrderService.cerateWarOrder, payload, team)
@@ -31,6 +31,8 @@ function* postWarOrderWorker(payload) {
       yield delay(1000)
       yield put(replace('/account/warorders'))
     } else {
+      yield put(action.postWarOrderFailed())
+      yield put(action.fetchFailed())
       Toast.success(`1天最多发布${warOrderLimit}条比赛约战帖`, 1)
     }
   } catch (error) {
