@@ -89,10 +89,10 @@ class AccountRecruitOrdersEdit extends Component {
   }
 
   componentDidMount() {
+    this.props.setNavBar({ title: '编辑招募令', isCanBack: true })
     if (this.props.teams.length === 0) {
       this.props.getMyTeams()
     }
-    this.props.setNavBar({ title: '编辑招募令', isCanBack: true })
   }
 
   render() {
@@ -196,7 +196,7 @@ class AccountRecruitOrdersEdit extends Component {
               </Button>
             )}
           </List>
-          <List renderHeader={() => '截止时间'}>
+          <List renderHeader={() => '有效日期'}>
             <DatePicker
               {...getFieldProps('endDate', {
                 initialValue: endDate,

@@ -31,12 +31,12 @@ class Account extends Component {
   }
 
   componentDidMount() {
-    this.props.setNavBar({ title: '个人中心', isCanBack: false })
     // if (_.isEmpty(this.props.account.user)) {
     //   this.setState({
     //     logined: true
     //   })
     // }
+    this.props.setNavBar({ title: '个人中心', isCanBack: false })
     const users = userService.getCurrentUser()
     if (!_.isEmpty(users)) {
       this.setState({
@@ -67,7 +67,7 @@ class Account extends Component {
                     : config.BASE_DEFAULT_PIC_URL
                   : config.BASE_DEFAULT_PIC_URL
               }
-              onClick={() => navigateTo('/login')}
+              onClick={() => logined ? null : navigateTo('/login') }
               alt="登录成功"
             />
           }

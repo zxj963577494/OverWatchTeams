@@ -152,7 +152,7 @@ class AccountResumeOrdersCreate extends Component {
               {contactErrors ? contactErrors.join(',') : null}
             </Flex>
           </List>
-          <List renderHeader={() => '截止时间'}>
+          <List renderHeader={() => '有效日期'}>
             <DatePicker
               {...getFieldProps('endDate', {
                 initialValue: endDate,

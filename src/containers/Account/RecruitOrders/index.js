@@ -7,10 +7,10 @@ import { AccountRecruitOrderListView, MyActivityIndicator } from '../../../compo
 
 class AccountRecruitOrders extends Component {
   componentDidMount() {
+    this.props.setNavBar({ title: '战队招募令', isCanBack: true })
     if (this.props.recruitOrder.list.length === 0) {
       this.props.getAccountRecruitOrderList({ page: 1 })
     }
-    this.props.setNavBar({ title: '战队招募令', isCanBack: true })
   }
 
   render() {

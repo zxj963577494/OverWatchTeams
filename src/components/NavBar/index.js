@@ -12,7 +12,6 @@ export default class MyNavBar extends PureComponent {
           onLeftClick={() => {
             history.goBack()
           }}
-          style={{ position: 'fixed', width: '100%', height: '7%' }}
         >
           {navbar.title}
         </NavBar>
@@ -21,7 +20,6 @@ export default class MyNavBar extends PureComponent {
       return (
         <NavBar
           mode="light"
-          style={{ position: 'fixed', width: '100%', height: '7%' }}
         >
           {navbar.title}
         </NavBar>
