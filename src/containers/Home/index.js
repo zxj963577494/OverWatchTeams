@@ -66,7 +66,7 @@ class Home extends Component {
     if (this.props.recruitOrder.list.length === 0) {
       this.props.getHomeRecruitOrderList({ page: 1 })
     }
-    this.props.setNavBar({ title: '守望先锋助手', isCanBack: false })
+    this.props.setNavBar({ title: 'OverWatch Teams', isCanBack: false })
   }
 
   // 展示LOGO
