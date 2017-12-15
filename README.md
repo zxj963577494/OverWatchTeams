@@ -14,7 +14,7 @@
 
 ## 项目使用
 
-1.git clone https://gitee.com/zhengxujiang/OverWatchTeams.git
+1.git clone https://github.com/zxj963577494/OverWatchTeams.git
 
 2.cd OverWatchTeams
 
