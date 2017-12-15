@@ -14,7 +14,15 @@
 
 ## 项目使用
 
-注册并获取LeanCloud的appId和appKey，填入src/index.js相关位置
+1.git clone https://gitee.com/zhengxujiang/OverWatchTeams.git
+
+2.cd OverWatchTeams
+
+3.npm install
+
+4.npm dev
+
+注册并获取[LeanCloud](https://leancloud.cn/)的appId和appKey，填入src/index.js相关位置
 
 ## 项目介绍
 
