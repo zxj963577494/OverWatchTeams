@@ -6,8 +6,8 @@ import rootSaga from './sagas'
 import configureStore from './store'
 import registerServiceWorker from './registerServiceWorker'
 
-const appId = '请填入appId'
-const appKey = '请填入appKey'
+const appId = 'Vvtn3QVyWcN9eVbuAT3wjMfG-9Nh9j0Va'
+const appKey = 'P59gxu0DMT7GkFeP1VlJoVmp'
 AV.init({ appId, appKey })
 
 const store = configureStore({})
