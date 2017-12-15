@@ -1,5 +1,9 @@
 # OverWatchTeams
 
+## 项目使用
+
+注册并获取LeanCloud的appId和appKey，填入src/index.js相关位置
+
 ## 项目介绍
 
 为守望先锋玩家提供组队、战队、交流的信息平台
@@ -23,7 +27,7 @@
 
 ## 技术栈
 
-* react
+* react v16
 * redux
 * redux-saga
 * react-redux
