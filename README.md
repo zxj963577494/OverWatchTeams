@@ -1,4 +1,16 @@
-# OverWatchTeams
+# OverWatch Teams
+
+## 技术栈
+
+* react v16
+* redux
+* redux-saga
+* react-redux
+* react-router v4
+* react-router-redux
+* axios
+* antd-mobile
+* LeanCloud
 
 ## 项目使用
 
@@ -19,20 +31,12 @@
 
 ## 项目示例
 
-[OverWatchTeams](https://ow.qipalin.com)
+[OverWatch Teams](https://ow.qipalin.com)
 
 ## 免责声明
 
 网站数据均为测试数据，不作为商业用途使用
 
-## 技术栈
+## 扩展
 
-* react v16
-* redux
-* redux-saga
-* react-redux
-* react-router v4
-* react-router-redux
-* axios
-* antd-mobile
-* LeanCloud
+* axios使用请见[qipalin-react-redux](https://github.com/zxj963577494/qipalin-react-redux)
