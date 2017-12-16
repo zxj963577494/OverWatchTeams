@@ -67,7 +67,7 @@ class Account extends Component {
                     : config.BASE_DEFAULT_PIC_URL
                   : config.BASE_DEFAULT_PIC_URL
               }
-              onClick={() => logined ? null : navigateTo('/login') }
+              onClick={() => (logined ? null : navigateTo('/login'))}
               alt="登录成功"
             />
           }
@@ -267,6 +267,31 @@ class Account extends Component {
             }}
           >
             我的组队帖
+          </List.Item>
+        </List>
+        <List renderHeader={() => '关于'}>
+          <List.Item
+            arrow="horizontal"
+            extra="OverWatchTeams"
+            onClick={() => {
+              window.location.href =
+                'https://github.com/zxj963577494/OverWatchTeams'
+            }}
+          >
+            项目地址
+          </List.Item>
+          <List.Item
+            arrow="horizontal"
+            extra="zxj963577494"
+            onClick={() => {
+              window.location.href =
+                'https://github.com/zxj963577494'
+            }}
+          >
+            作者主页
+          </List.Item>
+          <List.Item arrow="horizontal" extra="963577494@qq.com">
+            联系作者
           </List.Item>
         </List>
         <WhiteSpace />
