@@ -42,7 +42,7 @@ export default class HomeUserListView extends PureComponent {
           onClick={() => {
             this.props.navigateTo('/home/userinfo/' + rowData.objectId)
           }}
-          key={rowID}
+          key={rowData.objectId}
         >
           <Card full>
             <Card.Header title={rowData.nickname} thumb={rowData.avatar} />

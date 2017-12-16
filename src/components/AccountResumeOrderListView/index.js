@@ -50,7 +50,7 @@ export default class AccountResumeOrderListView extends PureComponent {
     const separator = (sectionID, rowID) => <WhiteSpace key={`${rowID}`} />
     const row = (rowData, sectionID, rowID) => {
       return (
-        <div key={rowID}>
+        <div key={rowData.objectId}>
           <Card full>
             <Card.Header
               title={rowData.title}

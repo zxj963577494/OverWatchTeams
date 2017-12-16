@@ -30,7 +30,7 @@ export default class HomeGroupOrderListView extends PureComponent {
     const row = (rowData, sectionID, rowID) => {
       return (
         <HomeGroupCard
-          key={rowID}
+          key={rowData.objectId}
           item={rowData}
           navigateTo={this.props.navigateTo}
         />

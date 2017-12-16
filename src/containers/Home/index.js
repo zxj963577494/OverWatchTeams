@@ -132,7 +132,7 @@ class Home extends Component {
         <List renderHeader={() => '组队上分'}>
           {groupOrder.list.slice(0, 3).map((item, index) => {
             return (
-              <HomeGroupCard key={index} item={item} navigateTo={navigateTo} />
+              <HomeGroupCard key={item.objectId} item={item} navigateTo={navigateTo} />
             )
           })}
         </List>
@@ -140,7 +140,7 @@ class Home extends Component {
           {recruitOrder.list.slice(0, 3).map((item, index) => {
             return (
               <HomeRecruitCard
-                key={index}
+                key={item.objectId}
                 item={item}
                 navigateTo={navigateTo}
               />

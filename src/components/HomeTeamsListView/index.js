@@ -35,7 +35,7 @@ export default class HomeTeamsListView extends PureComponent {
           onClick={() => {
             this.props.navigateTo('/home/team/' + rowData.objectId)
           }}
-          key={rowID}
+          key={rowData.objectId}
         >
           <Card full>
             <Card.Header

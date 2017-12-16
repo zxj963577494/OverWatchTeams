@@ -33,7 +33,7 @@ export default class HomeRecruitOrderListView extends PureComponent {
     const row = (rowData, sectionID, rowID) => {
       return (
         <HomeRecruitCard
-          key={rowID}
+          key={rowData.objectId}
           item={rowData}
           navigateTo={this.props.navigateTo}
         />
