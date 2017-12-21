@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { ListView, PullToRefresh, Card, Flex, WhiteSpace } from 'antd-mobile'
 import { cutstr } from '../../utils/utils'
 
-export default class HomeTeamsListView extends PureComponent {
+export default class HomeTeamListView extends PureComponent {
   constructor(props) {
     super(props)
     this.onEndReached = this.onEndReached.bind(this)
@@ -117,7 +117,7 @@ export default class HomeTeamsListView extends PureComponent {
   }
 }
 
-HomeTeamsListView.propTypes = {
+HomeTeamListView.propTypes = {
   team: PropTypes.object,
   navigateTo: PropTypes.func.isRequired,
   getHomeTeams: PropTypes.func.isRequired

@@ -10,7 +10,7 @@ import {
 } from 'antd-mobile'
 import { RANKS, TEAMPOSITIONS } from '../../constants'
 
-export default class HomeUserListView extends PureComponent {
+export default class HomeUserInfoListView extends PureComponent {
   constructor(props) {
     super(props)
     this.onEndReached = this.onEndReached.bind(this)
@@ -18,10 +18,10 @@ export default class HomeUserListView extends PureComponent {
   }
 
   onEndReached = event => {
-    if (this.props.user.isFetching || !this.props.user.isLoadMore) {
+    if (this.props.userinfo.isFetching || !this.props.userinfo.isLoadMore) {
       return
     }
-    const page = this.props.user.page + 1
+    const page = this.props.userinfo.page + 1
     this.props.getHomeUsers({ page: page })
   }
 
@@ -32,10 +32,8 @@ export default class HomeUserListView extends PureComponent {
   render() {
     const dataSource = new ListView.DataSource({
       rowHasChanged: (row1, row2) => row1 !== row2
-    }).cloneWithRows(this.props.user.list)
-    const separator = (sectionID, rowID) => (
-      <WhiteSpace key={`${rowID}`} />
-    )
+    }).cloneWithRows(this.props.userinfo.list)
+    const separator = (sectionID, rowID) => <WhiteSpace key={`${rowID}`} />
     const row = (rowData, sectionID, rowID) => {
       return (
         <div
@@ -49,9 +47,7 @@ export default class HomeUserListView extends PureComponent {
             <Card.Body>
               <Flex>
                 <Flex.Item>
-                  天梯：{rowData.rankscore
-                    ? rowData.rankscore + '分'
-                    : '未知'}
+                  天梯：{rowData.rankscore ? rowData.rankscore + '分' : '未知'}
                 </Flex.Item>
                 <Flex.Item>
                   段位：{rowData.rank
@@ -75,8 +71,8 @@ export default class HomeUserListView extends PureComponent {
                       <img
                         src={dataItem.image}
                         style={{
-                          width: '80px',
-                          height: '80px',
+                          width: '60px',
+                          height: '60px',
                           borderRadius: '50%'
                         }}
                         alt={dataItem.label}
@@ -98,7 +94,7 @@ export default class HomeUserListView extends PureComponent {
     const fonter = () => {
       return (
         <div style={{ padding: 5, textAlign: 'center' }}>
-          {this.props.user.isFetching ? '' : '到底了'}
+          {this.props.userinfo.isFetching ? '' : '到底了'}
         </div>
       )
     }
@@ -119,7 +115,7 @@ export default class HomeUserListView extends PureComponent {
         onEndReachedThreshold={100}
         pullToRefresh={
           <PullToRefresh
-            refreshing={this.props.user.isRefreshing}
+            refreshing={this.props.userinfo.isRefreshing}
             onRefresh={this.onRefresh}
           />
         }
@@ -128,8 +124,8 @@ export default class HomeUserListView extends PureComponent {
   }
 }
 
-HomeUserListView.propTypes = {
-  user: PropTypes.object.isRequired,
+HomeUserInfoListView.propTypes = {
+  userinfo: PropTypes.object.isRequired,
   navigateTo: PropTypes.func.isRequired,
   getHomeUsers: PropTypes.func.isRequired
 }

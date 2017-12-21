@@ -249,7 +249,7 @@ export function removeTeam(payload) {
 }
 
 // 获取战队列表
-export function getHomeTeamsList(payload) {
+export function getHomeTeamList(payload) {
   let list = []
   let { page, pagesize } = payload
   pagesize = pagesize || 20
