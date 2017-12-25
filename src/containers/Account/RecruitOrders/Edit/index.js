@@ -34,7 +34,7 @@ class AccountRecruitOrdersEdit extends Component {
       title: props.recruitOrder.title,
       description: props.recruitOrder.description,
       endDate: new Date(props.recruitOrder.endDate),
-      contact: props.recruitOrder.contact,
+      contact: props.recruitOrder.contact
     }
     this.onTitleChange = this.onTitleChange.bind(this)
     this.onDescriptionChange = this.onDescriptionChange.bind(this)
@@ -125,7 +125,9 @@ class AccountRecruitOrdersEdit extends Component {
               value={title}
             />
             <Flex className="error">
-              {titleErrors ? titleErrors.join(',') : null}
+              <Flex.Item>
+                {titleErrors ? titleErrors.join(',') : null}
+              </Flex.Item>
             </Flex>
           </List>
           <List renderHeader={() => '招募令内容'}>
@@ -148,7 +150,9 @@ class AccountRecruitOrdersEdit extends Component {
               value={description}
             />
             <Flex className="error">
-              {descriptionErrors ? descriptionErrors.join(',') : null}
+              <Flex.Item>
+                {descriptionErrors ? descriptionErrors.join(',') : null}
+              </Flex.Item>
             </Flex>
           </List>
           <List renderHeader={() => '联系方式'}>
@@ -170,7 +174,9 @@ class AccountRecruitOrdersEdit extends Component {
               value={contact}
             />
             <Flex className="error">
-              {contactErrors ? contactErrors.join(',') : null}
+              <Flex.Item>
+                {contactErrors ? contactErrors.join(',') : null}
+              </Flex.Item>
             </Flex>
           </List>
           <List renderHeader={() => '选择战队'}>
@@ -210,7 +216,9 @@ class AccountRecruitOrdersEdit extends Component {
               <List.Item arrow="horizontal">有效日期</List.Item>
             </DatePicker>
             <Flex className="error">
-              {endDateErrors ? endDateErrors.join(',') : null}
+              <Flex.Item>
+                {endDateErrors ? endDateErrors.join(',') : null}
+              </Flex.Item>
             </Flex>
           </List>
         </form>

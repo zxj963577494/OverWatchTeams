@@ -89,7 +89,9 @@ class Login extends Component {
             用户名
           </InputItem>
           <Flex className="error">
-            {usernameErrors ? usernameErrors.join(',') : null}
+            <Flex.Item>
+              {usernameErrors ? usernameErrors.join(',') : null}
+            </Flex.Item>
           </Flex>
           <InputItem
             type="password"
@@ -111,9 +113,10 @@ class Login extends Component {
             密码
           </InputItem>
           <Flex className="error">
-            {passwordErrors ? passwordErrors.join(',') : null}
+            <Flex.Item>
+              {passwordErrors ? passwordErrors.join(',') : null}
+            </Flex.Item>
           </Flex>
-          <WhiteSpace />
           <WhiteSpace />
           <WingBlank>
             <Flex>

@@ -230,7 +230,9 @@ class AccountMime extends Component {
               昵称
             </InputItem>
             <Flex className="error">
-              {nicknameErrors ? nicknameErrors.join(',') : null}
+              <Flex.item>
+                {nicknameErrors ? nicknameErrors.join(',') : null}
+              </Flex.item>
             </Flex>
             <InputItem
               type="number"
@@ -253,11 +255,14 @@ class AccountMime extends Component {
               天梯分
             </InputItem>
             <Flex className="error">
-              {rankscoreErrors ? rankscoreErrors.join(',') : null}
+              <Flex.item>
+                {rankscoreErrors ? rankscoreErrors.join(',') : null}
+              </Flex.item>
             </Flex>
             <InputItem
               {...getFieldProps('contact', {
                 onChange: this.onContactChange,
+                initialValue: this.state.contact,
                 rules: [
                   {
                     type: 'string',
@@ -273,13 +278,16 @@ class AccountMime extends Component {
               联系方式
             </InputItem>
             <Flex className="error">
-              {contactErrors ? contactErrors.join(',') : null}
+              <Flex.item>
+                {contactErrors ? contactErrors.join(',') : null}
+              </Flex.item>
             </Flex>
           </List>
           <List renderHeader={() => '个人介绍'}>
             <TextareaItem
               {...getFieldProps('introduction', {
                 onChange: this.onIntroductionChange,
+                initialValue: this.state.introduction,
                 rules: [
                   {
                     type: 'string',
@@ -295,13 +303,16 @@ class AccountMime extends Component {
               value={this.state.introduction}
             />
             <Flex className="error">
-              {introductionErrors ? introductionErrors.join(',') : null}
+              <Flex.item>
+                {introductionErrors ? introductionErrors.join(',') : null}
+              </Flex.item>
             </Flex>
           </List>
           <List renderHeader={() => '比赛经历'}>
             <TextareaItem
               {...getFieldProps('match', {
                 onChange: this.onMatchChange,
+                initialValue: this.state.match,
                 rules: [
                   {
                     type: 'string',
@@ -317,7 +328,9 @@ class AccountMime extends Component {
               value={this.state.match}
             />
             <Flex className="error">
-              {matchErrors ? matchErrors.join(',') : null}
+              <Flex.item>
+                {matchErrors ? matchErrors.join(',') : null}
+              </Flex.item>
             </Flex>
           </List>
           <List renderHeader={() => '天梯段位'}>
@@ -358,6 +371,7 @@ class AccountMime extends Component {
             <InputItem
               {...getFieldProps('mouse', {
                 onChange: this.onMouseChange,
+                initialValue: this.state.mouse,
                 rules: [
                   {
                     type: 'string',
@@ -373,11 +387,14 @@ class AccountMime extends Component {
               鼠标
             </InputItem>
             <Flex className="error">
-              {mouseErrors ? mouseErrors.join(',') : null}
+              <Flex.Item>
+                {mouseErrors ? mouseErrors.join(',') : null}
+              </Flex.Item>
             </Flex>
             <InputItem
               {...getFieldProps('keyboard', {
                 onChange: this.onKeyboardChange,
+                initialValue: this.state.keyboard,
                 rules: [
                   {
                     type: 'string',
@@ -393,11 +410,14 @@ class AccountMime extends Component {
               键盘
             </InputItem>
             <Flex className="error">
-              {keyboardErrors ? keyboardErrors.join(',') : null}
+              <Flex.Item>
+                {keyboardErrors ? keyboardErrors.join(',') : null}
+              </Flex.Item>
             </Flex>
             <InputItem
               {...getFieldProps('headphones', {
                 onChange: this.onHeadPhonesChange,
+                initialValue: this.state.headphones,
                 rules: [
                   {
                     type: 'string',
@@ -413,7 +433,9 @@ class AccountMime extends Component {
               耳机
             </InputItem>
             <Flex className="error">
-              {headphonesErrors ? headphonesErrors.join(',') : null}
+              <Flex.Item>
+                {headphonesErrors ? headphonesErrors.join(',') : null}
+              </Flex.Item>
             </Flex>
           </List>
           <List renderHeader={() => '是否公开信息(联系方式不公开)'}>

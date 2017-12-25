@@ -1,7 +1,6 @@
 :global(.error) {
   color: red;
-  margin-left: 10px;
-  line-height: 2;
+  text-align: center;
 }
 
 /* :global(.am-modal-popup) {

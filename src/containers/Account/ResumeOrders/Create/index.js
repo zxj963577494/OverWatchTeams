@@ -104,7 +104,9 @@ class AccountResumeOrdersCreate extends Component {
               value={title}
             />
             <Flex className="error">
-              {titleErrors ? titleErrors.join(',') : null}
+              <Flex.Item>
+                {titleErrors ? titleErrors.join(',') : null}
+              </Flex.Item>
             </Flex>
           </List>
           <List renderHeader={() => '自荐内容'}>
@@ -127,7 +129,9 @@ class AccountResumeOrdersCreate extends Component {
               value={description}
             />
             <Flex className="error">
-              {descriptionErrors ? descriptionErrors.join(',') : null}
+              <Flex.Item>
+                {descriptionErrors ? descriptionErrors.join(',') : null}
+              </Flex.Item>
             </Flex>
           </List>
           <List renderHeader={() => '联系方式'}>
@@ -149,7 +153,9 @@ class AccountResumeOrdersCreate extends Component {
               value={contact}
             />
             <Flex className="error">
-              {contactErrors ? contactErrors.join(',') : null}
+              <Flex.Item>
+                {contactErrors ? contactErrors.join(',') : null}
+              </Flex.Item>
             </Flex>
           </List>
           <List renderHeader={() => '有效日期'}>
@@ -166,7 +172,9 @@ class AccountResumeOrdersCreate extends Component {
               <List.Item arrow="horizontal">有效日期</List.Item>
             </DatePicker>
             <Flex className="error">
-              {endDateErrors ? endDateErrors.join(',') : null}
+              <Flex.Item>
+                {endDateErrors ? endDateErrors.join(',') : null}
+              </Flex.Item>
             </Flex>
           </List>
         </form>

@@ -11,12 +11,9 @@ import {
   List,
   TextareaItem,
   Toast,
-  DatePicker,
+  DatePicker
 } from 'antd-mobile'
-import {
-  setNavBar,
-  putResumeOrderRequest,
-} from '../../../../actions'
+import { setNavBar, putResumeOrderRequest } from '../../../../actions'
 import { MyActivityIndicator } from '../../../../components'
 
 let date = new Date()
@@ -30,7 +27,7 @@ class AccountResumeOrdersEdit extends Component {
       title: props.resumeOrder.title,
       description: props.resumeOrder.description,
       endDate: new Date(props.resumeOrder.endDate),
-      contact: props.resumeOrder.contact,
+      contact: props.resumeOrder.contact
     }
     this.onTitleChange = this.onTitleChange.bind(this)
     this.onDescriptionChange = this.onDescriptionChange.bind(this)
@@ -60,13 +57,13 @@ class AccountResumeOrdersEdit extends Component {
     const { putResume, form } = this.props
     form.validateFields((error, value) => {
       if (!error) {
-          putResume({
-            objectId: this.state.objectId,
-            contact: this.state.contact,
-            title: this.state.title,
-            description: this.state.description,
-            endDate: this.state.endDate
-          })
+        putResume({
+          objectId: this.state.objectId,
+          contact: this.state.contact,
+          title: this.state.title,
+          description: this.state.description,
+          endDate: this.state.endDate
+        })
       } else {
         Toast.fail('格式错误，请检查后提交', 1.5)
       }
@@ -107,7 +104,9 @@ class AccountResumeOrdersEdit extends Component {
               value={title}
             />
             <Flex className="error">
-              {titleErrors ? titleErrors.join(',') : null}
+              <Flex.Item>
+                {titleErrors ? titleErrors.join(',') : null}
+              </Flex.Item>
             </Flex>
           </List>
           <List renderHeader={() => '自荐内容'}>
@@ -130,7 +129,9 @@ class AccountResumeOrdersEdit extends Component {
               value={description}
             />
             <Flex className="error">
-              {descriptionErrors ? descriptionErrors.join(',') : null}
+              <Flex.Item>
+                {descriptionErrors ? descriptionErrors.join(',') : null}
+              </Flex.Item>
             </Flex>
           </List>
           <List renderHeader={() => '联系方式'}>
@@ -152,7 +153,9 @@ class AccountResumeOrdersEdit extends Component {
               value={contact}
             />
             <Flex className="error">
-              {contactErrors ? contactErrors.join(',') : null}
+              <Flex.Item>
+                {contactErrors ? contactErrors.join(',') : null}
+              </Flex.Item>
             </Flex>
           </List>
           <List renderHeader={() => '有效日期'}>
@@ -169,7 +172,9 @@ class AccountResumeOrdersEdit extends Component {
               <List.Item arrow="horizontal">有效日期</List.Item>
             </DatePicker>
             <Flex className="error">
-              {endDateErrors ? endDateErrors.join(',') : null}
+              <Flex.Item>
+                {endDateErrors ? endDateErrors.join(',') : null}
+              </Flex.Item>
             </Flex>
           </List>
         </form>
@@ -204,7 +209,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     },
     putResume: payload => {
       dispatch(putResumeOrderRequest(payload))
-    },
+    }
   }
 }
 

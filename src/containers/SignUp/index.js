@@ -93,7 +93,9 @@ class SignUp extends Component {
             用户名
           </InputItem>
           <Flex className="error">
-            {usernameErrors ? usernameErrors.join(',') : null}
+            <Flex.Item>
+              {usernameErrors ? usernameErrors.join(',') : null}
+            </Flex.Item>
           </Flex>
           <InputItem
             type="password"
@@ -114,7 +116,9 @@ class SignUp extends Component {
             密码
           </InputItem>
           <Flex className="error">
-            {passwordErrors ? passwordErrors.join(',') : null}
+            <Flex.Item>
+              {passwordErrors ? passwordErrors.join(',') : null}
+            </Flex.Item>
           </Flex>
           <InputItem
             type="email"
@@ -130,7 +134,7 @@ class SignUp extends Component {
             邮箱
           </InputItem>
           <Flex className="error">
-            {emailErrors ? emailErrors.join(',') : null}
+            <Flex.Item>{emailErrors ? emailErrors.join(',') : null}</Flex.Item>
           </Flex>
           <WhiteSpace />
           <WhiteSpace />

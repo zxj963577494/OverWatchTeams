@@ -125,7 +125,8 @@ class AccountWarOrdersEdit extends Component {
               value={title}
             />
             <Flex className="error">
-              {titleErrors ? titleErrors.join(',') : null}
+            <Flex.Item>
+              {titleErrors ? titleErrors.join(',') : null}</Flex.Item>
             </Flex>
           </List>
           <List renderHeader={() => '约战帖内容'}>
@@ -148,7 +149,8 @@ class AccountWarOrdersEdit extends Component {
               value={description}
             />
             <Flex className="error">
-              {descriptionErrors ? descriptionErrors.join(',') : null}
+            <Flex.Item>
+              {descriptionErrors ? descriptionErrors.join(',') : null}</Flex.Item>
             </Flex>
           </List>
           <List renderHeader={() => '联系方式'}>
@@ -170,7 +172,8 @@ class AccountWarOrdersEdit extends Component {
               value={contact}
             />
             <Flex className="error">
-              {contactErrors ? contactErrors.join(',') : null}
+            <Flex.Item>
+              {contactErrors ? contactErrors.join(',') : null}</Flex.Item>
             </Flex>
           </List>
           <List renderHeader={() => '选择战队'}>
@@ -210,7 +213,8 @@ class AccountWarOrdersEdit extends Component {
               <List.Item arrow="horizontal">有效日期</List.Item>
             </DatePicker>
             <Flex className="error">
-              {endDateErrors ? endDateErrors.join(',') : null}
+            <Flex.Item>
+              {endDateErrors ? endDateErrors.join(',') : null}</Flex.Item>
             </Flex>
           </List>
         </form>

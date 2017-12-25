@@ -27,7 +27,7 @@ class AccountGroupOrdersCreate extends Component {
       title: '',
       description: '',
       endDate: date,
-      contact: props.userinfo.contact || '',
+      contact: props.userinfo.contact || ''
     }
     this.onTitleChange = this.onTitleChange.bind(this)
     this.onDescriptionChange = this.onDescriptionChange.bind(this)
@@ -104,7 +104,9 @@ class AccountGroupOrdersCreate extends Component {
               value={title}
             />
             <Flex className="error">
-              {titleErrors ? titleErrors.join(',') : null}
+              <Flex.Item>
+                {titleErrors ? titleErrors.join(',') : null}
+              </Flex.Item>
             </Flex>
           </List>
           <List renderHeader={() => '组队内容'}>
@@ -128,7 +130,9 @@ class AccountGroupOrdersCreate extends Component {
               value={description}
             />
             <Flex className="error">
-              {descriptionErrors ? descriptionErrors.join(',') : null}
+              <Flex.Item>
+                {descriptionErrors ? descriptionErrors.join(',') : null}
+              </Flex.Item>
             </Flex>
           </List>
           <List renderHeader={() => '联系方式'}>
@@ -150,7 +154,9 @@ class AccountGroupOrdersCreate extends Component {
               value={contact}
             />
             <Flex className="error">
-              {contactErrors ? contactErrors.join(',') : null}
+              <Flex.Item>
+                {contactErrors ? contactErrors.join(',') : null}
+              </Flex.Item>
             </Flex>
           </List>
           <List renderHeader={() => '有效日期'}>
@@ -167,7 +173,9 @@ class AccountGroupOrdersCreate extends Component {
               <List.Item arrow="horizontal">有效日期</List.Item>
             </DatePicker>
             <Flex className="error">
-              {endDateErrors ? endDateErrors.join(',') : null}
+              <Flex.Item>
+                {endDateErrors ? endDateErrors.join(',') : null}
+              </Flex.Item>
             </Flex>
           </List>
         </form>

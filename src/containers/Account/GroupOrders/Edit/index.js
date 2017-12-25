@@ -11,12 +11,9 @@ import {
   List,
   TextareaItem,
   Toast,
-  DatePicker,
+  DatePicker
 } from 'antd-mobile'
-import {
-  setNavBar,
-  putGroupOrderRequest,
-} from '../../../../actions'
+import { setNavBar, putGroupOrderRequest } from '../../../../actions'
 import { MyActivityIndicator } from '../../../../components'
 
 let date = new Date()
@@ -30,7 +27,7 @@ class AccountGroupOrdersEdit extends Component {
       title: props.groupOrder.title,
       description: props.groupOrder.description,
       endDate: new Date(props.groupOrder.endDate),
-      contact: props.groupOrder.contact,
+      contact: props.groupOrder.contact
     }
     this.onTitleChange = this.onTitleChange.bind(this)
     this.onDescriptionChange = this.onDescriptionChange.bind(this)
@@ -60,13 +57,13 @@ class AccountGroupOrdersEdit extends Component {
     const { putGroup, form } = this.props
     form.validateFields((error, value) => {
       if (!error) {
-          putGroup({
-            objectId: this.state.objectId,
-            contact: this.state.contact,
-            title: this.state.title,
-            description: this.state.description,
-            endDate: this.state.endDate
-          })
+        putGroup({
+          objectId: this.state.objectId,
+          contact: this.state.contact,
+          title: this.state.title,
+          description: this.state.description,
+          endDate: this.state.endDate
+        })
       } else {
         Toast.fail('格式错误，请检查后提交', 1.5)
       }
@@ -107,7 +104,9 @@ class AccountGroupOrdersEdit extends Component {
               value={title}
             />
             <Flex className="error">
-              {titleErrors ? titleErrors.join(',') : null}
+              <Flex.Item>
+                {titleErrors ? titleErrors.join(',') : null}
+              </Flex.Item>
             </Flex>
           </List>
           <List renderHeader={() => '组队内容'}>
@@ -130,7 +129,9 @@ class AccountGroupOrdersEdit extends Component {
               value={description}
             />
             <Flex className="error">
-              {descriptionErrors ? descriptionErrors.join(',') : null}
+              <Flex.Item>
+                {descriptionErrors ? descriptionErrors.join(',') : null}
+              </Flex.Item>
             </Flex>
           </List>
           <List renderHeader={() => '联系方式'}>
@@ -152,7 +153,9 @@ class AccountGroupOrdersEdit extends Component {
               value={contact}
             />
             <Flex className="error">
-              {contactErrors ? contactErrors.join(',') : null}
+              <Flex.Item>
+                {contactErrors ? contactErrors.join(',') : null}
+              </Flex.Item>
             </Flex>
           </List>
           <List renderHeader={() => '有效日期'}>
@@ -169,7 +172,9 @@ class AccountGroupOrdersEdit extends Component {
               <List.Item arrow="horizontal">有效日期</List.Item>
             </DatePicker>
             <Flex className="error">
-              {endDateErrors ? endDateErrors.join(',') : null}
+              <Flex.Item>
+                {endDateErrors ? endDateErrors.join(',') : null}
+              </Flex.Item>
             </Flex>
           </List>
         </form>
@@ -204,7 +209,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     },
     putGroup: payload => {
       dispatch(putGroupOrderRequest(payload))
-    },
+    }
   }
 }
 
