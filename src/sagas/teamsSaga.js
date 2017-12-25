@@ -32,6 +32,7 @@ function* postTeamsWorker(payload) {
       Toast.fail('提交失败，每位用户最多可创建一支战队，若想创建多支战队，请联系管理员963577494@qq.com', 3)
       yield put(action.fetchFailed())
       yield put(action.postTeamsFailed())
+      yield put(goBack())
     }
   } catch (error) {
     yield put(action.fetchFailed())

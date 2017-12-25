@@ -1,7 +1,7 @@
 import { put, fork, take, call } from 'redux-saga/effects'
 import { delay } from 'redux-saga'
 import { Toast } from 'antd-mobile'
-import { replace } from 'react-router-redux'
+import { goBack } from 'react-router-redux'
 import {
   GET_HOME_WAR_ORDER_LIST_REQUEST,
   GET_ACCOUNT_WAR_ORDER_LIST_REQUEST,
@@ -29,11 +29,13 @@ function* postWarOrderWorker(payload) {
       yield put(action.postWarOrderSuccess(response))
       Toast.success('提交成功', 1)
       yield delay(1000)
-      yield put(replace('/account/warorders'))
+      yield put(goBack())
     } else {
       yield put(action.postWarOrderFailed())
       yield put(action.fetchFailed())
-      Toast.success(`1天最多发布${warOrderLimit}条比赛约战帖`, 1)
+      Toast.success(`1天最多发布${warOrderLimit}条比赛约战帖`, 2)
+      yield delay(2000)
+      yield put(goBack())
     }
   } catch (error) {
     yield put(action.postWarOrderFailed(error))
@@ -51,7 +53,7 @@ function* putWarOrderWorker(payload) {
     yield put(action.putWarOrderSuccess(response))
     Toast.success('提交成功', 1)
     yield delay(1000)
-    yield put(replace('/account/warorders'))
+    yield put(goBack())
   } catch (error) {
     yield put(action.putWarOrderFailed(error))
     yield put(action.fetchFailed())

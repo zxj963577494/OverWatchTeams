@@ -1,7 +1,7 @@
 import { put, fork, take, call } from 'redux-saga/effects'
 import { delay } from 'redux-saga'
 import { Toast } from 'antd-mobile'
-import { replace } from 'react-router-redux'
+import { goBack } from 'react-router-redux'
 import {
   GET_HOME_GROUP_ORDER_LIST_REQUEST,
   GET_ACCOUNT_GROUP_ORDER_LIST_REQUEST,
@@ -28,11 +28,13 @@ function* postGroupOrderWorker(payload) {
       yield put(action.postGroupOrderSuccess(response))
       Toast.success('提交成功', 1)
       yield delay(1000)
-      yield put(replace('/account/grouporders'))
+      yield put(goBack())
     } else {
       yield put(action.putGroupOrderFailed())
       yield put(action.fetchFailed())
-      Toast.success(`1天最多发布${groupOrderLimit}条组队上分帖`, 1)
+      Toast.success(`1天最多发布${groupOrderLimit}条组队上分帖`, 2)
+      yield delay(2000)
+      yield put(goBack())
     }
   } catch (error) {
     yield put(action.postGroupOrderFailed(error))
@@ -49,7 +51,7 @@ function* putGroupOrderWorker(payload) {
     yield put(action.putGroupOrderSuccess(response))
     Toast.success('提交成功', 1)
     yield delay(1000)
-    yield put(replace('/account/grouporders'))
+    yield put(goBack())
   } catch (error) {
     yield put(action.putGroupOrderFailed(error))
     yield put(action.fetchFailed())
