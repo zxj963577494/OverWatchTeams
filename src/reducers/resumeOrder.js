@@ -183,10 +183,7 @@ function resumeOrderReducer(state = initialResumeOrderState, action) {
     case PUT_RESUME_ORDER_SUCCESS:
       const data = state.account.resumeOrder.list.map(item => {
         if (item.objectId === action.payload.objectId) {
-          return {
-            ...item,
-            ...action.payload
-          }
+          return Object.assign(item, action.payload)
         } else {
           return item
         }

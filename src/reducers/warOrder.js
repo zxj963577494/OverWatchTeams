@@ -183,10 +183,7 @@ function warOrderReducer(state = initialWarOrderState, action) {
     case PUT_WAR_ORDER_SUCCESS:
       const data = state.account.warOrder.list.map(item => {
         if (item.objectId === action.payload.objectId) {
-          return {
-            ...item,
-            ...action.payload
-          }
+          return Object.assign(item, action.payload)
         } else {
           return item
         }
