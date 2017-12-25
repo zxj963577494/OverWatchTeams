@@ -23,6 +23,7 @@ export default () => {
       <Route exec path="/home/userinfo/:id" component={HomeUserInfoDetail} />
       <Route exec path="/home/userinfos" component={HomeUserInfos} />
       <Route exec path="/home" component={Home} />
+      <Route exec path="/" component={Home} />
     </Switch>
   )
   return routes

@@ -114,7 +114,7 @@ function* deleteTeamWorker(payload) {
 
 function* getHomeTeamListWorker(payload) {
   try {
-    const response = yield call(teamsService.getHomeTeamsList, payload)
+    const response = yield call(teamsService.getHomeTeamList, payload)
     yield put(action.getHomeTeamListSuccess(response))
   } catch (error) {
     yield put(action.getHomeTeamListFailed(error))

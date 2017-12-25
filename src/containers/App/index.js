@@ -9,12 +9,7 @@ import globalcss from '../../assets/css/style.css'
 
 class App extends Component {
   componentDidMount() {
-    // 请求根目录是转至/home
-    if (this.props.history.location.pathname === '/') {
-      setTimeout(() => {
-        this.props.history.replace('/home')
-      }, 0)
-    }
+   
   }
 
   render() {

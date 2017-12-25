@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import { setNavBar, getHomeTeamListRequest } from '../../../actions'
-import { HomeTeamsListView, MyActivityIndicator } from '../../../components'
+import { HomeTeamListView, MyActivityIndicator } from '../../../components'
 
 class HomeTeams extends Component {
   componentDidMount() {
@@ -21,7 +21,7 @@ class HomeTeams extends Component {
           isFetching={team.isFetching}
           text={team.fetchingText}
         />
-        <HomeTeamsListView
+        <HomeTeamListView
           team={team}
           navigateTo={navigateTo}
           getHomeTeams={getHomeTeams}

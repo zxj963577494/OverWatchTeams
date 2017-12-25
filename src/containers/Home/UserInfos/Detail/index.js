@@ -7,19 +7,19 @@ import { setNavBar, getHomeUserInfoDetailRequest } from '../../../../actions'
 import config from '../../../../config'
 import { MyActivityIndicator } from '../../../../components'
 
-class HomeUserDetail extends Component {
+class HomeUserInfoDetail extends Component {
   componentDidMount() {
     this.props.setNavBar({ title: '个人详情', isCanBack: true })
-    if (!this.props.user) {
+    if (!this.props.userinfo) {
       const id = this.props.match.params.id
       this.props.getUserById({ objectId: id })
     }
   }
 
   render() {
-    let { user, current, app } = this.props
-    if (user == null && current != null) {
-      user = current
+    let { userinfo, current, app } = this.props
+    if (userinfo == null && current != null) {
+      userinfo = current
     }
     return (
       <div>
@@ -31,22 +31,22 @@ class HomeUserDetail extends Component {
               width="60px"
               height="60px"
               style={{ borderRadius: '50%' }}
-              src={user.avatar ? user.avatar : config.BASE_DEFAULT_PIC_URL}
-              alt={user.nickname}
+              src={userinfo.avatar ? userinfo.avatar : config.BASE_DEFAULT_PIC_URL}
+              alt={userinfo.nickname}
             />
           }
-          title={user.nickname}
-          message={user.introduction}
+          title={userinfo.nickname}
+          message={userinfo.introduction}
         />
         <WhiteSpace />
         <List>
-          <List.Item extra={user.rankscore ? user.rankscore + '分' : '未知'}>
+          <List.Item extra={userinfo.rankscore ? userinfo.rankscore + '分' : '未知'}>
             天梯分
           </List.Item>
           <List.Item
             extra={
-              user.rank
-                ? RANKS.filter(x => x.value === user.rank)[0].label
+              userinfo.rank
+                ? RANKS.filter(x => x.value === userinfo.rank)[0].label
                 : '未知'
             }
           >
@@ -54,8 +54,8 @@ class HomeUserDetail extends Component {
           </List.Item>
           <List.Item
             extra={
-              user.position
-                ? TEAMPOSITIONS.filter(x => x.value === user.position)[0].label
+              userinfo.position
+                ? TEAMPOSITIONS.filter(x => x.value === userinfo.position)[0].label
                 : '未知'
             }
           >
@@ -64,8 +64,8 @@ class HomeUserDetail extends Component {
         </List>
         <List renderHeader={() => '擅长英雄'}>
           <List.Item style={{ textAlign: 'center' }}>
-            {user.heros ? (
-              user.heros.map((item, index) => {
+            {userinfo.heros ? (
+              userinfo.heros.map((item, index) => {
                 return (
                   <img
                     key={index}
@@ -95,14 +95,14 @@ class HomeUserDetail extends Component {
           </List.Item>
         </List>
         <List renderHeader={() => '个人比赛经历'}>
-          <List.Item wrap>{user.match}</List.Item>
+          <List.Item wrap>{userinfo.match}</List.Item>
         </List>
         <List renderHeader={() => '其他'}>
-          <List.Item extra={user.mouse ? user.mouse : '未知'}>鼠标</List.Item>
-          <List.Item extra={user.keyboard ? user.keyboard : '未知'}>
+          <List.Item extra={userinfo.mouse ? userinfo.mouse : '未知'}>鼠标</List.Item>
+          <List.Item extra={userinfo.keyboard ? userinfo.keyboard : '未知'}>
             键盘
           </List.Item>
-          <List.Item extra={user.headphones ? user.headphones : '未知'}>
+          <List.Item extra={userinfo.headphones ? userinfo.headphones : '未知'}>
             耳机
           </List.Item>
         </List>
@@ -115,8 +115,8 @@ class HomeUserDetail extends Component {
 const mapStateToProps = (state, ownProps) => {
   return {
     app: state.root.app,
-    current: state.root.user.home.user.current,
-    user: state.root.user.home.user.list.filter(
+    current: state.root.user.home.userinfo.current,
+    userinfo: state.root.user.home.userinfo.list.filter(
       x => x.objectId === ownProps.match.params.id
     )[0]
   }
@@ -135,12 +135,12 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   }
 }
 
-HomeUserDetail.propTypes = {
+HomeUserInfoDetail.propTypes = {
   app: PropTypes.object,
   current: PropTypes.object,
-  user: PropTypes.object,
+  userinfo: PropTypes.object,
   getUserById: PropTypes.func.isRequired,
   setNavBar: PropTypes.func.isRequired
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomeUserDetail)
+export default connect(mapStateToProps, mapDispatchToProps)(HomeUserInfoDetail)
