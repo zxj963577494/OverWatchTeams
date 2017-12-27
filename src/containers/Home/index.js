@@ -154,8 +154,8 @@ class Home extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    groupOrder: state.root.groupOrder.home.groupOrder,
-    recruitOrder: state.root.recruitOrder.home.recruitOrder
+    groupOrder: state.groupOrder.home.groupOrder,
+    recruitOrder: state.recruitOrder.home.recruitOrder
   }
 }
 

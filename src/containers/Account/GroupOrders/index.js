@@ -34,7 +34,7 @@ class AccountGroupOrders extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    groupOrder: state.root.groupOrder.account.groupOrder
+    groupOrder: state.groupOrder.account.groupOrder
   }
 }
 

@@ -34,7 +34,7 @@ class AccountRecruitOrders extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    recruitOrder: state.root.recruitOrder.account.recruitOrder
+    recruitOrder: state.recruitOrder.account.recruitOrder
   }
 }
 

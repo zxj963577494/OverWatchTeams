@@ -34,7 +34,7 @@ class AccountResumeOrders extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    resumeOrder: state.root.resumeOrder.account.resumeOrder
+    resumeOrder: state.resumeOrder.account.resumeOrder
   }
 }
 

@@ -33,7 +33,7 @@ class HomeResumeOrders extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    resumeOrder: state.root.resumeOrder.home.resumeOrder
+    resumeOrder: state.resumeOrder.home.resumeOrder
   }
 }
 

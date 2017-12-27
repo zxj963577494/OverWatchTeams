@@ -469,8 +469,8 @@ class AccountMime extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    app: state.root.app,
-    userinfo: state.root.user.account.userinfo
+    app: state.app,
+    userinfo: state.user.account.userinfo
   }
 }
 

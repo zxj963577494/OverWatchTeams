@@ -33,7 +33,7 @@ class HomeUserInfos extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    userinfo: state.root.user.home.userinfo
+    userinfo: state.user.home.userinfo
   }
 }
 

@@ -130,16 +130,16 @@ class AccountMemberDetail extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    userteams: state.root.userteams.list,
+    userteams: state.userteams.list,
     pickerTeam:
-      state.root.userteams.list.length > 0
-        ? state.root.userteams.list.filter(
+      state.userteams.list.length > 0
+        ? state.userteams.list.filter(
             x => x.objectId === ownProps.match.params.teamid
           )[0]
         : null,
     pickerMember:
-      state.root.userteams.list.length > 0
-        ? state.root.userteams.list
+      state.userteams.list.length > 0
+        ? state.userteams.list
             .filter(x => x.objectId === ownProps.match.params.teamid)[0]
             .members.filter(
               x => x.objectId === ownProps.match.params.memberid

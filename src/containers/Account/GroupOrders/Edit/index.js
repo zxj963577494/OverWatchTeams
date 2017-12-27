@@ -191,10 +191,10 @@ class AccountGroupOrdersEdit extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    app: state.root.app,
-    userinfo: state.root.user.account.userinfo,
-    pending: state.root.groupOrder.account.groupOrder.pending,
-    groupOrder: state.root.groupOrder.account.groupOrder.list.filter(
+    app: state.app,
+    userinfo: state.user.account.userinfo,
+    pending: state.groupOrder.account.groupOrder.pending,
+    groupOrder: state.groupOrder.account.groupOrder.list.filter(
       x => x.objectId === ownProps.match.params.id
     )[0]
   }

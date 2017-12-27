@@ -191,9 +191,9 @@ class AccountResumeOrdersCreate extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    app: state.root.app,
-    userinfo: state.root.user.account.userinfo,
-    resumeOrder: state.root.resumeOrder.account.resumeOrder
+    app: state.app,
+    userinfo: state.user.account.userinfo,
+    resumeOrder: state.resumeOrder.account.resumeOrder
   }
 }
 

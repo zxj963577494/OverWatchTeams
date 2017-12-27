@@ -33,7 +33,7 @@ class HomeTeams extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    team: state.root.team.home.team
+    team: state.team.home.team
   }
 }
 

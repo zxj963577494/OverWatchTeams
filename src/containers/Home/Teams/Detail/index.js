@@ -92,9 +92,9 @@ class HomeTeamDetail extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    app: state.root.app,
-    current: state.root.team.home.team.current,
-    team: state.root.team.home.team.list.filter(
+    app: state.app,
+    current: state.team.home.team.current,
+    team: state.team.home.team.list.filter(
       x => x.objectId === ownProps.match.params.id
     )[0]
   }

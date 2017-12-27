@@ -155,8 +155,8 @@ class SignUp extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    app: state.root.app,
-    user_home: state.root.user.home
+    app: state.app,
+    user_home: state.user.home
   }
 }
 

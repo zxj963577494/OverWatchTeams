@@ -234,10 +234,10 @@ class AccountRecruitOrdersCreate extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    app: state.root.app,
-    teams: state.root.team.account.team.myTeams,
-    userinfo: state.root.user.account.userinfo,
-    recruitOrder: state.root.recruitOrder.account.recruitOrder
+    app: state.app,
+    teams: state.team.account.team.myTeams,
+    userinfo: state.user.account.userinfo,
+    recruitOrder: state.recruitOrder.account.recruitOrder
   }
 }
 

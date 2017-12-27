@@ -231,11 +231,11 @@ class AccountWarOrdersEdit extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    app: state.root.app,
-    teams: state.root.team.account.team.myTeams,
-    userinfo: state.root.user.account.userinfo,
-    pending: state.root.warOrder.account.warOrder.pending,
-    warOrder: state.root.warOrder.account.warOrder.list.filter(
+    app: state.app,
+    teams: state.team.account.team.myTeams,
+    userinfo: state.user.account.userinfo,
+    pending: state.warOrder.account.warOrder.pending,
+    warOrder: state.warOrder.account.warOrder.list.filter(
       x => x.objectId === ownProps.match.params.id
     )[0]
   }

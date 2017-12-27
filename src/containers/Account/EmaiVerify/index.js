@@ -113,8 +113,8 @@ class AccountEmaiVerify extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    app: state.root.app,
-    user: state.root.user.account.user
+    app: state.app,
+    user: state.user.account.user
   }
 }
 

@@ -235,11 +235,11 @@ class AccountRecruitOrdersEdit extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    app: state.root.app,
-    teams: state.root.team.account.team.myTeams,
-    userinfo: state.root.user.account.userinfo,
-    pending: state.root.recruitOrder.account.recruitOrder.pending,
-    recruitOrder: state.root.recruitOrder.account.recruitOrder.list.filter(
+    app: state.app,
+    teams: state.team.account.team.myTeams,
+    userinfo: state.user.account.userinfo,
+    pending: state.recruitOrder.account.recruitOrder.pending,
+    recruitOrder: state.recruitOrder.account.recruitOrder.list.filter(
       x => x.objectId === ownProps.match.params.id
     )[0]
   }

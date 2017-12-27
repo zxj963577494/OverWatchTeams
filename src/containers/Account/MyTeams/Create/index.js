@@ -414,7 +414,7 @@ class AccountTeamsCreate extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    app: state.root.app,
+    app: state.app,
   }
 }
 

@@ -313,8 +313,8 @@ class Account extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    account: state.root.user.account,
-    userinfo: state.root.user.account.userinfo
+    account: state.user.account,
+    userinfo: state.user.account.userinfo
   }
 }
 

@@ -33,7 +33,7 @@ class HomeWarOrders extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    warOrder: state.root.warOrder.home.warOrder
+    warOrder: state.warOrder.home.warOrder
   }
 }
 

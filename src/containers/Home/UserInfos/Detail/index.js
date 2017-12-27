@@ -114,9 +114,9 @@ class HomeUserInfoDetail extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    app: state.root.app,
-    current: state.root.user.home.userinfo.current,
-    userinfo: state.root.user.home.userinfo.list.filter(
+    app: state.app,
+    current: state.user.home.userinfo.current,
+    userinfo: state.user.home.userinfo.list.filter(
       x => x.objectId === ownProps.match.params.id
     )[0]
   }

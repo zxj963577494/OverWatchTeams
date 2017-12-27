@@ -62,8 +62,8 @@ class AccountTeams extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    app: state.root.app,
-    teams: state.root.team.account.team.inTeams
+    app: state.app,
+    teams: state.team.account.team.inTeams
   }
 }
 

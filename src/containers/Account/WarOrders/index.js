@@ -34,7 +34,7 @@ class AccountWarOrders extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    warOrder: state.root.warOrder.account.warOrder
+    warOrder: state.warOrder.account.warOrder
   }
 }
 

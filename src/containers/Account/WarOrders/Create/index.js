@@ -234,10 +234,10 @@ class AccountWarOrdersCreate extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    app: state.root.app,
-    teams: state.root.team.account.team.myTeams,
-    userinfo: state.root.user.account.userinfo,
-    warOrder: state.root.warOrder.account.warOrder
+    app: state.app,
+    teams: state.team.account.team.myTeams,
+    userinfo: state.user.account.userinfo,
+    warOrder: state.warOrder.account.warOrder
   }
 }
 

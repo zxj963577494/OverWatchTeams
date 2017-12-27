@@ -84,8 +84,8 @@ class AccountMemberRemove extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    app: state.root.app,
-    members: state.root.team.account.team.myTeams
+    app: state.app,
+    members: state.team.account.team.myTeams
       .filter(x => x.objectId === ownProps.match.params.teamid)[0]
       .members.filter(x => {
         return x.leader === false && !_.isEmpty(x.objectId)

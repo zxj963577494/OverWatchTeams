@@ -192,9 +192,9 @@ class AccountGroupOrdersCreate extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    app: state.root.app,
-    userinfo: state.root.user.account.userinfo,
-    groupOrder: state.root.groupOrder.account.groupOrder
+    app: state.app,
+    userinfo: state.user.account.userinfo,
+    groupOrder: state.groupOrder.account.groupOrder
   }
 }
 

@@ -191,10 +191,10 @@ class AccountResumeOrdersEdit extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    app: state.root.app,
-    userinfo: state.root.user.account.userinfo,
-    pending: state.root.resumeOrder.account.resumeOrder.pending,
-    resumeOrder: state.root.resumeOrder.account.resumeOrder.list.filter(
+    app: state.app,
+    userinfo: state.user.account.userinfo,
+    pending: state.resumeOrder.account.resumeOrder.pending,
+    resumeOrder: state.resumeOrder.account.resumeOrder.list.filter(
       x => x.objectId === ownProps.match.params.id
     )[0]
   }

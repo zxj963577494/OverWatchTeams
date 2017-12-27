@@ -430,8 +430,8 @@ class AccountTeamsEdit extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    app: state.root.app,
-    team: state.root.team.account.team.myTeams.filter(
+    app: state.app,
+    team: state.team.account.team.myTeams.filter(
       x => x.objectId === ownProps.match.params.id
     )[0]
   }

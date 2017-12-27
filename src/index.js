@@ -10,9 +10,12 @@ const appId = 'Vvtn3QVyWcN9eVbuAT3wjMfG-9Nh9j0Va'
 const appKey = 'P59gxu0DMT7GkFeP1VlJoVmp'
 AV.init({ appId, appKey })
 
-const store = configureStore({})
+const { persistor, store } = configureStore({})
 
 store.runSaga(rootSaga)
 
-ReactDOM.render(<Root store={store} />, document.getElementById('root'))
+ReactDOM.render(
+  <Root store={store} persistor={persistor} />,
+  document.getElementById('root')
+)
 registerServiceWorker()

@@ -59,7 +59,7 @@ class App extends Component {
 const mapStateToProps = (state, ownProps) => {
   return {
     location: state.location,
-    navbar: state.root.navbar
+    navbar: state.navbar
   }
 }
 
