@@ -1,10 +1,4 @@
 import {
-  GET_ARTICLES_REQUEST,
-  GET_ARTICLES_SUCCESS,
-  GET_ARTICLES_FAILED,
-  GET_STICKY_ARTICLES_REQUEST,
-  GET_STICKY_ARTICLES_SUCCESS,
-  GET_STICKY_ARTICLES_FAILED,
   POST_LOGIN_REQUEST,
   POST_LOGIN_SUCCESS,
   POST_LOGIN_FAILED,
@@ -136,30 +130,6 @@ import {
   SEND_PASSWORD_RESET_SUCCESS,
   SEND_PASSWORD_RESET_FAILED,
 } from '../constants/actionTypes'
-
-export const getArticlesRequest = function(payload) {
-  return { type: GET_ARTICLES_REQUEST, payload }
-}
-
-export const getArticlesSuccess = function(payload) {
-  return { type: GET_ARTICLES_SUCCESS, payload }
-}
-
-export const getArticlesFailed = function(payload) {
-  return { type: GET_ARTICLES_FAILED, payload }
-}
-
-export const getStickyArticlesRequest = function() {
-  return { type: GET_STICKY_ARTICLES_REQUEST }
-}
-
-export const getStickyArticlesSuccess = function(payload) {
-  return { type: GET_STICKY_ARTICLES_SUCCESS, payload }
-}
-
-export const getStickyArticlesFailed = function(payload) {
-  return { type: GET_STICKY_ARTICLES_FAILED, payload }
-}
 
 export const postLoginRequest = function(payload) {
   return { type: POST_LOGIN_REQUEST, payload }
