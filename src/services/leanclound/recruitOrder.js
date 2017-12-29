@@ -29,7 +29,6 @@ export function cerateRecruitOrder(payload, team) {
 }
 
 export function updateRecruitOrder(payload, team) {
-  const user = getCurrentUser()
   const recruitOrders = AV.Object.createWithoutData(
     'RecruitOrders',
     payload.objectId
@@ -39,7 +38,6 @@ export function updateRecruitOrder(payload, team) {
   recruitOrders.set('contact', payload.contact)
   const endDate = new Date(payload.endDate)
   recruitOrders.set('endDate', endDate)
-  recruitOrders.set('user', user)
   recruitOrders.set('team', team)
 
   return recruitOrders.save().then(function(result) {
