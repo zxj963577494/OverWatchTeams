@@ -204,14 +204,6 @@ function warOrderReducer(state = initialWarOrderState, action) {
             list: data,
             pending: false
           }
-        },
-        home: {
-          ...state.home,
-          warOrder: {
-            ...state.home.warOrder,
-            list: data,
-            pending: false
-          }
         }
       }
     case PUT_WAR_ORDER_FAILED:

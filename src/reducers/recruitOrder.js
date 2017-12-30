@@ -203,13 +203,6 @@ function recruitOrderReducer(state = initialRecruitOrderState, action) {
             list: data,
             pending: false
           }
-        },
-        home: {
-          ...state.home,
-          recruitOrder: {
-            ...state.home.recruitOrder,
-            list: data
-          }
         }
       }
     case PUT_RECRUIT_ORDER_FAILED:

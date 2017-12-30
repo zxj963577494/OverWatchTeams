@@ -206,14 +206,6 @@ function resumeOrderReducer(state = initialResumeOrderState, action) {
             list: data,
             pending: false
           }
-        },
-        home: {
-          ...state.account,
-          home: {
-            ...state.home.resumeOrder,
-            list: data,
-            pending: false
-          }
         }
       }
     case PUT_RESUME_ORDER_FAILED:

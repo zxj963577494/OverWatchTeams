@@ -76,7 +76,7 @@ function teamReducer(state = initialTeamState, action) {
           ...state.home,
           team: {
             ...state.home.team,
-            myTeams: [...state.home.team.myTeams, action.payload],
+            myTeams: [...state.home.team.myTeams, action.payload]
           }
         }
       }
@@ -105,10 +105,7 @@ function teamReducer(state = initialTeamState, action) {
     case PUT_TEAMS_SUCCESS:
       const data = state.account.team.myTeams.map(item => {
         if (item.objectId === action.payload.objectId) {
-          return {
-            ...item,
-            ...action.payload
-          }
+          return Object.assign(item, action.payload)
         } else {
           return item
         }
@@ -119,13 +116,6 @@ function teamReducer(state = initialTeamState, action) {
           ...state.account,
           team: {
             ...state.account.team,
-            myTeams: data
-          }
-        },
-        home: {
-          ...state.home,
-          team: {
-            ...state.home.team,
             myTeams: data
           }
         }
@@ -212,7 +202,9 @@ function teamReducer(state = initialTeamState, action) {
             isFetching: true,
             isRefreshing: action.payload.isRefreshing || false,
             list: action.payload.isRefreshing ? [] : state.home.team.list,
-            page: action.payload.isRefreshing ? 1 :action.payload.page ? action.payload.page : 1
+            page: action.payload.isRefreshing
+              ? 1
+              : action.payload.page ? action.payload.page : 1
           }
         }
       }

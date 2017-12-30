@@ -201,14 +201,6 @@ function groupOrderReducer(state = initialGroupOrderState, action) {
             list: data,
             pending: false
           }
-        },
-        home: {
-          ...state.home,
-          groupOrder: {
-            ...state.home.groupOrder,
-            list: data,
-            pending: false
-          }
         }
       }
     case PUT_GROUP_ORDER_FAILED:
