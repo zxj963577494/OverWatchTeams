@@ -230,9 +230,9 @@ class AccountMime extends Component {
               昵称
             </InputItem>
             <Flex className="error">
-              <Flex.item>
+              <Flex.Item>
                 {nicknameErrors ? nicknameErrors.join(',') : null}
-              </Flex.item>
+              </Flex.Item>
             </Flex>
             <InputItem
               type="number"
@@ -255,9 +255,9 @@ class AccountMime extends Component {
               天梯分
             </InputItem>
             <Flex className="error">
-              <Flex.item>
+              <Flex.Item>
                 {rankscoreErrors ? rankscoreErrors.join(',') : null}
-              </Flex.item>
+              </Flex.Item>
             </Flex>
             <InputItem
               {...getFieldProps('contact', {
@@ -278,9 +278,9 @@ class AccountMime extends Component {
               联系方式
             </InputItem>
             <Flex className="error">
-              <Flex.item>
+              <Flex.Item>
                 {contactErrors ? contactErrors.join(',') : null}
-              </Flex.item>
+              </Flex.Item>
             </Flex>
           </List>
           <List renderHeader={() => '个人介绍'}>
@@ -303,9 +303,9 @@ class AccountMime extends Component {
               value={this.state.introduction}
             />
             <Flex className="error">
-              <Flex.item>
+              <Flex.Item>
                 {introductionErrors ? introductionErrors.join(',') : null}
-              </Flex.item>
+              </Flex.Item>
             </Flex>
           </List>
           <List renderHeader={() => '比赛经历'}>
@@ -328,9 +328,9 @@ class AccountMime extends Component {
               value={this.state.match}
             />
             <Flex className="error">
-              <Flex.item>
+              <Flex.Item>
                 {matchErrors ? matchErrors.join(',') : null}
-              </Flex.item>
+              </Flex.Item>
             </Flex>
           </List>
           <List renderHeader={() => '天梯段位'}>
