@@ -29,7 +29,6 @@ export function cerateWarOrder(payload, team) {
 }
 
 export function updateWarOrder(payload, team) {
-  const user = getCurrentUser()
   const warOrders = AV.Object.createWithoutData(
     'WarOrders',
     payload.objectId
@@ -39,7 +38,6 @@ export function updateWarOrder(payload, team) {
   warOrders.set('contact', payload.contact)
   const endDate = new Date(payload.endDate)
   warOrders.set('endDate', endDate)
-  warOrders.set('user', user)
   warOrders.set('team', team)
 
   return warOrders.save().then(function(result) {
