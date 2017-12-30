@@ -58,7 +58,10 @@ function warOrderReducer(state = initialWarOrderState, action) {
             ...state.home.warOrder,
             isFetching: true,
             isRefreshing: action.payload.isRefreshing || false,
-            page: action.payload.page ? action.payload.page : 1
+            list: action.payload.isRefreshing ? [] : state.home.warOrder.list,
+            page: action.payload.isRefreshing
+              ? 1
+              : action.payload.page ? action.payload.page : 1
           }
         }
       }
@@ -97,8 +100,12 @@ function warOrderReducer(state = initialWarOrderState, action) {
             ...state.account.warOrder,
             isFetching: true,
             isRefreshing: action.payload.isRefreshing || false,
-            list: action.payload.isRefreshing ? [] : state.account.warOrder.list,
-            page: action.payload.page ? action.payload.page : 1
+            list: action.payload.isRefreshing
+              ? []
+              : state.account.warOrder.list,
+            page: action.payload.isRefreshing
+              ? 1
+              : action.payload.page ? action.payload.page : 1
           }
         }
       }
@@ -154,7 +161,7 @@ function warOrderReducer(state = initialWarOrderState, action) {
           ...state.home,
           warOrder: {
             ...state.home.warOrder,
-            list: [...state.home.warOrder.list, action.payload],
+            list: [...state.home.warOrder.list, action.payload]
           }
         }
       }

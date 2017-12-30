@@ -212,7 +212,7 @@ function teamReducer(state = initialTeamState, action) {
             isFetching: true,
             isRefreshing: action.payload.isRefreshing || false,
             list: action.payload.isRefreshing ? [] : state.home.team.list,
-            page: action.payload.page ? action.payload.page : 1
+            page: action.payload.isRefreshing ? 1 :action.payload.page ? action.payload.page : 1
           }
         }
       }
